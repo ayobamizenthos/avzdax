@@ -301,6 +301,8 @@
     const nav = el(document,'nav');
     // create links from SITE_PAGES (human-friendly text) with analytics attributes
     SITE_PAGES.forEach((p, idx)=>{
+      // Do not include the homepage index.html in the injected mobile menu
+      if(p === 'index.html') return;
       const name = p.replace('.html','').replace(/-/g,' ').replace(/\b(\w)/g, s=>s.toUpperCase());
       const a = el(document,'a',{href:p}); a.textContent = name; a.className='mobile-menu-link';
       a.setAttribute('data-analytics', `mobile-menu-link:${name.toLowerCase().replace(/\s+/g,'-')}`);
@@ -325,6 +327,8 @@
     try{
       const nav = document.getElementById('main-nav');
       if(!nav) return;
+      // Only inject the toggle on mobile viewports to avoid affecting desktop header
+      if(window.innerWidth > 900) return;
       // if an existing toggle is present, skip
       if(nav.querySelector('.mobile-menu-toggle') || nav.querySelector('.mobile-menu-toggle-modern')) return;
       const btn = el(document,'button');

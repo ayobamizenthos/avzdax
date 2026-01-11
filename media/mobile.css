@@ -118,8 +118,10 @@
   .primus-hero-fullvideo { width:100vw; height:100vh; object-fit:cover; }
 }
 
-/* Back arrow focus style */
-.site-back-arrow:focus { outline: 3px solid rgba(255,255,255,0.14) !important; outline-offset: 3px !important; box-shadow: 0 6px 18px rgba(0,0,0,0.6) !important; }
+/* Back arrow focus style (mobile-only) */
+@media (max-width: 900px) {
+  .site-back-arrow:focus { outline: 3px solid rgba(255,255,255,0.14) !important; outline-offset: 3px !important; box-shadow: 0 6px 18px rgba(0,0,0,0.6) !important; }
+}
 
 /* Extra-small refinements */
 @media (max-width: 420px) {
