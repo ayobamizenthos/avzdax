@@ -209,4 +209,19 @@
   // Try immediately and also after first touch (some browsers require user gesture)
   tryPlayAutoplayVideos();
   window.addEventListener('touchstart', function onceTouch(){ tryPlayAutoplayVideos(); window.removeEventListener('touchstart', onceTouch); }, {passive:true});
+
+  // Mobile-only: hide specific hero overlay label if present (keeps desktop intact)
+  function hideHeroLabelOnMobile(){
+    try{
+      if(window.innerWidth > 900) return;
+      const sections = document.querySelectorAll('section.relative.h-screen');
+      sections.forEach(sec => {
+        const spans = Array.from(sec.querySelectorAll('span'));
+        const target = spans.find(s => s.textContent && s.textContent.trim().toLowerCase() === 'autonomous intelligence');
+        if(target) target.style.display = 'none';
+      });
+    }catch(e){}
+  }
+  hideHeroLabelOnMobile();
+  window.addEventListener('resize', hideHeroLabelOnMobile, {passive:true});
 })();
