@@ -1,0 +1,113 @@
+/* Mobile-specific overrides to preserve desktop CSS and provide professional responsive behavior */
+@media (max-width: 900px) {
+  /* Global spacing */
+  html, body { -webkit-text-size-adjust: 100%; }
+  body { padding-left: 12px; padding-right: 12px; }
+
+  /* Fluid media */
+  img, picture, video, iframe { max-width: 100% !important; height: auto !important; display: block; }
+
+  /* Collapse grid layouts to single column for readability */
+  .grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+  /* Reduce oversized hero typography while keeping strong hierarchy */
+  h1 { font-size: clamp(28px, 8vw, 40px) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(20px, 6.5vw, 32px) !important; }
+  h3, h4 { font-size: clamp(16px, 4.5vw, 20px) !important; }
+
+  /* Make CTA buttons easier to tap */
+  a.inline-block, a.btn, .btn, button { display: block !important; width: 100% !important; box-sizing: border-box !important; padding-left: 16px !important; padding-right: 16px !important; }
+
+  /* Hide giant decorative backdrops that interfere with reading */
+  .footer-watermark, .opening-teletraan-large, .opening-nest-large, .opening-obex-large { display: none !important; }
+
+  /* Make nav compact */
+  nav#main-nav { position: relative !important; padding-top: 12px !important; padding-bottom: 12px !important; }
+  nav#main-nav .max-w-\[1920px\], nav#main-nav .max-w-\[1400px\] { padding-left: 0 !important; padding-right: 0 !important; }
+
+  /* Hide large menu previews to reduce clutter on phones */
+  .menu-preview-img { display: none !important; }
+  .mega-menu-wrapper { position: static !important; transform: none !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+
+  /* Founder / profile images */
+  .founder-image { width: 128px !important; height: auto !important; margin-left: auto !important; margin-right: auto !important; }
+
+  /* Tighten up sections */
+  section, header, footer { padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* Search overlay padding */
+  #search-overlay .w-full, #search-overlay .max-w-5xl { padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* Prevent overflow caused by large transforms */
+  .transform-3d, .opening-teletraan-large { transform: none !important; }
+
+  /* Accessibility: larger tap targets for small elements */
+  .social-glass-btn, .footer-link-hover { padding: 10px 12px !important; display: inline-block !important; }
+
+  /* Reduce heavy shadows on mobile for performance */
+  .menu-preview-img, .command-intelligence, .command-overlay { filter: none !important; box-shadow: none !important; }
+
+  /* Ensure forms and inputs are legible */
+  input, textarea, select { font-size: 16px !important; }
+
+  /* Misc layout fixes for known large classes */
+  .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-\[1400px\], .max-w-\[1920px\] { padding-left: 0 !important; padding-right: 0 !important; width: 100% !important; }
+
+  /* Make lists and nav items easier to tap */
+  .nav-item a, .mega-menu-content a { padding: 14px 8px !important; display: block !important; }
+
+  /* Reduce huge letter spacing on tiny screens */
+  .tracking-widest, .tracking-[0.6em], .tracking-[0.5em], .tracking-[0.4em] { letter-spacing: 0.04em !important; }
+}
+
+/* Extra-small refinements */
+@media (max-width: 420px) {
+  h1 { font-size: clamp(22px, 9vw, 34px) !important; }
+  h2 { font-size: clamp(18px, 7vw, 26px) !important; }
+  .founder-image { width: 100px !important; }
+  a.inline-block, .btn, button { padding-top: 12px !important; padding-bottom: 12px !important; }
+}
+
+/* Additional fixes for mobile perfection */
+@media (max-width: 900px) {
+  /* Prevent horizontal scroll due to transforms or oversized elements */
+  html, body { overflow-x: hidden !important; }
+
+  /* Hide autoplaying background videos on mobile to save bandwidth and avoid visual clutter */
+  video, .opening-video, .hero-video-tint, .command-media { display: none !important; }
+
+  /* Provide a subtle static fallback for hero areas */
+  .opening-section { background-size: cover !important; background-position: center !important; }
+
+  /* Back arrow: ensure it's reachable and not at the extreme edge */
+  .site-back-arrow { left: 12px !important; top: 18px !important; transform: none !important; opacity: 0.95 !important; }
+
+  /* Make nav compact and ensure links wrap nicely */
+  nav#main-nav ul, nav#main-nav .max-w-\[1920px\], nav#main-nav .max-w-\[1400px\] { flex-wrap: wrap !important; }
+
+  /* Stack important columns into single column and increase spacing for readability */
+  .col-span-2, .grid-cols-2, .grid-cols-4 { grid-template-columns: 1fr !important; }
+
+  /* Improve footer layout */
+  footer .max-w-\[1800px\] { grid-template-columns: 1fr !important; text-align: center !important; }
+
+  /* Ensure any fixed-position overlays are scroll-friendly */
+  #search-overlay { padding-top: 18px !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; }
+
+  /* Make small text readable and reduce uppercase squish */
+  .text-[10px], .text-[9px], .font-mono { font-size: 12px !important; letter-spacing: 0.02em !important; }
+
+  /* Improve tap target for icon-only controls */
+  .gpu, #cursor, #cursor-ring { display: none !important; }
+
+  /* Accessibility: ensure focus outlines are visible */
+  a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid rgba(255,255,255,0.12) !important; outline-offset: 2px !important; }
+
+  /* Reduce heavy animations that may impact mobile performance */
+  * { animation-duration: 0.0001s !important; transition-duration: 0.0001s !important; }
+}
+
+/* Make sure small screens still show a clear CTA bar at bottom if needed */
+@media (max-width: 600px) {
+  .cta-fixed-bottom { position: fixed !important; bottom: 12px !important; left: 12px !important; right: 12px !important; z-index: 999 !important; }
+}

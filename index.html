@@ -28,36 +28,270 @@
         .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* MEGA MENU HORIZON LOGIC */
+        /* SILICON VALLEY NAVIGATION SYSTEM */
+        nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav:hover {
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* NAV ITEMS - SILICON VALLEY STYLE */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item > a {
+            position: relative;
+            padding: 20px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff41, #00ff41);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover > a {
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .nav-item:hover > a::after {
+            width: 100%;
+        }
+
+        .nav-item.is-active > a {
+            color: #ffffff;
+        }
+
+        .nav-item.is-active > a::after {
+            width: 100%;
+        }
+
+        /* MEGA MENU - SILICON VALLEY DESIGN */
         .mega-menu-wrapper {
             position: absolute;
             top: 100%;
             left: 0;
             width: 100vw;
-            padding-top: 40px; 
-            margin-top: -20px; 
             opacity: 0;
             pointer-events: none;
             visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 100;
+            transform: translateY(-10px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
         }
+
         .nav-item:hover .mega-menu-wrapper,
-        .nav-item.is-active .mega-menu-wrapper { 
-            opacity: 1; 
-            pointer-events: auto; 
-            visibility: visible; 
-            transform: translateY(0); 
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0) scale(1);
         }
 
-        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+        .mega-menu-content {
+            background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 60px 0;
+            position: relative;
+        }
 
-        .product-title { padding-right: 30px; overflow: visible !important; }
-        .border-thin { border: 0.5px solid rgba(255, 255, 255, 0.1); }
-        .product-image { filter: drop-shadow(0 0 80px rgba(255,255,255,0.03)); }
-        ::-webkit-scrollbar { display: none; }
-        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #020202 100%); }
+        .mega-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* MEGA MENU CONTENT - SILICON VALLEY LAYOUT */
+        .mega-menu-content .max-w-6xl {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 300px;
+            gap: 48px;
+            padding: 0 40px;
+        }
+
+        /* MENU SECTIONS */
+        .menu-section {
+            padding: 24px 0;
+        }
+
+        .menu-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        /* MENU LINKS - APPLE-STYLE */
+        .grid-item-hover {
+            display: block;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .grid-item-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item-hover span:first-child {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover span:last-child {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover:hover span:first-child {
+            color: #00ff41;
+        }
+
+        .grid-item-hover:hover span:last-child {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* MENU PREVIEW IMAGES */
+        .menu-preview-img {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(0.9) translateY(20px) rotateY(10deg);
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .menu-preview-img.active {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateY(0deg);
+        }
+
+        /* MENU STRATEGIC THEATERS */
+        .strategic-theaters {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategic-theaters h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .strategic-theaters ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .strategic-theaters ul li:last-child {
+            border-bottom: none;
+        }
+
+        .strategic-theaters ul li:hover {
+            color: #00ff41;
+            transform: translateX(4px);
+        }
+
+        .strategic-theaters .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .strategic-theaters ul li:hover .dot {
+            background: #00ff41;
+        }
+
+        /* MENU INTELLIGENCE LAYER */
+        .intelligence-layer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intelligence-layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .intelligence-layer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .intelligence-layer .status {
+            font-size: 11px;
+            color: #00ff41;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
         /* VIDEO PERFORMANCE OPTIMIZATION */
         .hero-video {
@@ -161,57 +395,111 @@
             }
         }
 
-        /* MOBILE MENU OVERLAY - FULLSCREEN APP EXPERIENCE */
+        /* MOBILE MENU OVERLAY - SILICON VALLEY DESIGN */
         @media (max-width: 1024px) {
             #mobile-menu-overlay {
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
-                backdrop-filter: blur(30px);
-                -webkit-backdrop-filter: blur(30px);
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(10, 10, 10, 0.99) 100%);
+                backdrop-filter: blur(40px);
+                -webkit-backdrop-filter: blur(40px);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
             }
+
+            #mobile-menu-overlay .close-button {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                cursor: pointer;
+            }
+
+            #mobile-menu-overlay .close-button:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.05);
+            }
+
             #mobile-menu-overlay nav {
-                padding: 40px 24px;
-                text-align: center;
+                padding: 80px 24px 40px;
+                max-width: 400px;
+                margin: 0 auto;
             }
+
             #mobile-menu-overlay h3 {
                 font-size: 11px;
                 font-weight: 600;
                 letter-spacing: 0.1em;
-                margin-bottom: 24px;
-                opacity: 0.7;
-            }
-            #mobile-menu-overlay .space-y-4 > div {
+                color: rgba(255, 255, 255, 0.6);
                 margin-bottom: 20px;
+                text-transform: uppercase;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding-bottom: 12px;
             }
+
+            #mobile-menu-overlay .nav-section {
+                margin-bottom: 40px;
+            }
+
             #mobile-menu-overlay a {
                 display: block;
                 padding: 16px 20px;
-                margin: 8px 0;
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.08);
+                margin: 6px 0;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.06);
                 border-radius: 12px;
                 font-size: 16px;
                 font-weight: 500;
                 letter-spacing: 0.025em;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 text-decoration: none;
+                color: rgba(255, 255, 255, 0.9);
+                position: relative;
+                overflow: hidden;
             }
+
+            #mobile-menu-overlay a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+                transition: left 0.5s ease;
+            }
+
+            #mobile-menu-overlay a:hover::before {
+                left: 100%;
+            }
+
             #mobile-menu-overlay a:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: rgba(255, 255, 255, 0.2);
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.15);
+                transform: translateX(4px);
+                color: #ffffff;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             }
-            #mobile-menu-overlay .pt-8 a {
+
+            #mobile-menu-overlay .cta-button {
                 background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
                 color: #000;
                 font-weight: 600;
-                margin-top: 32px;
-                box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+                margin-top: 40px;
+                text-align: center;
+                box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
             }
-            #mobile-menu-overlay .pt-8 a:hover {
+
+            #mobile-menu-overlay .cta-button:hover {
                 background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
-                transform: translateY(-3px);
-                box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
             }
         }
 
@@ -937,50 +1225,40 @@
 <body>
 
     <!-- MOBILE MENU OVERLAY -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
-        <div class="flex flex-col items-center justify-center h-full px-8">
-            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-white/60 hover:text-white transition-colors">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
+        <button onclick="toggleMobileMenu()" class="close-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
 
-            <nav class="text-center space-y-8">
-                <div class="space-y-6">
-                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Ecosystem</h3>
-                    <div class="space-y-4">
-                        <a href="primus.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Primus</a>
-                        <a href="trion.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Trion</a>
-                        <a href="sentinel.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Sentinel</a>
-                        <a href="teletraan.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Teletraan</a>
-                        <a href="nest.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Nest</a>
-                        <a href="obex.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Obex</a>
-                    </div>
-                </div>
+        <nav>
+            <div class="nav-section">
+                <h3>Ecosystem</h3>
+                <a href="primus.html">Primus</a>
+                <a href="teletraan.html">Teletraan</a>
+                <a href="nest.html">Nest</a>
+                <a href="trion.html">Trion</a>
+                <a href="sentinel.html">Sentinel</a>
+                <a href="obex.html">Obex</a>
+            </div>
 
-                <div class="space-y-6">
-                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Intelligence</h3>
-                    <div class="space-y-4">
-                        <a href="news.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Newsroom</a>
-                        <a href="industries.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Industries</a>
-                    </div>
-                </div>
+            <div class="nav-section">
+                <h3>Intelligence</h3>
+                <a href="news.html">Newsroom</a>
+                <a href="industries.html">Industries</a>
+            </div>
 
-                <div class="space-y-6">
-                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Mission</h3>
-                    <div class="space-y-4">
-                        <a href="about.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">About</a>
-                        <a href="careers.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Careers</a>
-                        <a href="contact.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Contact</a>
-                    </div>
-                </div>
+            <div class="nav-section">
+                <h3>Mission</h3>
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+            </div>
 
-                <div class="pt-8">
-                    <a href="contact.html" class="inline-block bg-white text-black px-8 py-4 text-sm font-black uppercase tracking-wider hover:bg-green-400 transition-all duration-300">Schedule Demonstration</a>
-                </div>
-            </nav>
-        </div>
+            <a href="contact.html" class="cta-button">Schedule Demonstration</a>
+        </nav>
     </div>
 
     <!-- FULL SCREEN TACTICAL SEARCH -->
@@ -1031,56 +1309,74 @@
                 <li class="nav-item group static cursor-pointer">
                     <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
                     <div class="mega-menu-wrapper">
-                        <div class="mega-menu-content text-left">
-                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
-                                <div class="space-y-8 text-left">
-                                    <div class="space-y-4">
-                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
-                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                        <div class="mega-menu-content">
+                            <div class="max-w-6xl mx-auto">
+                                <!-- ECOSYSTEM PRODUCTS -->
+                                <div class="menu-section">
+                                    <h4>Ecosystem</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover">
+                                            <span>Primus</span>
+                                            <span>Behavioral Predictive AI</span>
                                         </a>
-                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
-                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover">
+                                            <span>Teletraan</span>
+                                            <span>Global Command UI</span>
                                         </a>
-                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
-                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover">
+                                            <span>Nest</span>
+                                            <span>Professional Oversight</span>
                                         </a>
-                                    </div>
-                                </div>
-                                <div class="space-y-8 text-left">
-                                    <div class="space-y-4">
-                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
-                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover">
+                                            <span>Trion</span>
+                                            <span>Edge Optical Sensing</span>
                                         </a>
-                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
-                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover">
+                                            <span>Sentinel</span>
+                                            <span>Kinetic Unit Fleet</span>
                                         </a>
-                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
-                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
-                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover">
+                                            <span>Obex</span>
+                                            <span>Architectural Imaging</span>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="space-y-8 border-l border-white/5 pl-12">
-                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
-                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
-                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
-                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
-                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
-                                    </ul>
+
+                                <!-- INTELLIGENCE -->
+                                <div class="menu-section">
+                                    <h4>Intelligence</h4>
+                                    <a href="news.html" class="grid-item-hover">
+                                        <span>Newsroom</span>
+                                        <span>Global Tactical Updates</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover">
+                                        <span>Industries</span>
+                                        <span>Real-World Deployments</span>
+                                    </a>
                                 </div>
-                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
-                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
-                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+
+                                <!-- MISSION -->
+                                <div class="menu-section">
+                                    <h4>Mission</h4>
+                                    <a href="about.html" class="grid-item-hover">
+                                        <span>About</span>
+                                        <span>Our Story & Vision</span>
+                                    </a>
+                                    <a href="careers.html" class="grid-item-hover">
+                                        <span>Careers</span>
+                                        <span>Join The Frontline</span>
+                                    </a>
+                                    <a href="contact.html" class="grid-item-hover">
+                                        <span>Contact</span>
+                                        <span>Get In Touch</span>
+                                    </a>
+                                </div>
+
+                                <!-- INTELLIGENCE LAYER -->
+                                <div class="intelligence-layer">
+                                    <h4>Integrated Intelligence Layer</h4>
+                                    <p>Access real-time behavioral foresight models and strategic deployment archives through our sovereign neural mesh.</p>
+                                    <div class="status">● LIVE RESEARCH FEED ACTIVE</div>
                                 </div>
                             </div>
                         </div>
