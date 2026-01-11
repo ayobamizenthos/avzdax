@@ -73,8 +73,8 @@
   /* Prevent horizontal scroll due to transforms or oversized elements */
   html, body { overflow-x: hidden !important; }
 
-  /* Hide autoplaying background videos on mobile to save bandwidth and avoid visual clutter */
-  video, .opening-video, .hero-video-tint, .command-media { display: none !important; }
+  /* Preserve video display on mobile so hero & opening videos can autoplay when allowed by browser */
+  /* Note: autoplay requires videos to be muted and use playsinline (already set in markup). */
 
   /* Provide a subtle static fallback for hero areas */
   .opening-section { background-size: cover !important; background-position: center !important; }

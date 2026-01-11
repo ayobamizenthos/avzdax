@@ -193,4 +193,20 @@
 
   // Expose for debugging
   window.__AVZ_siteUtils = { buildIndex };
+  
+  // ---------- Mobile video playback helper ----------
+  function tryPlayAutoplayVideos(){
+    try{
+      const videos = document.querySelectorAll('video[autoplay]');
+      videos.forEach(v=>{
+        try{ v.muted = true; v.playsInline = true; }catch(e){}
+        const p = v.play();
+        if(p && p.catch){ p.catch(()=>{/* playback blocked until user interaction */}); }
+      });
+    }catch(e){}
+  }
+
+  // Try immediately and also after first touch (some browsers require user gesture)
+  tryPlayAutoplayVideos();
+  window.addEventListener('touchstart', function onceTouch(){ tryPlayAutoplayVideos(); window.removeEventListener('touchstart', onceTouch); }, {passive:true});
 })();
