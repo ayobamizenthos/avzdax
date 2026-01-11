@@ -165,7 +165,15 @@
   a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid rgba(255,255,255,0.12) !important; outline-offset: 2px !important; }
 
   /* Reduce heavy animations that may impact mobile performance */
-  * { animation-duration: 0.0001s !important; transition-duration: 0.0001s !important; }
+  /* Reduce heavy animations that may impact mobile performance (targeted) */
+  .menu-preview-img, .opening-video, .particle, .transform-3d, .command-intelligence, .command-overlay, .visual-frame, .slide { animation-duration: 0.0001s !important; transition-duration: 0.0001s !important; }
+}
+
+/* Mobile toggle button layout */
+@media (max-width: 900px) {
+  .mobile-menu-toggle-modern { display: inline-flex !important; position: relative; z-index: 99999; background: transparent; border: none; color: #fff; }
+  nav#main-nav { display: flex !important; align-items: center; justify-content: space-between; }
+  nav#main-nav .mobile-menu-toggle-modern { margin-left: auto; margin-right: 6px; }
 }
 
 /* Mobile-only: hide the small hero label that overlays the hero video on index (Autonomous Intelligence) */

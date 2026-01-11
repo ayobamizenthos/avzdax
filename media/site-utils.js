@@ -72,6 +72,9 @@
 
     btn.onclick = () => { if(history.length>1) history.back(); else window.location.href = 'index.html'; };
 
+    // analytics attribute for tracking
+    btn.setAttribute('data-analytics','back-button');
+
     document.body.appendChild(btn);
   }
 
@@ -196,6 +199,7 @@
     try{ ensureBackButton(); }catch(e){}
     try{ wireSearchOverlay(); }catch(e){}
     try{ injectMobileMenu(); }catch(e){}
+    try{ injectMobileToggle(); }catch(e){}
     try{ wireMobileMenuToggles(); }catch(e){}
     try{ enablePrimusMobileHero(); }catch(e){}
   }
@@ -314,6 +318,32 @@
     menu.appendChild(ctaWrap);
 
     document.body.appendChild(menu);
+  }
+
+  // Inject a visible mobile menu toggle into `nav#main-nav` if none exists
+  function injectMobileToggle(){
+    try{
+      const nav = document.getElementById('main-nav');
+      if(!nav) return;
+      // if an existing toggle is present, skip
+      if(nav.querySelector('.mobile-menu-toggle') || nav.querySelector('.mobile-menu-toggle-modern')) return;
+      const btn = el(document,'button');
+      btn.className = 'mobile-menu-toggle-modern';
+      btn.setAttribute('aria-label','Open menu');
+      btn.setAttribute('type','button');
+      btn.style.background = 'transparent';
+      btn.style.border = 'none';
+      btn.style.cursor = 'pointer';
+      btn.style.color = 'white';
+      btn.style.display = 'inline-flex';
+      btn.style.alignItems = 'center';
+      btn.style.justifyContent = 'center';
+      btn.style.padding = '8px';
+      btn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      btn.addEventListener('click', function(e){ e.preventDefault(); openMobileMenu(); this.setAttribute('aria-expanded','true'); });
+      // place at end of the nav container so it appears on the right
+      nav.appendChild(btn);
+    }catch(e){/* noop */}
   }
 
   function openMobileMenu(){
