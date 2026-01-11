@@ -60,6 +60,60 @@
   .tracking-widest, .tracking-[0.6em], .tracking-[0.5em], .tracking-[0.4em] { letter-spacing: 0.04em !important; }
 }
 
+/* Mobile-only text menu (injected via JS) */
+@media (max-width: 900px) {
+  .mobile-overlay-menu {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    color: #000;
+    z-index: 99999;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-y: auto;
+  }
+
+  .mobile-overlay-menu .menu-close {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  .mobile-overlay-menu nav { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .mobile-overlay-menu a { color: #000; text-decoration: none; font-weight: 600; padding: 12px 8px; border-radius: 6px; }
+  .mobile-overlay-menu a.small { font-weight: 500; color: #666; font-size: 14px; }
+  .mobile-overlay-cta { margin-top: 8px; }
+  .mobile-overlay-cta a { display: inline-block; background: #000; color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-weight:700; }
+
+  /* When menu open: hide header/nav and prevent underlying content from interacting */
+  body.mobile-menu-open { overflow: hidden; }
+  body.mobile-menu-open nav#main-nav { display: none !important; }
+
+  /* improve readability for injected menu on very small screens */
+  @media (max-width: 420px) {
+    .mobile-overlay-menu { padding: 18px 12px; }
+    .mobile-overlay-menu a { padding: 14px 6px; font-size: 18px; }
+    .mobile-overlay-cta a { width: 100%; text-align: center; }
+  }
+}
+
+/* PRIMUS: mobile full-screen hero video BEFORE scroll begins */
+@media (max-width: 900px) {
+  body.primus-mobile-hero-active { overflow: hidden; }
+  .primus-hero-blocker {
+    position: fixed; inset: 0; z-index: 99998; display:flex; align-items:center; justify-content:center; pointer-events:auto; background:#000; 
+  }
+  .primus-hero-blocker .skip-btn {
+    position: absolute; top: 18px; right: 16px; z-index:100000; background: rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:6px; backdrop-filter: blur(6px);
+  }
+  .primus-hero-fullvideo { width:100vw; height:100vh; object-fit:cover; }
+}
+
 /* Extra-small refinements */
 @media (max-width: 420px) {
   h1 { font-size: clamp(22px, 9vw, 34px) !important; }

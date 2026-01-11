@@ -187,6 +187,9 @@
     try{ wireSocialLinks(); }catch(e){}
     try{ ensureBackButton(); }catch(e){}
     try{ wireSearchOverlay(); }catch(e){}
+    try{ injectMobileMenu(); }catch(e){}
+    try{ wireMobileMenuToggles(); }catch(e){}
+    try{ enablePrimusMobileHero(); }catch(e){}
   }
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
@@ -224,4 +227,112 @@
   }
   hideHeroLabelOnMobile();
   window.addEventListener('resize', hideHeroLabelOnMobile, {passive:true});
+  
+  // ---------- Mobile menu injection & wiring ----------
+  function injectMobileMenu(){
+    if(typeof document === 'undefined') return;
+    if(document.querySelector('.mobile-overlay-menu')) return; // already injected
+    // build container
+    const menu = el(document,'div');
+    menu.className = 'mobile-overlay-menu';
+    menu.style.display = 'none';
+
+    const closeBtn = el(document,'button'); closeBtn.className='menu-close'; closeBtn.innerHTML = '✕';
+    closeBtn.setAttribute('aria-label','Close menu');
+    closeBtn.addEventListener('click', closeMobileMenu);
+    menu.appendChild(closeBtn);
+
+    const nav = el(document,'nav');
+    // create links from SITE_PAGES (human-friendly text)
+    SITE_PAGES.forEach(p=>{
+      const name = p.replace('.html','').replace(/-/g,' ').replace(/\b(\w)/g, s=>s.toUpperCase());
+      const a = el(document,'a',{href:p}); a.textContent = name; a.className='mobile-menu-link';
+      nav.appendChild(a);
+    });
+
+    // add schedule demo CTA
+    const ctaWrap = el(document,'div'); ctaWrap.className='mobile-overlay-cta';
+    const cta = el(document,'a',{href:'contact.html'}); cta.textContent = 'Schedule Demonstration'; cta.className='';
+    ctaWrap.appendChild(cta);
+    menu.appendChild(nav);
+    menu.appendChild(ctaWrap);
+
+    document.body.appendChild(menu);
+  }
+
+  function openMobileMenu(){
+    const menu = document.querySelector('.mobile-overlay-menu');
+    if(!menu) return;
+    menu.style.display = 'flex';
+    // small delay to allow transitions if present
+    setTimeout(()=>{ document.body.classList.add('mobile-menu-open'); menu.classList.add('is-open'); }, 40);
+    // trap focus for accessibility
+    try{ const first = menu.querySelector('a,button'); if(first) first.focus(); }catch(e){}
+  }
+
+  function closeMobileMenu(){
+    const menu = document.querySelector('.mobile-overlay-menu');
+    if(!menu) return;
+    menu.classList.remove('is-open');
+    document.body.classList.remove('mobile-menu-open');
+    menu.style.display = 'none';
+  }
+
+  function wireMobileMenuToggles(){
+    // wire existing toggle buttons if present
+    const toggles = Array.from(document.querySelectorAll('.mobile-menu-toggle, .mobile-menu-toggle-modern'));
+    if(toggles.length===0) return;
+    toggles.forEach(t=>{
+      t.addEventListener('click', function(e){ e.preventDefault(); openMobileMenu(); });
+    });
+    // also allow clicking anywhere on the header menu icon area
+    // close when overlay background clicked
+    document.addEventListener('click', function(e){
+      const menu = document.querySelector('.mobile-overlay-menu');
+      if(!menu || !menu.classList.contains('is-open')) return;
+      if(e.target === menu) closeMobileMenu();
+    });
+  }
+
+  // ---------- PRIMUS mobile full-screen hero (mobile-only) ----------
+  function enablePrimusMobileHero(){
+    try{
+      const path = (window.location.pathname||'').split('/').pop();
+      if(!path || path.indexOf('primus')===-1) return;
+      if(window.innerWidth > 900) return;
+      // find hero video (prefer .primus-video then .primus-vision-video)
+      const heroVideo = document.querySelector('.primus-video') || document.querySelector('.primus-vision-video') || document.querySelector('video');
+      if(!heroVideo) return;
+
+      // create blocker overlay
+      if(document.querySelector('.primus-hero-blocker')) return;
+      const blocker = el(document,'div'); blocker.className = 'primus-hero-blocker';
+      const clone = heroVideo.cloneNode(true);
+      clone.className = 'primus-hero-fullvideo';
+      // ensure muted & playsinline for autoplay on mobile
+      clone.muted = true; clone.playsInline = true; clone.setAttribute('playsinline',''); clone.setAttribute('muted','');
+      blocker.appendChild(clone);
+      const skip = el(document,'button'); skip.className = 'skip-btn'; skip.textContent = 'Skip'; skip.addEventListener('click', removePrimusHero);
+      blocker.appendChild(skip);
+      document.body.appendChild(blocker);
+      document.body.classList.add('primus-mobile-hero-active');
+
+      // try to play; if blocked wait for user gesture; remove overlay on ended or playing
+      const attempt = clone.play();
+      if(attempt && attempt.catch){ attempt.catch(()=>{
+        // waiting for user gesture; show simple tap to play instruction overlay via skip button text
+        skip.textContent = 'Tap to Start';
+        blocker.addEventListener('click', function once(){ clone.play().catch(()=>{}); blocker.removeEventListener('click', once); });
+      }); }
+
+      clone.addEventListener('playing', removePrimusHero);
+      clone.addEventListener('ended', removePrimusHero);
+
+      function removePrimusHero(){
+        const b = document.querySelector('.primus-hero-blocker');
+        if(b) b.remove();
+        document.body.classList.remove('primus-mobile-hero-active');
+      }
+    }catch(e){}
+  }
 })();
