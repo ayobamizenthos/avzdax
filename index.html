@@ -394,147 +394,253 @@
             }
         }
 
-        /* MOBILE MENU OVERLAY - SILICON VALLEY DESIGN */
+        /* AWARD-WINNING MOBILE NAVIGATION - PROFESSIONAL DESIGN */
         @media (max-width: 1024px) {
             #mobile-menu-overlay {
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(10, 10, 10, 0.99) 100%);
-                backdrop-filter: blur(40px);
-                -webkit-backdrop-filter: blur(40px);
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(5, 5, 5, 0.99) 100%);
+                backdrop-filter: blur(50px);
+                -webkit-backdrop-filter: blur(50px);
+                display: flex;
+                flex-direction: column;
             }
 
-            #mobile-menu-overlay .close-button {
-                position: absolute;
-                top: 24px;
-                right: 24px;
+            /* MOBILE NAV HEADER - LOGO LEFT, CLOSE RIGHT */
+            .mobile-nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 24px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .mobile-logo {
+                height: 32px;
+                width: auto;
+                filter: brightness(0.9);
+            }
+
+            .mobile-close-btn {
                 width: 44px;
                 height: 44px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                color: rgba(255, 255, 255, 0.7);
                 cursor: pointer;
             }
 
-            #mobile-menu-overlay .close-button:hover {
-                background: rgba(255, 255, 255, 0.2);
+            .mobile-close-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+                color: #ffffff;
                 transform: scale(1.05);
             }
 
-            #mobile-menu-overlay nav {
-                padding: 80px 24px 40px;
-                max-width: 400px;
-                margin: 0 auto;
+            /* MOBILE NAV CONTENT */
+            .mobile-nav-content {
+                flex: 1;
+                overflow-y: auto;
+                padding: 0 20px 40px;
             }
 
-            #mobile-menu-overlay h3 {
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.1em;
-                color: rgba(255, 255, 255, 0.6);
-                margin-bottom: 20px;
-                text-transform: uppercase;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                padding-bottom: 12px;
-            }
-
-            #mobile-menu-overlay .nav-section {
+            /* QUICK ACTIONS - PROFESSIONAL CARDS */
+            .mobile-quick-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
                 margin-bottom: 40px;
+                padding-top: 24px;
             }
 
-            #mobile-menu-overlay a {
-                display: block;
-                padding: 16px 20px;
-                margin: 6px 0;
+            .mobile-action-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                padding: 24px 20px;
                 background: rgba(255, 255, 255, 0.03);
                 border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 12px;
-                font-size: 16px;
-                font-weight: 500;
-                letter-spacing: 0.025em;
+                border-radius: 16px;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 text-decoration: none;
                 color: rgba(255, 255, 255, 0.9);
+                cursor: pointer;
                 position: relative;
                 overflow: hidden;
             }
 
-            #mobile-menu-overlay a::before {
+            .mobile-action-card::before {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: -100%;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
-                transition: left 0.5s ease;
+                background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.05), transparent);
+                transition: left 0.6s ease;
             }
 
-            #mobile-menu-overlay a:hover::before {
+            .mobile-action-card:hover::before {
                 left: 100%;
             }
 
-            #mobile-menu-overlay a:hover {
+            .mobile-action-card:hover {
                 background: rgba(255, 255, 255, 0.08);
                 border-color: rgba(255, 255, 255, 0.15);
-                transform: translateX(4px);
-                color: #ffffff;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+                transform: translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
             }
 
-            #mobile-menu-overlay .cta-button {
+            .mobile-action-card.primary {
                 background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
                 color: #000;
-                font-weight: 600;
-                margin-top: 40px;
-                text-align: center;
-                box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.3);
             }
 
-            #mobile-menu-overlay .cta-button:hover {
+            .mobile-action-card.primary:hover {
                 background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
+                transform: translateY(-4px);
+                box-shadow: 0 16px 40px rgba(255, 255, 255, 0.2);
             }
 
-            /* QUICK ACTION BUTTONS */
-            #mobile-menu-overlay .quick-action-btn {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-                padding: 20px 16px;
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 16px;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                text-decoration: none;
-                color: rgba(255, 255, 255, 0.9);
-                font-size: 12px;
-                font-weight: 500;
-                text-align: center;
-            }
-
-            #mobile-menu-overlay .quick-action-btn:hover {
+            .action-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
                 background: rgba(255, 255, 255, 0.1);
-                border-color: rgba(255, 255, 255, 0.2);
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
             }
 
-            #mobile-menu-overlay .quick-action-btn svg {
+            .mobile-action-card.primary .action-icon {
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-action-card:hover .action-icon {
+                background: rgba(255, 255, 255, 0.15);
+                transform: scale(1.1);
+            }
+
+            .mobile-action-card.primary:hover .action-icon {
+                background: rgba(0, 0, 0, 0.15);
+            }
+
+            .action-icon svg {
                 width: 24px;
                 height: 24px;
-                opacity: 0.7;
-                transition: opacity 0.3s ease;
+                opacity: 0.8;
             }
 
-            #mobile-menu-overlay .quick-action-btn:hover svg {
-                opacity: 1;
+            .action-label {
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: 0.025em;
+                text-align: center;
+                line-height: 1.2;
+            }
+
+            /* NAVIGATION SECTIONS - EXPANDABLE */
+            .mobile-nav-sections {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .mobile-nav-section {
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.04);
+                border-radius: 16px;
+                overflow: hidden;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .mobile-nav-section:hover {
+                background: rgba(255, 255, 255, 0.03);
+                border-color: rgba(255, 255, 255, 0.08);
+            }
+
+            .section-toggle {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 24px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .section-toggle:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .section-title {
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 0.025em;
+            }
+
+            .toggle-icon {
+                width: 16px;
+                height: 16px;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0.6;
+            }
+
+            .mobile-nav-section.active .toggle-icon {
+                transform: rotate(180deg);
+            }
+
+            .section-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                background: rgba(255, 255, 255, 0.01);
+            }
+
+            .mobile-nav-section.active .section-content {
+                max-height: 500px;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 16px 24px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+                transition: all 0.3s ease;
+                text-decoration: none;
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.05);
+                color: #ffffff;
+                padding-left: 32px;
+            }
+
+            .link-title {
+                display: block;
+                font-size: 15px;
+                font-weight: 600;
+                margin-bottom: 2px;
+            }
+
+            .link-desc {
+                font-size: 12px;
+                opacity: 0.6;
+                font-weight: 400;
             }
         }
 
@@ -1259,59 +1365,126 @@
 </head>
 <body>
 
-    <!-- MOBILE MENU OVERLAY -->
+    <!-- PROFESSIONAL MOBILE MENU OVERLAY -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
-        <button onclick="toggleMobileMenu()" class="close-button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
+        <!-- HEADER -->
+        <div class="mobile-nav-header">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="mobile-logo">
+            <button onclick="toggleMobileMenu()" class="mobile-close-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
 
-        <nav>
+        <!-- MAIN NAVIGATION -->
+        <div class="mobile-nav-content">
             <!-- QUICK ACTIONS -->
-            <div class="nav-section">
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <button onclick="toggleSearch()" class="quick-action-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="mobile-quick-actions">
+                <button onclick="toggleSearch()" class="mobile-action-card">
+                    <div class="action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
-                        <span>Search</span>
-                    </button>
-                    <a href="contact.html" class="quick-action-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    </div>
+                    <span class="action-label">Search</span>
+                </button>
+                <a href="contact.html" class="mobile-action-card primary">
+                    <div class="action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14,2 14,8 20,8"></polyline>
                         </svg>
-                        <span>Demo</span>
-                    </a>
+                    </div>
+                    <span class="action-label">Schedule Demo</span>
+                </a>
+            </div>
+
+            <!-- NAVIGATION SECTIONS -->
+            <div class="mobile-nav-sections">
+                <!-- ECOSYSTEM -->
+                <div class="mobile-nav-section">
+                    <button class="section-toggle" onclick="toggleSection(this)">
+                        <span class="section-title">Ecosystem</span>
+                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="section-content">
+                        <a href="primus.html" class="nav-link">
+                            <span class="link-title">Primus</span>
+                            <span class="link-desc">Behavioral AI Engine</span>
+                        </a>
+                        <a href="teletraan.html" class="nav-link">
+                            <span class="link-title">Teletraan</span>
+                            <span class="link-desc">Command Intelligence</span>
+                        </a>
+                        <a href="nest.html" class="nav-link">
+                            <span class="link-title">Nest</span>
+                            <span class="link-desc">Professional Oversight</span>
+                        </a>
+                        <a href="trion.html" class="nav-link">
+                            <span class="link-title">Trion</span>
+                            <span class="link-desc">Optical Sensing</span>
+                        </a>
+                        <a href="sentinel.html" class="nav-link">
+                            <span class="link-title">Sentinel</span>
+                            <span class="link-desc">Autonomous Fleet</span>
+                        </a>
+                        <a href="obex.html" class="nav-link">
+                            <span class="link-title">Obex</span>
+                            <span class="link-desc">Architectural Security</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- INTELLIGENCE -->
+                <div class="mobile-nav-section">
+                    <button class="section-toggle" onclick="toggleSection(this)">
+                        <span class="section-title">Intelligence</span>
+                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="section-content">
+                        <a href="news.html" class="nav-link">
+                            <span class="link-title">Newsroom</span>
+                            <span class="link-desc">Global Updates</span>
+                        </a>
+                        <a href="industries.html" class="nav-link">
+                            <span class="link-title">Industries</span>
+                            <span class="link-desc">Real-World Deployments</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- MISSION -->
+                <div class="mobile-nav-section">
+                    <button class="section-toggle" onclick="toggleSection(this)">
+                        <span class="section-title">Mission</span>
+                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="section-content">
+                        <a href="about.html" class="nav-link">
+                            <span class="link-title">About</span>
+                            <span class="link-desc">Our Story & Vision</span>
+                        </a>
+                        <a href="careers.html" class="nav-link">
+                            <span class="link-title">Careers</span>
+                            <span class="link-desc">Join The Frontline</span>
+                        </a>
+                        <a href="contact.html" class="nav-link">
+                            <span class="link-title">Contact</span>
+                            <span class="link-desc">Get In Touch</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <div class="nav-section">
-                <h3>Ecosystem</h3>
-                <a href="primus.html">Primus</a>
-                <a href="teletraan.html">Teletraan</a>
-                <a href="nest.html">Nest</a>
-                <a href="trion.html">Trion</a>
-                <a href="sentinel.html">Sentinel</a>
-                <a href="obex.html">Obex</a>
-            </div>
-
-            <div class="nav-section">
-                <h3>Intelligence</h3>
-                <a href="news.html">Newsroom</a>
-                <a href="industries.html">Industries</a>
-            </div>
-
-            <div class="nav-section">
-                <h3>Mission</h3>
-                <a href="about.html">About</a>
-                <a href="careers.html">Careers</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </nav>
+        </div>
     </div>
 
     <!-- FULL SCREEN TACTICAL SEARCH -->
@@ -1507,9 +1680,12 @@
                 </li>
             </ul>
 
-            <div class="flex items-center gap-12 relative z-[160]">
-                <!-- MOBILE MENU TOGGLE - ICON ONLY -->
-                <button onclick="toggleMobileMenu()" class="mobile-menu-toggle hidden flex items-center justify-center w-12 h-12 border border-white/10 group hover:border-white transition-all bg-white/5 lg:hidden">
+            <!-- MOBILE NAV HEADER - HORIZONTAL LAYOUT -->
+            <div class="mobile-nav-bar hidden lg:hidden">
+                <a href="index.html" class="mobile-nav-logo">
+                    <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto">
+                </a>
+                <button onclick="toggleMobileMenu()" class="mobile-menu-toggle">
                     <div class="hamburger-lines">
                         <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all"></span>
                         <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all mt-1"></span>
@@ -2007,6 +2183,22 @@
             } else {
                 overlay.classList.remove('opacity-0', 'pointer-events-none');
                 overlay.classList.add('opacity-100', 'pointer-events-auto');
+            }
+        }
+
+        // MOBILE NAV SECTION TOGGLE
+        function toggleSection(button) {
+            const section = button.closest('.mobile-nav-section');
+            const isActive = section.classList.contains('active');
+
+            // Close all sections first
+            document.querySelectorAll('.mobile-nav-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // Open clicked section if it wasn't active
+            if (!isActive) {
+                section.classList.add('active');
             }
         }
 
