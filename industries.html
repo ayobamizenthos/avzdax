@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECTORS | AVZDAX DEFENSE INTELLIGENCE</title>
+
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FFFFFF; color: #000000; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .text-gradient { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px;
+            margin-top: -20px;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(0, 0, 0, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(0,0,0,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #FFFFFF 100%); }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.05)); }
+
+        .grid-item-hover:hover { background: #000000; color: #FFFFFF !important; border-color: #000000; }
+        .grid-item-hover:hover span { color: #FFFFFF !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #AAA !important; }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(0,0,0,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #000, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: black; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* SECTORS PAGE SPECIFIC STYLES */
+        .sector-section { padding: 120px 0; }
+        .sector-showcase { padding: 80px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .sector-content { max-width: 500px; }
+        .sector-image-wrapper { position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .sector-showcase-image { width: 100%; height: 400px; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .sector-image-wrapper:hover .sector-showcase-image { transform: scale(1.05); }
+
+        .hero-section { background: #FFFFFF; padding: 120px 0; }
+
+    </style>
+</head>
+<body>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">White Papers: Behavioral Foresight</li>
+                        <li class="hover:text-white cursor-pointer">News: Global Deployment Status</li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">SECTORS</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section px-12 md:px-24">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-8"><div class="h-[1px] w-20 bg-black/40"></div><span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Industry Solutions</span></div>
+            <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase tracking-tighter leading-[0.85] text-gradient-dark mb-8">PROTECTING CRITICAL<br>
+                INFRASTRUCTURES<br>
+                WORLDWIDE</h1>
+            <p class="text-gray-600 text-sm md:text-base max-w-3xl mx-auto font-light leading-relaxed uppercase tracking-widest mb-10">AVZDAX delivers sovereign predictive defense solutions tailored for the world's most critical industries. From energy grids to financial systems, we secure what matters most.</p>
+            <div class="flex justify-center gap-6">
+                <button onclick="lenis.scrollTo('#sectors')" class="px-10 py-4 bg-black text-white text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gray-800 transition-all">Explore Sectors</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTORS SHOWCASE -->
+    <section id="sectors" class="sector-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                    CRITICAL SECTORS
+                </h2>
+                <p class="text-gray-600 text-xl max-w-4xl mx-auto leading-relaxed">
+                    AVZDAX delivers sovereign predictive defense intelligence across the world's most critical infrastructure sectors.
+                    Our AI-powered solutions transform vulnerability into absolute security.
+                </p>
+            </div>
+
+            <!-- GOVERNMENT -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-content">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Sovereign Defense</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            GOVERNMENT
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Protecting national sovereignty and critical government infrastructure from advanced persistent threats.
+                            Our predictive intelligence systems secure government operations, from classified facilities to
+                            public administration networks, ensuring uninterrupted governance in an era of hybrid warfare.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Border security and immigration control</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Critical infrastructure protection</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Intelligence operations support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sector-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=2000" alt="Government Security" class="sector-showcase-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENERGY -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-image-wrapper lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Energy Infrastructure" class="sector-showcase-image">
+                    </div>
+                    <div class="sector-content lg:order-2">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Infrastructure Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            ENERGY
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Securing the global energy supply chain from cyber attacks, physical sabotage, and natural disasters.
+                            Our systems protect power grids, nuclear facilities, oil refineries, and renewable energy installations,
+                            ensuring energy security for nations and economies worldwide.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Power grid cybersecurity</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Nuclear facility protection</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">SCADA system defense</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANKING -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-content">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Financial Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            BANKING
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Protecting the global financial system from sophisticated cyber attacks, fraud, and operational disruptions.
+                            Our predictive AI systems secure transactions worth trillions daily, safeguarding banking institutions,
+                            stock exchanges, and payment networks from emerging threats.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Real-time fraud prevention</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Transaction security monitoring</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Market infrastructure protection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sector-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?q=80&w=1000" alt="Banking Security" class="sector-showcase-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESIDENTIAL -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-image-wrapper lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Residential Security" class="sector-showcase-image">
+                    </div>
+                    <div class="sector-content lg:order-2">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Community Protection</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            RESIDENTIAL
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Advanced residential security combining predictive threat detection with community protection.
+                            Our AI-powered systems secure homes, apartments, and residential communities from burglary,
+                            vandalism, and emerging security threats in urban and suburban environments.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Smart home security integration</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Community surveillance networks</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Emergency response coordination</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HEALTHCARE -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-content">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Medical Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            HEALTHCARE
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Securing healthcare facilities and protecting patient data in an era of increasing cyber threats.
+                            Our systems safeguard hospitals, clinics, and medical research facilities while ensuring
+                            continuity of critical care services and protecting sensitive medical information.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Hospital network security</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Patient data protection</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Medical device cybersecurity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sector-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000" alt="Healthcare Security" class="sector-showcase-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AIRPORT -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-image-wrapper lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1473862170180-84427c485aca?q=80&w=2670" alt="Airport Security" class="sector-showcase-image">
+                    </div>
+                    <div class="sector-content lg:order-2">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Aviation Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            AIRPORT
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Comprehensive airport security combining predictive threat analysis with operational continuity.
+                            Our systems protect passenger terminals, cargo facilities, and air traffic control from terrorism,
+                            smuggling, and cyber attacks while ensuring smooth aviation operations.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Passenger screening enhancement</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Perimeter security monitoring</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Cargo facility protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAMPUS -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-content">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Educational Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            CAMPUS
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Protecting educational institutions with intelligent surveillance and emergency response systems.
+                            Our technology secures universities, colleges, and research facilities, ensuring safe learning
+                            environments for students, faculty, and staff while protecting valuable research assets.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Campus access control</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Emergency response coordination</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Research facility protection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sector-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2686" alt="Campus Security" class="sector-showcase-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RETAIL -->
+            <div class="sector-showcase mb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="sector-image-wrapper lg:order-1">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2670" alt="Retail Security" class="sector-showcase-image">
+                    </div>
+                    <div class="sector-content lg:order-2">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-[1px] w-20 bg-black/40"></div>
+                            <span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Commercial Security</span>
+                        </div>
+                        <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none mb-8">
+                            RETAIL
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                            Advanced retail security combining loss prevention with customer safety and operational intelligence.
+                            Our systems protect shopping centers, stores, and commercial facilities from theft, vandalism,
+                            and security threats while enhancing the shopping experience.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Loss prevention systems</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Customer safety monitoring</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-3 h-3 bg-black rounded-full"></div>
+                                <span class="text-gray-600">Operational intelligence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover text-white">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover text-white">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Sectors</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="industries.html" class="footer-link-hover italic text-white/70">Government</a>
+                    <a href="industries.html" class="footer-link-hover">Energy</a>
+                    <a href="industries.html" class="footer-link-hover">Bank</a>
+                    <a href="industries.html" class="footer-link-hover">Residential</a>
+                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                    <a href="industries.html" class="footer-link-hover">Airport</a>
+                    <a href="industries.html" class="footer-link-hover">Campus</a>
+                    <a href="industries.html" class="footer-link-hover">Retail</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="#" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({ lerp: 0.1 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                document.getElementById('preview-default').style.opacity = '1';
+            });
+        });
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from(".hero-section h1", {
+            scrollTrigger: { trigger: ".hero-section", start: "top center" },
+            y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".hero-section p", {
+            scrollTrigger: { trigger: ".hero-section", start: "top center" },
+            y: 50, opacity: 0, duration: 1.2, delay: 0.3, ease: "power4.out"
+        });
+
+        // Enhanced animations for sector showcase
+        gsap.utils.toArray('.sector-showcase').forEach((showcase, index) => {
+            const content = showcase.querySelector('.sector-content');
+            const image = showcase.querySelector('.sector-showcase-image');
+
+            gsap.from(content, {
+                scrollTrigger: { trigger: showcase, start: "top 80%" },
+                x: index % 2 === 0 ? -60 : 60, opacity: 0, duration: 1.2, ease: "power4.out"
+            });
+
+            gsap.from(image, {
+                scrollTrigger: { trigger: showcase, start: "top 75%" },
+                x: index % 2 === 0 ? 60 : -60, opacity: 0, duration: 1.2, delay: 0.2, ease: "power4.out"
+            });
+        });
+
+        // SCROLL NAV
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
+            else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+        });
+
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<100; i++) pts.push(new P()); }
+        class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.onresize=resize;
+
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>

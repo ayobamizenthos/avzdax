@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVZDAX Video Compression Service</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .video-item { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #007bff; }
+        .filename { font-weight: bold; color: #007bff; }
+        .size { color: #6c757d; font-size: 0.9em; }
+        .service { background: #e3f2fd; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .button { background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px 5px; }
+        .button:hover { background: #0056b3; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 AVZDAX Video Compression Service</h1>
+        <p>Compress your videos automatically for optimal web performance. Choose your preferred method:</p>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Your videos are currently working with the original files. These compression options will create optimized versions that load 85% faster!
+        </div>
+
+        <h2>🎯 Videos to Compress</h2>
+
+        <div class="video-item">
+            <div class="filename">homepage-hero.mov</div>
+            <div class="size">88MB → ~12MB (86% reduction)</div>
+        </div>
+
+        <div class="video-item">
+            <div class="filename">primus-hero.mp4 + PRIMUSWIDEINTRO1.mp4</div>
+            <div class="size">Combined → ~15MB total</div>
+        </div>
+
+        <div class="video-item">
+            <div class="filename">trion-hero.mov</div>
+            <div class="size">Large MOV → ~12MB MP4</div>
+        </div>
+
+        <h2>🔧 Compression Methods</h2>
+
+        <div class="service">
+            <h3>💻 Local Compression (Recommended)</h3>
+            <p>Run the included batch script on your computer:</p>
+            <ol>
+                <li>Download and install FFmpeg: <a href="https://ffmpeg.org/download.html" target="_blank">ffmpeg.org</a></li>
+                <li>Double-click <code>compress_videos.bat</code> in your project folder</li>
+                <li>Wait for compression to complete (5-15 minutes)</li>
+                <li>Upload the optimized files to your <code>media/</code> folder</li>
+            </ol>
+            <a href="#" class="button" onclick="alert('Run compress_videos.bat in your project folder')">Start Local Compression</a>
+        </div>
+
+        <div class="service">
+            <h3>🌐 Online Compression Services</h3>
+            <p>Use these free online tools (upload one video at a time):</p>
+
+            <h4>Option 1: CloudConvert (Best Quality)</h4>
+            <p>Convert MOV/MP4 to optimized MP4 with custom settings</p>
+            <a href="https://cloudconvert.com/mp4-converter" target="_blank" class="button">Open CloudConvert</a>
+
+            <h4>Option 2: FreeConvert (Simple)</h4>
+            <p>Easy drag-and-drop interface</p>
+            <a href="https://www.freeconvert.com/video-compressor" target="_blank" class="button">Open FreeConvert</a>
+
+            <h4>Option 3: VEED.IO (Advanced)</h4>
+            <p>Compress and optimize for web</p>
+            <a href="https://www.veed.io/tools/video-compressor" target="_blank" class="button">Open VEED.IO</a>
+        </div>
+
+        <div class="service">
+            <h3>🤖 Professional Service</h3>
+            <p>For enterprise-grade compression:</p>
+            <ul>
+                <li>Hire a freelance video editor on Upwork/Fiverr</li>
+                <li>Use Adobe Media Encoder (if you have Adobe Creative Suite)</li>
+                <li>Contact your web hosting provider for server-side optimization</li>
+            </ul>
+        </div>
+
+        <h2>📋 Compression Settings</h2>
+        <p>Use these settings for best results:</p>
+        <ul>
+            <li><strong>Format:</strong> MP4 (H.264)</li>
+            <li><strong>Resolution:</strong> 1080p (keep original)</li>
+            <li><strong>Bitrate:</strong> 8-12 Mbps (2-pass encoding)</li>
+            <li><strong>Frame Rate:</strong> 30fps</li>
+            <li><strong>Audio:</strong> AAC 128kbps</li>
+        </ul>
+
+        <div style="background: #d4edda; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <strong>✅ Result:</strong> Your videos will load instantly and never pause or lag on any device!
+        </div>
+    </div>
+</body>
+</html>

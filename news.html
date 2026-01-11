@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWSROOM | AVZDAX DEFENSE INTELLIGENCE</title>
+
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FFFFFF; color: #000000; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .text-gradient { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px;
+            margin-top: -20px;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(0, 0, 0, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(0,0,0,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #FFFFFF 100%); }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.05)); }
+
+        .grid-item-hover:hover { background: #000000; color: #FFFFFF !important; border-color: #000000; }
+        .grid-item-hover:hover span { color: #FFFFFF !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #AAA !important; }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(0,0,0,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #000, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: black; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* NEWSROOM SPECIFIC STYLES */
+        .news-nav { display: flex; justify-content: center; gap: 40px; margin-bottom: 60px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; }
+        .nav-tab { padding: 12px 24px; border: 1px solid rgba(0,0,0,0.1); background: #FFFFFF; color: #666; cursor: pointer; transition: all 0.3s ease; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-tab.active { background: #000000; color: #FFFFFF; border-color: #000000; }
+        .nav-tab:hover { background: #000000; color: #FFFFFF; }
+
+        .news-section { display: none; }
+        .news-section.active { display: block; }
+
+        .news-hero { background: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%); border: 1px solid rgba(0,0,0,0.08); padding: 80px; margin: 60px 0; }
+        .news-card { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.1); padding: 40px; margin: 20px 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2); }
+        .news-image { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; transition: transform 0.4s ease; }
+        .news-card:hover .news-image { transform: scale(1.02); }
+        .news-meta { display: flex; align-items: center; gap: 20px; margin-bottom: 15px; font-size: 0.9rem; color: #666; }
+        .news-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: #000; }
+        .news-excerpt { color: #555; line-height: 1.6; margin-bottom: 20px; }
+
+        .featured-news { background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.08); padding: 60px; margin: 40px 0; }
+        .featured-image { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; }
+
+        .press-release { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.1); padding: 40px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .press-badge { background: rgba(0,0,100,0.1); color: #000080; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+
+        .media-card { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.1); padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        .blog-card { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.1); padding: 30px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .blog-tag { background: rgba(100,100,0,0.1); color: #666600; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+
+        .event-card { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.1); padding: 40px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .event-status { background: rgba(0,100,0,0.1); color: #006400; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+
+        .hero-section { background: #FFFFFF; padding: 120px 0; }
+
+    </style>
+</head>
+<body>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="javascript:void(0)" aria-disabled="true">White Papers: Behavioral Foresight</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="news.html">Newsroom</a></li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">SECTORS</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACK BUTTON -->
+    <div class="px-12 py-8">
+        <a href="index.html" class="inline-flex items-center gap-3 text-black hover:text-gray-600 transition-colors text-sm font-mono uppercase tracking-widest">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section px-12 md:px-24">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-8"><div class="h-[1px] w-20 bg-black/40"></div><span class="text-[10px] uppercase tracking-[0.8em] text-black/60">Intelligence Hub</span></div>
+            <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase tracking-tighter leading-[0.85] text-gradient-dark mb-8">NEWSROOM</h1>
+            <p class="text-gray-600 text-sm md:text-base max-w-3xl mx-auto font-light leading-relaxed uppercase tracking-widest mb-10">Stay informed with the latest developments in predictive defense intelligence, global deployments, and technological breakthroughs from AVZDAX.</p>
+        </div>
+    </section>
+
+    <!-- INTERNAL NAVIGATION -->
+    <section class="px-12 md:px-24 py-20 border-b border-black/10">
+        <div class="max-w-7xl mx-auto">
+            <nav class="news-nav">
+                <button onclick="showSection('all')" class="nav-tab active" data-section="all">All News</button>
+                <button onclick="showSection('press')" class="nav-tab" data-section="press">Press Releases</button>
+                <button onclick="showSection('media')" class="nav-tab" data-section="media">Media Coverage</button>
+                <button onclick="showSection('blog')" class="nav-tab" data-section="blog">Blog</button>
+                <button onclick="showSection('events')" class="nav-tab" data-section="events">Events</button>
+            </nav>
+        </div>
+    </section>
+
+    <!-- NEWS CONTENT SECTIONS -->
+    <section id="news-content" class="px-12 md:px-24 py-40">
+
+        <!-- ALL NEWS -->
+        <div id="all-section" class="news-section active">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                        LATEST NEWS
+                    </h2>
+                    <p class="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+                        Comprehensive coverage of AVZDAX developments, partnerships, and technological advancements.
+                    </p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <!-- Featured News Article -->
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800" alt="Global Coalition Agreement" class="news-image">
+                        <div class="news-meta">
+                            <span class="news-category">STRATEGIC PARTNERSHIP</span>
+                            <span>November 22, 2026</span>
+                        </div>
+                        <h3 class="news-title">AVZDAX Signs Strategic Defense Agreement with Global Coalition</h3>
+                        <p class="news-excerpt">
+                            Multi-nation defense alliance adopts AVZDAX predictive intelligence platform
+                            for unified border security and threat prevention across 15 countries.
+                        </p>
+                        <div class="text-sm text-gray-600">Read More →</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRESS RELEASES -->
+        <div id="press-section" class="news-section">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                        PRESS RELEASES
+                    </h2>
+                    <p class="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+                        Official announcements and statements from AVZDAX leadership.
+                    </p>
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Press Release 1 -->
+                    <div class="press-release">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="press-badge">PRESS RELEASE</span>
+                            <span class="text-gray-500 text-sm">December 10, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-4">AVZDAX Achieves ISO 27001 Certification for Information Security Management</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            AVZDAX Corporation today announced that it has successfully achieved ISO 27001 certification,
+                            demonstrating our commitment to maintaining the highest standards of information security management.
+                            This certification validates our comprehensive approach to protecting sensitive data and ensuring
+                            operational security across all our global deployments.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium">Contact:</span> Media Relations Team
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800 font-medium">Download PDF →</button>
+                        </div>
+                    </div>
+
+                    <!-- Press Release 2 -->
+                    <div class="press-release">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="press-badge">PRESS RELEASE</span>
+                            <span class="text-gray-500 text-sm">November 28, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-4">AVZDAX Expands Global Operations with New European Headquarters</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            AVZDAX Corporation announces the establishment of its European headquarters in London,
+                            strengthening our presence in the international defense technology market. This strategic
+                            expansion will enhance our ability to serve European Union member states and NATO allies
+                            with cutting-edge predictive defense solutions.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium">Contact:</span> Media Relations Team
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800 font-medium">Download PDF →</button>
+                        </div>
+                    </div>
+
+                    <!-- Press Release 3 -->
+                    <div class="press-release">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="press-badge">PRESS RELEASE</span>
+                            <span class="text-gray-500 text-sm">November 15, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-4">AVZDAX Partners with Leading Research Universities for AI Advancement</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            AVZDAX Corporation today announced strategic partnerships with MIT, Stanford, and Oxford University
+                            to advance research in artificial intelligence for defense applications. These collaborations will
+                            focus on developing next-generation neural networks and behavioral prediction algorithms.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium">Contact:</span> Media Relations Team
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800 font-medium">Download PDF →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEDIA COVERAGE -->
+        <div id="media-section" class="news-section">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                        MEDIA COVERAGE
+                    </h2>
+                    <p class="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+                        AVZDAX featured in leading publications and news outlets worldwide.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Media Article 1 -->
+                    <div class="media-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
+                                <span class="text-xs font-bold text-gray-600">WSJ</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-black">The Wall Street Journal</div>
+                                <div class="text-xs text-gray-500">October 30, 2026</div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-3">The Future of Defense: How AI is Revolutionizing National Security</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            An in-depth analysis of how AVZDAX's predictive intelligence is transforming traditional defense paradigms,
+                            offering unprecedented capabilities in threat prevention and response.
+                        </p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Read Full Article →</a>
+                    </div>
+
+                    <!-- Media Article 2 -->
+                    <div class="media-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
+                                <span class="text-xs font-bold text-red-600">BBC</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-black">BBC Technology</div>
+                                <div class="text-xs text-gray-500">October 25, 2026</div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-3">AI That Predicts Crime: The Ethics and Implications</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            BBC explores the ethical considerations of predictive policing technology,
+                            featuring AVZDAX's approach to responsible AI development in security applications.
+                        </p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Read Full Article →</a>
+                    </div>
+
+                    <!-- Media Article 3 -->
+                    <div class="media-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
+                                <span class="text-xs font-bold text-blue-600">FT</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-black">Financial Times</div>
+                                <div class="text-xs text-gray-500">October 20, 2026</div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-3">Silicon Valley Meets Defense: The AVZDAX Revolution</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            Financial Times examines how AVZDAX is bridging the gap between consumer technology innovation
+                            and military-grade security requirements.
+                        </p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Read Full Article →</a>
+                    </div>
+
+                    <!-- Media Article 4 -->
+                    <div class="media-card">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-green-100 rounded flex items-center justify-center">
+                                <span class="text-xs font-bold text-green-600">MIT</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-black">MIT Technology Review</div>
+                                <div class="text-xs text-gray-500">October 15, 2026</div>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-black mb-3">The Mathematics of Prediction: Inside AVZDAX's AI</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            A technical deep-dive into the algorithms powering AVZDAX's predictive defense system,
+                            exploring the mathematical foundations of behavioral prediction.
+                        </p>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Read Full Article →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOG -->
+        <div id="blog-section" class="news-section">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                        THE FRONTLINE BLOG
+                    </h2>
+                    <p class="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+                        Insights, analysis, and thought leadership from AVZDAX experts.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=600" alt="AI Ethics" class="w-full h-48 object-cover rounded mb-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="blog-tag">AI ETHICS</span>
+                            <span class="text-gray-500 text-xs">By Dr. Sarah Chen</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-black mb-3">The Human Element in Autonomous Defense Systems</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            Exploring the critical balance between AI automation and human oversight in defense applications,
+                            ensuring ethical decision-making in high-stakes security scenarios.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">December 5, 2026</span>
+                            <span class="text-blue-600 text-sm font-medium">Read More →</span>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600" alt="Cybersecurity" class="w-full h-48 object-cover rounded mb-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="blog-tag">CYBERSECURITY</span>
+                            <span class="text-gray-500 text-xs">By Marcus Rodriguez</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-black mb-3">Beyond Perimeter Defense: Predictive Threat Intelligence</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            How modern organizations are shifting from reactive security measures to proactive threat prediction,
+                            leveraging AI to identify and neutralize risks before they materialize.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">November 28, 2026</span>
+                            <span class="text-blue-600 text-sm font-medium">Read More →</span>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=600" alt="Future Tech" class="w-full h-48 object-cover rounded mb-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="blog-tag">FUTURE TECH</span>
+                            <span class="text-gray-500 text-xs">By Dr. James Park</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-black mb-3">The Evolution of Edge Computing in Defense Applications</h3>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                            Examining how edge computing is revolutionizing defense technology, enabling real-time processing
+                            and decision-making in disconnected and hostile environments.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">November 20, 2026</span>
+                            <span class="text-blue-600 text-sm font-medium">Read More →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVENTS -->
+        <div id="events-section" class="news-section">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                        EVENTS & CONFERENCES
+                    </h2>
+                    <p class="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+                        AVZDAX participation in industry events, conferences, and speaking engagements.
+                    </p>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Upcoming Event -->
+                    <div class="event-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="event-status">UPCOMING</span>
+                            <span class="text-gray-600 text-sm">January 15-17, 2027</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-3">CES 2027 - Las Vegas, NV</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            AVZDAX CEO Gbenga A. Sosan will keynote at CES 2027, presenting breakthrough developments
+                            in AI-driven security technology and their implications for consumer and enterprise applications.
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm text-gray-600">📍 Las Vegas Convention Center</span>
+                            <span class="text-sm text-gray-600">🎤 Keynote Speaker: Gbenga A. Sosan</span>
+                        </div>
+                    </div>
+
+                    <!-- Past Event 1 -->
+                    <div class="event-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="event-status">COMPLETED</span>
+                            <span class="text-gray-600 text-sm">December 8, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-3">World Defense Security Conference - London</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            AVZDAX presented its latest research on predictive defense intelligence at the World Defense
+                            Security Conference. The presentation covered real-world deployment case studies and future
+                            technology roadmaps, receiving widespread industry recognition.
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm text-gray-600">📍 ExCeL London</span>
+                            <span class="text-sm text-gray-600">👥 500+ Attendees</span>
+                        </div>
+                    </div>
+
+                    <!-- Past Event 2 -->
+                    <div class="event-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="event-status">COMPLETED</span>
+                            <span class="text-gray-600 text-sm">November 22, 2026</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-3">AI Safety Summit - San Francisco</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            AVZDAX participated in the AI Safety Summit, contributing to discussions on responsible AI development
+                            in defense applications. Our presentation focused on ethical AI frameworks and transparency measures
+                            in autonomous defense systems.
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm text-gray-600">📍 Moscone Center</span>
+                            <span class="text-sm text-gray-600">🎯 Panel Discussion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- NEWSLETTER SUBSCRIPTION -->
+    <section class="news-hero px-12 md:px-24">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gradient-dark leading-none mb-8">
+                STAY INFORMED
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-12">
+                Subscribe to receive the latest updates on AVZDAX developments, security insights, and technological breakthroughs.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="ENTER TACTICAL EMAIL..." class="flex-1 px-6 py-4 bg-white border border-black/20 text-black placeholder:text-black/40 focus:outline-none focus:border-black/40 transition-all">
+                <button class="px-8 py-4 bg-black text-white text-[11px] font-black uppercase tracking-[0.3em] hover:bg-gray-800 transition-all duration-300">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover text-white">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover text-white">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Intelligence</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="javascript:void(0)" aria-disabled="true" class="footer-link-hover">White Papers</a>
+                    <a href="news.html" class="footer-link-hover text-white">Newsroom</a>
+                    <a href="#" class="footer-link-hover">API Docs</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="#" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({ lerp: 0.1 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                document.getElementById('preview-default').style.opacity = '1';
+            });
+        });
+
+        // NEWSROOM TAB SWITCHING
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.news-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId + '-section').classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Initialize with "all" section active
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('all');
+        });
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from(".hero-section h1", {
+            scrollTrigger: { trigger: ".hero-section", start: "top center" },
+            y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".hero-section p", {
+            scrollTrigger: { trigger: ".hero-section", start: "top center" },
+            y: 50, opacity: 0, duration: 1.2, delay: 0.3, ease: "power4.out"
+        });
+
+        // News cards staggered animation
+        gsap.utils.toArray('.news-card').forEach((card, index) => {
+            gsap.from(card, {
+                scrollTrigger: { trigger: card, start: "top 85%" },
+                y: 40, opacity: 0, duration: 0.8, delay: index * 0.1, ease: "power2.out"
+            });
+        });
+
+        // Other content animations
+        gsap.utils.toArray('.press-release, .media-card, .blog-card, .event-card').forEach((item, index) => {
+            gsap.from(item, {
+                scrollTrigger: { trigger: item, start: "top 85%" },
+                y: 30, opacity: 0, duration: 0.8, delay: index * 0.1, ease: "power2.out"
+            });
+        });
+
+        // SCROLL NAV
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
+            else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+        });
+
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<100; i++) pts.push(new P()); }
+        class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.onresize=resize;
+
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>

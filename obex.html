@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBEX | ARCHITECTURAL IMAGING | AVZDAX</title>
+
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #020202; color: white; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px;
+            margin-top: -20px;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(255,255,255,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #020202 100%); }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+        .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+        .grid-item-hover:hover span { color: #000000 !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* CINEMATIC SECTIONS */
+        .transform-3d { transform-style: preserve-3d; }
+        .icon-svg { filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: all 0.5s ease; }
+        .icon-svg:hover { filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); transform: scale(1.05); }
+        .opening-obex-large { position: absolute; left: -8%; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 15vw; font-weight: 900; color: rgba(255,255,255,0.08); pointer-events: none; z-index: 1; font-family: 'Inter'; letter-spacing: -0.05em; }
+        .opening-tag-small { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--silver); letter-spacing: 0.2em; opacity: 0.8; }
+        .opening-video { transition: opacity 4s ease; }
+        .particle { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; }
+        .particle-1 { top: 20%; left: 30%; animation: float 6s infinite; }
+        .particle-2 { top: 60%; left: 70%; animation: float 8s infinite; }
+        .particle-3 { top: 80%; left: 20%; animation: float 10s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(-20px); opacity: 1; } }
+
+        .structural-title { transform: translateX(-200px) rotateY(45deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .structural-desc { transform: translateX(-100px); opacity: 0; transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .structural-spec-num { transform: scale(0); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .structural-media { transform: scale(0.5) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .structural-layer { transition: opacity 2s ease; }
+        .grid-line { position: absolute; background: rgba(255,255,255,0.1); }
+        .grid-line.horizontal { width: 100%; height: 1px; }
+        .grid-line.vertical { height: 100%; width: 1px; left: 0; top: 0; }
+        .scan-node { animation: scan-pulse 2s infinite; }
+        .analysis-conn { animation: analysis-flow 3s infinite; }
+        .material-pattern { animation: material-scan 2s infinite; }
+        .integrity-stream { animation: integrity-flow 4s infinite; }
+        .threat-indicator { animation: threat-alert 2s infinite; }
+        @keyframes scan-pulse { 0%, 100% { r: 8; opacity: 0.8; } 50% { r: 12; opacity: 1; } }
+        @keyframes analysis-flow { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
+        @keyframes material-scan { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+        @keyframes integrity-flow { 0% { y: 0; height: 50; opacity: 0.8; } 50% { height: 100; opacity: 1; } 100% { y: 550; height: 50; opacity: 0.8; } }
+        @keyframes threat-alert { 0%, 100% { r: 15; opacity: 0.5; } 50% { r: 25; opacity: 1; } }
+        .bracket { position: absolute; width: 20px; height: 20px; border: 2px solid #00FF41; opacity: 0; transition: all 1s ease; }
+        .bracket-tl { top: 10%; left: 10%; border-right: 0; border-bottom: 0; }
+        .bracket-tr { top: 10%; right: 10%; border-left: 0; border-bottom: 0; }
+        .bracket-bl { bottom: 10%; left: 10%; border-right: 0; border-top: 0; }
+        .bracket-br { bottom: 10%; right: 10%; border-left: 0; border-top: 0; }
+        .structural-float { transform: translateX(50px); transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .mapping-title { transform: translateX(200px) rotateY(-45deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mapping-desc { transform: translateX(100px); opacity: 0; transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mapping-unit { transform: scale(0) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mapping-core { transform: scale(0); transition: all 2s ease 1s; }
+        .mapping-pulse { animation: mapping-glow 3s infinite; }
+        @keyframes mapping-glow { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        .mapping-line { transition: opacity 3s ease; }
+        .mapping-point { transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reconstruction { animation: reconstruction-build 2s infinite; }
+        .terrain { animation: terrain-map 3s infinite; }
+        .spatial { animation: spatial-plot 4s infinite; }
+        @keyframes reconstruction-build { 0%, 100% { fill-opacity: 0.8; } 50% { fill-opacity: 1; transform: scale(1.1); } }
+        @keyframes terrain-map { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+        @keyframes spatial-plot { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+        .step-num { transform: rotateX(90deg); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .detection-title { transform: scale(0.2) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detection-title2 { transform: scale(0.2) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detection-desc { transform: translateY(50px); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detection-panel { transform: translateY(100px) rotateX(45deg); opacity: 0; transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detection-fill { width: 30%; transition: width 2s ease; }
+        .detection-level { transform: scale(0); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .detection-zone { animation: zone-pulse 3s infinite; }
+        .detection-line { animation: line-flow 4s infinite; }
+        @keyframes zone-pulse { 0%, 100% { r: 30; opacity: 0.3; } 50% { r: 40; opacity: 0.6; } }
+        @keyframes line-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+
+        .integration-title { transform: scale(0.2) rotateX(180deg) rotateY(45deg); opacity: 0; transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .integration-desc { transform: translateY(100px) rotateX(90deg); opacity: 0; transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .integration-card { transform: translateY(200px) rotateX(90deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .integration-frame { transform: scale(0.3) rotateY(180deg); transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .security-svg { filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); }
+        .security-shield { animation: security-shine 4s infinite; }
+        .security-core { animation: security-pulse 3s infinite; }
+        .system-marker { animation: marker-twinkle 2s infinite; }
+        @keyframes security-shine { 0%, 100% { fill-opacity: 0.9; } 50% { fill-opacity: 1; } }
+        @keyframes security-pulse { 0%, 100% { fill-opacity: 1; } 50% { fill-opacity: 0.8; } }
+        @keyframes marker-twinkle { 0%, 100% { fill-opacity: 0.6; } 50% { fill-opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <div id="cursor" class="gpu"></div>
+    <div id="cursor-ring" class="gpu"></div>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">White Papers: Behavioral Foresight</li>
+                        <li class="hover:text-white cursor-pointer">News: Global Deployment Status</li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">INDUSTRIES</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. ARCHITECTURAL IMAGING OPENING -->
+    <section class="opening-section h-screen w-full relative overflow-hidden bg-black">
+        <video autoplay muted loop playsinline class="opening-video absolute inset-0 w-full h-full object-cover opacity-0 filter brightness-125" src="media/obex-hero.mov"></video>
+        <div class="opening-overlay absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30"></div>
+        <div class="opening-obex-large">OBEX</div>
+        <div class="opening-particles absolute inset-0 pointer-events-none">
+            <div class="particle particle-1"></div>
+            <div class="particle particle-2"></div>
+            <div class="particle particle-3"></div>
+        </div>
+    </section>
+
+    <!-- 2. STRUCTURAL ANALYSIS -->
+    <section class="structural-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-black overflow-hidden">
+        <div class="max-w-[2000px] w-full grid grid-cols-1 lg:grid-cols-2 gap-32 items-center relative">
+            <div class="structural-text space-y-12 text-left">
+                <span class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">Structural Analysis</span>
+                <h2 class="text-7xl md:text-9xl font-black uppercase tracking-tighter italic leading-[0.8] text-gradient structural-title transform-3d">BUILDING <br>INTELLIGENCE.</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-xl structural-desc">
+                    Non-invasive architectural scanning with millimeter precision. OBEX analyzes building structures, materials, and integrity without physical intrusion.
+                </p>
+                <div class="structural-specs grid grid-cols-2 gap-8 mt-16">
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white structural-spec-num">0.1MM</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Scan Precision</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white structural-spec-num">500M</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Penetration Depth</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white structural-spec-num">NON-INVASIVE</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Scanning Method</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white structural-spec-num">REAL-TIME</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Analysis Speed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="structural-visual flex justify-center relative">
+                <div class="structural-analysis w-full h-[800px] border border-white/10 bg-white/5 relative overflow-hidden transform-3d">
+                    <video autoplay muted loop playsinline class="w-full h-full object-cover structural-media" src="media/obex display 1.mp4"></video>
+                    <div class="structural-overlay absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent structural-layer opacity-0"></div>
+                    <div class="structural-grid absolute inset-0 pointer-events-none">
+                        <svg class="w-full h-full" viewBox="0 0 800 600">
+                            <!-- Analysis Grid -->
+                            <rect x="0" y="0" width="800" height="600" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="800" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="0" y1="450" x2="800" y2="450" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="200" y1="0" x2="200" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="400" y1="0" x2="400" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="600" y1="0" x2="600" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="structural-brackets">
+                        <div class="bracket bracket-tl"></div>
+                        <div class="bracket bracket-tr"></div>
+                        <div class="bracket bracket-bl"></div>
+                        <div class="bracket bracket-br"></div>
+                    </div>
+                </div>
+                <div class="structural-floating-text absolute top-10 right-10 text-[12px] font-mono text-green-400 uppercase tracking-widest structural-float opacity-0">
+                    MATERIAL<br>
+                    ANALYSIS<br>
+                    0.1MM PRECISION
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ENVIRONMENTAL MAPPING -->
+    <section class="mapping-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-dark overflow-hidden">
+        <div class="max-w-[2000px] w-full grid grid-cols-1 lg:grid-cols-2 gap-32 items-center relative">
+            <div class="mapping-visual flex flex-col items-center gap-8 relative">
+                <div class="mapping-unit w-64 h-64 border border-white/20 rounded-full flex items-center justify-center mapping-core transform-3d">
+                    <div class="w-32 h-32 bg-gradient-to-br from-purple-600 to-purple-800 rounded-full mapping-processor"></div>
+                    <div class="absolute inset-0 rounded-full border-2 border-purple-400/30 mapping-pulse animate-pulse"></div>
+                </div>
+                <div class="mapping-flows absolute inset-0 pointer-events-none">
+                    <div class="flow-line absolute top-1/2 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent mapping-line opacity-0"></div>
+                    <div class="flow-line absolute top-1/3 right-1/4 w-1/3 h-px bg-gradient-to-l from-transparent via-blue-400/50 to-transparent mapping-line opacity-0"></div>
+                    <div class="flow-line absolute bottom-1/3 left-1/3 w-2/5 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent mapping-line opacity-0"></div>
+                </div>
+                <div class="mapping-data-points absolute inset-0">
+                    <div class="data-point absolute top-1/4 left-1/4 w-5 h-5 bg-purple-400 rounded-full mapping-point opacity-0"></div>
+                    <div class="data-point absolute top-1/3 right-1/3 w-5 h-5 bg-blue-400 rounded-full mapping-point opacity-0"></div>
+                    <div class="data-point absolute bottom-1/4 right-1/4 w-5 h-5 bg-green-400 rounded-full mapping-point opacity-0"></div>
+                    <div class="data-point absolute bottom-1/3 left-1/3 w-5 h-5 bg-cyan-400 rounded-full mapping-point opacity-0"></div>
+                    <div class="mapping-reconstruction absolute inset-0">
+                        <svg class="w-full h-full" viewBox="0 0 600 400">
+                            <defs>
+                                <radialGradient id="reconstructionGrad" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.6" />
+                                    <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0" />
+                                </radialGradient>
+                                <linearGradient id="terrainFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0" />
+                                    <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
+                                </linearGradient>
+                                <linearGradient id="spatialFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:0" />
+                                    <stop offset="50%" style="stop-color:#10B981;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#10B981;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- 3D Reconstruction Network -->
+                            <g class="mapping-reconstructions">
+                                <!-- Central Mapping Hub -->
+                                <circle cx="300" cy="200" r="25" fill="url(#reconstructionGrad)" stroke="#8B5CF6" stroke-width="3" class="reconstruction command-hub"/>
+                                <circle cx="300" cy="200" r="15" fill="#FFFFFF" class="reconstruction-indicator cmd">
+                                    <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+
+                                <!-- Reconstruction Displays -->
+                                <circle cx="150" cy="120" r="18" fill="#8B5CF6" stroke="#7C3AED" stroke-width="2" class="reconstruction display-1"/>
+                                <circle cx="450" cy="120" r="18" fill="#8B5CF6" stroke="#7C3AED" stroke-width="2" class="reconstruction display-2"/>
+                                <circle cx="150" cy="280" r="18" fill="#8B5CF6" stroke="#7C3AED" stroke-width="2" class="reconstruction display-3"/>
+                                <circle cx="450" cy="280" r="18" fill="#8B5CF6" stroke="#7C3AED" stroke-width="2" class="reconstruction display-4"/>
+                                <circle cx="100" cy="200" r="16" fill="#3B82F6" stroke="#1D4ED8" stroke-width="2" class="reconstruction display-5"/>
+                                <circle cx="500" cy="200" r="16" fill="#3B82F6" stroke="#1D4ED8" stroke-width="2" class="reconstruction display-6"/>
+
+                                <!-- Display Indicators -->
+                                <circle cx="150" cy="120" r="8" fill="#FFFFFF" class="reconstruction-indicator d1">
+                                    <animate attributeName="r" values="8;12;8" dur="2.5s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="450" cy="120" r="8" fill="#FFFFFF" class="reconstruction-indicator d2">
+                                    <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="150" cy="280" r="8" fill="#FFFFFF" class="reconstruction-indicator d3">
+                                    <animate attributeName="r" values="8;12;8" dur="2.2s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="450" cy="280" r="8" fill="#FFFFFF" class="reconstruction-indicator d4">
+                                    <animate attributeName="r" values="8;12;8" dur="2.8s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="100" cy="200" r="6" fill="#FFFFFF" class="reconstruction-indicator d5">
+                                    <animate attributeName="r" values="6;10;6" dur="3.2s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="500" cy="200" r="6" fill="#FFFFFF" class="reconstruction-indicator d6">
+                                    <animate attributeName="r" values="6;10;6" dur="2.7s" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
+
+                            <!-- Terrain Connections -->
+                            <g class="terrain-links">
+                                <!-- Hub to Displays -->
+                                <path d="M300,200 L150,120" stroke="url(#terrainFlow)" stroke-width="3" fill="none" class="terrain t1">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="3s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M300,200 L450,120" stroke="url(#terrainFlow)" stroke-width="3" fill="none" class="terrain t2">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="3.2s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M300,200 L150,280" stroke="url(#terrainFlow)" stroke-width="3" fill="none" class="terrain t3">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="3.4s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M300,200 L450,280" stroke="url(#terrainFlow)" stroke-width="3" fill="none" class="terrain t4">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="3.6s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M300,200 L100,200" stroke="url(#spatialFlow)" stroke-width="3" fill="none" class="terrain t5">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="2.8s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M300,200 L500,200" stroke="url(#spatialFlow)" stroke-width="3" fill="none" class="terrain t6">
+                                    <animate attributeName="stroke-dasharray" values="0,200;200,0" dur="3.1s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+
+                            <!-- Spatial Data -->
+                            <g class="spatial-data">
+                                <circle cx="300" cy="200" r="4" fill="#FFFFFF" class="spatial s1">
+                                    <animateMotion dur="3s" repeatCount="indefinite">
+                                        <path d="M300,200 L150,120"/>
+                                    </animateMotion>
+                                </circle>
+                                <circle cx="300" cy="200" r="4" fill="#FFFFFF" class="spatial s2">
+                                    <animateMotion dur="3.5s" repeatCount="indefinite">
+                                        <path d="M300,200 L450,120"/>
+                                    </animateMotion>
+                                </circle>
+                                <circle cx="300" cy="200" r="4" fill="#FFFFFF" class="spatial s3">
+                                    <animateMotion dur="4s" repeatCount="indefinite">
+                                        <path d="M300,200 L150,280"/>
+                                    </animateMotion>
+                                </circle>
+                                <circle cx="300" cy="200" r="4" fill="#FFFFFF" class="spatial s4">
+                                    <animateMotion dur="3.2s" repeatCount="indefinite">
+                                        <path d="M300,200 L450,280"/>
+                                    </animateMotion>
+                                </circle>
+                            </g>
+
+                            <!-- Mapping Labels -->
+                            <g class="mapping-labels">
+                                <text x="300" y="170" fill="#8B5CF6" font-size="14" font-family="monospace" text-anchor="middle" class="mapping-label">3D RECONSTRUCTION</text>
+                                <text x="300" y="230" fill="#3B82F6" font-size="12" font-family="monospace" text-anchor="middle" class="mapping-label">ENVIRONMENTAL MAPPING</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mapping-text space-y-12 text-left">
+                <span class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">Environmental Mapping</span>
+                <h2 class="text-7xl font-black uppercase tracking-tighter italic leading-none mapping-title transform-3d">3D <br>RECONSTRUCTION.</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-xl mapping-desc">
+                    Complete spatial reconstruction of architectural environments. OBEX creates detailed 3D models for comprehensive building analysis and security planning.
+                </p>
+                <div class="mapping-process grid grid-cols-1 gap-6 mt-16">
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-4xl font-black text-purple-400">01</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Spatial Scanning</div>
+                            <div class="step-desc text-sm text-silver-400">360° environmental capture</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-4xl font-black text-blue-400">02</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Point Cloud Generation</div>
+                            <div class="step-desc text-sm text-silver-400">Dense 3D data processing</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-4xl font-black text-green-400">03</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Model Reconstruction</div>
+                            <div class="step-desc text-sm text-silver-400">Real-time mesh generation</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-4xl font-black text-cyan-400">04</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Analysis Integration</div>
+                            <div class="step-desc text-sm text-silver-400">Security system overlay</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. THREAT DETECTION -->
+    <section class="detection-section min-h-screen w-full bg-black text-white px-12 py-32 relative overflow-hidden">
+        <div class="detection-content max-w-8xl mx-auto">
+            <div class="detection-header text-center mb-32">
+                <h3 class="text-[clamp(5rem,15vw,12rem)] font-black uppercase tracking-tighter italic leading-none detection-title opacity-0">THREAT</h3>
+                <h3 class="text-[clamp(5rem,15vw,12rem)] font-black uppercase tracking-tighter italic leading-none detection-title2 opacity-0">DETECTION</h3>
+                <p class="text-silver-400 text-2xl font-bold uppercase tracking-[0.4em] max-w-4xl mx-auto leading-relaxed detection-desc opacity-0 mt-16">
+                    Advanced anomaly detection within architectural structures. OBEX identifies hidden compartments, structural weaknesses, and security vulnerabilities.
+                </p>
+            </div>
+
+            <div class="detection-grid grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <!-- HIDDEN COMPARTMENT SCANNING -->
+                <div class="detection-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header flex items-center justify-between mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Hidden Compartments</h4>
+                        <div class="status-indicator">
+                            <div class="w-4 h-4 bg-red-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="detection-visual h-64 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-lg mb-8 relative overflow-hidden">
+                        <div class="detection-fill h-full bg-gradient-to-r from-red-400 to-orange-400 rounded-lg detection-fill"></div>
+                    </div>
+                    <div class="detection-metrics text-sm text-silver-400">
+                        <div class="flex justify-between mb-2"><span>Detection Rate:</span><span>99.8%</span></div>
+                        <div class="flex justify-between mb-2"><span>Minimum Size:</span><span>5cm³</span></div>
+                        <div class="flex justify-between"><span>Material Types:</span><span>All</span></div>
+                    </div>
+                </div>
+
+                <!-- STRUCTURAL INTEGRITY -->
+                <div class="detection-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Structural Integrity</h4>
+                    </div>
+                    <div class="detection-visual h-64 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-lg mb-8 relative overflow-hidden">
+                        <div class="detection-fill h-full bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 rounded-lg detection-fill"></div>
+                    </div>
+                    <div class="detection-metrics text-sm text-silver-400">
+                        <div class="flex justify-between mb-2"><span>Stress Analysis:</span><span>Real-time</span></div>
+                        <div class="flex justify-between mb-2"><span>Weakness Detection:</span><span><1mm cracks</span></div>
+                        <div class="flex justify-between"><span>Load Capacity:</span><span>Calculated</span></div>
+                    </div>
+                </div>
+
+                <!-- SECURITY VULNERABILITIES -->
+                <div class="detection-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header flex items-center justify-between mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Security Assessment</h4>
+                        <div class="detection-level text-6xl font-black text-red-400 detection-level">CRITICAL</div>
+                    </div>
+                    <div class="detection-visual h-64 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-lg mb-8 relative overflow-hidden">
+                        <div class="detection-fill h-full bg-gradient-to-r from-pink-400 to-rose-400 rounded-lg detection-fill"></div>
+                    </div>
+                    <div class="detection-metrics text-sm text-silver-400">
+                        <div class="flex justify-between mb-2"><span>Vulnerability Scan:</span><span>Complete</span></div>
+                        <div class="flex justify-between mb-2"><span>Risk Assessment:</span><span>Dynamic</span></div>
+                        <div class="flex justify-between"><span>Current Status:</span><span>CRITICAL</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE DETECTION MAP -->
+            <div class="live-detection absolute inset-0 opacity-0 pointer-events-none">
+                <svg class="w-full h-full" viewBox="0 0 1200 800">
+                    <defs>
+                        <radialGradient id="detectionGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#EF4444;stop-opacity:0.3"/>
+                            <stop offset="100%" style="stop-color:#EF4444;stop-opacity:0"/>
+                        </radialGradient>
+                    </defs>
+                    <!-- Building structure -->
+                    <path d="M200,400 Q400,350 600,400 Q800,450 1000,400 Q1100,350 1200,400 L1200,600 L200,600 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+                    <!-- Active detection zones -->
+                    <circle cx="400" cy="450" r="40" fill="url(#detectionGlow)" class="detection-zone"/>
+                    <circle cx="700" cy="420" r="35" fill="url(#detectionGlow)" class="detection-zone"/>
+                    <circle cx="900" cy="480" r="45" fill="url(#detectionGlow)" class="detection-zone"/>
+                    <!-- Anomaly connections -->
+                    <path d="M400,450 Q550,430 700,420" stroke="#EF4444" stroke-width="2" fill="none" opacity="0.6" class="detection-line"/>
+                    <path d="M700,420 Q800,440 900,480" stroke="#EF4444" stroke-width="2" fill="none" opacity="0.6" class="detection-line"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SECURITY INTEGRATION -->
+    <section class="integration-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-black overflow-hidden">
+        <div class="max-w-[2000px] w-full text-center space-y-32">
+            <div class="integration-statement">
+                <h2 class="text-8xl md:text-[140px] font-black uppercase tracking-tighter italic text-gradient integration-title opacity-0 transform-3d">SECURITY</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-5xl mx-auto integration-desc opacity-0">
+                    Seamless integration with existing building security systems. OBEX enhances traditional security with advanced architectural intelligence and automated response protocols.
+                </p>
+            </div>
+            <div class="integration-values grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="integration-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <path d="M12 2L3 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-9-5z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">System Integration</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">Compatible with all major building security platforms. API-driven integration with existing infrastructure and control systems.</p>
+                </div>
+                <div class="integration-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                            <path d="M12 2v2"/>
+                            <path d="M22 12h-2"/>
+                            <path d="M12 22v-2"/>
+                            <path d="M2 12h2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">Automated Response</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">Intelligent response protocols triggered by architectural threats. Automated security measures based on structural analysis.</p>
+                </div>
+                <div class="integration-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">Continuous Monitoring</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">24/7 architectural surveillance with real-time updates. Continuous assessment of building security and structural integrity.</p>
+                </div>
+            </div>
+            <div class="integration-visual w-full h-[600px] border border-white/20 bg-gradient-to-br from-white/5 to-white/10 relative overflow-hidden integration-frame opacity-0 transform-3d flex items-center justify-center">
+                <div class="security-container">
+                    <svg width="500" height="400" viewBox="0 0 500 400" class="security-svg">
+                        <defs>
+                            <linearGradient id="securityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+                                <stop offset="50%" style="stop-color:#F8F8F8;stop-opacity:0.7" />
+                                <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+                            </linearGradient>
+                            <filter id="securityGlow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                            <filter id="softShadow">
+                                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="rgba(0,0,0,0.1)"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Security Integration Core -->
+                        <g class="security-systems">
+                            <!-- Main Security Display -->
+                            <rect x="50" y="50" width="400" height="300" fill="url(#securityGrad)" stroke="#FFFFFF" stroke-width="2" filter="url(#softShadow)" class="security-shield"/>
+                            <rect x="70" y="70" width="360" height="260" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1" class="security-outline"/>
+
+                            <!-- Central Integration Core -->
+                            <circle cx="250" cy="200" r="40" fill="#FFFFFF" stroke="rgba(0,0,0,0.1)" stroke-width="1" filter="url(#securityGlow)" class="security-core">
+                                <animate attributeName="r" values="40;45;40" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+
+                            <!-- System Markers -->
+                            <circle cx="220" cy="170" r="4" fill="#00FF41" class="system-marker"/>
+                            <circle cx="280" cy="170" r="4" fill="#00FF41" class="system-marker"/>
+                            <circle cx="220" cy="230" r="4" fill="#00FF41" class="system-marker"/>
+                            <circle cx="280" cy="230" r="4" fill="#00FF41" class="system-marker"/>
+
+                            <!-- Subtle Integration Lines -->
+                            <path d="M160,200 Q250,180 340,200" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none" class="flow-line"/>
+                            <path d="M160,200 Q250,220 340,200" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none" class="flow-line"/>
+                        </g>
+
+                        <!-- Integration Labels -->
+                        <g class="security-labels">
+                            <text x="250" y="195" text-anchor="middle" fill="#000000" font-size="16" font-family="monospace" class="security-label">INTEGRATED</text>
+                            <text x="250" y="215" text-anchor="middle" fill="#00FF41" font-size="12" font-family="monospace" class="security-label">SECURITY</text>
+                        </g>
+                    </svg>
+
+                    <div class="integration-text absolute bottom-8 left-8 right-8 text-center">
+                        <div class="text-2xl font-light uppercase text-white tracking-widest mb-2">Security Integration</div>
+                        <div class="text-sm text-silver-400 font-light">Building intelligence, automated security</div>
+                        <div class="text-xs text-white/60 font-mono mt-4 tracking-wider">24/7 MONITORING • REAL-TIME RESPONSE • FULL INTEGRATION</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover text-white">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover text-white">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="#" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="#" class="footer-link-hover">Government</a>
+                    <a href="#" class="footer-link-hover">Finance & Banking</a>
+                    <a href="#" class="footer-link-hover">Healthcare</a>
+                    <a href="#" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.5em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">About Us</a><a href="#" class="footer-link-hover text-green-500 font-black">Careers</a><a href="#" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.5em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                document.getElementById('preview-default').style.opacity = '1';
+            });
+        });
+
+        window.addEventListener('load', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            const lenis = new Lenis({ lerp: 0.1 });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+
+            const cursor = document.getElementById('cursor');
+            const ring = document.getElementById('cursor-ring');
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { x: e.clientX-4, y: e.clientY-4, duration: 0 });
+                gsap.to(ring, { x: e.clientX-20, y: e.clientY-20, duration: 0.15 });
+            });
+
+            // ARCHITECTURAL IMAGING OPENING - SUBTLE REVEAL
+            gsap.timeline({
+                scrollTrigger: { trigger: ".opening-section", start: "top bottom", end: "bottom top", scrub: 1 }
+            })
+            .to(".opening-video", { opacity: 0.4, duration: 3, ease: "power2.out" })
+
+            // STRUCTURAL ANALYSIS - SCANNING SWEEP
+            gsap.timeline({
+                scrollTrigger: { trigger: ".structural-section", start: "top 90%", end: "bottom 10%", scrub: 2 }
+            })
+            .to(".structural-title", { rotationY: 0, x: 0, opacity: 1, duration: 2, ease: "power4.out" })
+            .to(".structural-desc", { x: 0, opacity: 1, duration: 1.5 }, "-=1.5")
+            .to(".structural-spec-num", { scale: 1, stagger: 0.3, duration: 1, ease: "elastic.out(1, 0.3)" }, "-=1")
+            .to(".structural-media", { rotationX: 0, scale: 1, opacity: 1, duration: 3, ease: "power2.out" }, "-=2")
+            .to(".structural-layer", { opacity: 0.6, duration: 2 }, "-=2")
+            .to(".bracket", { opacity: 1, scale: 1.5, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, "-=1")
+            .to(".structural-float", { x: 0, opacity: 1, duration: 1.5 }, "-=0.5")
+            .to(".scan-node", { opacity: 1, stagger: 0.3, duration: 1 }, "-=1")
+            .to(".analysis-conn", { opacity: 0.8, duration: 1.5 }, "-=1.5")
+            .to(".material-pattern", { opacity: 1, stagger: 0.4, duration: 1 }, "-=1")
+            .to(".threat-indicator", { opacity: 1, duration: 1 }, "-=0.5");
+
+            // ENVIRONMENTAL MAPPING - RECONSTRUCTION BUILD
+            gsap.timeline({
+                scrollTrigger: { trigger: ".mapping-section", start: "top 85%", end: "bottom 15%", scrub: 2 }
+            })
+            .to(".mapping-title", { rotationY: 0, x: 0, opacity: 1, duration: 2, ease: "power4.out" })
+            .to(".mapping-desc", { x: 0, opacity: 1, duration: 1.5 }, "-=1.5")
+            .to(".mapping-unit", { rotationX: 0, scale: 1, opacity: 1, duration: 3, ease: "elastic.out(1, 0.3)" }, "-=2")
+            .to(".mapping-core", { scale: 1, duration: 2, ease: "power2.out" }, "-=2.5")
+            .to(".mapping-line", { opacity: 1, stagger: 0.5, duration: 2 }, "-=2")
+            .to(".mapping-point", { scale: 1, opacity: 1, stagger: 0.3, duration: 1, ease: "back.out(1.7)" }, "-=1.5")
+            .to(".reconstruction", { opacity: 1, stagger: 0.1, duration: 1 }, "-=1")
+            .to(".terrain", { opacity: 0.8, stagger: 0.05, duration: 1.5 }, "-=1.5")
+            .to(".spatial", { opacity: 1, stagger: 0.3, duration: 1 }, "-=1")
+            .to(".mapping-label", { opacity: 1, stagger: 0.2, duration: 1 }, "-=0.5")
+            .to(".step-num", { rotationX: 0, stagger: 0.2, duration: 1.5, ease: "power4.out" }, "-=1");
+
+            // THREAT DETECTION - ANOMALY SCAN
+            gsap.timeline({
+                scrollTrigger: { trigger: ".detection-section", start: "top 80%", end: "bottom 20%", scrub: 2 }
+            })
+            .to(".detection-title", { rotationX: 0, scale: 1, opacity: 1, duration: 2, ease: "elastic.out(1, 0.3)" })
+            .to(".detection-title2", { rotationX: 0, scale: 1, opacity: 1, duration: 2, ease: "elastic.out(1, 0.3)" }, "-=1.5")
+            .to(".detection-desc", { y: 0, opacity: 1, duration: 1.5 }, "-=1")
+            .to(".detection-panel", { rotationX: 0, y: 0, opacity: 1, stagger: 0.3, duration: 2, ease: "power2.out" }, "-=1.5")
+            .to(".detection-fill", { width: "23%", duration: 1.5 }, "-=1")
+            .to(".detection-level", { scale: 1, duration: 1, ease: "back.out(1.7)" }, "-=0.5")
+            .to(".live-detection", { opacity: 0.4, duration: 2 }, "-=1");
+
+            // SECURITY INTEGRATION - SYSTEM LINK
+            gsap.timeline({
+                scrollTrigger: { trigger: ".integration-section", start: "top 90%", end: "bottom 10%", scrub: 2 }
+            })
+            .to(".integration-title", { rotationX: 0, rotationY: 0, scale: 1, opacity: 1, duration: 3, ease: "power4.out" })
+            .to(".integration-desc", { rotationX: 0, y: 0, opacity: 1, duration: 2 }, "-=2.5")
+            .to(".integration-card", { rotationX: 0, y: 0, opacity: 1, stagger: 0.4, duration: 2, ease: "power2.out" }, "-=2")
+            .to(".integration-frame", { rotationY: 0, scale: 1, opacity: 1, duration: 4, ease: "elastic.out(1, 0.3)" }, "-=2.5")
+            .to(".security-svg", { opacity: 1, duration: 3 }, "-=2.5")
+            .to(".integration-text", { opacity: 1, y: 0, duration: 2 }, "-=1");
+
+            // SCROLL NAV
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('main-nav');
+                if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
+                else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+            });
+
+            // OPTIMIZED FOOTER CANVAS
+            const canvas = document.getElementById('footer-neural-canvas');
+            const ctx = canvas.getContext('2d');
+            let pts = [];
+            function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<100; i++) pts.push(new P()); }
+            class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+            function draw(){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                const maxDistSq = 200 * 200;
+                pts.forEach((p,i)=>{
+                    p.update(); p.draw();
+                    for(let j=i+1;j<pts.length;j++){
+                        const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                        if(dSq < maxDistSq){
+                            const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                            ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                            ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                        }
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            resize(); draw(); window.onresize=resize;
+        });
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>

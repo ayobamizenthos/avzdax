@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMUS | NEURAL INTELLIGENCE NUCLEUS | AVZDAX</title>
+    
+    <!-- THE ARSENAL -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <link rel="stylesheet" href="assets/common.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300&display=swap');
+
+        :root {
+            --void: #000000;
+            --white: #FFFFFF;
+            --silver: #E5E5E7;
+            --dark-silver: #86868B;
+            --menu-bg: rgba(10, 10, 10, 0.98);
+            --border: rgba(255, 255, 255, 0.1);
+            --btn-accent: #FF003C;
+            --bright-glow: 0 0 50px rgba(255, 255, 255, 0.15);
+            --accent-green: #00FF41;
+            --signal-green: #00FF41;
+            --alert-red: #FF003C;
+        }
+
+        /* --- HARD CORE PERFORMANCE --- */
+        ::-webkit-scrollbar { display: none; }
+        html, body { -ms-overflow-style: none; scrollbar-width: none; background: #000; color: #fff; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        
+
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px;
+            margin-top: -20px;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(255,255,255,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #020202 100%); }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+        .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+        .grid-item-hover:hover span { color: #000000 !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* --- APEX HERO STAGE --- */
+        .hero-stage { position: relative; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; perspective: 2000px; }
+
+        /* VIDEO PERFORMANCE OPTIMIZATION */
+        .primus-video, .primus-vision-video {
+            will-change: transform;
+            transform: translateZ(0); /* Force hardware acceleration */
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+        }
+
+        /* ===========================================
+           MOBILE RESPONSIVENESS (PRESERVING DESKTOP)
+           =========================================== */
+
+        /* MOBILE NAVIGATION */
+        @media (max-width: 1024px) {
+            .mega-menu-wrapper { display: none !important; }
+            nav { padding: 20px 20px !important; }
+            .nav-item { display: none; }
+            .mobile-menu-toggle { display: block !important; }
+        }
+
+        /* HERO SECTION MOBILE */
+        @media (max-width: 768px) {
+            .opening-section { height: 100vh; }
+            .opening-tag-small { font-size: 10px; }
+        }
+
+        /* VISION SECTION MOBILE */
+        @media (max-width: 1024px) {
+            .vision-section { padding: 80px 20px; }
+            .vision-section .grid { grid-template-columns: 1fr; gap: 40px; }
+            .vision-section h2 { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+            .vision-section p { font-size: 16px; max-width: 100% !important; }
+            .vision-specs { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        /* THINKING SECTION MOBILE */
+        @media (max-width: 1024px) {
+            .thinking-section { padding: 80px 20px; }
+            .thinking-section .grid { grid-template-columns: 1fr; gap: 40px; }
+            .thinking-section h2 { font-size: clamp(2.5rem, 10vw, 5rem) !important; }
+            .thinking-process { gap: 30px; }
+        }
+
+        /* DASHBOARD SECTION MOBILE */
+        @media (max-width: 768px) {
+            .dashboard-section { padding: 60px 20px; }
+            .dashboard-content h3 { font-size: clamp(3rem, 12vw, 8rem) !important; }
+            .dashboard-grid { grid-template-columns: 1fr; gap: 30px; }
+            .dashboard-panel { padding: 20px; }
+        }
+
+        /* PURPOSE SECTION MOBILE */
+        @media (max-width: 768px) {
+            .purpose-section { padding: 80px 20px; }
+            .purpose-statement h2 { font-size: clamp(3rem, 12vw, 7rem) !important; }
+            .purpose-values { grid-template-columns: 1fr; gap: 40px; }
+            .purpose-visual { height: 400px; }
+        }
+
+        /* FOOTER MOBILE */
+        @media (max-width: 768px) {
+            footer { padding: 60px 20px; }
+            footer .grid { grid-template-columns: 1fr; gap: 40px; }
+            footer .flex { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        /* BACK BUTTON MOBILE */
+        @media (max-width: 768px) {
+            .px-12.py-8 { padding: 20px !important; }
+        }
+
+        /* TOUCH TARGETS MOBILE */
+        @media (max-width: 768px) {
+            button, .button, a[role="button"] { min-height: 44px; padding: 12px 24px; }
+        }
+        .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(1.25); transform: scale(1.1); }
+        .hero-content { position: absolute; bottom: 12vh; width: 100%; padding: 0 6vw; display: flex; justify-content: space-between; align-items: flex-end; z-index: 20; pointer-events: none; }
+        .hero-col { max-width: 380px; }
+        .col-tag { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent); letter-spacing: 0.4em; margin-bottom: 15px; display: block; border-left: 2px solid #fff; padding-left: 15px; }
+        .col-p { font-size: 14px; line-height: 1.6; color: var(--silver); font-weight: 400; text-transform: uppercase; }
+
+        /* --- FOCUS-PULL ENGINE --- */
+        #ecosystem-trigger { position: relative; width: 100%; background: var(--void); }
+        #ecosystem-pin { position: relative; height: 100vh; width: 100%; overflow: hidden; }
+        .slide { position: absolute; inset: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 10vw; background: #000; opacity: 0; visibility: hidden; transform: scale(1.2); filter: blur(30px); }
+        .p-title { font-size: 8vw; font-weight: 900; letter-spacing: -0.06em; line-height: 0.8; text-transform: uppercase; }
+        .visual-frame { width: 45vw; height: 65vh; border: 1px solid var(--border); background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); overflow: hidden; position: relative; }
+        .visual-frame video, .visual-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .bracket { position: absolute; width: 30px; height: 30px; border: 1px solid var(--signal-green); z-index: 10; opacity: 0; transition: 0.5s ease; }
+        .slide.active .bracket { opacity: 0.5; transform: scale(1.2); }
+        .s-meta { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent); letter-spacing: 0.4em; margin-bottom: 15px; display: block; }
+
+        /* --- TACTICAL RAIL --- */
+        #tactical-rail { position: fixed; left: 3vw; top: 50%; transform: translateY(-50%); z-index: 50000; display: flex; flex-direction: column; gap: 40px; align-items: center; opacity: 0; transition: 0.5s; }
+        .rail-node { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono'; font-size: 9px; color: var(--dark-silver); background: var(--void); transition: 0.5s; }
+        .rail-node.active { border-color: #fff; color: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.2); transform: scale(1.1); }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* CINEMATIC SECTIONS */
+        .transform-3d { transform-style: preserve-3d; }
+        .icon-svg { filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: all 0.5s ease; }
+        .icon-svg:hover { filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); transform: scale(1.05); }
+        .opening-primus-large { position: absolute; left: -8%; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 15vw; font-weight: 900; color: rgba(255,255,255,0.08); pointer-events: none; z-index: 1; font-family: 'Inter'; letter-spacing: -0.05em; }
+        .opening-tag-small { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--silver); letter-spacing: 0.2em; opacity: 0.8; }
+        .opening-video { transition: opacity 4s ease; }
+        .particle { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; }
+        .particle-1 { top: 20%; left: 30%; animation: float 6s infinite; }
+        .particle-2 { top: 60%; left: 70%; animation: float 8s infinite; }
+        .particle-3 { top: 80%; left: 20%; animation: float 10s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(-20px); opacity: 1; } }
+
+        .vision-title { transform: translateX(-200px) rotateY(45deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vision-desc { transform: translateX(-100px); opacity: 0; transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vision-spec-num { transform: scale(0); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vision-media { transform: scale(0.5) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vision-layer { transition: opacity 2s ease; }
+        .grid-line { position: absolute; background: rgba(255,255,255,0.1); }
+        .grid-line.horizontal { width: 100%; height: 1px; }
+        .grid-line.vertical { height: 100%; width: 1px; left: 0; top: 0; }
+        .process-node { animation: node-pulse 2s infinite; }
+        .neural-conn { animation: conn-flow 3s infinite; }
+        .detect-pattern { animation: pattern-scan 2s infinite; }
+        .data-stream { animation: stream-flow 4s infinite; }
+        .threat-indicator { animation: threat-alert 2s infinite; }
+        @keyframes node-pulse { 0%, 100% { r: 8; opacity: 0.8; } 50% { r: 12; opacity: 1; } }
+        @keyframes conn-flow { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
+        @keyframes pattern-scan { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+        @keyframes stream-flow { 0% { y: 0; height: 50; opacity: 0.8; } 50% { height: 100; opacity: 1; } 100% { y: 550; height: 50; opacity: 0.8; } }
+        @keyframes threat-alert { 0%, 100% { r: 15; opacity: 0.5; } 50% { r: 25; opacity: 1; } }
+        .bracket { position: absolute; width: 20px; height: 20px; border: 2px solid #00FF41; opacity: 0; transition: all 1s ease; }
+        .bracket-tl { top: 10%; left: 10%; border-right: 0; border-bottom: 0; }
+        .bracket-tr { top: 10%; right: 10%; border-left: 0; border-bottom: 0; }
+        .bracket-bl { bottom: 10%; left: 10%; border-right: 0; border-top: 0; }
+        .bracket-br { bottom: 10%; right: 10%; border-left: 0; border-top: 0; }
+        .vision-float { transform: translateX(50px); transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .thinking-title { transform: translateX(200px) rotateY(-45deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .thinking-desc { transform: translateX(100px); opacity: 0; transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .thinking-circle { transform: scale(0) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .thinking-core { transform: scale(0); transition: all 2s ease 1s; }
+        .thinking-pulse { animation: pulse-glow 3s infinite; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        .thinking-line { transition: opacity 3s ease; }
+        .thinking-point { transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .neuron { animation: neuron-fire 2s infinite; }
+        .synapse { animation: synapse-pulse 3s infinite; }
+        .packet { animation: packet-move 4s infinite; }
+        @keyframes neuron-fire { 0%, 100% { fill-opacity: 0.8; } 50% { fill-opacity: 1; transform: scale(1.2); } }
+        @keyframes synapse-pulse { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+        @keyframes packet-move { 0% { opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+        .step-num { transform: rotateX(90deg); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .dashboard-title { transform: scale(0.2) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dashboard-title2 { transform: scale(0.2) rotateX(180deg); opacity: 0; transition: all 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dashboard-desc { transform: translateY(50px); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dashboard-panel { transform: translateY(100px) rotateX(45deg); opacity: 0; transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .threat-fill { width: 30%; transition: width 2s ease; }
+        .threat-level { transform: scale(0); transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .active-zone { animation: zone-pulse 3s infinite; }
+        .connection-line { animation: line-flow 4s infinite; }
+        @keyframes zone-pulse { 0%, 100% { r: 30; opacity: 0.3; } 50% { r: 40; opacity: 0.6; } }
+        @keyframes line-flow { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+
+        .purpose-title { transform: scale(0.2) rotateX(180deg) rotateY(45deg); opacity: 0; transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .purpose-desc { transform: translateY(100px) rotateX(90deg); opacity: 0; transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .value-card { transform: translateY(200px) rotateX(90deg); opacity: 0; transition: all 2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .purpose-frame { transform: scale(0.3) rotateY(180deg); transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .premium-white-svg { filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); }
+        .white-shield { animation: white-shine 4s infinite; }
+        .white-core { animation: white-pulse 3s infinite; }
+        .temporal-marker { animation: marker-twinkle 2s infinite; }
+        @keyframes white-shine { 0%, 100% { fill-opacity: 0.9; } 50% { fill-opacity: 1; } }
+        @keyframes white-pulse { 0%, 100% { fill-opacity: 1; } 50% { fill-opacity: 0.8; } }
+        @keyframes marker-twinkle { 0%, 100% { fill-opacity: 0.6; } 50% { fill-opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <div id="cursor" class="gpu"></div>
+    <div id="cursor-ring" class="gpu"></div>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full px-8">
+            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-white/60 hover:text-white transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <nav class="text-center space-y-8">
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Ecosystem</h3>
+                    <div class="space-y-4">
+                        <a href="primus.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Primus</a>
+                        <a href="trion.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Trion</a>
+                        <a href="sentinel.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Sentinel</a>
+                        <a href="teletraan.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Teletraan</a>
+                        <a href="nest.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Nest</a>
+                        <a href="obex.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Obex</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Intelligence</h3>
+                    <div class="space-y-4">
+                        <a href="news.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Newsroom</a>
+                        <a href="industries.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Industries</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Mission</h3>
+                    <div class="space-y-4">
+                        <a href="about.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">About</a>
+                        <a href="careers.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Careers</a>
+                        <a href="contact.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <a href="contact.html" class="inline-block bg-white text-black px-8 py-4 text-sm font-black uppercase tracking-wider hover:bg-green-400 transition-all duration-300">Schedule Demonstration</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">White Papers: Behavioral Foresight</li>
+                        <li class="hover:text-white cursor-pointer">News: Global Deployment Status</li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">INDUSTRIES</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <!-- MOBILE MENU TOGGLE -->
+                <button onclick="toggleMobileMenu()" class="mobile-menu-toggle hidden flex items-center gap-3 px-4 py-3 border border-white/10 group hover:border-white transition-all bg-white/5 lg:hidden">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Menu</span>
+                    <div class="hamburger-lines">
+                        <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all"></span>
+                        <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all mt-1"></span>
+                        <span class="block w-3 h-0.5 bg-white/40 group-hover:bg-white transition-all mt-1"></span>
+                    </div>
+                </button>
+
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BACK BUTTON -->
+    <div class="px-12 py-8">
+        <a href="index.html" class="inline-flex items-center gap-3 text-silver-400 hover:text-white transition-colors text-sm font-mono uppercase tracking-widest">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+    </div>
+
+    <!-- 1. COMMANDING OPENING -->
+    <section class="opening-section h-screen w-full relative overflow-hidden bg-black">
+        <video autoplay muted loop playsinline preload="metadata" class="opening-video primus-video absolute inset-0 w-full h-full object-cover opacity-0 filter brightness-125">
+            <source src="media/primus-hero-av1.mp4" type="video/mp4; codecs=av01.0.05M.08">
+            <source src="media/primus-hero-vp9.webm" type="video/webm; codecs=vp9">
+            <source src="media/primus-hero-h264.mp4" type="video/mp4; codecs=avc1.4d401f">
+            <!-- Fallback to original video while optimized versions are being created -->
+            <source src="media/primus-hero.mp4" type="video/mp4">
+            <!-- Fallback for unsupported devices -->
+            <img src="/media/primus-fallback.svg" alt="PRIMUS Neural Intelligence" class="absolute inset-0 w-full h-full object-cover opacity-0 filter brightness-125">
+        </video>
+        <div class="opening-overlay absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30"></div>
+        <div class="opening-primus-large">PRIMUS</div>
+        <div class="opening-particles absolute inset-0 pointer-events-none">
+            <div class="particle particle-1"></div>
+            <div class="particle particle-2"></div>
+            <div class="particle particle-3"></div>
+        </div>
+    </section>
+
+    <!-- 2. WHAT PRIMUS SEES -->
+    <section class="vision-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-black overflow-hidden">
+        <div class="max-w-[2000px] w-full grid grid-cols-1 lg:grid-cols-2 gap-32 items-center relative">
+            <div class="vision-text space-y-12 text-left">
+                <span class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">What PRIMUS Sees</span>
+                <h2 class="text-7xl md:text-9xl font-black uppercase tracking-tighter italic leading-[0.8] text-gradient vision-title transform-3d">VISUAL <br>INTELLIGENCE.</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-xl vision-desc">
+                    Layered perception beyond human limits. Multi-spectrum analysis, thermal overlays, and kinetic mapping reveal hidden patterns in real-time. PRIMUS processes 4.2 trillion parameters across planetary grids, identifying intent 0.4ms before manifestation.
+                </p>
+                <div class="vision-specs grid grid-cols-2 gap-8 mt-16">
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white vision-spec-num">4K</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Resolution</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white vision-spec-num">360°</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Field of View</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white vision-spec-num">∞</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Detection Range</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="text-4xl font-black text-white vision-spec-num">0.4MS</div>
+                        <div class="text-[10px] font-mono text-silver-400 uppercase">Analysis Time</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vision-visual flex justify-center relative">
+                <div class="vision-frame w-full h-[800px] border border-white/10 bg-white/5 relative overflow-hidden transform-3d">
+                    <video autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover vision-media primus-vision-video">
+                        <source src="/media/primus-wide-av1.mp4" type="video/mp4; codecs=av01.0.05M.08">
+                        <source src="/media/primus-wide-vp9.webm" type="video/webm; codecs=vp9">
+                        <source src="/media/primus-wide-h264.mp4" type="video/mp4; codecs=avc1.4d401f">
+                        <!-- Fallback to original video while optimized versions are being created -->
+                        <source src="/media/PRIMUSWIDEINTRO1.mp4" type="video/mp4">
+                        <!-- Fallback for unsupported devices -->
+                        <img src="/media/primus-vision-fallback.svg" alt="PRIMUS Visual Intelligence" class="w-full h-full object-cover">
+                    </video>
+                    <div class="vision-overlay absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent vision-layer opacity-0"></div>
+                    <div class="vision-grid absolute inset-0 pointer-events-none">
+                        <svg class="w-full h-full" viewBox="0 0 800 600">
+                            <!-- Grid Lines -->
+                            <line x1="0" y1="150" x2="800" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="0" y1="450" x2="800" y2="450" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="200" y1="0" x2="200" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="400" y1="0" x2="400" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            <line x1="600" y1="0" x2="600" y2="600" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="vision-brackets">
+                        <div class="bracket bracket-tl"></div>
+                        <div class="bracket bracket-tr"></div>
+                        <div class="bracket bracket-bl"></div>
+                        <div class="bracket bracket-br"></div>
+                    </div>
+                </div>
+                <div class="vision-floating-text absolute top-10 right-10 text-[12px] font-mono text-green-400 uppercase tracking-widest vision-float opacity-0">
+                    TARGET ACQUIRED<br>
+                    INTENT DETECTED<br>
+                    0.4MS RESPONSE
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. HOW PRIMUS THINKS -->
+    <section class="thinking-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-dark overflow-hidden">
+        <div class="max-w-[2000px] w-full grid grid-cols-1 lg:grid-cols-2 gap-32 items-center relative">
+            <div class="thinking-visual flex flex-col items-center gap-8 relative">
+                <div class="thinking-node w-48 h-48 border border-white/20 rounded-full flex items-center justify-center thinking-circle transform-3d">
+                    <div class="w-24 h-24 bg-white/10 rounded-full thinking-core"></div>
+                    <div class="absolute inset-0 rounded-full border-2 border-green-400/30 thinking-pulse animate-pulse"></div>
+                </div>
+                <div class="thinking-flows absolute inset-0 pointer-events-none">
+                    <div class="flow-line absolute top-1/2 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent thinking-line opacity-0"></div>
+                    <div class="flow-line absolute top-1/3 right-1/4 w-1/3 h-px bg-gradient-to-l from-transparent via-blue-400/50 to-transparent thinking-line opacity-0"></div>
+                    <div class="flow-line absolute bottom-1/3 left-1/3 w-2/5 h-px bg-gradient-to-r from-transparent via-red-400/50 to-transparent thinking-line opacity-0"></div>
+                </div>
+                <div class="thinking-data-points absolute inset-0">
+                    <div class="data-point absolute top-1/4 left-1/4 w-3 h-3 bg-green-400 rounded-full thinking-point opacity-0"></div>
+                    <div class="data-point absolute top-1/3 right-1/3 w-3 h-3 bg-blue-400 rounded-full thinking-point opacity-0"></div>
+                    <div class="data-point absolute bottom-1/4 right-1/4 w-3 h-3 bg-red-400 rounded-full thinking-point opacity-0"></div>
+                    <div class="data-point absolute bottom-1/3 left-1/3 w-3 h-3 bg-yellow-400 rounded-full thinking-point opacity-0"></div>
+                    <div class="neural-web absolute inset-0">
+                        <svg class="w-full h-full" viewBox="0 0 600 400">
+                            <defs>
+                                <radialGradient id="neuralGrad" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" style="stop-color:#00FF41;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#00FF41;stop-opacity:0" />
+                                </radialGradient>
+                                <linearGradient id="synapseFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#FF003C;stop-opacity:0" />
+                                    <stop offset="50%" style="stop-color:#FF003C;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#FF003C;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Neural Layers -->
+                            <g class="neural-layers">
+                                <!-- Input Layer -->
+                                <circle cx="100" cy="100" r="8" fill="#00FF41" class="neuron input-1"/>
+                                <circle cx="100" cy="150" r="8" fill="#00FF41" class="neuron input-2"/>
+                                <circle cx="100" cy="200" r="8" fill="#00FF41" class="neuron input-3"/>
+                                <circle cx="100" cy="250" r="8" fill="#00FF41" class="neuron input-4"/>
+                                <circle cx="100" cy="300" r="8" fill="#00FF41" class="neuron input-5"/>
+
+                                <!-- Hidden Layer 1 -->
+                                <circle cx="250" cy="120" r="6" fill="#FF003C" class="neuron hidden1-1"/>
+                                <circle cx="250" cy="180" r="6" fill="#FF003C" class="neuron hidden1-2"/>
+                                <circle cx="250" cy="240" r="6" fill="#FF003C" class="neuron hidden1-3"/>
+                                <circle cx="250" cy="300" r="6" fill="#FF003C" class="neuron hidden1-4"/>
+
+                                <!-- Hidden Layer 2 -->
+                                <circle cx="400" cy="140" r="7" fill="#00FF41" class="neuron hidden2-1"/>
+                                <circle cx="400" cy="200" r="7" fill="#00FF41" class="neuron hidden2-2"/>
+                                <circle cx="400" cy="260" r="7" fill="#00FF41" class="neuron hidden2-3"/>
+
+                                <!-- Output Layer -->
+                                <circle cx="550" cy="160" r="10" fill="#FF003C" class="neuron output-1"/>
+                                <circle cx="550" cy="200" r="10" fill="#FF003C" class="neuron output-2"/>
+                                <circle cx="550" cy="240" r="10" fill="#FF003C" class="neuron output-3"/>
+                            </g>
+
+                            <!-- Synaptic Connections -->
+                            <g class="synapses">
+                                <!-- Input to Hidden1 -->
+                                <path d="M108,100 Q179,110 242,120" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s1"/>
+                                <path d="M108,150 Q179,160 242,180" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s2"/>
+                                <path d="M108,200 Q179,190 242,240" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s3"/>
+                                <path d="M108,250 Q179,240 242,300" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s4"/>
+                                <path d="M108,300 Q179,290 242,300" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s5"/>
+
+                                <!-- Hidden1 to Hidden2 -->
+                                <path d="M256,120 Q328,130 392,140" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s6"/>
+                                <path d="M256,180 Q328,170 392,200" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s7"/>
+                                <path d="M256,240 Q328,230 392,260" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s8"/>
+                                <path d="M256,300 Q328,280 392,260" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s9"/>
+
+                                <!-- Hidden2 to Output -->
+                                <path d="M407,140 Q479,150 540,160" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s10"/>
+                                <path d="M407,200 Q479,190 540,200" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s11"/>
+                                <path d="M407,260 Q479,230 540,240" stroke="url(#synapseFlow)" stroke-width="1" fill="none" class="synapse s12"/>
+                            </g>
+
+                            <!-- Data Packets -->
+                            <g class="data-packets">
+                                <circle cx="100" cy="100" r="3" fill="#FFFFFF" class="packet p1">
+                                    <animateMotion dur="3s" repeatCount="indefinite">
+                                        <path d="M100,100 Q179,110 242,120 Q328,130 392,140 Q479,150 540,160"/>
+                                    </animateMotion>
+                                </circle>
+                                <circle cx="100" cy="200" r="3" fill="#FFFFFF" class="packet p2">
+                                    <animateMotion dur="4s" repeatCount="indefinite">
+                                        <path d="M100,200 Q179,190 242,240 Q328,230 392,260 Q479,230 540,240"/>
+                                    </animateMotion>
+                                </circle>
+                                <circle cx="100" cy="300" r="3" fill="#FFFFFF" class="packet p3">
+                                    <animateMotion dur="3.5s" repeatCount="indefinite">
+                                        <path d="M100,300 Q179,290 242,300 Q328,280 392,260 Q479,230 540,240"/>
+                                    </animateMotion>
+                                </circle>
+                            </g>
+
+                            <!-- Processing Indicators -->
+                            <g class="processing-indicators">
+                                <text x="250" y="50" fill="#00FF41" font-size="12" font-family="monospace" class="process-label">DATA INGESTION</text>
+                                <text x="400" y="50" fill="#FF003C" font-size="12" font-family="monospace" class="process-label">PATTERN ANALYSIS</text>
+                                <text x="550" y="50" fill="#00FF41" font-size="12" font-family="monospace" class="process-label">FORESIGHT OUTPUT</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="thinking-text space-y-12 text-left">
+                <span class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">How PRIMUS Thinks</span>
+                <h2 class="text-7xl font-black uppercase tracking-tighter italic leading-none thinking-title transform-3d">NEURAL <br>FLOW.</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-xl thinking-desc">
+                    Calm, deliberate processing. 4.2 trillion parameters flow through decision nodes. Logic paths converge in real-time. Foresight emerges without haste. Zero cloud dependency ensures sovereign intelligence.
+                </p>
+                <div class="thinking-process grid grid-cols-1 gap-6 mt-16">
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-3xl font-black text-green-400">01</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Data Ingestion</div>
+                            <div class="step-desc text-sm text-silver-400">Multi-spectrum inputs from Trion nodes</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-3xl font-black text-blue-400">02</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Pattern Recognition</div>
+                            <div class="step-desc text-sm text-silver-400">Kinetic analysis distinguishes intent</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-3xl font-black text-red-400">03</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Foresight Synthesis</div>
+                            <div class="step-desc text-sm text-silver-400">0.4ms prediction of future events</div>
+                        </div>
+                    </div>
+                    <div class="process-step flex items-center gap-6">
+                        <div class="step-num text-3xl font-black text-yellow-400">04</div>
+                        <div>
+                            <div class="step-title text-lg font-black uppercase text-white">Autonomous Action</div>
+                            <div class="step-desc text-sm text-silver-400">Sentinel deployment without human lag</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. GLOBAL THREAT DASHBOARD -->
+    <section class="dashboard-section min-h-screen w-full bg-black text-white px-12 py-32 relative overflow-hidden">
+        <div class="dashboard-content max-w-8xl mx-auto">
+            <div class="dashboard-header text-center mb-32">
+                <h3 class="text-[clamp(5rem,15vw,12rem)] font-black uppercase tracking-tighter italic leading-none dashboard-title opacity-0">THREAT</h3>
+                <h3 class="text-[clamp(5rem,15vw,12rem)] font-black uppercase tracking-tighter italic leading-none dashboard-title2 opacity-0">DASHBOARD</h3>
+                <p class="text-silver-400 text-2xl font-bold uppercase tracking-[0.4em] max-w-4xl mx-auto leading-relaxed dashboard-desc opacity-0 mt-16">
+                    Real-time global intelligence. Every threat detected, analyzed, neutralized. Sovereign defense at planetary scale.
+                </p>
+            </div>
+
+            <div class="dashboard-grid grid grid-cols-1 lg:grid-cols-3 gap-16">
+                <!-- ACTIVE DEPLOYMENTS -->
+                <div class="dashboard-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header flex items-center justify-between mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Active Deployments</h4>
+                        <div class="status-indicator">
+                            <div class="w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="deployments-list space-y-8">
+                        <div class="deployment-item flex justify-between items-center">
+                            <div>
+                                <div class="deployment-name text-lg font-bold">Pacific Command</div>
+                                <div class="deployment-type text-sm text-silver-400">Maritime Surveillance</div>
+                            </div>
+                            <div class="deployment-status text-green-400 font-mono">OPERATIONAL</div>
+                        </div>
+                        <div class="deployment-item flex justify-between items-center">
+                            <div>
+                                <div class="deployment-name text-lg font-bold">European Grid</div>
+                                <div class="deployment-type text-sm text-silver-400">Critical Infrastructure</div>
+                            </div>
+                            <div class="deployment-status text-green-400 font-mono">ACTIVE</div>
+                        </div>
+                        <div class="deployment-item flex justify-between items-center">
+                            <div>
+                                <div class="deployment-name text-lg font-bold">Urban Matrix</div>
+                                <div class="deployment-type text-sm text-silver-400">Smart City Defense</div>
+                            </div>
+                            <div class="deployment-status text-yellow-400 font-mono">STANDBY</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- THREAT LEVEL METER -->
+                <div class="dashboard-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Global Threat Level</h4>
+                    </div>
+                    <div class="threat-meter relative">
+                        <div class="meter-bg w-full h-8 bg-gray-800 rounded-full overflow-hidden">
+                            <div class="meter-fill h-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full threat-fill"></div>
+                        </div>
+                        <div class="meter-labels flex justify-between mt-4 text-sm font-mono">
+                            <span class="text-green-400">LOW</span>
+                            <span class="text-yellow-400">ELEVATED</span>
+                            <span class="text-red-400">CRITICAL</span>
+                        </div>
+                        <div class="current-level text-center mt-8">
+                            <div class="level-value text-6xl font-black text-green-400 threat-level">2.3</div>
+                            <div class="level-label text-sm text-silver-400 uppercase tracking-wider">Current Index</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESPONSE LOG -->
+                <div class="dashboard-panel bg-gray-900/50 border border-white/10 p-12 opacity-0">
+                    <div class="panel-header flex items-center justify-between mb-12">
+                        <h4 class="text-2xl font-black uppercase tracking-wider">Response Log</h4>
+                        <div class="log-count text-sm font-mono text-silver-400">247 Events</div>
+                    </div>
+                    <div class="response-log space-y-6 max-h-96 overflow-y-auto">
+                        <div class="log-entry flex gap-4">
+                            <div class="log-time text-xs font-mono text-silver-400">14:23:47</div>
+                            <div class="log-content">
+                                <div class="log-type text-sm font-bold text-green-400">NEUTRALIZED</div>
+                                <div class="log-desc text-sm text-silver-400">Unauthorized perimeter breach - Sector 7</div>
+                            </div>
+                        </div>
+                        <div class="log-entry flex gap-4">
+                            <div class="log-time text-xs font-mono text-silver-400">14:18:12</div>
+                            <div class="log-content">
+                                <div class="log-type text-sm font-bold text-blue-400">MONITORED</div>
+                                <div class="log-desc text-sm text-silver-400">Anomaly detected - Pattern analysis initiated</div>
+                            </div>
+                        </div>
+                        <div class="log-entry flex gap-4">
+                            <div class="log-time text-xs font-mono text-silver-400">14:15:33</div>
+                            <div class="log-content">
+                                <div class="log-type text-sm font-bold text-yellow-400">ESCALATED</div>
+                                <div class="log-desc text-sm text-silver-400">Multi-vector threat - Sentinel deployed</div>
+                            </div>
+                        </div>
+                        <div class="log-entry flex gap-4">
+                            <div class="log-time text-xs font-mono text-silver-400">14:12:08</div>
+                            <div class="log-content">
+                                <div class="log-type text-sm font-bold text-green-400">RESOLVED</div>
+                                <div class="log-desc text-sm text-silver-400">False positive cleared - System integrity maintained</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE MAP OVERLAY -->
+            <div class="live-map absolute inset-0 opacity-0 pointer-events-none">
+                <svg class="w-full h-full" viewBox="0 0 1200 800">
+                    <defs>
+                        <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#00FF41;stop-opacity:0.3"/>
+                            <stop offset="100%" style="stop-color:#00FF41;stop-opacity:0"/>
+                        </radialGradient>
+                    </defs>
+                    <!-- Simplified world map outline -->
+                    <path d="M200,300 Q300,250 400,300 Q500,350 600,300 Q700,250 800,300 Q900,350 1000,300 Q1100,250 1200,300 L1200,600 L200,600 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+                    <!-- Active zones -->
+                    <circle cx="400" cy="350" r="30" fill="url(#mapGlow)" class="active-zone"/>
+                    <circle cx="700" cy="320" r="25" fill="url(#mapGlow)" class="active-zone"/>
+                    <circle cx="900" cy="380" r="35" fill="url(#mapGlow)" class="active-zone"/>
+                    <!-- Connection lines -->
+                    <path d="M400,350 Q550,330 700,320" stroke="#00FF41" stroke-width="1" fill="none" opacity="0.5" class="connection-line"/>
+                    <path d="M700,320 Q800,340 900,380" stroke="#00FF41" stroke-width="1" fill="none" opacity="0.5" class="connection-line"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY PRIMUS EXISTS -->
+    <section class="purpose-section min-h-screen py-60 px-12 md:px-24 flex items-center justify-center relative bg-black overflow-hidden">
+        <div class="max-w-[2000px] w-full text-center space-y-32">
+            <div class="purpose-statement">
+                <h2 class="text-8xl md:text-[140px] font-black uppercase tracking-tighter italic text-gradient purpose-title opacity-0 transform-3d">PURPOSE</h2>
+                <p class="text-xl text-silver-400 uppercase tracking-[0.2em] leading-loose max-w-5xl mx-auto purpose-desc opacity-0">
+                    Not reaction, but prevention. Not surveillance, but governance. PRIMUS exists to make nations secure through intelligence, not force. The temporal shield for modern civilization.
+                </p>
+            </div>
+            <div class="purpose-values grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="value-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <path d="M12 2L3 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-9-5z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">Prevention</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">Stop threats before they materialize. 0.4ms foresight eliminates the reaction gap.</p>
+                </div>
+                <div class="value-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                            <path d="M12 2v2"/>
+                            <path d="M22 12h-2"/>
+                            <path d="M12 22v-2"/>
+                            <path d="M2 12h2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">Sovereignty</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">100% edge computing. No data leaves territory. No interception risk.</p>
+                </div>
+                <div class="value-card space-y-8 opacity-0 transform-3d">
+                    <div class="value-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" class="icon-svg">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase text-white">Precision</h3>
+                    <p class="text-silver-400 text-sm leading-relaxed">Machine-speed accuracy. Distinguishes intent from routine. Zero false positives.</p>
+                </div>
+            </div>
+            <div class="purpose-visual w-full h-[600px] border border-white/20 bg-gradient-to-br from-white/5 to-white/10 relative overflow-hidden purpose-frame opacity-0 transform-3d flex items-center justify-center">
+                <div class="premium-white-container">
+                    <svg width="400" height="300" viewBox="0 0 400 300" class="premium-white-svg">
+                        <defs>
+                            <linearGradient id="whiteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+                                <stop offset="50%" style="stop-color:#F8F8F8;stop-opacity:0.7" />
+                                <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+                            </linearGradient>
+                            <filter id="whiteGlow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                            <filter id="softShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.1)"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Elegant White Shield -->
+                        <path d="M200,40 L140,90 L140,210 L200,260 L260,210 L260,90 Z" fill="url(#whiteGrad)" stroke="#FFFFFF" stroke-width="2" filter="url(#softShadow)" class="white-shield"/>
+                        <path d="M200,60 L160,100 L160,200 L200,240 L240,200 L240,100 Z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1" class="white-outline"/>
+
+                        <!-- Central White Orb -->
+                        <circle cx="200" cy="150" r="35" fill="#FFFFFF" stroke="rgba(0,0,0,0.1)" stroke-width="1" filter="url(#whiteGlow)" class="white-core">
+                            <animate attributeName="r" values="35;40;35" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Temporal Markers -->
+                        <circle cx="170" cy="120" r="4" fill="#E5E5E7" class="temporal-marker"/>
+                        <circle cx="230" cy="120" r="4" fill="#E5E5E7" class="temporal-marker"/>
+                        <circle cx="170" cy="180" r="4" fill="#E5E5E7" class="temporal-marker"/>
+                        <circle cx="230" cy="180" r="4" fill="#E5E5E7" class="temporal-marker"/>
+
+                        <!-- Subtle Flow Lines -->
+                        <path d="M160,150 Q200,130 240,150" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none" class="flow-line"/>
+                        <path d="M160,150 Q200,170 240,150" stroke="rgba(255,255,255,0.4)" stroke-width="1" fill="none" class="flow-line"/>
+                    </svg>
+
+                    <div class="premium-text absolute bottom-8 left-8 right-8 text-center">
+                        <div class="text-2xl font-light uppercase text-white tracking-widest mb-2">Temporal Shield</div>
+                        <div class="text-sm text-silver-400 font-light">Pure intelligence, sovereign protection</div>
+                        <div class="text-xs text-white/60 font-mono mt-4 tracking-wider">0.4ms • Neural • Sovereign</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="industries.html" class="footer-link-hover">Government</a>
+                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
+                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const isOpen = overlay.classList.contains('opacity-100');
+
+            if (isOpen) {
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+            }
+        }
+
+        // Close mobile menu when clicking a link
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileLinks = document.querySelectorAll('#mobile-menu-overlay a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMobileMenu();
+                });
+            });
+        });
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                document.getElementById('preview-default').style.opacity = '1';
+            });
+        });
+
+        window.addEventListener('load', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            const lenis = new Lenis({ lerp: 0.1 });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+
+            const cursor = document.getElementById('cursor');
+            const ring = document.getElementById('cursor-ring');
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { x: e.clientX-4, y: e.clientY-4, duration: 0 });
+                gsap.to(ring, { x: e.clientX-20, y: e.clientY-20, duration: 0.15 });
+            });
+
+            // COMMANDING OPENING - SUBTLE REVEAL
+            gsap.timeline({
+                scrollTrigger: { trigger: ".opening-section", start: "top bottom", end: "bottom top", scrub: 1 }
+            })
+            .to(".opening-video", { opacity: 0.4, duration: 3, ease: "power2.out" })
+
+            // WHAT PRIMUS SEES - SLAM FROM LEFT WITH 3D
+            gsap.timeline({
+                scrollTrigger: { trigger: ".vision-section", start: "top 90%", end: "bottom 10%", scrub: 2 }
+            })
+            .to(".vision-title", { rotationY: 0, x: 0, opacity: 1, duration: 2, ease: "power4.out" })
+            .to(".vision-desc", { x: 0, opacity: 1, duration: 1.5 }, "-=1.5")
+            .to(".vision-spec-num", { scale: 1, stagger: 0.3, duration: 1, ease: "elastic.out(1, 0.3)" }, "-=1")
+            .to(".vision-media", { rotationX: 0, scale: 1, opacity: 1, duration: 3, ease: "power2.out" }, "-=2")
+            .to(".vision-layer", { opacity: 0.6, duration: 2 }, "-=2")
+            .to(".bracket", { opacity: 1, scale: 1.5, stagger: 0.2, duration: 1, ease: "back.out(1.7)" }, "-=1")
+            .to(".vision-float", { x: 0, opacity: 1, duration: 1.5 }, "-=0.5")
+            .to(".process-node", { opacity: 1, stagger: 0.3, duration: 1 }, "-=1")
+            .to(".neural-conn", { opacity: 0.8, duration: 1.5 }, "-=1.5")
+            .to(".detect-pattern", { opacity: 1, stagger: 0.4, duration: 1 }, "-=1")
+            .to(".threat-indicator", { opacity: 1, duration: 1 }, "-=0.5");
+
+            // HOW PRIMUS THINKS - EXPANSIVE REVEAL
+            gsap.timeline({
+                scrollTrigger: { trigger: ".thinking-section", start: "top 85%", end: "bottom 15%", scrub: 2 }
+            })
+            .to(".thinking-title", { rotationY: 0, x: 0, opacity: 1, duration: 2, ease: "power4.out" })
+            .to(".thinking-desc", { x: 0, opacity: 1, duration: 1.5 }, "-=1.5")
+            .to(".thinking-circle", { rotationX: 0, scale: 1, opacity: 1, duration: 3, ease: "elastic.out(1, 0.3)" }, "-=2")
+            .to(".thinking-core", { scale: 1, duration: 2, ease: "power2.out" }, "-=2.5")
+            .to(".thinking-line", { opacity: 1, stagger: 0.5, duration: 2 }, "-=2")
+            .to(".thinking-point", { scale: 1, opacity: 1, stagger: 0.3, duration: 1, ease: "back.out(1.7)" }, "-=1.5")
+            .to(".neuron", { opacity: 1, stagger: 0.1, duration: 1 }, "-=1")
+            .to(".synapse", { opacity: 0.8, stagger: 0.05, duration: 1.5 }, "-=1.5")
+            .to(".packet", { opacity: 1, stagger: 0.3, duration: 1 }, "-=1")
+            .to(".process-label", { opacity: 1, stagger: 0.2, duration: 1 }, "-=0.5")
+            .to(".step-num", { rotationX: 0, stagger: 0.2, duration: 1.5, ease: "power4.out" }, "-=1");
+
+            // GLOBAL THREAT DASHBOARD - CINEMATIC BUILD
+            gsap.timeline({
+                scrollTrigger: { trigger: ".dashboard-section", start: "top 80%", end: "bottom 20%", scrub: 2 }
+            })
+            .to(".dashboard-title", { rotationX: 0, scale: 1, opacity: 1, duration: 2, ease: "elastic.out(1, 0.3)" })
+            .to(".dashboard-title2", { rotationX: 0, scale: 1, opacity: 1, duration: 2, ease: "elastic.out(1, 0.3)" }, "-=1.5")
+            .to(".dashboard-desc", { y: 0, opacity: 1, duration: 1.5 }, "-=1")
+            .to(".dashboard-panel", { rotationX: 0, y: 0, opacity: 1, stagger: 0.3, duration: 2, ease: "power2.out" }, "-=1.5")
+            .to(".threat-fill", { width: "23%", duration: 1.5 }, "-=1")
+            .to(".threat-level", { scale: 1, duration: 1, ease: "back.out(1.7)" }, "-=0.5")
+            .to(".live-map", { opacity: 0.4, duration: 2 }, "-=1");
+
+            // WHY PRIMUS EXISTS - ROTATIONAL SLAM
+            gsap.timeline({
+                scrollTrigger: { trigger: ".purpose-section", start: "top 90%", end: "bottom 10%", scrub: 2 }
+            })
+            .to(".purpose-title", { rotationX: 0, rotationY: 0, scale: 1, opacity: 1, duration: 3, ease: "power4.out" })
+            .to(".purpose-desc", { rotationX: 0, y: 0, opacity: 1, duration: 2 }, "-=2.5")
+            .to(".value-card", { rotationX: 0, y: 0, opacity: 1, stagger: 0.4, duration: 2, ease: "power2.out" }, "-=2")
+            .to(".purpose-frame", { rotationY: 0, scale: 1, opacity: 1, duration: 4, ease: "elastic.out(1, 0.3)" }, "-=2.5")
+            .to(".premium-white-svg", { opacity: 1, duration: 3 }, "-=2.5")
+            .to(".premium-text", { opacity: 1, y: 0, duration: 2 }, "-=1");
+
+
+            // SCROLL NAV
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('main-nav');
+                if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
+                else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+            });
+
+            // VIDEO PERFORMANCE OPTIMIZATION FOR PRIMUS
+            class PrimusVideoOptimizer {
+                constructor() {
+                    this.heroVideo = document.querySelector('.primus-video');
+                    this.visionVideo = document.querySelector('.primus-vision-video');
+                    this.bufferingCount = 0;
+                    this.maxBufferingAttempts = 3;
+                    this.init();
+                }
+    
+                init() {
+                    if (this.heroVideo) this.setupVideo(this.heroVideo, 'PRIMUS Hero');
+                    if (this.visionVideo) this.setupVideo(this.visionVideo, 'PRIMUS Vision');
+                }
+    
+                setupVideo(video, label) {
+                    video.addEventListener('waiting', () => this.handleBuffering(label));
+                    video.addEventListener('canplaythrough', () => this.resetBuffering());
+                    video.addEventListener('error', (e) => this.handleError(e, label));
+                    video.addEventListener('loadstart', () => console.log(`${label} video load started`));
+                    video.addEventListener('loadeddata', () => console.log(`${label} video data loaded`));
+                }
+    
+                handleBuffering(label) {
+                    this.bufferingCount++;
+                    console.log(`${label} video buffering attempt ${this.bufferingCount}/${this.maxBufferingAttempts}`);
+    
+                    if (this.bufferingCount >= this.maxBufferingAttempts) {
+                        console.warn(`${label} video buffering too frequently, implementing fallback`);
+                        this.implementFallback(label);
+                    }
+                }
+    
+                resetBuffering() {
+                    this.bufferingCount = 0;
+                }
+    
+                handleError(error, label) {
+                    console.error(`${label} video loading error:`, error);
+                    this.implementFallback(label);
+                }
+    
+                implementFallback(label) {
+                    // Find the corresponding fallback image and show it
+                    const video = label === 'PRIMUS Hero' ? this.heroVideo : this.visionVideo;
+                    const fallbackImg = video.querySelector('img');
+                    if (fallbackImg) {
+                        fallbackImg.style.display = 'block';
+                        video.style.display = 'none';
+                    }
+                    console.log(`${label} video fallback activated`);
+                }
+            }
+    
+            // Initialize video optimizer when DOM is ready
+            document.addEventListener('DOMContentLoaded', () => {
+                new PrimusVideoOptimizer();
+            });
+    
+            // OPTIMIZED FOOTER CANVAS
+            const canvas = document.getElementById('footer-neural-canvas');
+            const ctx = canvas.getContext('2d');
+            let pts = [];
+            function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<100; i++) pts.push(new P()); }
+            class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+            function draw(){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                const maxDistSq = 200 * 200;
+                pts.forEach((p,i)=>{
+                    p.update(); p.draw();
+                    for(let j=i+1;j<pts.length;j++){
+                        const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                        if(dSq < maxDistSq){
+                            const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                            ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                            ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                        }
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            resize(); draw(); window.onresize=resize;
+        });
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>

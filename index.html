@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVZDAX | SOVEREIGN PREDICTIVE DEFENSE</title>
+    
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #020202; color: white; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px; 
+            margin-top: -20px; 
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper { 
+            opacity: 1; 
+            pointer-events: auto; 
+            visibility: visible; 
+            transform: translateY(0); 
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(255,255,255,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #020202 100%); }
+
+        /* VIDEO PERFORMANCE OPTIMIZATION */
+        .hero-video {
+            will-change: transform;
+            transform: translateZ(0); /* Force hardware acceleration */
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+        }
+        
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+        
+        .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+        .grid-item-hover:hover span { color: #000000 !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+        .premium-white-gloss {
+            background: #FBFBFB;
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-white-gloss::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+            opacity: 0.3; pointer-events: none;
+        }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* SVG GROUNDBREAKING ANIMATION MESH */
+        .svg-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+
+        /* HIDE SCROLLBAR */
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* ===========================================
+           MOBILE RESPONSIVENESS (PRESERVING DESKTOP)
+           =========================================== */
+
+        /* MOBILE NAVIGATION */
+        @media (max-width: 1024px) {
+            .mega-menu-wrapper { display: none !important; }
+            nav { padding: 20px 20px !important; }
+            .nav-item { display: none; }
+            .mobile-menu-toggle { display: block !important; }
+        }
+
+        /* HERO SECTION MOBILE */
+        @media (max-width: 768px) {
+            .hero-stage { height: 100vh; }
+            h1 { font-size: clamp(2.5rem, 12vw, 4rem) !important; line-height: 0.9 !important; }
+            .hero-content { padding: 0 20px; bottom: 15vh; }
+            .hero-content p { font-size: 14px !important; max-width: 100% !important; }
+            .hero-content .flex { gap: 20px; flex-direction: column; align-items: flex-start; }
+            .hero-content button { width: 100%; text-align: center; }
+        }
+
+        /* MOATS SECTION MOBILE */
+        @media (max-width: 768px) {
+            .premium-white-gloss { padding: 60px 20px; }
+            .premium-white-gloss .max-w-6xl { grid-template-columns: 1fr; gap: 40px; }
+            .premium-white-gloss h3 { font-size: 2.5rem !important; margin-bottom: 20px; }
+            .premium-white-gloss p { font-size: 13px; }
+        }
+
+        /* NEURAL LAYER MOBILE */
+        @media (max-width: 768px) {
+            #neural-layer { padding: 80px 20px; }
+            #neural-layer h2 { font-size: clamp(2rem, 10vw, 4rem) !important; }
+            #neural-layer .grid { grid-template-columns: 1fr; gap: 40px; }
+            #neural-layer p { font-size: 16px; }
+        }
+
+        /* PRODUCT SECTIONS MOBILE */
+        @media (max-width: 1024px) {
+            .product-section { padding: 60px 20px; }
+            .product-section .grid { grid-template-columns: 1fr; gap: 40px; }
+            .product-section h2 { font-size: clamp(2.5rem, 8vw, 5rem) !important; }
+            .product-section p { font-size: 16px; max-width: 100% !important; }
+            .product-section .text-right { text-align: left !important; }
+            .product-section .justify-end { justify-content: flex-start !important; }
+        }
+
+        /* INDUSTRIES SHOWCASE MOBILE */
+        @media (max-width: 768px) {
+            .industries-showcase { height: auto; padding: 60px 20px; }
+            .industries-showcase .text-center { text-align: left; }
+            .industries-showcase h2 { font-size: clamp(2rem, 8vw, 4rem) !important; }
+            .industries-showcase .flex { flex-direction: column; gap: 30px; }
+            .industries-showcase .flex > a { width: 100%; }
+            .industries-showcase img { height: 300px !important; }
+        }
+
+        /* NEWS SECTION MOBILE */
+        @media (max-width: 768px) {
+            #news-highlights { padding: 60px 20px; }
+            #news-highlights h2 { font-size: clamp(2rem, 8vw, 3rem) !important; }
+            #news-highlights .grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        /* FOOTER MOBILE */
+        @media (max-width: 768px) {
+            footer { padding: 60px 20px; }
+            footer .grid { grid-template-columns: 1fr; gap: 40px; }
+            footer .flex { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        /* BACK BUTTON MOBILE */
+        @media (max-width: 768px) {
+            .px-12.py-8 { padding: 20px !important; }
+        }
+
+        /* TOUCH TARGETS MOBILE */
+        @media (max-width: 768px) {
+            button, .button, a[role="button"] { min-height: 44px; padding: 12px 24px; }
+        }
+
+        /* VIDEO CONTAINERS MOBILE */
+        @media (max-width: 768px) {
+            .vision-frame, .optical-lens, .kinetic-terrain, .command-intelligence, .structural-analysis, .oversight-monitor {
+                height: 300px !important;
+            }
+        }
+
+        /* DASHBOARD MOBILE */
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; gap: 30px; }
+            .dashboard-panel { padding: 20px; }
+        }
+
+        /* PURPOSE SECTION MOBILE */
+        @media (max-width: 768px) {
+            .purpose-values { grid-template-columns: 1fr; gap: 40px; }
+            .purpose-visual { height: 400px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full px-8">
+            <button onclick="toggleMobileMenu()" class="absolute top-8 right-8 text-white/60 hover:text-white transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <nav class="text-center space-y-8">
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Ecosystem</h3>
+                    <div class="space-y-4">
+                        <a href="primus.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Primus</a>
+                        <a href="trion.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Trion</a>
+                        <a href="sentinel.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Sentinel</a>
+                        <a href="teletraan.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Teletraan</a>
+                        <a href="nest.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Nest</a>
+                        <a href="obex.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Obex</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Intelligence</h3>
+                    <div class="space-y-4">
+                        <a href="news.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Newsroom</a>
+                        <a href="industries.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Industries</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-white/40 text-xs font-mono uppercase tracking-wider">Mission</h3>
+                    <div class="space-y-4">
+                        <a href="about.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">About</a>
+                        <a href="careers.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Careers</a>
+                        <a href="contact.html" class="block text-white text-lg font-bold uppercase tracking-wider hover:text-green-400 transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <a href="contact.html" class="inline-block bg-white text-black px-8 py-4 text-sm font-black uppercase tracking-wider hover:bg-green-400 transition-all duration-300">Schedule Demonstration</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">White Papers: Behavioral Foresight</li>
+                        <li class="hover:text-white cursor-pointer">News: Global Deployment Status</li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+            
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+                                    <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">INDUSTRIES</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <!-- MOBILE MENU TOGGLE -->
+                <button onclick="toggleMobileMenu()" class="mobile-menu-toggle hidden flex items-center gap-3 px-4 py-3 border border-white/10 group hover:border-white transition-all bg-white/5 lg:hidden">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Menu</span>
+                    <div class="hamburger-lines">
+                        <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all"></span>
+                        <span class="block w-4 h-0.5 bg-white/40 group-hover:bg-white transition-all mt-1"></span>
+                        <span class="block w-3 h-0.5 bg-white/40 group-hover:bg-white transition-all mt-1"></span>
+                    </div>
+                </button>
+
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen w-full flex items-end justify-start overflow-hidden">
+        <video autoplay muted loop playsinline preload="metadata" class="hero-video absolute inset-0 w-full h-full object-cover opacity-50">
+            <source src="/media/homepage-hero-av1.mp4" type="video/mp4; codecs=av01.0.05M.08">
+            <source src="/media/homepage-hero-vp9.webm" type="video/webm; codecs=vp9">
+            <source src="/media/homepage-hero-h264.mp4" type="video/mp4; codecs=avc1.4d401f">
+            <!-- Fallback to original video while optimized versions are being created -->
+            <source src="/media/homepage-hero.mov" type="video/mp4">
+            <!-- Fallback for unsupported devices -->
+            <img src="/media/hero-fallback.svg" alt="AVZDAX Hero" class="absolute inset-0 w-full h-full object-cover opacity-50">
+        </video>
+        <div class="absolute inset-0 hero-video-tint"></div>
+        <div class="relative z-10 px-12 pb-20 max-w-4xl text-left">
+            <div class="flex items-center gap-4 mb-6 text-left"><div class="h-[1px] w-20 bg-white/40"></div><span class="text-[10px] uppercase tracking-[0.8em] text-white/60">Autonomous Intelligence</span></div>
+            <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase tracking-tighter leading-[0.85] text-gradient mb-8 text-left">PREDICTING <br> THE UNSEEN.</h1>
+            <p class="text-silver-400 text-sm md:text-base max-w-xl font-light leading-relaxed uppercase tracking-widest mb-10 opacity-80 text-left">AVZDAX is the global standard in predictive surveillance. We build the neural infrastructure that secures civilizations.</p>
+            <div class="flex gap-6">
+                <button onclick="lenis.scrollTo('#moats')" class="px-10 py-4 bg-white/5 border-thin text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Explore Platform</button>
+                <button class="px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-all underline decoration-white/20 underline-offset-8">Read Thesis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM WHITE MOATS SECTION -->
+    <section id="moats" class="premium-white-gloss py-40 border-b border-black/10 px-12 md:px-24">
+        <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-24 relative z-10 text-left">
+            <div class="space-y-8">
+                <h4 class="text-[11px] font-mono text-black/40 uppercase tracking-[0.5em]">01 / LATENCY</h4>
+                <h3 class="text-5xl font-black uppercase tracking-tighter italic text-black text-left">0.4MS Foresight</h3>
+                <p class="text-gray-600 text-sm font-bold uppercase leading-loose tracking-widest text-left">Identifying threat intent before manifestation, delivering the ultimate temporal advantage to defenders.</p>
+            </div>
+            <div class="space-y-8 text-left">
+                <h4 class="text-[11px] font-mono text-black/40 uppercase tracking-[0.5em]">02 / COMPUTE</h4>
+                <h3 class="text-5xl font-black uppercase tracking-tighter italic text-black text-gradient-dark text-left">Sovereign Edge</h3>
+                <p class="text-gray-600 text-sm font-bold uppercase leading-loose tracking-widest text-left">Local-device intelligence. Zero cloud dependency ensures 100% uptime in signal-denied zones.</p>
+            </div>
+            <div class="space-y-8 text-left">
+                <h4 class="text-[11px] font-mono text-black/40 uppercase tracking-[0.5em]">03 / NETWORK</h4>
+                <h3 class="text-5xl font-black uppercase tracking-tighter italic text-black text-left">Neural Mesh</h3>
+                <p class="text-gray-600 text-sm font-bold uppercase leading-loose tracking-widest text-left">Self-healing, encrypted grids synchronizing every node across territories for a unified defense.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GROUNDBREAKING NEW SECTION: THE SOVEREIGN NEURAL LAYER -->
+    <section id="neural-layer" class="py-60 bg-black overflow-hidden border-b border-white/5 px-12 relative">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg width="100%" height="100%" class="svg-mesh">
+                <line class="svg-grid-line" x1="0" y1="20%" x2="100%" y2="20%"></line>
+                <line class="svg-grid-line" x1="0" y1="40%" x2="100%" y2="40%"></line>
+                <line class="svg-grid-line" x1="0" y1="60%" x2="100%" y2="60%"></line>
+                <line class="svg-grid-line" x1="0" y1="80%" x2="100%" y2="80%"></line>
+            </svg>
+        </div>
+        <div class="max-w-[1400px] mx-auto relative z-10 flex flex-col items-center text-center">
+            <h4 class="text-[11px] font-mono text-white/30 uppercase tracking-[1em] mb-8">Integrated Ecosystem</h4>
+            <h2 class="text-[clamp(3rem,8vw,7rem)] font-black uppercase tracking-tighter text-gradient leading-none mb-12">ONE BRAIN. <br> TOTAL CONTROL.</h2>
+            <div class="h-[1px] w-full bg-white/10 mb-20"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-32 text-left">
+                <p class="text-silver-400 text-xl font-light leading-relaxed max-w-xl">
+                    AVZDAX is not a collection of parts. It is a singular, intelligent entity. Every Sentinel unit, every Trion sensor, and every Nest watchtower feeds into the Primus engine—creating an unbroken circle of predictive security.
+                </p>
+                <div class="space-y-12">
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">A</span>
+                        <span class="text-sm font-bold uppercase tracking-widest">Hardware Interconnectivity</span>
+                    </div>
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">B</span>
+                        <span class="text-sm font-bold uppercase tracking-widest">Algorithmic Synchronization</span>
+                    </div>
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">C</span>
+                        <span class="text-sm font-bold uppercase tracking-widest">Immediate Tactical Response</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT MATRIX -->
+    <main id="main-content">
+        <section id="primus" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/primus-display.png" class="product-image w-full h-auto"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Intelligence Nucleus</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">PRIMUS</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Decentralized behavioral engine converting raw metadata into <span class="text-white font-black">predictive certainty.</span> Join the elite defense network.</p>
+                    <a href="primus.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500">Integrate Core</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="trion" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="text-content space-y-10 lg:order-1 order-2 text-right">
+                    <div class="flex items-center gap-4 justify-end"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400 text-right">Optical Vanguard</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none text-right">TRION</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Multi-spectrum sensing hardware. Featuring proprietary <span class="text-white font-black">Titanium-Edge Compute</span> for zero-fail environments.</p>
+                    <div class="flex justify-end"><a href="trion.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-right">Deploy Asset</a></div>
+                </div>
+                <div class="image-wrapper opacity-0 lg:order-2 order-1"><img src="/media/trion-display.png" alt="TRION" class="product-image w-full h-auto"></div>
+            </div>
+        </section>
+
+        <section id="teletraan" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/teletraan-display.png" class="product-image w-full h-auto"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Command OS</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">TELETRAAN</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Unified situational OS merging global data streams into a <span class="text-white font-black">Digital Twin of Reality.</span> Command whole territories.</p>
+                    <a href="teletraan.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-left">Initialize OS</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sentinel" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="text-content space-y-10 lg:order-1 order-2 text-right">
+                    <div class="flex items-center gap-4 justify-end"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400 text-right">Autonomous Force</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none text-right text-gradient">SENTINEL</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Autonomous drones utilizing hive-intelligence to <span class="text-white font-black">neutralize threats</span> before perimeter breaches occur.</p>
+                    <div class="flex justify-end"><a href="sentinel.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-right">Mobilize Fleet</a></div>
+                </div>
+                <div class="image-wrapper opacity-0 lg:order-2 order-1"><img src="/media/sentinel-display.png" class="product-image w-full h-auto"></div>
+            </div>
+        </section>
+
+        <section id="nest" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/nest-display.png" class="product-image w-full h-auto"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Hybrid Watchtower</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">NEST</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Where foresight meets human precision. <span class="text-white font-black">24/7 Professional Hybrid Oversight</span> for mission-critical assets.</p>
+                    <a href="nest.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-left">Establish Link</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="obex" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="text-content space-y-10 lg:order-1 order-2 text-right">
+                    <div class="flex items-center gap-4 justify-end"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400 text-right text-gradient">OBEX</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none text-right text-gradient">OBEX</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Predictive security for the world's most <span class="text-white font-black">exclusive architectural domains.</span> Blending total silence with total cognitive awareness.</p>
+                    <div class="flex justify-end"><a href="obex.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 text-right">Secure Domain</a></div>
+                </div>
+                <div class="image-wrapper opacity-0 lg:order-2 order-1"><img src="/media/obex-display.png" alt="OBEX" class="product-image w-full h-auto"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- INDUSTRIES SHOWCASE -->
+    <section class="industries-showcase h-screen bg-white border-b border-black/10 px-12 overflow-hidden flex flex-col justify-center">
+        <div class="w-full">
+            <div class="text-center mb-16">
+                <h4 class="text-[11px] font-mono text-black/40 uppercase tracking-[0.8em] mb-6">Critical Sectors</h4>
+                <h2 class="text-7xl md:text-9xl font-black uppercase tracking-tighter text-black leading-none">PROTECTING GLOBAL INFRASTRUCTURE</h2>
+            </div>
+            <div class="flex space-x-12">
+                <!-- Government -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=2000" alt="Government Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Government</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">National security & critical infrastructure protection systems</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Energy -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Energy Infrastructure" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Energy</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Power grids & infrastructure security intelligence</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Banking -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?q=80&w=1000" alt="Banking Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Banking</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Financial systems & fraud prevention technology</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Healthcare -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000" alt="Healthcare Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Healthcare</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Medical data & facility protection solutions</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Airport -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1473862170180-84427c485aca?q=80&w=2670" alt="Airport Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Airport</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Aviation security & passenger safety systems</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Residential -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Residential Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Residential</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Community & home security intelligence</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS HIGHLIGHTS SECTION -->
+    <section id="news-highlights" class="py-40 bg-black border-b border-white/5 px-12">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <h4 class="text-[11px] font-mono text-white/30 uppercase tracking-[1em] mb-8">Intelligence Updates</h4>
+            <h2 class="text-[clamp(3rem,8vw,5rem)] font-black uppercase tracking-tighter text-gradient leading-none mb-20">LATEST INTELLIGENCE</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="news-highlight space-y-6">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800" alt="AI Breakthrough" class="w-full h-48 object-cover rounded-lg border border-white/10">
+                    <div class="text-left">
+                        <div class="text-[10px] text-silver-400 uppercase font-mono mb-2">TECHNOLOGY • NOVEMBER 28, 2026</div>
+                        <h3 class="text-lg font-black uppercase tracking-widest text-white mb-4">Neural Network Achieves 99.97% Threat Prediction Accuracy</h3>
+                        <p class="text-silver-400 text-sm font-light leading-relaxed uppercase tracking-widest mb-6">AVZDAX researchers announce breakthrough in behavioral pattern recognition, achieving unprecedented accuracy in predicting security threats before manifestation.</p>
+                        <a href="news.html" class="text-white/60 hover:text-white text-[10px] font-mono uppercase tracking-[0.3em] transition-all">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-highlight space-y-6">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800" alt="Government Partnership" class="w-full h-48 object-cover rounded-lg border border-white/10">
+                    <div class="text-left">
+                        <div class="text-[10px] text-silver-400 uppercase font-mono mb-2">PARTNERSHIP • NOVEMBER 22, 2026</div>
+                        <h3 class="text-lg font-black uppercase tracking-widest text-white mb-4">AVZDAX Signs Strategic Defense Agreement with Global Coalition</h3>
+                        <p class="text-silver-400 text-sm font-light leading-relaxed uppercase tracking-widest mb-6">Multi-nation defense alliance adopts AVZDAX predictive intelligence platform for unified border security and threat prevention across 15 countries.</p>
+                        <a href="news.html" class="text-white/60 hover:text-white text-[10px] font-mono uppercase tracking-[0.3em] transition-all">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-highlight space-y-6">
+                    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=800" alt="Energy Security" class="w-full h-48 object-cover rounded-lg border border-white/10">
+                    <div class="text-left">
+                        <div class="text-[10px] text-silver-400 uppercase font-mono mb-2">DEPLOYMENT • NOVEMBER 15, 2026</div>
+                        <h3 class="text-lg font-black uppercase tracking-widest text-white mb-4">Energy Infrastructure Protected by Sovereign AI Network</h3>
+                        <p class="text-silver-400 text-sm font-light leading-relaxed uppercase tracking-widest mb-6">Major energy consortium deploys AVZDAX edge computing solution, securing critical infrastructure from cyber and physical threats worldwide.</p>
+                        <a href="news.html" class="text-white/60 hover:text-white text-[10px] font-mono uppercase tracking-[0.3em] transition-all">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="#" class="footer-link-hover">NEST</a>
+                    <a href="#" class="footer-link-hover">Teletraan</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="#" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="#" class="footer-link-hover">Government</a>
+                    <a href="#" class="footer-link-hover">Finance & Banking</a>
+                    <a href="#" class="footer-link-hover">Healthcare</a>
+                    <a href="#" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">About Us</a><a href="#" class="footer-link-hover text-green-500 font-black">Careers</a><a href="#" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        const lenis = new Lenis();
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // VIDEO PERFORMANCE OPTIMIZATION & MONITORING
+        class VideoOptimizer {
+            constructor() {
+                this.video = document.querySelector('.hero-video');
+                this.bufferingCount = 0;
+                this.maxBufferingAttempts = 3;
+                this.connectionSlow = false;
+                this.init();
+            }
+
+            init() {
+                if (!this.video) return;
+
+                // Performance monitoring
+                this.video.addEventListener('waiting', () => this.handleBuffering());
+                this.video.addEventListener('canplaythrough', () => this.resetBuffering());
+                this.video.addEventListener('error', (e) => this.handleError(e));
+                this.video.addEventListener('loadstart', () => this.onLoadStart());
+                this.video.addEventListener('loadeddata', () => this.onLoadedData());
+
+                // Network quality detection
+                this.detectConnectionQuality();
+
+                // Preload optimization
+                this.optimizePreloading();
+            }
+
+            handleBuffering() {
+                this.bufferingCount++;
+                console.log(`Video buffering attempt ${this.bufferingCount}/${this.maxBufferingAttempts}`);
+
+                if (this.bufferingCount >= this.maxBufferingAttempts) {
+                    console.warn('Video buffering too frequently, implementing fallback');
+                    this.implementFallback();
+                }
+            }
+
+            resetBuffering() {
+                this.bufferingCount = 0;
+            }
+
+            handleError(error) {
+                console.error('Video loading error:', error);
+                this.implementFallback();
+            }
+
+            onLoadStart() {
+                console.log('Video load started');
+            }
+
+            onLoadedData() {
+                console.log('Video data loaded successfully');
+            }
+
+            detectConnectionQuality() {
+                // Check connection speed
+                if ('connection' in navigator) {
+                    const connection = navigator.connection;
+                    if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                        this.connectionSlow = true;
+                        console.log('Slow connection detected, optimizing for low bandwidth');
+                        this.optimizeForSlowConnection();
+                    }
+                }
+            }
+
+            optimizeForSlowConnection() {
+                // Reduce video quality or disable autoplay on slow connections
+                this.video.preload = 'none';
+                this.video.autoplay = false;
+
+                // Load video only when user scrolls to hero section
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.video.preload = 'metadata';
+                            this.video.autoplay = true;
+                            observer.disconnect();
+                        }
+                    });
+                });
+
+                observer.observe(this.video.parentElement);
+            }
+
+            optimizePreloading() {
+                // Use requestIdleCallback for non-critical loading
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(() => {
+                        // Preload additional video formats if needed
+                        this.preloadAdditionalFormats();
+                    });
+                }
+            }
+
+            preloadAdditionalFormats() {
+                // Preload lower quality versions for fallback
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'video';
+                link.href = '/media/homepage-hero-low.mp4';
+                document.head.appendChild(link);
+            }
+
+            implementFallback() {
+                // Show static image fallback
+                const fallbackImg = this.video.querySelector('img');
+                if (fallbackImg) {
+                    fallbackImg.style.display = 'block';
+                    this.video.style.display = 'none';
+                }
+
+                // Log fallback activation
+                console.log('Video fallback activated');
+            }
+        }
+
+        // Initialize video optimizer when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new VideoOptimizer();
+        });
+
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const isOpen = overlay.classList.contains('opacity-100');
+
+            if (isOpen) {
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+            }
+        }
+
+        // Close mobile menu when clicking a link
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileLinks = document.querySelectorAll('#mobile-menu-overlay a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMobileMenu();
+                });
+            });
+        });
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelector('.nav-item').addEventListener('mouseleave', () => {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '1';
+        });
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Neural Layer Text Reveal
+        gsap.from("#neural-layer h2", {
+            scrollTrigger: { trigger: "#neural-layer", start: "top 70%" },
+            y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        document.querySelectorAll('.product-section').forEach((section) => {
+            const align = section.getAttribute('data-align');
+            const img = section.querySelector('.image-wrapper');
+            const text = section.querySelector('.text-content');
+            gsap.fromTo(img, 
+                { x: align === 'left' ? -150 : 150, opacity: 0, scale: 0.85, rotateY: align === 'left' ? 10 : -10 },
+                { x: 0, opacity: 1, scale: 1, rotateY: 0, scrollTrigger: { trigger: section, start: "top 75%", end: "top 25%", scrub: 1.5 } }
+            );
+            gsap.fromTo(text.children, { y: 80, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.2, duration: 1.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 65%" } });
+        });
+
+        // Industries Showcase Horizontal Scroll Animation
+        const industriesSection = document.querySelector('.industries-showcase');
+        const industriesContainer = industriesSection.querySelector('.flex');
+
+        // Calculate total width of all cards (6 cards * 600px + 5 spaces * 48px = 3600 + 240 = 3840px)
+        const totalWidth = 6 * 600 + 5 * 48; // 3840px
+        const moveDistance = totalWidth - window.innerWidth + 200;
+
+        gsap.to(industriesContainer, {
+            x: -moveDistance,
+            ease: "none",
+            scrollTrigger: {
+                trigger: industriesSection,
+                start: "top top",
+                end: "+=" + (moveDistance + 400),
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        // Industries Cards Fade In
+        gsap.from(".industries-showcase .flex > div", {
+            scrollTrigger: { trigger: ".industries-showcase", start: "top 80%" },
+            y: 60, opacity: 0, stagger: 0.2, duration: 1.2, ease: "power4.out"
+        });
+
+        // News Highlights Reveal
+        gsap.from("#news-highlights .news-highlight", {
+            scrollTrigger: { trigger: "#news-highlights", start: "top 70%" },
+            y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "power4.out"
+        });
+
+        // SCROLL NAV
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
+            else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+        });
+
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<100; i++) pts.push(new P()); }
+        class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.onresize=resize;
+
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | AVZDAX DEFENSE INTELLIGENCE</title>
+
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #020202; color: white; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* MEGA MENU HORIZON LOGIC */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            padding-top: 40px;
+            margin-top: -20px;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content { background: #0A0A0B; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 80px 0; box-shadow: 0 100px 100px rgba(0,0,0,0.95); }
+
+        .product-title { padding-right: 30px; overflow: visible !important; }
+        .border-thin { border: 0.5px solid rgba(255, 255, 255, 0.1); }
+        .product-image { filter: drop-shadow(0 0 80px rgba(255,255,255,0.03)); }
+        ::-webkit-scrollbar { display: none; }
+        .hero-video-tint { background: radial-gradient(circle, transparent 20%, #020202 100%); }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+        .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+        .grid-item-hover:hover span { color: #000000 !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* ABOUT PAGE SPECIFIC STYLES */
+        .premium-white-section { background: #FFFFFF; color: #000000; position: relative; overflow: hidden; }
+        .premium-white-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .founder-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 80px; margin: 60px 0; }
+        .founder-image { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin: 0 auto 40px; border: 5px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
+
+        .timeline-item { position: relative; padding-left: 50px; margin-bottom: 80px; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: -40px;
+            width: 3px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00FF41;
+            border: 3px solid #000;
+            box-shadow: 0 0 20px rgba(0,255,65,0.3);
+        }
+
+        .vision-section { padding: 140px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        .impact-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; margin: 80px 0; }
+
+        .tech-showcase { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 60px; margin: 40px 0; border-radius: 8px; }
+
+        .milestone-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 40px; margin: 20px 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .milestone-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); transform: translateY(-5px); }
+
+        .global-presence { background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.08); padding: 80px; margin: 60px 0; }
+
+        .innovation-lab { background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); padding: 80px; margin: 60px 0; }
+
+    </style>
+</head>
+<body>
+
+    <!-- FULL SCREEN TACTICAL SEARCH -->
+    <div id="search-overlay" class="flex flex-col items-center justify-start pt-40 px-12">
+        <button onclick="toggleSearch()" class="absolute top-12 right-12 text-silver-400 hover:text-white uppercase text-[10px] tracking-[0.5em] flex items-center gap-4">
+            Close Terminal <span class="text-2xl">×</span>
+        </button>
+        <div class="w-full max-w-5xl space-y-12 text-left">
+            <div class="border-b border-white/20 pb-8">
+                <input type="text" placeholder="INITIALIZE SITE-WIDE SEARCH..." class="bg-transparent border-none outline-none text-5xl md:text-7xl font-black uppercase tracking-tighter w-full text-white placeholder:text-white/10 italic">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Ecosystem</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer"><a href="primus.html">Primus Neural Engine</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="trion.html">Trion Optical Hardware</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="sentinel.html">Sentinel Kinetic Fleet</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Intelligence</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">White Papers: Behavioral Foresight</li>
+                        <li class="hover:text-white cursor-pointer">News: Global Deployment Status</li>
+                        <li class="hover:text-white cursor-pointer">Tactical API Documentation</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <h5 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">Corporate</h5>
+                    <ul class="space-y-4 text-sm font-bold uppercase text-silver-400">
+                        <li class="hover:text-white cursor-pointer">Investor Relations Portal</li>
+                        <li class="hover:text-white cursor-pointer">Leadership & Ethics</li>
+                        <li class="hover:text-white cursor-pointer">Join The Frontline (Careers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
+        <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+            
+            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+            <ul class="hidden lg:flex gap-20 items-center">
+                <!-- DEFENSE PLATFORMS -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Ecosystem</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Primus</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Behavioral Predictive AI</span>
+                                        </a>
+                                        <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Teletraan</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Global Command UI</span>
+                                        </a>
+                                        <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Nest</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Professional Oversight</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 text-left">
+                                    <div class="space-y-4">
+                                        <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Trion</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Edge Optical Sensing</span>
+                                        </a>
+                                        <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Sentinel</span>
+                                            <span class="text-[9px] text-gray-500 uppercase font-mono">Kinetic Unit Fleet</span>
+                                        </a>
+                                        <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-5 border border-transparent transition-all">
+                                            <span class="text-sm font-black uppercase text-white tracking-widest block">Obex</span>
+                                            <span class="text-[10px] text-gray-500 uppercase font-mono">Architectural Imaging</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 text-left">Strategic Theaters</h3>
+                                    <ul class="space-y-8 text-[12px] font-black text-gray-400 uppercase tracking-widest px-4 text-left">
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white rounded-full"></div> National Security</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                        <li class="hover:text-white cursor-pointer transition-all flex items-center gap-4"><div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                    </ul>
+                                </div>
+                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px]">
+ agt                                   <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-10 mx-auto opacity-10 grayscale"></div>
+                                    <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-sentinel" src="/media/sentinel-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-obex" src="/media/obex-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-primus" src="/media/primus-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                    <img id="p-nest" src="/media/nest-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- INTELLIGENCE -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Intelligence</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-10 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Research Lab</h3>
+                                    <a href="javascript:void(0)" aria-disabled="true" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Neural behavior Analysis</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Global Tactical Updates</span>
+                                    </a>
+                                </div>
+                                <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Resources</h3>
+                                    <a href="news.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-6 border border-transparent transition-all">
+                                        <span class="text-sm font-black uppercase tracking-widest block text-white">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono">Real-World Deployments</span>
+                                    </a>
+                                </div>
+                                <div class="col-span-2 bg-white border border-black/10 p-10 flex flex-col justify-between">
+                                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-black">Integrated Intelligence Layer</h4>
+                                    <p class="text-[10px] text-gray-600 uppercase leading-loose tracking-[0.2em]">Access real-time behavioral foresight models and strategic deployment archives.</p>
+                                    <div class="h-[1px] w-full bg-black/10 my-4"></div>
+                                    <div class="text-[9px] font-mono text-green-600">● LIVE RESEARCH FEED ACTIVE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- MISSION -->
+                <li class="nav-item group static cursor-pointer">
+                    <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-white transition-colors py-6">Mission</a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-content text-left">
+                            <h2 class="text-center text-2xl font-black uppercase tracking-widest text-white mb-12">Ecosystem</h2>
+                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                                <div class="space-y-8 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Corporate</h3>
+                                    <a href="about.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">About AVZDAX</a>
+                                    <a href="careers.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Careers <span class="text-[9px] text-green-500 ml-2 animate-pulse">● Hiring</span></a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Governance</h3>
+                                    <a href="ethics.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">Ethics & Policy</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">INDUSTRIES</a>
+                                </div>
+                                <div class="space-y-8 border-l border-white/5 pl-12 text-left">
+                                    <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-4 border-b border-white/5 pb-4">Access</h3>
+                                    <a href="contact.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">CONTACT</a>
+                                    <a href="partners.html" class="grid-item-hover block p-6 border border-transparent transition-all text-sm font-black uppercase tracking-widest text-white">PARTNERSHIP</a>
+                                </div>
+                                <div class="flex items-center justify-center border-l border-white/5">
+                                    <img src="/media/avzdax-logo.png" class="h-10 opacity-20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex items-center gap-12 relative z-[160]">
+                <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                    <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+                <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION - FULL CONTENT START -->
+    <section class="relative h-screen w-full flex items-end justify-start overflow-hidden">
+        <div class="absolute inset-0 hero-video-tint"></div>
+        <div class="relative z-10 px-12 pb-20 max-w-4xl text-left">
+            <div class="flex items-center gap-4 mb-6 text-left"><div class="h-[1px] w-20 bg-white/40"></div><span class="text-[10px] uppercase tracking-[0.8em] text-white/60">Silicon Valley Standard</span></div>
+            <h1 class="text-[clamp(3rem,8vw,6rem)] font-black uppercase tracking-tighter leading-[0.85] text-gradient mb-8 text-left">THE FUTURE OF<br>
+                DEFENSE INTELLIGENCE<br>
+                STARTS HERE
+            </h1>
+            <p class="text-silver-400 text-sm md:text-base max-w-xl font-light leading-relaxed uppercase tracking-widest mb-10 opacity-80 text-left">AVZDAX represents the convergence of cutting-edge artificial intelligence and sovereign defense technology. Born from the vision of redefining security paradigms, we are building the neural infrastructure that secures civilizations.</p>
+            <div class="flex gap-6">
+                <button onclick="lenis.scrollTo('#founder')" class="px-10 py-4 bg-white/5 border-thin text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Meet The Founder</button>
+                <button onclick="lenis.scrollTo('#innovation')" class="px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 hover:text-white transition-all underline decoration-white/20 underline-offset-8">Our Innovation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM WHITE SECTION - THE VISION -->
+    <section class="premium-white-section py-40 px-12 md:px-24">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl md:text-9xl font-black uppercase tracking-tighter text-black text-gradient-dark leading-none mb-12">
+                    THE AVZDAX VISION
+                </h2>
+                <p class="text-gray-600 text-2xl max-w-4xl mx-auto leading-relaxed">
+                    We are not just building technology. We are architecting the future of global security,
+                    where artificial intelligence serves as the ultimate guardian of human civilization.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="space-y-12">
+                    <div class="space-y-6">
+                        <h3 class="text-4xl font-bold text-black">Predictive Sovereignty</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Traditional security reacts to threats. AVZDAX predicts them. Our neural networks analyze
+                            behavioral patterns, environmental data, and global intelligence streams to identify
+                            potential security incidents before they manifest. This isn't defense—it's prevention
+                            at the level of human intention.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-4xl font-bold text-black">Silicon Valley Engineering</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Built with the same rigor and innovation that powers the world's most advanced technology
+                            companies. Our codebase represents years of research in machine learning, distributed
+                            systems, and sovereign computing. Every component is engineered for reliability,
+                            scalability, and unbreakable security.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-4xl font-bold text-black">Strategic Operations, Global Impact</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Our operations are strategically positioned to leverage world-class engineering
+                            talent while maintaining complete operational sovereignty and security.
+                            This enables us to deliver cutting-edge defense technology worldwide.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="bg-black/5 border border-black/10 p-8 rounded-lg">
+                        <h4 class="text-2xl font-bold text-black mb-6">Core Principles</h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">1</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xl font-semibold text-black mb-2">Sovereign First</h5>
+                                    <p class="text-gray-600 leading-relaxed">National security must remain in national hands. We build systems that protect sovereignty while enabling global cooperation.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">2</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xl font-semibold text-black mb-2">Innovation Without Compromise</h5>
+                                    <p class="text-gray-600 leading-relaxed">We push technological boundaries while maintaining the highest standards of security, ethics, and reliability.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">3</span>
+                                </div>
+                                <div>
+                                    <h5 class="text-xl font-semibold text-black mb-2">Human-Centric Intelligence</h5>
+                                    <p class="text-gray-600 leading-relaxed">AI serves humanity. Our technology enhances human decision-making, never replaces human judgment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER SECTION -->
+    <section id="founder" class="vision-section px-12 md:px-24">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-16">
+                MEET THE FOUNDER
+            </h2>
+
+            <div class="founder-section max-w-5xl mx-auto">
+                <img src="/media/avzdax-ceo.png" alt="Gbenga A. Sosan - Founder & CEO" class="founder-image">
+                <h3 class="text-4xl font-bold text-white mb-4">Gbenga A. Sosan</h3>
+                <p class="text-silver-400 text-xl mb-12">Founder & Chief Executive Officer</p>
+                
+
+                <div class="max-w-4xl mx-auto">
+                    <p class="text-silver-400 text-xl leading-relaxed mb-8">
+                        Gbenga A. Sosan founded AVZDAX with a singular vision: to harness the power of artificial
+                        intelligence to create a safer world. His journey began with a fundamental belief that
+                        technology should serve humanity's highest aspirations—security, freedom, and progress.
+                    </p>
+
+                    <p class="text-silver-400 text-xl leading-relaxed mb-8">
+                        Under his leadership, AVZDAX has emerged as a global leader in predictive defense intelligence,
+                        combining Silicon Valley innovation with sovereign security principles. Gbenga's commitment
+                        to excellence drives every aspect of our mission, from cutting-edge research to operational
+                        deployment.
+                    </p>
+
+                    <p class="text-silver-400 text-xl leading-relaxed">
+                        "Security is not about walls and weapons. It's about foresight, intelligence, and the
+                        courage to innovate. At AVZDAX, we are building the systems that will protect future
+                        generations from threats they cannot yet imagine."
+                    </p>
+                    <cite class="block mt-8 text-white/60 font-semibold text-lg">— Gbenga A. Sosan, Founder & CEO</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INNOVATION LAB -->
+    <section id="innovation" class="innovation-lab px-12 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-12">
+                    INNOVATION LAB
+                </h2>
+                <p class="text-silver-400 text-2xl max-w-4xl mx-auto leading-relaxed">
+                    Our research and development facility in Lagos represents the cutting edge of defense technology.
+                    Here, world-class engineers and AI researchers push the boundaries of what's possible.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div class="tech-showcase">
+                        <h3 class="text-3xl font-bold text-white mb-6">Neural Architecture</h3>
+                        <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                            Our proprietary neural networks process millions of data points per second,
+                            identifying patterns that human analysts would never detect. This computational
+                            power enables predictive capabilities that redefine security paradigms.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-black text-white mb-2">0.4ms</div>
+                                <div class="text-silver-400 text-sm">Response Time</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-black text-white mb-2">99.97%</div>
+                                <div class="text-silver-400 text-sm">Accuracy Rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-showcase">
+                        <h3 class="text-3xl font-bold text-white mb-6">Sovereign Computing</h3>
+                        <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                            Unlike cloud-dependent systems, AVZDAX operates on sovereign infrastructure.
+                            Our edge computing architecture ensures operational continuity in any environment,
+                            from urban centers to remote outposts.
+                        </p>
+                        <ul class="space-y-3 text-silver-400">
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                Zero external dependencies
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                Encrypted data sovereignty
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                Autonomous operation
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="tech-showcase">
+                        <h3 class="text-3xl font-bold text-white mb-6">Behavioral Intelligence</h3>
+                        <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                            Our AI systems understand human behavior at a fundamental level. By analyzing
+                            patterns in movement, communication, and decision-making, we can predict
+                            security threats before they materialize.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-silver-400">Pattern Recognition</span>
+                                <span class="text-white font-bold">98.7%</span>
+                            </div>
+                            <div class="w-full bg-white/10 rounded-full h-2">
+                                <div class="bg-green-400 h-2 rounded-full" style="width: 98.7%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-showcase">
+                        <h3 class="text-3xl font-bold text-white mb-6">Global Standards</h3>
+                        <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                            AVZDAX technology meets the highest international standards for security,
+                            reliability, and ethical AI deployment. Our systems are designed to serve
+                            humanity while protecting fundamental rights and freedoms.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center p-4 bg-white/5 rounded">
+                                <div class="text-2xl font-bold text-white mb-1">ISO</div>
+                                <div class="text-silver-400 text-xs">27001 Certified</div>
+                            </div>
+                            <div class="text-center p-4 bg-white/5 rounded">
+                                <div class="text-2xl font-bold text-white mb-1">NIST</div>
+                                <div class="text-silver-400 text-xs">Framework Compliant</div>
+                            </div>
+                            <div class="text-center p-4 bg-white/5 rounded">
+                                <div class="text-2xl font-bold text-white mb-1">GDPR</div>
+                                <div class="text-silver-400 text-xs">Privacy Compliant</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR STORY TIMELINE -->
+    <section class="vision-section px-12 md:px-24">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-12">
+                    OUR JOURNEY
+                </h2>
+                <p class="text-silver-400 text-xl max-w-3xl mx-auto leading-relaxed">
+                    From a bold vision in 2025 to becoming a global leader in defense intelligence,
+                    our story is one of relentless innovation and unwavering commitment to security.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="text-sm font-mono text-silver-400 uppercase tracking-wider mb-4">2025</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">The Genesis</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                        AVZDAX was founded in Lagos, Nigeria, with a mission to revolutionize defense technology
+                        through artificial intelligence. Gbenga A. Sosan assembled a world-class team of engineers,
+                        AI researchers, and security experts to tackle the most pressing challenges in global security.
+                    </p>
+                    <div class="milestone-card">
+                        <h4 class="text-xl font-semibold text-white mb-4">Key Achievements</h4>
+                        <ul class="space-y-2 text-silver-400">
+                            <li>• Established research headquarters in Lagos</li>
+                            <li>• Secured initial funding for AI defense research</li>
+                            <li>• Assembled team of 15 world-class engineers</li>
+                            <li>• Began development of proprietary neural architectures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="text-sm font-mono text-silver-400 uppercase tracking-wider mb-4">2026</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">First Breakthroughs</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                        Our research team achieved groundbreaking results in behavioral prediction algorithms.
+                        The development of our core neural engine marked a significant milestone in AI-driven
+                        security technology, demonstrating capabilities far beyond traditional surveillance systems.
+                    </p>
+                    <div class="milestone-card">
+                        <h4 class="text-xl font-semibold text-white mb-4">Technical Milestones</h4>
+                        <ul class="space-y-2 text-silver-400">
+                            <li>• 0.4ms response time achieved in predictive algorithms</li>
+                            <li>• 99.97% accuracy in threat pattern recognition</li>
+                            <li>• Sovereign edge computing architecture developed</li>
+                            <li>• First successful field trials completed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="text-sm font-mono text-silver-400 uppercase tracking-wider mb-4">2027</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Global Recognition</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                        AVZDAX technology began to attract international attention. Our Lagos-based innovation
+                        lab became a hub for defense technology research, establishing partnerships with
+                        leading institutions and governments worldwide.
+                    </p>
+                    <div class="milestone-card">
+                        <h4 class="text-xl font-semibold text-white mb-4">Global Expansion</h4>
+                        <ul class="space-y-2 text-silver-400">
+                            <li>• International partnerships established</li>
+                            <li>• Technology demonstrations for global clients</li>
+                            <li>• Research collaborations with leading universities</li>
+                            <li>• Industry recognition for AI innovation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="text-sm font-mono text-silver-400 uppercase tracking-wider mb-4">2028</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Silicon Valley Standard</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed mb-6">
+                        Today, AVZDAX operates as a global leader in defense intelligence, with technology
+                        that meets Silicon Valley standards of innovation and reliability. Our Lagos operations
+                        serve as the foundation for worldwide deployment and continued advancement.
+                    </p>
+                    <div class="milestone-card">
+                        <h4 class="text-xl font-semibold text-white mb-4">Current Status</h4>
+                        <ul class="space-y-2 text-silver-400">
+                            <li>• Global leader in predictive defense technology</li>
+                            <li>• Silicon Valley-level engineering standards</li>
+                            <li>• Lagos-based operations with worldwide reach</li>
+                            <li>• Continuous innovation in AI security</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPERATIONAL PRESENCE -->
+    <section class="global-presence px-12 md:px-24">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-12">
+                OPERATIONAL PRESENCE
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <h3 class="text-3xl font-bold text-white mb-6">Lagos Operations</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed">
+                        Our headquarters in Lagos serves as the nerve center for global operations.
+                        This strategic location combines world-class engineering talent with the
+                        operational flexibility needed for international deployment.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-silver-400">Engineering Team</span>
+                            <span class="text-white font-bold">50+ Experts</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-silver-400">Research Labs</span>
+                            <span class="text-white font-bold">3 Facilities</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-silver-400">Global Reach</span>
+                            <span class="text-white font-bold">International</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <h3 class="text-3xl font-bold text-white mb-6">Technology Standards</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed">
+                        AVZDAX maintains Silicon Valley standards in every aspect of our technology
+                        development. Our commitment to excellence ensures that our systems meet
+                        the highest global benchmarks for security and reliability.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/5 p-4 rounded">
+                            <div class="text-2xl font-bold text-white mb-1">99.97%</div>
+                            <div class="text-silver-400 text-sm">Accuracy</div>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded">
+                            <div class="text-2xl font-bold text-white mb-1">0.4ms</div>
+                            <div class="text-silver-400 text-sm">Response</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <h3 class="text-3xl font-bold text-white mb-6">Future Vision</h3>
+                    <p class="text-silver-400 text-lg leading-relaxed">
+                        As we continue to innovate, AVZDAX is positioned to lead the global defense
+                        technology industry. Our technology will establish new standards for security
+                        innovation and sovereign defense worldwide.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="text-silver-400">Global innovation leadership</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="text-silver-400">Silicon Valley-level engineering</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="text-silver-400">Complete operational sovereignty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT METRICS -->
+    <section class="vision-section px-12 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-12">
+                    MEASURABLE IMPACT
+                </h2>
+                <p class="text-silver-400 text-xl max-w-3xl mx-auto leading-relaxed">
+                    Our technology delivers real-world results, protecting lives and preserving economic value
+                    through predictive intelligence and sovereign security.
+                </p>
+            </div>
+
+            <div class="impact-metrics">
+                <div class="text-center">
+                    <div class="text-7xl font-black text-white mb-6">99.97%</div>
+                    <div class="text-silver-400 uppercase tracking-wider text-lg">Prevention Accuracy</div>
+                    <p class="text-silver-400 text-sm mt-4 leading-relaxed">
+                        Our neural networks achieve unprecedented accuracy in threat prediction,
+                        enabling proactive security measures.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-7xl font-black text-white mb-6">0.4ms</div>
+                    <div class="text-silver-400 uppercase tracking-wider text-lg">Response Time</div>
+                    <p class="text-silver-400 text-sm mt-4 leading-relaxed">
+                        Industry-leading computational speed ensures real-time threat prevention
+                        and immediate protective actions.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-7xl font-black text-white mb-6">100%</div>
+                    <div class="text-silver-400 uppercase tracking-wider text-lg">Sovereign Operation</div>
+                    <p class="text-silver-400 text-sm mt-4 leading-relaxed">
+                        Complete operational independence with zero external dependencies,
+                        ensuring security in any environment.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="text-7xl font-black text-white mb-6">∞</div>
+                    <div class="text-silver-400 uppercase tracking-wider text-lg">Scalability</div>
+                    <p class="text-silver-400 text-sm mt-4 leading-relaxed">
+                        Our architecture scales infinitely, from single facilities to entire
+                        national infrastructures without performance degradation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUTURE HORIZONS -->
+    <section class="vision-section bg-black px-12 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gradient leading-none mb-12">
+                    FUTURE HORIZONS
+                </h2>
+                <p class="text-silver-400 text-xl max-w-3xl mx-auto leading-relaxed">
+                    The next decade will witness the transformation of defense from reaction to prevention,
+                    from vulnerability to absolute security through technological enlightenment.
+                </p>
+            </div>
+
+            <div class="space-y-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-5xl font-bold text-white mb-8">2030: The Prevention Era</h3>
+                        <p class="text-silver-400 text-xl leading-relaxed mb-8">
+                            By 2030, traditional defense spending will shift dramatically toward prevention technologies.
+                            Nations worldwide will invest in predictive intelligence rather than reactive military capabilities.
+                            Global conflicts will become statistically improbable events.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-green-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">90% reduction in international conflicts</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-green-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">$5 trillion annual savings in defense spending</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-green-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Zero civilian casualties from terrorism</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-80 h-80 bg-gradient-to-br from-white/10 to-white/5 rounded-full mx-auto flex items-center justify-center border border-white/20">
+                            <span class="text-8xl font-bold text-white/30">2030</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="text-center lg:order-2">
+                        <div class="w-80 h-80 bg-gradient-to-br from-white/10 to-white/5 rounded-full mx-auto flex items-center justify-center border border-white/20">
+                            <span class="text-8xl font-bold text-white/30">2040</span>
+                        </div>
+                    </div>
+                    <div class="lg:order-1">
+                        <h3 class="text-5xl font-bold text-white mb-8">2040: Conscious Security</h3>
+                        <p class="text-silver-400 text-xl leading-relaxed mb-8">
+                            Human consciousness will evolve alongside AI capabilities. Security will become
+                            an extension of collective awareness, preventing threats at the level of human intention
+                            through seamless human-AI collaboration.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Real-time global threat consciousness</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Predictive peacekeeping operations</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Human-AI collaborative defense</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-5xl font-bold text-white mb-8">2050: Universal Harmony</h3>
+                        <p class="text-silver-400 text-xl leading-relaxed mb-8">
+                            Defense technology will transcend Earth. Interstellar exploration will be protected
+                            by predictive intelligence that anticipates cosmic threats. Human civilization
+                            will achieve true security through technological enlightenment and universal harmony.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Interstellar defense capabilities</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Cosmic threat prevention</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full"></div>
+                                <span class="text-silver-400 text-lg">Universal security protocols</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-80 h-80 bg-gradient-to-br from-white/10 to-white/5 rounded-full mx-auto flex items-center justify-center border border-white/20">
+                            <span class="text-8xl font-bold text-white/30">2050</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer">
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4"><a href="#" class="social-glass-btn">LN</a><a href="#" class="social-glass-btn">TW</a><a href="#" class="social-glass-btn">MD</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover text-white">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover text-white">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="industries.html" class="footer-link-hover">Government</a>
+                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
+                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="#" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>AVZDAX_HQ: SECURE_LOCATION</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({ lerp: 0.1 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // FULL SCREEN SEARCH TOGGLE
+        function toggleSearch() {
+            document.getElementById('search-overlay').classList.toggle('is-open');
+        }
+
+        // HYBRID NAV TOGGLE
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const isActive = item.classList.contains('is-active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+                if (!isActive) item.classList.add('is-active');
+            });
+        });
+
+        // Outside click to close menu
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('is-active'));
+            }
+        });
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                document.getElementById('preview-default').style.opacity = '1';
+            });
+        });
+
+        // GSAP ANIMATIONS - ENHANCED FOR PREMIUM EXPERIENCE
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations with enhanced effects
+        gsap.from(".about-hero h1", {
+            scrollTrigger: { trigger: ".about-hero", start: "top center" },
+            y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".about-hero p", {
+            scrollTrigger: { trigger: ".about-hero", start: "top center" },
+            y: 50, opacity: 0, duration: 1.2, delay: 0.3, ease: "power4.out"
+        });
+
+        // Enhanced section animations
+        gsap.utils.toArray('.vision-section').forEach((section, index) => {
+            gsap.from(section.querySelector('h2'), {
+                scrollTrigger: { trigger: section, start: "top 80%" },
+                y: 80, opacity: 0, duration: 1.2, ease: "power4.out"
+            });
+
+            gsap.from(section.querySelectorAll('p'), {
+                scrollTrigger: { trigger: section, start: "top 70%" },
+                y: 40, opacity: 0, duration: 1, stagger: 0.2, ease: "power4.out"
+            });
+        });
+
+        // Premium white section animations
+        gsap.from(".premium-white-section h2", {
+            scrollTrigger: { trigger: ".premium-white-section", start: "top 75%" },
+            y: 60, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".premium-white-section p", {
+            scrollTrigger: { trigger: ".premium-white-section", start: "top 65%" },
+            y: 30, opacity: 0, duration: 1.2, stagger: 0.3, ease: "power4.out"
+        });
+
+        // Founder section with enhanced animations
+        gsap.from(".founder-section", {
+            scrollTrigger: { trigger: ".founder-section", start: "top 85%" },
+            y: 80, opacity: 0, scale: 0.95, duration: 1.5, ease: "power4.out"
+        });
+
+        gsap.from(".founder-image", {
+            scrollTrigger: { trigger: ".founder-image", start: "top 90%" },
+            scale: 0.8, opacity: 0, duration: 1.2, ease: "back.out(1.7)"
+        });
+
+        // Timeline animations with enhanced effects
+        gsap.utils.toArray('.timeline-item').forEach((item, index) => {
+            gsap.from(item, {
+                scrollTrigger: { trigger: item, start: "top 85%" },
+                x: -60, opacity: 0, duration: 1.2, delay: index * 0.2, ease: "power4.out"
+            });
+        });
+
+        // Tech showcase animations
+        gsap.utils.toArray('.tech-showcase').forEach((showcase, index) => {
+            gsap.from(showcase, {
+                scrollTrigger: { trigger: showcase, start: "top 85%" },
+                y: 50, opacity: 0, duration: 1, delay: index * 0.1, ease: "power4.out"
+            });
+        });
+
+        // Milestone cards with hover effects
+        gsap.utils.toArray('.milestone-card').forEach((card) => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { y: -10, duration: 0.3, ease: "power2.out" });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, { y: 0, duration: 0.3, ease: "power2.out" });
+            });
+        });
+
+        // Impact metrics with counter animations
+        gsap.utils.toArray('.impact-metrics div').forEach((metric, index) => {
+            gsap.from(metric, {
+                scrollTrigger: { trigger: metric, start: "top 90%" },
+                y: 60, opacity: 0, duration: 1, delay: index * 0.2, ease: "power4.out"
+            });
+        });
+
+        // Future horizons enhanced animations
+        gsap.utils.toArray('.future-horizon-item').forEach((item, index) => {
+            gsap.from(item, {
+                scrollTrigger: { trigger: item, start: "top 80%" },
+                x: index % 2 === 0 ? -100 : 100, opacity: 0, duration: 1.5, ease: "power4.out"
+            });
+        });
+
+        // SCROLL NAV with enhanced effects
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 80) {
+                gsap.to(nav, {
+                    backgroundColor: 'rgba(10, 10, 11, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    paddingTop: '1.5rem',
+                    paddingBottom: '1.5rem',
+                    duration: 0.3
+                });
+            } else {
+                gsap.to(nav, {
+                    backgroundColor: 'transparent',
+                    backdropFilter: 'none',
+                    paddingTop: '2.5rem',
+                    paddingBottom: '2.5rem',
+                    duration: 0.3
+                });
+            }
+        });
+
+        // OPTIMIZED FOOTER CANVAS with enhanced effects
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<150; i++) pts.push(new P()); }
+        class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.5; this.vy=(Math.random()-0.5)*0.5; this.size = Math.random()*2 + 1; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'; ctx.fill(); } }
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 250 * 250;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.3 - (dSq/maxDistSq)*0.3;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1.5;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.onresize=resize;
+
+        // Enhanced particle effects for premium sections
+        function createParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'fixed inset-0 pointer-events-none z-0';
+            document.body.appendChild(particlesContainer);
+
+            for(let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute w-1 h-1 bg-white/20 rounded-full';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${Math.random() * 10 + 10}s infinite linear`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
+                50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+            }
+
+            @keyframes buttonPulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+
+            @keyframes ripple {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        createParticles();
+
+        // ACTION ANIMATIONS FOR BUTTONS
+        document.querySelectorAll('button, .grid-item-hover').forEach(btn => {
+            // Hover animations
+            btn.addEventListener('mouseenter', (e) => {
+                gsap.to(btn, {
+                    scale: 1.02,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = '50%';
+                ripple.style.top = '50%';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.marginLeft = '-10px';
+                ripple.style.marginTop = '-10px';
+                ripple.style.pointerEvents = 'none';
+
+                btn.style.position = 'relative';
+                btn.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+
+            btn.addEventListener('mouseleave', (e) => {
+                gsap.to(btn, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            // Click animations
+            btn.addEventListener('click', (e) => {
+                // Prevent default for demo
+                if(btn.tagName === 'BUTTON' && !btn.onclick) {
+                    e.preventDefault();
+                }
+
+                gsap.to(btn, {
+                    scale: 0.95,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        // Add success feedback
+                        const originalBg = btn.style.background;
+                        gsap.to(btn, {
+                            background: 'rgba(0, 255, 65, 0.2)',
+                            duration: 0.3,
+                            onComplete: () => {
+                                gsap.to(btn, {
+                                    background: originalBg,
+                                    duration: 0.3,
+                                    delay: 0.5
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Screen shake effect for important actions
+                if(btn.textContent.includes('Founder') || btn.textContent.includes('Innovation')) {
+                    gsap.to('body', {
+                        x: -2,
+                        duration: 0.05,
+                        yoyo: true,
+                        repeat: 5,
+                        ease: "power2.inOut"
+                    });
+                }
+            });
+        });
+
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>
