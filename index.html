@@ -2345,11 +2345,26 @@
             y: 50, opacity: 0, stagger: 0.2, duration: 1, ease: "power4.out"
         });
 
-        // SCROLL NAV
+        // SCROLL NAV - DESKTOP AND MOBILE
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('main-nav');
-            if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
-            else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+            const mobileNav = document.querySelector('.mobile-nav-bar');
+
+            // Desktop nav scroll behavior
+            if (window.scrollY > 80) {
+                nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5');
+                nav.classList.remove('py-10');
+            } else {
+                nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5');
+                nav.classList.add('py-10');
+            }
+
+            // Mobile nav scroll behavior - add background on scroll
+            if (window.scrollY > 50) {
+                mobileNav.classList.add('mobile-nav-scrolled');
+            } else {
+                mobileNav.classList.remove('mobile-nav-scrolled');
+            }
         });
 
         // OPTIMIZED FOOTER CANVAS
