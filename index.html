@@ -383,6 +383,21 @@
                 border-radius: 1px;
                 transition: all 0.3s ease;
             }
+
+            /* MOBILE NAV BAR SCROLL BACKGROUND */
+            .mobile-nav-bar {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                background: transparent;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+
+            .mobile-nav-bar.mobile-nav-scrolled {
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
         }
 
         /* AWARD-WINNING MOBILE NAVIGATION - PROFESSIONAL DESIGN */
@@ -537,101 +552,71 @@
                 line-height: 1.2;
             }
 
-            /* NAVIGATION SECTIONS - EXPANDABLE */
-            .mobile-nav-sections {
+            /* MINIMALIST LUXURY NAVIGATION */
+            .luxury-nav-list {
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
             }
 
-            .mobile-nav-section {
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.04);
-                border-radius: 16px;
-                overflow: hidden;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            .mobile-nav-section:hover {
-                background: rgba(255, 255, 255, 0.03);
-                border-color: rgba(255, 255, 255, 0.08);
-            }
-
-            .section-toggle {
-                width: 100%;
+            .luxury-nav-item {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
-                padding: 20px 24px;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                color: rgba(255, 255, 255, 0.9);
-            }
-
-            .section-toggle:hover {
+                justify-content: space-between;
+                padding: 20px 16px;
                 background: rgba(255, 255, 255, 0.05);
-            }
-
-            .section-title {
-                font-size: 16px;
-                font-weight: 600;
-                letter-spacing: 0.025em;
-            }
-
-            .toggle-icon {
-                width: 16px;
-                height: 16px;
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                opacity: 0.6;
-            }
-
-            .mobile-nav-section.active .toggle-icon {
-                transform: rotate(180deg);
-            }
-
-            .section-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                background: rgba(255, 255, 255, 0.01);
-            }
-
-            .mobile-nav-section.active .section-content {
-                max-height: 500px;
-            }
-
-            .nav-link {
-                display: block;
-                padding: 16px 24px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 16px;
+                color: white;
                 text-decoration: none;
-                color: rgba(255, 255, 255, 0.8);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                position: relative;
+                overflow: hidden;
             }
 
-            .nav-link:last-child {
-                border-bottom: none;
+            .luxury-nav-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+                transition: left 0.5s ease;
             }
 
-            .nav-link:hover {
-                background: rgba(255, 255, 255, 0.05);
-                color: #ffffff;
-                padding-left: 32px;
+            .luxury-nav-item:hover::before {
+                left: 100%;
             }
 
-            .link-title {
-                display: block;
-                font-size: 15px;
+            .luxury-nav-item:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(0, 212, 255, 0.3);
+                transform: translateX(4px);
+                box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+            }
+
+            .item-label {
+                font-size: 18px;
                 font-weight: 600;
-                margin-bottom: 2px;
+                letter-spacing: -0.02em;
             }
 
-            .link-desc {
+            .item-desc {
                 font-size: 12px;
-                opacity: 0.6;
+                color: rgba(255, 255, 255, 0.6);
                 font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .luxury-nav-item:hover .item-label {
+                color: #00d4ff;
+            }
+
+            .luxury-nav-item:hover .item-desc {
+                color: rgba(0, 212, 255, 0.8);
             }
         }
 
@@ -1393,86 +1378,54 @@
                 </a>
             </div>
 
-            <!-- NAVIGATION SECTIONS -->
+            <!-- MINIMALIST LUXURY NAVIGATION LIST -->
             <div class="mobile-nav-sections">
-                <!-- ECOSYSTEM -->
-                <div class="mobile-nav-section">
-                    <button class="section-toggle" onclick="toggleSection(this)">
-                        <span class="section-title">Ecosystem</span>
-                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="section-content">
-                        <a href="primus.html" class="nav-link">
-                            <span class="link-title">Primus</span>
-                            <span class="link-desc">Behavioral AI Engine</span>
-                        </a>
-                        <a href="teletraan.html" class="nav-link">
-                            <span class="link-title">Teletraan</span>
-                            <span class="link-desc">Command Intelligence</span>
-                        </a>
-                        <a href="nest.html" class="nav-link">
-                            <span class="link-title">Nest</span>
-                            <span class="link-desc">Professional Oversight</span>
-                        </a>
-                        <a href="trion.html" class="nav-link">
-                            <span class="link-title">Trion</span>
-                            <span class="link-desc">Optical Sensing</span>
-                        </a>
-                        <a href="sentinel.html" class="nav-link">
-                            <span class="link-title">Sentinel</span>
-                            <span class="link-desc">Autonomous Fleet</span>
-                        </a>
-                        <a href="obex.html" class="nav-link">
-                            <span class="link-title">Obex</span>
-                            <span class="link-desc">Architectural Security</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- INTELLIGENCE -->
-                <div class="mobile-nav-section">
-                    <button class="section-toggle" onclick="toggleSection(this)">
-                        <span class="section-title">Intelligence</span>
-                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="section-content">
-                        <a href="news.html" class="nav-link">
-                            <span class="link-title">Newsroom</span>
-                            <span class="link-desc">Global Updates</span>
-                        </a>
-                        <a href="industries.html" class="nav-link">
-                            <span class="link-title">Industries</span>
-                            <span class="link-desc">Real-World Deployments</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- MISSION -->
-                <div class="mobile-nav-section">
-                    <button class="section-toggle" onclick="toggleSection(this)">
-                        <span class="section-title">Mission</span>
-                        <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="section-content">
-                        <a href="about.html" class="nav-link">
-                            <span class="link-title">About</span>
-                            <span class="link-desc">Our Story & Vision</span>
-                        </a>
-                        <a href="careers.html" class="nav-link">
-                            <span class="link-title">Careers</span>
-                            <span class="link-desc">Join The Frontline</span>
-                        </a>
-                        <a href="contact.html" class="nav-link">
-                            <span class="link-title">Contact</span>
-                            <span class="link-desc">Get In Touch</span>
-                        </a>
-                    </div>
+                <!-- PRIMARY NAVIGATION ITEMS -->
+                <div class="luxury-nav-list">
+                    <a href="primus.html" class="luxury-nav-item">
+                        <span class="item-label">Primus</span>
+                        <span class="item-desc">AI Engine</span>
+                    </a>
+                    <a href="teletraan.html" class="luxury-nav-item">
+                        <span class="item-label">Teletraan</span>
+                        <span class="item-desc">Command OS</span>
+                    </a>
+                    <a href="nest.html" class="luxury-nav-item">
+                        <span class="item-label">Nest</span>
+                        <span class="item-desc">Oversight</span>
+                    </a>
+                    <a href="trion.html" class="luxury-nav-item">
+                        <span class="item-label">Trion</span>
+                        <span class="item-desc">Optical</span>
+                    </a>
+                    <a href="sentinel.html" class="luxury-nav-item">
+                        <span class="item-label">Sentinel</span>
+                        <span class="item-desc">Autonomous</span>
+                    </a>
+                    <a href="obex.html" class="luxury-nav-item">
+                        <span class="item-label">Obex</span>
+                        <span class="item-desc">Security</span>
+                    </a>
+                    <a href="news.html" class="luxury-nav-item">
+                        <span class="item-label">Newsroom</span>
+                        <span class="item-desc">Intelligence</span>
+                    </a>
+                    <a href="industries.html" class="luxury-nav-item">
+                        <span class="item-label">Industries</span>
+                        <span class="item-desc">Deployments</span>
+                    </a>
+                    <a href="about.html" class="luxury-nav-item">
+                        <span class="item-label">About</span>
+                        <span class="item-desc">Our Story</span>
+                    </a>
+                    <a href="careers.html" class="luxury-nav-item">
+                        <span class="item-label">Careers</span>
+                        <span class="item-desc">Join Us</span>
+                    </a>
+                    <a href="contact.html" class="luxury-nav-item">
+                        <span class="item-label">Contact</span>
+                        <span class="item-desc">Get In Touch</span>
+                    </a>
                 </div>
             </div>
         </div>
