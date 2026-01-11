@@ -410,26 +410,19 @@
                 flex-direction: column;
             }
 
-            /* MOBILE NAV HEADER - LOGO LEFT, CLOSE RIGHT */
-            .mobile-nav-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 24px 20px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                background: rgba(255, 255, 255, 0.02);
+            /* MOBILE MENU INTERNAL HEADER - SMALL DESIGN */
+            .mobile-menu-internal-header {
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                position: relative;
             }
 
-            .mobile-logo {
-                height: 32px;
-                width: auto;
-                filter: brightness(0.9);
-            }
-
-            .mobile-close-btn {
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
+            .mobile-menu-exit-btn {
+                width: 36px;
+                height: 36px;
+                border-radius: 10px;
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 display: flex;
@@ -438,9 +431,11 @@
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 color: rgba(255, 255, 255, 0.7);
                 cursor: pointer;
+                position: relative;
+                z-index: 10;
             }
 
-            .mobile-close-btn:hover {
+            .mobile-menu-exit-btn:hover {
                 background: rgba(255, 255, 255, 0.1);
                 border-color: rgba(255, 255, 255, 0.2);
                 color: #ffffff;
@@ -454,102 +449,124 @@
                 padding: 0 20px 40px;
             }
 
-            /* QUICK ACTIONS - PROFESSIONAL CARDS */
-            .mobile-quick-actions {
+            /* PREMIUM QUICK ACTIONS GRID */
+            .mobile-premium-actions {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 16px;
-                margin-bottom: 40px;
-                padding-top: 24px;
+                gap: 12px;
+                margin-bottom: 32px;
+                padding-top: 20px;
             }
 
-            .mobile-action-card {
+            .premium-action-card {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 12px;
-                padding: 24px 20px;
+                gap: 16px;
+                padding: 28px 20px;
                 background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 16px;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 text-decoration: none;
                 color: rgba(255, 255, 255, 0.9);
                 cursor: pointer;
                 position: relative;
                 overflow: hidden;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
 
-            .mobile-action-card::before {
+            .premium-action-card::before {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: -100%;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.05), transparent);
+                background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.08), transparent);
                 transition: left 0.6s ease;
             }
 
-            .mobile-action-card:hover::before {
+            .premium-action-card:hover::before {
                 left: 100%;
             }
 
-            .mobile-action-card:hover {
+            .premium-action-card:hover {
                 background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.15);
-                transform: translateY(-4px);
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+                border-color: rgba(0, 212, 255, 0.3);
+                transform: translateY(-6px);
+                box-shadow: 0 16px 40px rgba(0, 212, 255, 0.15);
             }
 
-            .mobile-action-card.primary {
+            .premium-action-card.primary {
                 background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
                 color: #000;
-                border-color: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.4);
+                box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
             }
 
-            .mobile-action-card.primary:hover {
-                background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
-                transform: translateY(-4px);
-                box-shadow: 0 16px 40px rgba(255, 255, 255, 0.2);
+            .premium-action-card.primary:hover {
+                background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+                transform: translateY(-6px);
+                box-shadow: 0 20px 48px rgba(255, 255, 255, 0.25);
+                border-color: rgba(255, 255, 255, 0.6);
             }
 
-            .action-icon {
-                width: 48px;
-                height: 48px;
-                border-radius: 12px;
-                background: rgba(255, 255, 255, 0.1);
+            .premium-action-icon {
+                width: 56px;
+                height: 56px;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.08);
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                z-index: 2;
+            }
+
+            .premium-action-card.primary .premium-action-icon {
+                background: rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .premium-action-card:hover .premium-action-icon {
+                background: rgba(255, 255, 255, 0.15);
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            .premium-action-card.primary:hover .premium-action-icon {
+                background: rgba(0, 0, 0, 0.12);
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            .premium-action-icon svg {
+                width: 28px;
+                height: 28px;
+                opacity: 0.8;
                 transition: all 0.3s ease;
             }
 
-            .mobile-action-card.primary .action-icon {
-                background: rgba(0, 0, 0, 0.1);
+            .premium-action-card:hover .premium-action-icon svg {
+                opacity: 1;
             }
 
-            .mobile-action-card:hover .action-icon {
-                background: rgba(255, 255, 255, 0.15);
-                transform: scale(1.1);
-            }
-
-            .mobile-action-card.primary:hover .action-icon {
-                background: rgba(0, 0, 0, 0.15);
-            }
-
-            .action-icon svg {
-                width: 24px;
-                height: 24px;
-                opacity: 0.8;
-            }
-
-            .action-label {
-                font-size: 13px;
+            .premium-action-label {
+                font-size: 12px;
                 font-weight: 600;
-                letter-spacing: 0.025em;
+                letter-spacing: 0.05em;
                 text-align: center;
                 line-height: 1.2;
+                text-transform: uppercase;
+                font-family: 'Inter', sans-serif;
+                position: relative;
+                z-index: 2;
+            }
+
+            .premium-action-card.primary .premium-action-label {
+                color: #000;
+                font-weight: 700;
             }
 
             /* MINIMALIST LUXURY NAVIGATION */
@@ -1343,38 +1360,42 @@
 
     <!-- PROFESSIONAL MOBILE MENU OVERLAY -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
-        <!-- HEADER -->
-        <div class="mobile-nav-header">
-            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="mobile-logo">
-            <button onclick="toggleMobileMenu()" class="mobile-close-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
+        <!-- SMALL MOBILE HEADER INSIDE MENU -->
+        <div class="mobile-menu-internal-header">
+            <div class="flex justify-between items-center pl-4 pr-6 py-4">
+                <a href="index.html" class="mobile-nav-logo">
+                    <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-6 w-auto">
+                </a>
+                <button onclick="toggleMobileMenu()" class="mobile-menu-exit-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- MAIN NAVIGATION -->
         <div class="mobile-nav-content">
-            <!-- QUICK ACTIONS -->
-            <div class="mobile-quick-actions">
-                <button onclick="toggleSearch()" class="mobile-action-card">
-                    <div class="action-icon">
+            <!-- PREMIUM QUICK ACTIONS GRID -->
+            <div class="mobile-premium-actions">
+                <button onclick="toggleSearch()" class="premium-action-card">
+                    <div class="premium-action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </div>
-                    <span class="action-label">Search</span>
+                    <span class="premium-action-label">Search</span>
                 </button>
-                <a href="contact.html" class="mobile-action-card primary">
-                    <div class="action-icon">
+                <a href="contact.html" class="premium-action-card primary">
+                    <div class="premium-action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14,2 14,8 20,8"></polyline>
                         </svg>
                     </div>
-                    <span class="action-label">Schedule Demo</span>
+                    <span class="premium-action-label">Schedule Demo</span>
                 </a>
             </div>
 
