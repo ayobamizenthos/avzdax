@@ -90,6 +90,10 @@
   .mobile-overlay-cta { margin-top: 8px; }
   .mobile-overlay-cta a { display: inline-block; background: #000; color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-weight:700; }
 
+  /* Focus and accessibility */
+  .mobile-overlay-menu a:focus, .mobile-overlay-menu button:focus, .mobile-overlay-menu .menu-close:focus { outline: 3px solid rgba(0,0,0,0.08); outline-offset: 3px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+  .mobile-overlay-menu a:focus { background: #f3f3f3; }
+
   /* When menu open: hide header/nav and prevent underlying content from interacting */
   body.mobile-menu-open { overflow: hidden; }
   body.mobile-menu-open nav#main-nav { display: none !important; }
@@ -113,6 +117,9 @@
   }
   .primus-hero-fullvideo { width:100vw; height:100vh; object-fit:cover; }
 }
+
+/* Back arrow focus style */
+.site-back-arrow:focus { outline: 3px solid rgba(255,255,255,0.14) !important; outline-offset: 3px !important; box-shadow: 0 6px 18px rgba(0,0,0,0.6) !important; }
 
 /* Extra-small refinements */
 @media (max-width: 420px) {

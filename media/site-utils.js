@@ -284,6 +284,9 @@
     // build container
     const menu = el(document,'div');
     menu.className = 'mobile-overlay-menu';
+    menu.setAttribute('role','dialog');
+    menu.setAttribute('aria-modal','true');
+    menu.setAttribute('aria-hidden','true');
     menu.style.display = 'none';
 
     const closeBtn = el(document,'button'); closeBtn.className='menu-close'; closeBtn.innerHTML = '✕';
@@ -292,16 +295,20 @@
     menu.appendChild(closeBtn);
 
     const nav = el(document,'nav');
-    // create links from SITE_PAGES (human-friendly text)
-    SITE_PAGES.forEach(p=>{
+    // create links from SITE_PAGES (human-friendly text) with analytics attributes
+    SITE_PAGES.forEach((p, idx)=>{
       const name = p.replace('.html','').replace(/-/g,' ').replace(/\b(\w)/g, s=>s.toUpperCase());
       const a = el(document,'a',{href:p}); a.textContent = name; a.className='mobile-menu-link';
+      a.setAttribute('data-analytics', `mobile-menu-link:${name.toLowerCase().replace(/\s+/g,'-')}`);
+      a.setAttribute('tabindex','0');
       nav.appendChild(a);
     });
 
     // add schedule demo CTA
     const ctaWrap = el(document,'div'); ctaWrap.className='mobile-overlay-cta';
     const cta = el(document,'a',{href:'contact.html'}); cta.textContent = 'Schedule Demonstration'; cta.className='';
+    cta.setAttribute('data-analytics','mobile-menu-cta:schedule-demo');
+    cta.setAttribute('tabindex','0');
     ctaWrap.appendChild(cta);
     menu.appendChild(nav);
     menu.appendChild(ctaWrap);
@@ -314,7 +321,7 @@
     if(!menu) return;
     menu.style.display = 'flex';
     // small delay to allow transitions if present
-    setTimeout(()=>{ document.body.classList.add('mobile-menu-open'); menu.classList.add('is-open'); }, 40);
+    setTimeout(()=>{ document.body.classList.add('mobile-menu-open'); menu.classList.add('is-open'); menu.setAttribute('aria-hidden','false'); }, 40);
     // trap focus for accessibility
     try{ const first = menu.querySelector('a,button'); if(first) first.focus(); }catch(e){}
   }
@@ -324,7 +331,9 @@
     if(!menu) return;
     menu.classList.remove('is-open');
     document.body.classList.remove('mobile-menu-open');
-    menu.style.display = 'none';
+    menu.setAttribute('aria-hidden','true');
+    // small delay for a graceful hide
+    setTimeout(()=>{ menu.style.display = 'none'; }, 220);
   }
 
   function wireMobileMenuToggles(){
@@ -332,7 +341,12 @@
     const toggles = Array.from(document.querySelectorAll('.mobile-menu-toggle, .mobile-menu-toggle-modern'));
     if(toggles.length===0) return;
     toggles.forEach(t=>{
-      t.addEventListener('click', function(e){ e.preventDefault(); openMobileMenu(); });
+      // accessibility attributes
+      t.setAttribute('aria-haspopup','dialog');
+      t.setAttribute('aria-controls','mobile-overlay-menu');
+      t.setAttribute('aria-expanded','false');
+      t.addEventListener('click', function(e){ e.preventDefault(); openMobileMenu(); t.setAttribute('aria-expanded','true'); });
+      t.addEventListener('keydown', function(ev){ if(ev.key==='Enter' || ev.key===' ') { ev.preventDefault(); openMobileMenu(); t.setAttribute('aria-expanded','true'); } });
     });
     // also allow clicking anywhere on the header menu icon area
     // close when overlay background clicked
@@ -340,6 +354,17 @@
       const menu = document.querySelector('.mobile-overlay-menu');
       if(!menu || !menu.classList.contains('is-open')) return;
       if(e.target === menu) closeMobileMenu();
+    });
+
+    // keyboard: close on Escape and manage focus
+    document.addEventListener('keydown', function(ev){
+      const menu = document.querySelector('.mobile-overlay-menu');
+      if(!menu || !menu.classList.contains('is-open')) return;
+      if(ev.key === 'Escape'){
+        closeMobileMenu();
+        // return focus to first toggle
+        const firstToggle = document.querySelector('.mobile-menu-toggle, .mobile-menu-toggle-modern'); if(firstToggle) firstToggle.focus();
+      }
     });
   }
 
