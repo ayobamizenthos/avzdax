@@ -205,3 +205,10 @@
 @media (max-width: 600px) {
   .cta-fixed-bottom { position: fixed !important; bottom: 12px !important; left: 12px !important; right: 12px !important; z-index: 999 !important; }
 }
+
+/* HIDE MOBILE NAV BAR, SEARCH, AND SCHEDULE DEMO FROM ALL PAGES ON MOBILE */
+@media (max-width: 1024px) {
+  .mobile-nav-bar { display: none !important; }
+  #search-overlay { display: none !important; }
+  .premium-action-card { display: none !important; }
+}
