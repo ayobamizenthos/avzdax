@@ -26,9 +26,9 @@
 
   // ---------- Back button injection (consistent placement) ----------
   function ensureBackButton(){
-    // Don't show a back arrow on the homepage
+    // Don't show a back arrow on the homepage (root or index.html)
     const pathname = (window.location.pathname || '').split('/').pop();
-    if(!pathname || pathname === '' || pathname === 'index.html' || pathname === 'industries.html') return;
+    if(!pathname || pathname === '' || pathname === 'index.html') return;
 
     // If an arrow already exists, do nothing
     if(document.querySelector('.site-back-arrow')) return;
@@ -37,31 +37,39 @@
     btn.className = 'site-back-arrow';
     btn.setAttribute('aria-label', 'Go back');
     btn.tabIndex = 0;
-    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M9 18L3 12 9 6"/></svg>';
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M9 18L3 12 9 6"/></svg>';
 
-    // Minimal, no-background styling placed on the page (not in header)
-    btn.style.background = 'transparent';
-    btn.style.border = 'none';
-    btn.style.color = 'white';
+    // Polished circular touch target with subtle backdrop to work on any hero
     btn.style.position = 'fixed';
-    const nav = document.getElementById('main-nav');
-    const topOffset = nav ? (nav.getBoundingClientRect().height + 12) : 24;
-    btn.style.top = topOffset + 'px';
-    // move arrow slightly inward from the edge for a cleaner look
-    btn.style.left = '36px';
-    btn.style.zIndex = '999';
-    btn.style.padding = '4px';
-    btn.style.cursor = 'pointer';
+    btn.style.zIndex = '99999';
+    btn.style.width = '48px';
+    btn.style.height = '48px';
+    btn.style.borderRadius = '999px';
     btn.style.display = 'flex';
     btn.style.alignItems = 'center';
     btn.style.justifyContent = 'center';
-    btn.style.outline = 'none';
-    btn.style.opacity = '0.95';
+    btn.style.cursor = 'pointer';
+    btn.style.border = '1px solid rgba(255,255,255,0.08)';
+    btn.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))';
+    btn.style.backdropFilter = 'blur(6px)';
+    btn.style.color = '#fff';
+    btn.style.boxShadow = '0 6px 18px rgba(0,0,0,0.6)';
+    btn.style.opacity = '0.98';
+    btn.style.transition = 'transform 160ms ease, opacity 160ms ease, background 160ms ease';
 
-    // hover affordance
-    btn.style.transition = 'transform 160ms ease, opacity 160ms ease';
-    btn.addEventListener('mouseover', ()=>{ btn.style.transform = 'translateX(-4px) scale(1.05)'; btn.style.opacity = '1'; });
-    btn.addEventListener('mouseout', ()=>{ btn.style.transform = 'none'; btn.style.opacity = '0.95'; });
+    const nav = document.getElementById('main-nav');
+    const topOffset = nav ? (nav.getBoundingClientRect().height + 12) : 20;
+    // best position: slightly inset from left and below nav for visibility
+    btn.style.top = (topOffset) + 'px';
+    btn.style.left = '14px';
+
+    // increase left offset on very small screens
+    function adjustForViewport(){ if(window.innerWidth <= 420){ btn.style.left = '10px'; btn.style.top = (topOffset) + 'px'; } }
+    adjustForViewport(); window.addEventListener('resize', adjustForViewport, {passive:true});
+
+    btn.addEventListener('mouseover', ()=>{ btn.style.transform = 'translateX(-3px) scale(1.03)'; btn.style.opacity = '1'; });
+    btn.addEventListener('mouseout', ()=>{ btn.style.transform = 'none'; btn.style.opacity = '0.98'; });
+
     btn.onclick = () => { if(history.length>1) history.back(); else window.location.href = 'index.html'; };
 
     document.body.appendChild(btn);
@@ -197,21 +205,62 @@
   // Expose for debugging
   window.__AVZ_siteUtils = { buildIndex };
   
-  // ---------- Mobile video playback helper ----------
+  // ---------- Robust video playback helper (retry on gesture) ----------
   function tryPlayAutoplayVideos(){
     try{
-      const videos = document.querySelectorAll('video[autoplay]');
+      const videos = Array.from(document.querySelectorAll('video'));
       videos.forEach(v=>{
-        try{ v.muted = true; v.playsInline = true; }catch(e){}
-        const p = v.play();
-        if(p && p.catch){ p.catch(()=>{/* playback blocked until user interaction */}); }
+        try{ v.muted = true; v.playsInline = true; v.setAttribute('playsinline',''); v.setAttribute('muted',''); }catch(e){}
+        // attempt to play; if rejected, we'll attach a one-time gesture listener to retry
+        const p = v.play && v.play();
+        if(p && p.catch){
+          p.catch(()=>{
+            const retry = ()=>{ try{ v.play().catch(()=>{}); }catch(e){}; document.removeEventListener('click', retry); document.removeEventListener('touchstart', retry); };
+            document.addEventListener('click', retry, {passive:true, once:true});
+            document.addEventListener('touchstart', retry, {passive:true, once:true});
+          });
+        }
       });
-    }catch(e){}
+    }catch(e){ console.warn('video autoplay helper error', e); }
   }
 
-  // Try immediately and also after first touch (some browsers require user gesture)
+  // Try immediately and also after first gesture; keep a safety retry on focus
   tryPlayAutoplayVideos();
   window.addEventListener('touchstart', function onceTouch(){ tryPlayAutoplayVideos(); window.removeEventListener('touchstart', onceTouch); }, {passive:true});
+  window.addEventListener('click', function onceClick(){ tryPlayAutoplayVideos(); window.removeEventListener('click', onceClick); }, {passive:true});
+
+  // Index page: ensure hero video attempts seamless play and provide a lightweight tap-to-play overlay if blocked
+  function enableIndexHeroAutoplay(){
+    try{
+      const path = (window.location.pathname||'').split('/').pop();
+      if(path && path.indexOf('index')===-1 && path !== '') return; // only index/root
+      const heroSection = document.querySelector('section.relative.h-screen');
+      if(!heroSection) return;
+      const heroVideo = heroSection.querySelector('video.hero-video');
+      if(!heroVideo) return;
+
+      // If video is already playing or can play, nothing to do
+      if(!heroVideo.paused) return;
+
+      // Try to play; if blocked, show a small centered play CTA overlay that triggers play
+      const attempt = heroVideo.play();
+      if(attempt && attempt.catch){
+        attempt.catch(()=>{
+          if(document.querySelector('.index-play-overlay')) return;
+          const overlay = el(document,'div'); overlay.className='index-play-overlay';
+          overlay.style.position = 'absolute'; overlay.style.inset = '0'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center'; overlay.style.zIndex='9999';
+          overlay.style.pointerEvents = 'auto';
+          overlay.innerHTML = '<button aria-label="Play video" style="background:rgba(0,0,0,0.6);color:#fff;border:0;padding:12px 18px;border-radius:8px;font-weight:700">Play</button>';
+          heroSection.appendChild(overlay);
+          overlay.addEventListener('click', function(){ heroVideo.muted = true; heroVideo.play().catch(()=>{}); overlay.remove(); });
+          document.addEventListener('touchstart', function once(){ heroVideo.play().catch(()=>{}); if(document.querySelector('.index-play-overlay')) document.querySelector('.index-play-overlay').remove(); document.removeEventListener('touchstart', once); }, {passive:true});
+        });
+      }
+    }catch(e){ console.warn('index hero autoplay helper', e); }
+  }
+
+  // Run index hero helper on load
+  try{ enableIndexHeroAutoplay(); }catch(e){}
 
   // Mobile-only: hide specific hero overlay label if present (keeps desktop intact)
   function hideHeroLabelOnMobile(){
