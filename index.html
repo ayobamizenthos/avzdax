@@ -28,18 +28,9 @@
         .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* SILICON VALLEY NAVIGATION SYSTEM */
+        /* SILICON VALLEY NAVIGATION SYSTEM - NO INITIAL BACKGROUND */
         nav {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        nav:hover {
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom-color: rgba(255, 255, 255, 0.12);
         }
 
         /* NAV ITEMS - SILICON VALLEY STYLE */
@@ -1525,9 +1516,9 @@
         </div>
     </div>
 
-    <!-- MOBILE NAVIGATION BAR - LOGO LEFT, MENU RIGHT -->
+    <!-- MOBILE NAVIGATION BAR - LOGO LEFT, MENU RIGHT - NO INITIAL BACKGROUND -->
     <div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[150] lg:hidden">
-        <div class="flex justify-between items-center px-6 py-4 bg-black/95 backdrop-filter backdrop-blur-xl border-b border-white/08">
+        <div class="flex justify-between items-center px-6 py-4">
             <a href="index.html" class="mobile-nav-logo">
                 <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-6 w-auto">
             </a>
