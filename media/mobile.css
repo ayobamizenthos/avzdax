@@ -107,6 +107,11 @@
   * { animation-duration: 0.0001s !important; transition-duration: 0.0001s !important; }
 }
 
+/* Mobile-only: hide the small hero label that overlays the hero video on index (Autonomous Intelligence) */
+@media (max-width: 900px) {
+  section.relative.h-screen .text-\[10px\].uppercase.tracking-\[0.8em\].text-white\/60 { display: none !important; }
+}
+
 /* Make sure small screens still show a clear CTA bar at bottom if needed */
 @media (max-width: 600px) {
   .cta-fixed-bottom { position: fixed !important; bottom: 12px !important; left: 12px !important; right: 12px !important; z-index: 999 !important; }

@@ -138,6 +138,116 @@
         </div>
     </div>
 
+    <!-- PROFESSIONAL MOBILE MENU OVERLAY -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[200] opacity-0 pointer-events-none transition-all duration-500 lg:hidden">
+        <!-- SMALL MOBILE HEADER INSIDE MENU -->
+        <div class="mobile-menu-internal-header">
+            <div class="flex justify-between items-center pl-1 pr-6 py-4">
+                <a href="index.html" class="mobile-nav-logo">
+                    <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-6 w-auto">
+                </a>
+                <button onclick="toggleMobileMenu()" class="mobile-menu-exit-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- MAIN NAVIGATION -->
+        <div class="mobile-nav-content">
+            <!-- PREMIUM QUICK ACTIONS GRID -->
+            <div class="mobile-premium-actions">
+                <button onclick="toggleSearch()" class="premium-action-card">
+                    <div class="premium-action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <span class="premium-action-label">Search</span>
+                </button>
+                <a href="contact.html" class="premium-action-card primary">
+                    <div class="premium-action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                        </svg>
+                    </div>
+                    <span class="premium-action-label">Schedule Demo</span>
+                </a>
+            </div>
+
+            <!-- MINIMALIST LUXURY NAVIGATION LIST -->
+            <div class="mobile-nav-sections">
+                <!-- PRIMARY NAVIGATION ITEMS -->
+                <div class="luxury-nav-list">
+                    <a href="primus.html" class="luxury-nav-item">
+                        <span class="item-label">Primus</span>
+                        <span class="item-desc">AI Engine</span>
+                    </a>
+                    <a href="teletraan.html" class="luxury-nav-item">
+                        <span class="item-label">Teletraan</span>
+                        <span class="item-desc">Command OS</span>
+                    </a>
+                    <a href="nest.html" class="luxury-nav-item">
+                        <span class="item-label">Nest</span>
+                        <span class="item-desc">Oversight</span>
+                    </a>
+                    <a href="trion.html" class="luxury-nav-item">
+                        <span class="item-label">Trion</span>
+                        <span class="item-desc">Optical</span>
+                    </a>
+                    <a href="sentinel.html" class="luxury-nav-item">
+                        <span class="item-label">Sentinel</span>
+                        <span class="item-desc">Autonomous</span>
+                    </a>
+                    <a href="obex.html" class="luxury-nav-item">
+                        <span class="item-label">Obex</span>
+                        <span class="item-desc">Security</span>
+                    </a>
+                    <a href="news.html" class="luxury-nav-item">
+                        <span class="item-label">Newsroom</span>
+                        <span class="item-desc">Intelligence</span>
+                    </a>
+                    <a href="industries.html" class="luxury-nav-item">
+                        <span class="item-label">Industries</span>
+                        <span class="item-desc">Deployments</span>
+                    </a>
+                    <a href="about.html" class="luxury-nav-item">
+                        <span class="item-label">About</span>
+                        <span class="item-desc">Our Story</span>
+                    </a>
+                    <a href="careers.html" class="luxury-nav-item">
+                        <span class="item-label">Careers</span>
+                        <span class="item-desc">Join Us</span>
+                    </a>
+                    <a href="contact.html" class="luxury-nav-item">
+                        <span class="item-label">Contact</span>
+                        <span class="item-desc">Get In Touch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION BAR - LOGO EXTREME LEFT, MODERN MENU ICON -->
+    <div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[150] lg:hidden">
+        <div class="flex justify-between items-center pl-4 pr-6 py-4">
+            <a href="index.html" class="mobile-nav-logo">
+                <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-6 w-auto">
+            </a>
+            <button onclick="toggleMobileMenu()" class="mobile-menu-toggle-modern">
+                <div class="hamburger-lines-modern">
+                    <span class="block w-5 h-0.5 bg-white/60 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-white/60 transition-all duration-300 mt-1"></span>
+                    <span class="block w-5 h-0.5 bg-white/60 transition-all duration-300 mt-1"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
     <!-- NAVIGATION -->
     <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-10">
         <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
@@ -680,6 +790,30 @@
             document.getElementById('search-overlay').classList.toggle('is-open');
         }
 
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const isOpen = overlay.classList.contains('opacity-100');
+
+            if (isOpen) {
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+            }
+        }
+
+        // Close mobile menu when clicking a link
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileLinks = document.querySelectorAll('#mobile-menu-overlay a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMobileMenu();
+                });
+            });
+        });
+
         // HYBRID NAV TOGGLE
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -742,11 +876,26 @@
             });
         });
 
-        // SCROLL NAV
+        // SCROLL NAV - DESKTOP AND MOBILE
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('main-nav');
-            if (window.scrollY > 80) { nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.remove('py-10'); }
-            else { nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5'); nav.classList.add('py-10'); }
+            const mobileNav = document.querySelector('.mobile-nav-bar');
+
+            // Desktop nav scroll behavior
+            if (window.scrollY > 80) {
+                nav.classList.add('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5');
+                nav.classList.remove('py-10');
+            } else {
+                nav.classList.remove('bg-[#0A0A0B]/90', 'backdrop-blur-3xl', 'py-6', 'border-b', 'border-white/5');
+                nav.classList.add('py-10');
+            }
+
+            // Mobile nav scroll behavior - add background on scroll
+            if (window.scrollY > 50) {
+                mobileNav.classList.add('mobile-nav-scrolled');
+            } else {
+                mobileNav.classList.remove('mobile-nav-scrolled');
+            }
         });
 
         // OPTIMIZED FOOTER CANVAS
