@@ -209,6 +209,14 @@
   // Expose for debugging
   window.__AVZ_siteUtils = { buildIndex };
   
+  // idle scheduler to defer non-critical work and avoid jank
+  function scheduleIdle(fn, timeout = 300){
+    try{
+      if('requestIdleCallback' in window){ requestIdleCallback(fn, {timeout}); }
+      else setTimeout(fn, timeout);
+    }catch(e){ setTimeout(fn, timeout); }
+  }
+
   // ---------- Robust video playback helper (retry on gesture) ----------
   function tryPlayAutoplayVideos(){
     try{
@@ -228,8 +236,8 @@
     }catch(e){ console.warn('video autoplay helper error', e); }
   }
 
-  // Try immediately and also after first gesture; keep a safety retry on focus
-  tryPlayAutoplayVideos();
+  // Defer autoplay attempts to idle so initial paint isn't blocked
+  scheduleIdle(()=>{ tryPlayAutoplayVideos(); });
   window.addEventListener('touchstart', function onceTouch(){ tryPlayAutoplayVideos(); window.removeEventListener('touchstart', onceTouch); }, {passive:true});
   window.addEventListener('click', function onceClick(){ tryPlayAutoplayVideos(); window.removeEventListener('click', onceClick); }, {passive:true});
 
@@ -263,8 +271,8 @@
     }catch(e){ console.warn('index hero autoplay helper', e); }
   }
 
-  // Run index hero helper on load
-  try{ enableIndexHeroAutoplay(); }catch(e){}
+  // Schedule index hero helper and the mobile hero-label hide to idle so page paints first
+  scheduleIdle(()=>{ try{ enableIndexHeroAutoplay(); }catch(e){} });
 
   // Mobile-only: hide specific hero overlay label if present (keeps desktop intact)
   function hideHeroLabelOnMobile(){
@@ -278,7 +286,8 @@
       });
     }catch(e){}
   }
-  hideHeroLabelOnMobile();
+  // run hideHeroLabelOnMobile on idle and wire resize
+  scheduleIdle(hideHeroLabelOnMobile);
   window.addEventListener('resize', hideHeroLabelOnMobile, {passive:true});
   
   // ---------- Mobile menu injection & wiring ----------
@@ -346,13 +355,16 @@
       btn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       btn.addEventListener('click', function(e){ e.preventDefault(); openMobileMenu(); this.setAttribute('aria-expanded','true'); });
       // place at end of the nav container so it appears on the right
-      nav.appendChild(btn);
+      // append after a short idle delay to avoid layout thrash during initial paint
+      scheduleIdle(()=>{ nav.appendChild(btn); }, 120);
     }catch(e){/* noop */}
   }
 
   function openMobileMenu(){
     const menu = document.querySelector('.mobile-overlay-menu');
     if(!menu) return;
+    // Apply the optimized mobile class to reduce heavy animations while menu open
+    document.documentElement.classList.add('avz-mobile-optimized');
     menu.style.display = 'flex';
     // small delay to allow transitions if present
     setTimeout(()=>{ document.body.classList.add('mobile-menu-open'); menu.classList.add('is-open'); menu.setAttribute('aria-hidden','false'); }, 40);

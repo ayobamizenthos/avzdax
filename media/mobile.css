@@ -106,6 +106,24 @@
   }
 }
 
+/* Aggressive mobile optimization class applied only during heavy interactions
+   Keeps desktop untouched; toggled by JS when menu or mobile hero is active. */
+@media (max-width: 900px) {
+  .avz-mobile-optimized .menu-preview-img,
+  .avz-mobile-optimized .opening-video,
+  .avz-mobile-optimized .particle,
+  .avz-mobile-optimized .transform-3d,
+  .avz-mobile-optimized .command-intelligence,
+  .avz-mobile-optimized .command-overlay,
+  .avz-mobile-optimized .visual-frame,
+  .avz-mobile-optimized .slide,
+  .avz-mobile-optimized * {
+    animation-duration: 0.0001s !important;
+    transition-duration: 0.0001s !important;
+    will-change: auto !important;
+  }
+}
+
 /* PRIMUS: mobile full-screen hero video BEFORE scroll begins */
 @media (max-width: 900px) {
   body.primus-mobile-hero-active { overflow: hidden; }
