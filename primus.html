@@ -360,10 +360,24 @@
         }
         @keyframes titanium-sweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         
-        .act-content { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; }
-        .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .video-bg video { width: 100%; height: 100%; object-fit: cover; }
-        .video-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+        .act-content { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; padding: 0 !important; }
+        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        .video-bg video { 
+            position: absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            min-width: 100%; 
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            /* Force the video to cover the entire container */
+            object-fit: cover;
+            /* Use max to ensure it always fills both dimensions */
+            min-width: max(100%, 177.78vh); /* 16:9 width from height */
+            min-height: max(100%, 56.25vw); /* 16:9 height from width */
+        }
+        .video-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; background: rgba(0,0,0,0.2); }
 
         .lab-phase { background: var(--white); color: var(--void); }
         .lab-phase .synco, .lab-phase .mono { color: var(--void); }
@@ -435,13 +449,9 @@
                 margin-bottom: 20px;
                 flex: none;
             }
-            .act-content .video-bg video { width: 100% !important; height: 100% !important; object-fit: contain !important; opacity: 0.9; }
-            /* Scanline effect overlay */
-            .act-content .video-bg::after {
-                content: ''; position: absolute; inset: 0;
-                background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-                background-size: 100% 2px, 3px 100%; pointer-events: none; opacity: 0.3;
-            }
+            .act-content .video-bg video { width: 100% !important; height: 100% !important; object-fit: cover !important; opacity: 0.9; }
+            /* Remove scanline grid that appears in bars */
+            .act-content .video-bg::after { display: none !important; }
             .video-overlay { display: none !important; }
 
             /* 2. Text Container: Glassmorphic Floating HUD */
@@ -1184,52 +1194,60 @@
             <section class="pinned-stage" id="story-pin">
                 
                 <!-- 1. NEURAL NODE / RETROFIT -->
-                <div class="act-content px-24" id="act-1">
+                <div class="act-content" id="act-1">
                     <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_1.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 01</div>
-                        <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">NEURAL<br>NODE.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed mb-10">PRIMUS functions as an intelligent retrofit node, injecting predictive AI into passive legacy infrastructure. Transforming standard CCTV into autonomous sentinels without hardware replacement.</p>
-                        <div class="flex gap-12">
-                            <div><div class="mono text-[9px] text-white/30 mb-1">Compatibility</div><div class="synco text-2xl chrome-text">UNIVERSAL</div></div>
-                            <div><div class="mono text-[9px] text-white/30 mb-1">Integration</div><div class="synco text-2xl chrome-text">INSTANT</div></div>
+                    <div class="relative z-20 w-full h-full flex items-center px-12 md:px-24">
+                        <div class="max-w-2xl">
+                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 01</div>
+                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">NEURAL<br>NODE.</h2>
+                            <p class="text-silver/60 text-lg leading-relaxed mb-10">PRIMUS functions as an intelligent retrofit node, injecting predictive AI into passive legacy infrastructure. Transforming standard CCTV into autonomous sentinels without hardware replacement.</p>
+                            <div class="flex gap-12">
+                                <div><div class="mono text-[9px] text-white/30 mb-1">Compatibility</div><div class="synco text-2xl chrome-text">UNIVERSAL</div></div>
+                                <div><div class="mono text-[9px] text-white/30 mb-1">Integration</div><div class="synco text-2xl chrome-text">INSTANT</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 2. THREAT RECOGNITION -->
-                <div class="act-content px-24 justify-end" id="act-2">
+                <div class="act-content justify-end" id="act-2">
                     <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_2.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl text-right">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 02</div>
-                        <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">THREAT<br>RECOGNITION.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed mb-10">Real-time identification within 0.3 seconds. PRIMUS classifies 847 distinct threat categories from retail intent to coordinated intrusion.</p>
-                        <div class="flex gap-12 justify-end">
-                            <div><div class="mono text-[9px] text-white/30 mb-1">Latency</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="0.3">0.0</span>s</div></div>
-                            <div><div class="mono text-[9px] text-white/30 mb-1">Classifications</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="847">0</span></div></div>
+                    <div class="relative z-20 w-full h-full flex items-center justify-end px-12 md:px-24 text-right">
+                        <div class="max-w-2xl">
+                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 02</div>
+                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">THREAT<br>RECOGNITION.</h2>
+                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Real-time identification within 0.3 seconds. PRIMUS classifies 847 distinct threat categories from retail intent to coordinated intrusion.</p>
+                            <div class="flex gap-12 justify-end">
+                                <div><div class="mono text-[9px] text-white/30 mb-1">Latency</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="0.3">0.0</span>s</div></div>
+                                <div><div class="mono text-[9px] text-white/30 mb-1">Classifications</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="847">0</span></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 3. INTRUSION & PERMISSION ALERT -->
-                <div class="act-content px-24" id="act-3">
+                <div class="act-content" id="act-3">
                     <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_3.webm"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 03</div>
-                        <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">INTRUSION<br>ALERT.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed mb-10">Sovereign Zone Enforcement. PRIMUS constructs an invisible, computational fortress around secure zones. Analyzing spatial credentials in real-time, it detects unauthorized access and 'piggybacking' vectors instantly, neutralizing the threat before the physical perimeter is breached.</p>
-                        <div class="synco text-3xl chrome-text">ZONE INTEGRITY: <span class="text-green-500">ABSOLUTE</span></div>
+                    <div class="relative z-20 w-full h-full flex items-center px-12 md:px-24">
+                        <div class="max-w-2xl">
+                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 03</div>
+                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">INTRUSION<br>ALERT.</h2>
+                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Sovereign Zone Enforcement. PRIMUS constructs an invisible, computational fortress around secure zones. Analyzing spatial credentials in real-time, it detects unauthorized access and 'piggybacking' vectors instantly, neutralizing the threat before the physical perimeter is breached.</p>
+                            <div class="synco text-3xl chrome-text">ZONE INTEGRITY: <span class="text-green-500">ABSOLUTE</span></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 4. BEHAVIORAL ANOMALY (SELF-LEARNING) -->
-                <div class="act-content px-24 justify-end" id="act-4">
+                <div class="act-content justify-end" id="act-4">
                     <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_4.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl text-right">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 04</div>
-                        <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">BEHAVIORAL<br>ANOMALY.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed mb-10">Autonomous Pattern Recognition. PRIMUS establishes a dynamic baseline of normal human flow for any environment. It instantly isolates micro deviations, loitering, or erratic movement that precedes a kinetic event. It does not just monitor but understands intent through motion.</p>
-                        <div class="synco text-3xl chrome-text">PATTERN: <span class="text-red-500">ANOMALOUS</span></div>
+                    <div class="relative z-20 w-full h-full flex items-center justify-end px-12 md:px-24 text-right">
+                        <div class="max-w-2xl">
+                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 04</div>
+                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">BEHAVIORAL<br>ANOMALY.</h2>
+                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Autonomous Pattern Recognition. PRIMUS establishes a dynamic baseline of normal human flow for any environment. It instantly isolates micro deviations, loitering, or erratic movement that precedes a kinetic event. It does not just monitor but understands intent through motion.</p>
+                            <div class="synco text-3xl chrome-text">PATTERN: <span class="text-red-500">ANOMALOUS</span></div>
+                        </div>
                     </div>
                 </div>
 
