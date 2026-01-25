@@ -71,14 +71,18 @@ class VideoOptimizer {
     }
 
     optimizeAutoplayVideo(video) {
-        // Add loading state
-        video.addEventListener('loadstart', () => {
-            video.style.opacity = '0.3';
-        });
+        // Only dim if there is no poster image
+        const hasPoster = video.hasAttribute('poster');
+        
+        if (!hasPoster) {
+            video.addEventListener('loadstart', () => {
+                video.style.opacity = '0';
+            });
+        }
 
         video.addEventListener('canplay', () => {
             video.style.opacity = '1';
-            video.style.transition = 'opacity 0.5s ease';
+            video.style.transition = 'opacity 0.8s ease';
         });
 
         // Handle errors gracefully

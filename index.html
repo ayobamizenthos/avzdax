@@ -10,7 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/media/homepage-hero.webm" as="video" type="video/webm">
     <link rel="preload" href="/media/homepage-hero.mp4" as="video" type="video/mp4">
+    <script src="video-optimizer.js" defer></script>
 
     <script>
         tailwind.config = {
@@ -767,10 +769,10 @@
                 font-weight: 500;
                 color: rgba(255, 255, 255, 0.8);
             }
-            #neural-layer .h-[1px] {
+            #neural-layer .h-\[1px\] {
                 height: 1px;
                 width: 100%;
-                background: white/10;
+                background: rgba(255, 255, 255, 0.1);
                 margin: 10px 0;
             }
         }
@@ -1038,7 +1040,7 @@
                 display: flex;
                 align-items: center;
             }
-            #news-highlights .max-w-[1400px] { width:100%; }
+            #news-highlights .max-w-\[1400px\] { width:100%; }
             #news-highlights h4 { font-size:11px; color: rgba(255,255,255,0.6); margin-bottom:6px; text-align:center; }
             #news-highlights h2 { font-size: clamp(1.6rem,6vw,2.6rem); margin-bottom:8px; text-align:center; }
 
@@ -1871,13 +1873,23 @@
 
 <!-- HERO SECTION -->
     <section id="hero" class="relative hero-stage w-full flex items-center justify-center overflow-hidden">
-        <video autoplay muted loop playsinline preload="metadata" poster="/media/hero-poster.jpg" class="hero-video-full">
+        <video autoplay muted loop playsinline preload="auto" poster="/media/hero-poster.jpg" class="hero-video-full">
             <source src="/media/homepage-hero.webm" type="video/webm">
-            <source src="/media/homepage-hero-optimized.mp4" type="video/mp4">
+            <source src="/media/homepage-hero.mp4" type="video/mp4">
         </video>
         <div class="absolute bottom-0 left-0 z-10 p-6 max-w-md">
-            <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-4">PREDICTING <br> THE UNSEEN.</h1>
-            <p class="text-white/80 text-xs font-light leading-relaxed uppercase tracking-wider mb-6">AVZDAX <span class="font-bold text-white">PEACETECH</span> is the global standard in predictive surveillance. We build the neural infrastructure that secures civilizations.</p>
+        <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-4">PREDICTING <br> THE UNSEEN.</h1>
+        <script>
+            // Ensure hero video plays ASAP
+            const heroVid = document.querySelector('.hero-video-full');
+            if (heroVid) {
+                heroVid.play().catch(() => {
+                    // Fallback for some browsers
+                    document.addEventListener('click', () => heroVid.play(), { once: true });
+                });
+            }
+        </script>
+        <p class="text-white/80 text-xs font-light leading-relaxed uppercase tracking-wider mb-6">AVZDAX <span class="font-bold text-white">PEACETECH</span> is the global standard in predictive surveillance. We build the neural infrastructure that secures civilizations.</p>
             <div class="flex gap-4">
                 <button onclick="document.getElementById('primus').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-white/10 border border-white/20 text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Explore</button>
                 <a href="whitepaper.html" class="inline-block px-6 py-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/60 hover:text-white transition-all underline decoration-white/30 underline-offset-4">Read Thesis</a>
@@ -2151,8 +2163,8 @@
 
         <!-- MACRO BACKDROP VIDEO -->
         <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-            <video muted loop playsinline preload="none" data-lazy-video class="w-full h-full object-cover blur-[80px] grayscale">
-                <source src="/media/XBAThero-web-optimized.mp4" type="video/mp4">
+            <video muted loop playsinline preload="none" data-lazy-video poster="/media/general-poster.png" class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
         </div>
