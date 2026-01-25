@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="video-optimizer.js" defer></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Syncopate:wght@700;800&display=swap');
@@ -1030,7 +1031,7 @@
                 
                 <!-- 1. UNIFIED DOMAIN AWARENESS -->
                 <div class="act-content px-24" id="act-1">
-                    <div class="video-bg"><video autoplay muted loop playsinline src="media/tele_highlight_1.mp4"></video><div class="video-overlay"></div></div>
+                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_1.mp4"></video><div class="video-overlay"></div></div>
                     <div class="relative z-20 max-w-2xl">
                         <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 01</div>
                         <h2 class="synco text-7xl font-bold mb-8">TOTAL VISUAL<br>ORCHESTRATION.</h2>
@@ -1041,7 +1042,7 @@
 
                 <!-- 2. PREDICTIVE ALERT TRIAGE -->
                 <div class="act-content px-24 justify-end" id="act-2">
-                    <div class="video-bg"><video autoplay muted loop playsinline src="media/tele_highlight_2.mp4"></video><div class="video-overlay"></div></div>
+                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_2.mp4"></video><div class="video-overlay"></div></div>
                     <div class="relative z-20 max-w-2xl text-right">
                         <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 02</div>
                         <h2 class="synco text-7xl font-bold mb-8">PREDICTIVE<br>ALERT TRIAGE.</h2>
@@ -1052,7 +1053,7 @@
 
                 <!-- 3. TEMPORAL RECONSTRUCTION -->
                 <div class="act-content px-24" id="act-3">
-                    <div class="video-bg"><video autoplay muted loop playsinline src="media/tele_highlight_3.mp4"></video><div class="video-overlay"></div></div>
+                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_3.mp4"></video><div class="video-overlay"></div></div>
                     <div class="relative z-20 max-w-2xl">
                         <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 03</div>
                         <h2 class="synco text-7xl font-bold mb-8">TEMPORAL<br>RECONSTRUCTION.</h2>
@@ -1063,7 +1064,7 @@
 
                 <!-- 4. SOVEREIGN SHIELD COMMAND -->
                 <div class="act-content px-24 justify-end" id="act-4">
-                    <div class="video-bg"><video autoplay muted loop playsinline src="media/tele_highlight_4.mp4"></video><div class="video-overlay"></div></div>
+                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_4.mp4"></video><div class="video-overlay"></div></div>
                     <div class="relative z-20 max-w-2xl text-right">
                         <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 04</div>
                         <h2 class="synco text-7xl font-bold mb-8">SOVEREIGN SHIELD<br>COMMAND.</h2>
@@ -1074,7 +1075,7 @@
 
                 <!-- 5. DIGITAL TWIN OF REALITY -->
                 <div class="act-content px-24" id="act-5">
-                    <div class="video-bg"><video autoplay muted loop playsinline src="media/tele_highlight_5.mp4"></video><div class="video-overlay"></div></div>
+                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_5.mp4"></video><div class="video-overlay"></div></div>
                     <div class="relative z-20 max-w-2xl">
                         <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 05</div>
                         <h2 class="synco text-7xl font-bold mb-8">A DIGITAL TWIN<br>OF REALITY.</h2>
@@ -1115,7 +1116,7 @@
 
             <!-- MACRO BACKDROP VIDEO -->
             <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-                <video autoplay muted loop playsinline preload="none" src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
+                <video muted loop playsinline preload="none" poster="/media/general-poster.png" data-lazy-video data-src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
                 <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
             </div>
 

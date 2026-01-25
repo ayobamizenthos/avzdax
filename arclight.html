@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="video-optimizer.js" defer></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;700;900&family=JetBrains+Mono:wght@300;400;500&family=Syncopate:wght@700;800&display=swap');
@@ -847,7 +848,7 @@
             <div class="layer" id="act-energy">
                 <div class="brief-card max-w-7xl grid grid-cols-12 gap-16 items-center">
                     <div class="col-span-5">
-                        <video autoplay muted loop playsinline src="media/archlight-highlight-1.mp4" class="evidence-vid"></video>
+                        <video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/archlight-highlight-1.mp4" class="evidence-vid"></video>
                         <div class="mono text-[8px] mt-6 text-white/20">UPLINK_01 // SOLAR_KINETIC_FUSION</div>
                     </div>
                     <div class="col-span-7 space-y-12 data-column border-l border-white/5 pl-16">
@@ -904,7 +905,7 @@
                             </div>
                         </div>
                         <div class="col-span-12 lg:col-span-5">
-                            <video autoplay muted loop playsinline src="media/archlight-highlight-2.mp4" class="evidence-vid h-[600px]"></video>
+                            <video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/archlight-highlight-2.mp4" class="evidence-vid h-[600px]"></video>
                         </div>
                     </div>
                 </div>
@@ -953,7 +954,7 @@
 
         <!-- MACRO BACKDROP VIDEO -->
         <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-            <video autoPlay muted loop playsInline preload="none" src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
+            <video muted loop playsinline preload="none" poster="/media/general-poster.png" data-lazy-video data-src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
             <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
         </div>
 
