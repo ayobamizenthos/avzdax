@@ -362,8 +362,8 @@
         
         .act-content { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; }
         .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-        .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) grayscale(1); }
-        .video-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.6) 100%); z-index: 5; }
+        .video-bg video { width: 100%; height: 100%; object-fit: cover; }
+        .video-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
 
         .lab-phase { background: var(--white); color: var(--void); }
         .lab-phase .synco, .lab-phase .mono { color: var(--void); }
