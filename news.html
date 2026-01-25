@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWSROOM | INSTITUTIONAL INTELLIGENCE | AVZDAX</title>
+
+    <link rel="preload" href="/media/homepage-hero.mp4" as="video" type="video/mp4">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;900&family=JetBrains+Mono:wght@300;500&family=Syncopate:wght@700;800&display=swap');
+
+        :root {
+            --void: #030303; --white: #ffffff; --silver: #E5E5E7; --alloy: #86868B;
+            --phosphor: #00FF41; --crimson: #FF003C;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: #020202; color: white; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        
+        .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
+        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
+
+        /* SILICON VALLEY NAVIGATION SYSTEM - DYNAMIC VOID TRANSITION */
+        nav {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        nav:hover {
+            background: #000 !important;
+            border-bottom-color: rgba(255,255,255,0.15);
+        }
+
+        nav:hover .nav-item > a,
+        nav:hover .mono,
+        nav:hover .nav-direct-link,
+        nav:hover button span,
+        nav:hover .text-black,
+        nav:hover .text-black\/40 {
+            color: #fff !important;
+        }
+
+        nav:hover svg {
+            stroke: #fff !important;
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+        
+        nav:hover .nav-item > a::after {
+            background: #fff !important;
+        }
+
+        nav:hover .nav-logo-img {
+            filter: invert(1) brightness(10);
+        }
+
+        /* NAV ITEMS - SILICON VALLEY STYLE */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item > a {
+            position: relative;
+            padding: 20px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E2E2E2, #E2E2E2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover > a {
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .nav-item:hover > a::after {
+            width: 100%;
+        }
+
+        .nav-item.is-active > a {
+            color: #ffffff;
+        }
+
+        .nav-item.is-active > a::after {
+            width: 100%;
+        }
+
+        /* MEGA MENU - SILICON VALLEY DESIGN */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        /* SILICON VALLEY SCROLL REFINEMENT - DELETE VISUAL BARS */
+        ::-webkit-scrollbar { display: none; }
+        * { scrollbar-width: none; -ms-overflow-style: none; }
+
+        html, body { max-width: 100%; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        /* INSTITUTIONAL VIDEO THEATER */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .video-modal-container {
+            width: 100%;
+            max-width: 1400px;
+            aspect-ratio: 16/9;
+            background: #000;
+            box-shadow: 0 50px 150px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        /* TACTICAL LOADING WATERMARK - RED PLAY BUTTON */
+        .video-modal-container::before {
+            content: '';
+            width: 120px;
+            height: 84px;
+            background: #FF0000;
+            border-radius: 24px;
+            position: absolute;
+            z-index: 1;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 40px;
+            opacity: 0.8;
+            animation: pulse-red 2s infinite ease-in-out;
+        }
+        @keyframes pulse-red {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        .video-modal-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2;
+        }
+        .video-close-btn {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            font-family: 'JetBrains Mono';
+            font-size: 10px;
+            font-weight: 900;
+            color: #ff3b3b; /* TACTICAL RED */
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 2010;
+            transition: opacity 0.3s ease;
+        }
+        .video-close-btn:hover { opacity: 0.7; }
+
+        .play-trigger { 
+            position: absolute; 
+            inset: 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 10;
+            pointer-events: none; /* Let clicks pass through to the button */
+        }
+        .play-trigger button { pointer-events: auto; }
+
+        .play-btn { 
+            width: 80px;
+            background: transparent;
+            border: none;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            cursor: pointer;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+        .play-btn svg { 
+            width: 100%;
+            height: auto;
+        }
+        .card-wrap:hover .play-btn { 
+            transform: scale(1.1); 
+            filter: drop-shadow(0 15px 40px rgba(255,0,0,0.3));
+        }
+
+        .reader-open, .video-open { overflow: hidden !important; height: 100vh; }
+
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .mega-menu-content {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .mega-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+        }
+
+        /* MEGA MENU CONTENT - SILICON VALLEY LAYOUT */
+        .mega-menu-content .max-w-6xl {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 300px;
+            gap: 48px;
+            padding: 0 40px;
+        }
+
+        /* MENU SECTIONS */
+        .menu-section {
+            padding: 24px 0;
+        }
+
+        .menu-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding-bottom: 12px;
+        }
+
+        /* MENU LINKS - APPLE-STYLE */
+        .grid-item-hover {
+            display: block;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .grid-item-hover:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-item-hover span:first-child {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover span:last-child {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover:hover span:first-child {
+            color: #00ff41;
+        }
+
+        .grid-item-hover:hover span:last-child {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* MENU PREVIEW IMAGES */
+        .menu-preview-img {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(0.9) translateY(20px) rotateY(10deg);
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.2));
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .menu-preview-img.active {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateY(0deg);
+        }
+
+        /* MENU STRATEGIC THEATERS */
+        .strategic-theaters {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategic-theaters h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .strategic-theaters ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .strategic-theaters ul li:last-child {
+            border-bottom: none;
+        }
+
+        .strategic-theaters ul li:hover {
+            color: #00ff41;
+            transform: translateX(4px);
+        }
+
+        .strategic-theaters .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .strategic-theaters ul li:hover .dot {
+            background: #00ff41;
+        }
+
+        /* MENU INTELLIGENCE LAYER */
+        .intelligence-layer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 248, 248, 0.8) 100%);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intelligence-layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        .intelligence-layer p {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.7);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .intelligence-layer .status {
+            font-size: 11px;
+            color: #00ff41;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* VIDEO PERFORMANCE OPTIMIZATION */
+        .hero-video {
+            will-change: transform;
+            transform: translateZ(0); /* Force hardware acceleration */
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+        }
+
+        /* Make hero video truly cover the viewport (handles mobile address bar issues) */
+        /* CINEMATIC HERO UTILITIES */
+        .hero-stage { height: 85vh; min-height: 800px; }
+        
+        .vertical-text { writing-mode: vertical-rl; text-orientation: mixed; }
+        
+        @keyframes scrollLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .animate-scroll-line {
+            animation: scrollLine 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        .hero-video-full {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: 0;
+        }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.1)); }
+
+        .grid-item-hover:hover { background: #000000; color: #ffffff !important; border-color: #000000; }
+        .grid-item-hover:hover span { color: #ffffff !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #cccccc !important; }
+
+        .premium-white-gloss {
+            background: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-white-gloss::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(0,0,0,0.05) 50%, transparent 60%);
+            opacity: 0.3; pointer-events: none;
+        }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* SVG GROUNDBREAKING ANIMATION MESH */
+        .svg-grid-line { stroke: rgba(0,0,0,0.05); stroke-width: 0.5; }
+
+        /* HIDE SCROLLBAR */
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(0,0,0,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #000, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: black; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* MOBILE NAVIGATION - APP-STYLE */
+        @media (max-width: 1024px) {
+            /* Hide desktop nav completely on mobile */
+            #main-nav {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important;
+            }
+            .mobile-nav-bar {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                border-radius: 10px;
+                transition: transform 0.18s ease, background 0.18s ease;
+                cursor: pointer;
+                padding: 6px;
+            }
+            .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(0,0,0,0.04); }
+            .mobile-menu-toggle-modern:active { transform: scale(0.98); }
+            .mobile-menu-toggle-modern .menu-icon { width: 26px; height: 26px; display: block; }
+            .mobile-menu-toggle-modern .bar { stroke: rgba(0,0,0,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
+            .mobile-menu-toggle-modern .menu-icon { overflow: visible; }
+            .mobile-menu-toggle-modern .bar { transform-box: fill-box; transform-origin: center; }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(1) { transform: translateY(4px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(2) { opacity: 0; transform: scaleX(0.2); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(3) { transform: translateY(-4px) rotate(-45deg); }
+        }
+
+        /* LUXURY MOBILE MENU OVERLAY - AVZDAX SECURITY TECH */
+        @media (max-width: 1024px) {
+            #mobile-menu-overlay {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 248, 248, 0.98) 50%, rgba(255, 255, 255, 0.96) 100%);
+                backdrop-filter: blur(60px);
+                -webkit-backdrop-filter: blur(60px);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 80px 24px 40px;
+                position: relative;
+            }
+            #mobile-menu-overlay::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
+                animation: security-scan 3s infinite linear;
+            }
+            @keyframes security-scan {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+            .mobile-nav-content {
+                width: 100%;
+                max-width: 480px;
+                margin: 0 auto;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                box-shadow: none;
+                overflow-y: auto;
+                max-height: calc(100vh - 120px);
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .mobile-nav-content::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* AVZDAX LUXURY NAV DESIGN */
+        .minimalist-nav {
+            width: 100%;
+            position: relative;
+        }
+        .minimalist-nav::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            border-radius: 1px;
+        }
+        .nav-section {
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .nav-section::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0.5px;
+        }
+        .nav-section:last-child::after {
+            display: none;
+        }
+        .nav-toggle {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #000000;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-toggle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #000000, rgba(0, 0, 0, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-toggle:hover::before {
+            width: 100%;
+        }
+        .nav-toggle::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+            background-size: contain;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.6;
+            transform: rotate(0deg);
+        }
+        .nav-toggle.active::after {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+        .nav-toggle:hover {
+            color: #000000;
+            transform: translateX(4px);
+        }
+        .nav-toggle.active {
+            color: #000000;
+        }
+        .nav-direct-link {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #000000;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            text-decoration: none;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 8px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-direct-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #000000, rgba(0, 0, 0, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-direct-link:hover::before {
+            width: 100%;
+        }
+        .nav-direct-link:hover {
+            color: #000000;
+            transform: translateX(8px);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        .nav-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 16px;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .nav-dropdown.open {
+            max-height: 800px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .products-list,
+        .intelligence-list,
+        .mission-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .product-link-item,
+        .intelligence-link-item,
+        .mission-link-item {
+            color: rgba(0, 0, 0, 0.85);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+            line-height: 1.4;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .product-link-item::before,
+        .intelligence-link-item::before,
+        .mission-link-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #000000, rgba(0, 0, 0, 0.3));
+            border-radius: 2px 0 0 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-link-item:hover,
+        .intelligence-link-item:hover,
+        .mission-link-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .product-link-item:hover::before,
+        .intelligence-link-item:hover::before,
+        .mission-link-item:hover::before {
+            opacity: 1;
+        }
+        .product-link-item:active,
+        .intelligence-link-item:active,
+        .mission-link-item:active {
+            transform: translateX(8px) translateY(-2px) scale(0.98);
+        }
+
+        /* TOUCH OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            button, .button, a[role="button"], input, textarea, select {
+                min-height: 44px;
+                padding: 12px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+            button:active, .button:active, a[role="button"]:active {
+                transform: scale(0.98);
+            }
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        :root {
+            --void: #020202;
+            --ghost: #ffffff;
+            --accent: #E2E2E2;
+            --blueprint: rgba(255,255,255,0.03);
+            --glass: rgba(0, 0, 0, 0.7);
+        }
+
+        body { background-color: #020202; color: white; overflow-x: hidden; }
+
+        /* HEADER REDESIGN - BLACK BACKGROUND */
+        nav#main-nav { background: var(--void) !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav#main-nav .nav-item a, 
+        nav#main-nav .text-black,
+        nav#main-nav button span { color: var(--ghost) !important; }
+        nav#main-nav svg { color: var(--ghost) !important; }
+        nav#main-nav .bg-white\/5 { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.1) !important; }
+        
+        /* THE BLUEPRINT SPATIAL GRID */
+        .page-background {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.02) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.02) 0%, transparent 40%);
+            background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        /* TACTICAL NEWS LAYOUT */
+        .news-container { width: 100%; max-width: 1800px; margin: 0 auto; padding: 220px 60px 100px; }
+        
+        .news-header-section { margin-bottom: 120px; }
+        .news-hero-title { font-family: 'Syncopate'; font-size: 10vw; font-weight: 900; line-height: 0.85; letter-spacing: -0.06em; text-transform: uppercase; color: var(--ghost); }
+        .news-sub-label { font-family: 'JetBrains Mono'; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.8em; margin-bottom: 40px; }
+
+        /* THE GRID ENGINE */
+        .news-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; }
+
+        /* CARD TYPOLOGIES */
+        .card-wrap { 
+            position: relative; 
+            background: #0a0a0a; 
+            border: 1px solid rgba(255,255,255,0.08); 
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-wrap:hover { transform: translateY(-10px); box-shadow: 0 40px 100px rgba(0,0,0,0.5); border-color: white; }
+
+        .featured-card { grid-column: span 12; display: grid; grid-template-columns: repeat(12, 1fr); height: 650px; }
+        .standard-card { grid-column: span 6; min-height: 700px; }
+        .wide-card { grid-column: span 8; min-height: 600px; }
+        .compact-card { grid-column: span 4; min-height: 600px; }
+
+        /* MEDIA TREATMENT */
+        .card-media { position: relative; overflow: hidden; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; }
+        .standard-card .card-media { height: 400px; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform 3s ease; opacity: 1; filter: contrast(1.1) brightness(0.9); }
+        .card-wrap:hover .card-img { transform: scale(1.05); opacity: 1; filter: contrast(1) brightness(1.1); }
+        .featured-card .card-media { grid-column: span 7; background: radial-gradient(circle at center, #1a1a1a 0%, #080808 100%); position: relative; height: 100%; }
+        .featured-card .card-media .card-img { object-fit: contain; width: 90%; height: 90%; filter: drop-shadow(0 0 50px rgba(255,255,255,0.1)); }
+        .featured-card .card-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #080808 0%, transparent 20%); pointer-events: none; }
+
+        /* CONTENT ENGINE */
+        .card-body { padding: 60px; display: flex; flex-direction: column; flex-grow: 1; }
+        .featured-card .card-body { grid-column: span 5; padding: 80px; justify-content: center; }
+        
+        .c-meta { font-family: 'JetBrains Mono'; font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.4); margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .c-meta::before { content: ''; width: 30px; height: 1px; background: rgba(255,255,255,0.1); }
+        
+        .c-title { font-family: 'Syncopate'; font-size: 2.2vw; font-weight: 900; line-height: 1.1; margin-bottom: 25px; color: white; text-transform: uppercase; }
+        .featured-card .c-title { font-size: 3.5vw; line-height: 1; }
+        
+        .c-excerpt { font-family: 'Inter'; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.6); margin-bottom: 40px; font-weight: 400; }
+        
+        .c-link { 
+            margin-top: auto; 
+            font-family: 'Syncopate'; 
+            font-size: 10px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: 0.2em; 
+            color: white;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        .card-wrap:hover .c-link { border-color: white; padding-right: 30px; }
+
+
+        /* BOLD FILTER NAVIGATION */
+        .filter-nav { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 0;
+        }
+        .f-item { 
+            font-family: 'JetBrains Mono'; 
+            font-size: 13px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+        }
+        .f-item.active { 
+            background: white !important; 
+            color: black !important; 
+            border-color: white !important;
+        }
+
+        /* SOVEREIGN READER LAYER - INSTITUTIONAL WHITE REDESIGN */
+        .reader-overlay {
+            position: fixed;
+            inset: 0;
+            background: #ffffff; /* Institutional White */
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            padding: 0;
+        }
+        .reader-container {
+            width: 100%;
+            max-width: 1400px; /* Tighter for focus */
+            margin: 0 auto;
+            padding: 180px 100px 150px;
+            position: relative;
+        }
+        
+        .reader-nav-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            z-index: 1010;
+            background: rgba(255,255,255,0.9);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .reader-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.4em;
+            color: #000;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* FLAGSHIP HEADER STRUCTURE */
+        .r-header {
+            margin-bottom: 140px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 80px;
+            max-width: 1100px;
+        }
+        .r-title { 
+            font-family: 'Syncopate'; 
+            font-size: 7vw; 
+            font-weight: 900; 
+            line-height: 0.85; 
+            margin-bottom: 20px; 
+            color: #000; 
+            letter-spacing: -0.06em; 
+            text-transform: uppercase; 
+        }
+        
+        /* FLAGSHIP CONTENT ENGINE */
+        .r-content-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 80px;
+        }
+        .r-main-text { grid-column: span 8; }
+        .r-side-meta { grid-column: 10 / span 3; }
+
+        .r-body { 
+            font-family: 'Inter'; 
+            font-size: 24px; /* Increased for authority */
+            line-height: 1.6; 
+            color: #000; 
+            font-weight: 400; 
+        }
+        .r-body p { margin-bottom: 40px; opacity: 0.9; }
+        .r-body h3 { font-family: 'Syncopate'; font-size: 36px; font-weight: 900; margin: 80px 0 30px; text-transform: uppercase; color: #000; letter-spacing: -0.02em; line-height: 1; }
+        .r-body strong { font-weight: 900; }
+
+        /* PEACETECH IMAGE GRID */
+        /* PEACETECH IMAGE GRID - TACTICAL LAYOUT */
+        .r-image-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin: 100px 0;
+        }
+        .r-grid-img {
+            grid-column: span 4;
+            width: 100%;
+            height: 400px; /* Standard height */
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.6s ease;
+        }
+        /* Tactical Variations */
+        .r-grid-img:nth-child(1) { grid-column: span 8; }
+        .r-grid-img:nth-child(2) { grid-column: span 4; }
+        .r-grid-img:nth-child(3) { grid-column: span 12; height: 600px; } /* Panoramic */
+        
+        .r-grid-img:hover { transform: scale(1.02); border-color: #fff; z-index: 10; }
+
+        /* MASSIVE PULL QUOTE */
+        .r-quote-full { 
+            grid-column: span 12;
+            font-family: 'Syncopate'; 
+            font-size: 4vw; 
+            font-weight: 900; 
+            line-height: 1; 
+            margin: 80px 0; 
+            padding: 80px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            color: #000;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .r-quote-full::before { content: 'PEACETECH_VISION'; position: absolute; top: 20px; left: 0; font-family: 'JetBrains Mono'; fontSize: 10px; opacity: 0.3; letter-spacing: 0.5em; }
+
+        .accent-green { color: #00ff41; }
+        
+        @media (max-width: 1100px) {
+            .r-content-grid { grid-template-columns: 1fr; }
+            .r-main-text, .r-side-meta { grid-column: span 1; }
+            .r-image-grid { grid-template-columns: 1fr; }
+            .r-title { font-size: 15vw; }
+            .r-quote-full { font-size: 32px; }
+        }
+
+        .r-sidenote {
+            position: absolute;
+            left: -200px;
+            width: 150px;
+            font-family: 'JetBrains Mono';
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            line-height: 1.7;
+            padding-top: 5px;
+        }
+
+        /* MOBILE OVERLAY FIXES */
+        /* MOBILE GRID REFINEMENT */
+        @media (max-width: 1100px) {
+            .news-container { padding: 160px 30px 60px; }
+            .news-grid { grid-template-columns: 1fr; gap: 30px; }
+            .featured-card, .standard-card, .wide-card, .compact-card { grid-column: span 1 !important; height: auto !important; min-height: auto !important; }
+            .featured-card { grid-template-columns: 1fr; }
+            .featured-card .card-media { height: 400px; grid-column: span 1; }
+            .featured-card .card-body { grid-column: span 1; padding: 40px 30px; }
+            .c-title { font-size: 32px !important; }
+            .news-hero-title { font-size: 18vw; }
+            .r-quote { margin: 60px 0; padding: 40px 20px; font-size: 24px; }
+            .r-sidenote { display: none; }
+            .r-title { font-size: 42px; }
+        }
+        /* UTILITIES */
+        .img-glow-effect { filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6)); }
+        .footer-radial-gradient { background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%); }
+        .reader-close-style {
+            background: rgba(255,255,255,0.05); 
+            color: #fff; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .glass-blur-20 {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blueprint-grid"></div>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="flex items-center justify-center">
+    <button onclick="toggleSearch()" aria-label="Close search" class="absolute top-10 right-10 text-black/40 hover:text-black transition-all">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-4xl w-full px-10">
+        <div class="flex items-center gap-6 border-b border-black/20 pb-6 mb-10">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-black w-full placeholder:text-black/10">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-mono text-black/20 uppercase tracking-widest">Trending Assets</h4>
+                <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
+                    <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
+                    <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
+                    <a href="teletraan.html" class="hover:text-green-500 transition-colors">TELETRAAN_OS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
+    <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+        <ul class="hidden lg:flex gap-20 items-center relative z-[160]">
+            <!-- BRIEFINGS -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Briefings</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Strategic Theses
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="javascript:void(0)" onclick="openArticle('the-end-of-reactive-security')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The End of Reactive Security</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Institutional Foundation</span>
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="openArticle('surveillance-is-not-enough')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Surveillance Limitation</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Systemic Critique</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Performance Analysis
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="javascript:void(0)" onclick="openArticle('making-crime-obsolete')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Making Crime Obsolete</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Opportunity Collapse Strategy</span>
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="openArticle('energy-security-logic')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Energy Infrastructure Logic</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Critical Asset Defense</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Neural Standards
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="javascript:void(0)" onclick="openArticle('ethical-autonomy')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Ethical Autonomy</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">NAS Governance Protocol</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- BROADCASTS -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Broadcasts</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Media Network
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">TVC News Interview</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Plateau State Stabilization</span>
+                                    </a>
+                                    <a href="https://www.youtube.com/watch?v=tAotVFKt5cs" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Channels TV Sunrise</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">The Proactive Tech Pivot</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Resource Videos
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">State Police & Technology</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Infrastructural Analysis</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- BLOG -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Blog</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-2 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Medium Articles
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The Copy-Paste Problem</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Industry Critique</span>
+                                    </a>
+                                    <a href="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The AI Renaissance</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Indigenous Intelligence Strategy</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-black/5 pl-16 text-left flex items-center justify-center">
+                                <div class="p-8 bg-black/5 border border-black/10 rounded-xl space-y-6 text-center">
+                                    <div class="text-[10px] font-mono text-black/40">EXTERNAL_RSS_LINK_READY</div>
+                                    <a href="https://medium.com/@AVZDAXtechnologies" target="_blank" class="text-[11px] font-black uppercase tracking-widest text-black border-b-2 border-black inline-block pb-2">Visit Full Medium Gallery</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="news.html" class="text-[13px] uppercase tracking-[0.6em] font-black text-black hover:text-black transition-colors py-6">Newsroom</a></li>
+        </ul>
+
+        <div class="flex items-center gap-12 relative z-[160]">
+            <button id="search-toggle" onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-black/10 group hover:border-black transition-all bg-white/5">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-black/40 group-hover:text-black">Search</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-black/40 group-hover:text-black"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <a href="contact.html" class="bg-black text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black/80 transition-all duration-300 inline-block">Schedule Demonstration</a>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE NAVIGATION BAR -->
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+    <div class="flex justify-between items-center pl-0 pr-6 py-1">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+        </a>
+        <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
+            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bar" d="M4.5 7.2h15" stroke="black" stroke-width="2.6" />
+                    <path class="bar" d="M6 12h12" stroke="black" stroke-width="2.6" opacity="0.95" />
+                    <path class="bar" d="M4.5 16.8h15" stroke="black" stroke-width="2.6" opacity="0.9" />
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+    <div class="mobile-nav-content">
+        <div class="minimalist-nav">
+            <div class="nav-section">
+                <button class="nav-toggle">BRIEFINGS</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="javascript:void(0)" onclick="openArticle('the-end-of-reactive-security')" class="intelligence-link-item">The End of Reactive Security</a>
+                        <a href="javascript:void(0)" onclick="openArticle('surveillance-is-not-enough')" class="intelligence-link-item">Surveillance Limitation</a>
+                        <a href="javascript:void(0)" onclick="openArticle('making-crime-obsolete')" class="intelligence-link-item">Making Crime Obsolete</a>
+                        <a href="javascript:void(0)" onclick="openArticle('energy-security-logic')" class="intelligence-link-item">Energy Infrastructure Logic</a>
+                        <a href="javascript:void(0)" onclick="openArticle('ethical-autonomy')" class="intelligence-link-item">Ethical Autonomy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">BROADCASTS</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="intelligence-link-item">TVC News: Plateau State</a>
+                        <a href="https://www.youtube.com/watch?v=tAotVFKt5cs" target="_blank" class="intelligence-link-item">Channels TV: Proactive Pivot</a>
+                        <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="intelligence-link-item">Video: State Police Architecture</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">BLOG</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" class="intelligence-link-item">The Copy-Paste Problem</a>
+                        <a href="https://medium.com/@AVZDAXtechnologies" target="_blank" class="intelligence-link-item">View Full Medium Gallery</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <a href="index.html" class="nav-direct-link">HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div id="viewport" class="relative z-10">
+        
+        <!-- CINEMATIC NEWSROOM HERO -->
+        <section id="hero" class="relative hero-stage w-full flex items-center overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="/media/avzdax-news.png" class="w-full h-full object-cover opacity-50" alt="Newsroom Background">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
+            </div>
+
+            <div class="container mx-auto px-12 relative z-10 flex justify-between items-end pb-32">
+                <div class="max-w-4xl">
+                    <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-6 block reveal-up" style="opacity: 0; transform: translateY(30px);">AVZDAX // INSTITUTIONAL INTELLIGENCE</span>
+                    <h1 class="text-[120px] font-black uppercase tracking-tighter leading-[0.8] text-white synco reveal-up mb-8" style="opacity: 0; transform: translateY(50px);">NEWSROOM</h1>
+                    <p class="text-white/60 text-lg font-light leading-relaxed max-w-xl reveal-up" style="opacity: 0; transform: translateY(30px);">Official press coverage, broadcast appearances, and institutional intelligence from the frontlines of autonomous defense.</p>
+                </div>
+
+                <!-- SCROLL INDICATOR -->
+                <div class="hidden md:flex flex-col items-center gap-6 reveal-up">
+                    <span class="mono text-[9px] text-white/40 vertical-text tracking-[0.4em]">SCROLL TO EXPLORE</span>
+                    <div class="w-[1px] h-32 bg-white/10 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full bg-white/60 animate-scroll-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- BOLD FILTER NAVIGATION -->
+    <!-- TACTICAL FILTER NAVIGATION -->
+    <!-- TACTICAL FILTER NAVIGATION -->
+    <div class="sticky top-0 z-50 bg-[#ffffff] border-y border-black/10 shadow-xl" id="filter-bar">
+        <div class="max-w-[1700px] mx-auto px-6 md:px-12 w-full flex items-center justify-between h-20">
+            <!-- LABEL -->
+            <div class="hidden md:flex items-center gap-4">
+                 <div class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></div>
+                 <span class="text-[11px] font-bold text-black uppercase tracking-[0.2em]">INTELLIGENCE_GRID // V.3.0</span>
+            </div>
+            
+            <!-- BUTTONS -->
+            <div class="filter-nav flex gap-8 md:gap-16 mx-auto md:mx-0" id="filter-nav">
+                <button class="f-item group relative py-2 text-[12px] md:text-[13px] font-black tracking-[0.2em] uppercase transition-all duration-300 text-black" data-filter="all">
+                   <span class="z-10 relative">ALL_INTEL</span>
+                   <span class="absolute -bottom-2 left-0 w-full h-[2px] bg-black transform scale-x-100 transition-transform duration-300 origin-left f-line"></span>
+                </button>
+                <button class="f-item group relative py-2 text-[12px] md:text-[13px] font-bold tracking-[0.2em] uppercase transition-all duration-300 text-black/40 hover:text-black" data-filter="insight">
+                   <span class="z-10 relative">INSIGHTS</span>
+                   <span class="absolute -bottom-2 left-0 w-full h-[2px] bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left f-line"></span>
+                </button>
+                <button class="f-item group relative py-2 text-[12px] md:text-[13px] font-bold tracking-[0.2em] uppercase transition-all duration-300 text-black/40 hover:text-black" data-filter="broadcast">
+                   <span class="z-10 relative">BROADCASTS</span>
+                   <span class="absolute -bottom-2 left-0 w-full h-[2px] bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left f-line"></span>
+                </button>
+                <button class="f-item group relative py-2 text-[12px] md:text-[13px] font-bold tracking-[0.2em] uppercase transition-all duration-300 text-black/40 hover:text-black" data-filter="blog">
+                   <span class="z-10 relative">BLOG</span>
+                   <span class="absolute -bottom-2 left-0 w-full h-[2px] bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left f-line"></span>
+                </button>
+            </div>
+
+            <!-- EXTRA DECORATION -->
+            <div class="hidden lg:block text-[10px] font-bold text-black/40 tracking-widest pl-12 border-l border-black/10">
+                SECURE ACCESS
+            </div>
+        </div>
+    </div>
+
+    <div class="page-background"></div>
+
+    <div class="news-container pt-20">
+
+        <div class="news-grid">
+            
+            <!-- 01: FLAGSHIP PHILOSOPHY -->
+            <div class="card-wrap featured-card reveal-up" data-category="insight" data-article-id="the-end-of-reactive-security">
+                <div class="card-body">
+                    <span class="c-meta">PHILOSOPHY // THESIS // 01</span>
+                    <h2 class="c-title">The End of Reactive Security</h2>
+                    <p class="c-excerpt">Intelligence is no longer an optional overlay; it is the fundamental infrastructure upon which physical stability is built. The era of observation is over.</p>
+                    <a href="javascript:void(0)" class="c-link">Read Thesis</a>
+                </div>
+                <div class="card-media">
+                    <img src="/media/primusbox.png" class="card-img object-contain opacity-100 p-20" alt="Institutional Intelligence" title="The End of Reactive Security">
+                </div>
+            </div>
+
+
+            <!-- 02: SYSTEMIC CRITIQUE -->
+            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="surveillance-is-not-enough">
+                <div class="card-media">
+                    <img src="/media/trion-display.png" class="card-img" alt="Trion Sensing Hardware" title="Why Surveillance Is Not Enough">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">INTEL // ANALYSIS // 02</span>
+                    <h2 class="c-title">Why Surveillance Alone Was Never Enough</h2>
+                    <p class="c-excerpt">The presence of a camera does not constitute the presence of safety. We must bridge the gap between sight and understanding.</p>
+                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
+                </div>
+            </div>
+
+            <!-- 03: RESEARCH ANALYSIS -->
+            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="neural-network-limits">
+                <div class="card-media">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img" alt="Neural Mesh Mapping" title="Limits of Threat Prediction">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">RESEARCH // ANALYSIS // 03</span>
+                    <h2 class="c-title">Neural Networks and the Limits of Threat Prediction</h2>
+                    <p class="c-excerpt">Predictive accuracy is often mistaken for foresight. We must define the threshold where mathematical modeling meets physical reality.</p>
+                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
+                </div>
+            </div>
+
+            <!-- 04: STRATEGY ANALYSIS -->
+            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="energy-security-logic">
+                <div class="card-media">
+                    <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img" alt="Energy Infrastructure Defense" title="Securing Critical Assets">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">STRATEGY // ANALYSIS // 04</span>
+                    <h2 class="c-title">Why Energy Infrastructure Cannot Be Secured Reactively</h2>
+                    <p class="c-excerpt">When failure is catastrophic, reaction is irrelevant. We must architect systems where stability is a mathematical constant.</p>
+                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
+                </div>
+            </div>
+
+            <!-- 05: TVC NEWS INTERVIEW -->
+            <div class="card-wrap standard-card reveal-up" data-category="broadcast" data-video-url="https://www.youtube.com/watch?v=MMXsmbpqR4g">
+                <div class="card-media">
+                    <img src="https://img.youtube.com/vi/MMXsmbpqR4g/maxresdefault.jpg" class="card-img" alt="TVC News Broadcast" title="CEO on TVC News">
+                    <div class="play-trigger">
+                        <button class="play-btn" aria-label="Play TVC News Interview">
+                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">BROADCAST // TVC_NEWS</span>
+                    <h2 class="c-title">Plateau State Security</h2>
+                    <p class="c-excerpt">Operational analysis of Sovereign Shield deployment and the impact of predictive autonomous sensing on regional stabilization efforts.</p>
+                    <a href="https://youtu.be/MMXsmbpqR4g" target="_blank" rel="noopener" class="c-link">Watch Interview</a>
+                </div>
+            </div>
+
+            <!-- 07: BROADCAST DIALOGUE -->
+            <div class="card-wrap wide-card reveal-up" data-category="broadcast" data-video-url="https://www.youtube.com/watch?v=tAotVFKt5cs">
+                <div class="card-media">
+                    <img src="https://img.youtube.com/vi/tAotVFKt5cs/maxresdefault.jpg" class="card-img" alt="Channels TV Sunrise Daily" title="Proactive Tech Discussion">
+                    <div class="play-trigger">
+                        <button class="play-btn" aria-label="Play Channels TV Discussion">
+                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">BROADCAST // CHANNELS_TV</span>
+                    <h2 class="c-title">Proactive Technology Over Reactive Response</h2>
+                    <p class="c-excerpt">Engineering inquiry into the architectural requirements for indigenous defense frameworks and the transition to predictive temporal systems.</p>
+                    <a href="https://youtu.be/tAotVFKt5cs" target="_blank" rel="noopener" class="c-link">Watch Discussion</a>
+                </div>
+            </div>
+
+
+
+            <!-- 07: STATE POLICING & TECHNOLOGY -->
+            <div class="card-wrap standard-card reveal-up" data-category="broadcast" data-article-id="state-policing-analysis">
+                <div class="card-media">
+                    <img src="https://img.youtube.com/vi/MMXsmbpqR4g/0.jpg" class="card-img" alt="State Police Framework" title="Localized Security Infrastructure">
+                    <div class="play-trigger">
+                        <button class="play-btn" aria-label="Play State Police Discussion">
+                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">RESOURCE // STATE_POLICING</span>
+                    <h2 class="c-title">State Police & Technology</h2>
+                    <p class="c-excerpt">Thematic breakdown of decentralized data mesh networks and edge-compute requirements for effective localized policing infrastructure.</p>
+                    <a href="https://youtu.be/MMXsmbpqR4g" target="_blank" rel="noopener" class="c-link">Watch Analysis</a>
+                </div>
+            </div>
+
+            <!-- 08: INDUSTRY ANALYSIS -->
+            <div class="card-wrap standard-card reveal-up" data-category="blog" data-external-url="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a">
+                <div class="card-media">
+                    <img src="/media/copy-paste-medium.webp" class="card-img" alt="Industry Analysis" title="Security Industry Evolution">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">RESEARCH // INDUSTRY_CRITIQUE</span>
+                    <h2 class="c-title">The Copy-Paste Problem</h2>
+                    <p class="c-excerpt">Strategic critique of legacy security models and the imperative for African indigenous data sovereignty in autonomous infrastructure.</p>
+                    <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" rel="noopener" class="c-link">Read Article</a>
+                </div>
+            </div>
+
+            <!-- 08B: AI RENAISSANCE -->
+            <div class="card-wrap standard-card reveal-up" data-category="blog" data-external-url="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27">
+                <div class="card-media">
+                    <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*gxtiKIg8aqL2StvW2Yvsfw.png" class="card-img" alt="The AI Renaissance" title="Building the Future Through Africa's Lens">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">RESEARCH // AI_RENAISSANCE</span>
+                    <h2 class="c-title">The AI Renaissance</h2>
+                    <p class="c-excerpt">A deep-dive into the intersection of indigenous intelligence and global innovation. Architecting the next era of autonomous defense through a regional lens.</p>
+                    <a href="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27" target="_blank" rel="noopener" class="c-link">Read Article</a>
+                </div>
+            </div>
+
+            <!-- 09: MAKING CRIME OBSOLETE -->
+            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="making-crime-obsolete">
+                <div class="card-media">
+                    <img src="https://images.unsplash.com/photo-1605806616949-1e87b487fc2f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img" alt="Data Analytics" title="Making Crime Obsolete">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">PERFORMANCE // TECHNICAL_ANALYSIS</span>
+                    <h2 class="c-title">Making Crime Obsolete</h2>
+                    <p class="c-excerpt">Technical analysis of closing the temporal window of opportunity for kinetic threats through mathematical certainty and predictive analytics.</p>
+                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
+                </div>
+            </div>
+
+            <!-- 10: ETHICAL FRAMEWORK -->
+            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="ethical-autonomy">
+                <div class="card-media">
+                    <img src="/media/human-watch.png" class="card-img" alt="AI Ethics" title="Responsible Autonomy">
+                </div>
+                <div class="card-body">
+                    <span class="c-meta">GOVERNANCE // ETHICAL_AUTONOMY</span>
+                    <h2 class="c-title">Ethical Autonomy</h2>
+                    <p class="c-excerpt">Neural Alignment Standard (NAS): Why Human-in-the-Loop protocols are engineering requirements, not philosophical constraints, in autonomous defense systems.</p>
+                    <a href="#" class="c-link">Read Advisory</a>
+                </div>
+            </div>
+        </div> <!-- end news-grid -->
+    </div> <!-- end news-container -->
+</div> <!-- end viewport -->
+
+        <!-- GOD-TIER BLACK SHIELD FOOTER -->
+        <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+            <div class="radiant-footer-border"></div>
+
+            <!-- MACRO BACKDROP VIDEO -->
+            <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+                <video autoplay muted loop playsinline preload="none" src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale" title="AVZDAX Neural Mesh Visualization"></video>
+                <div class="absolute inset-0 footer-radial-gradient"></div>
+            </div>
+
+            <div class="footer-watermark">AVZDAX</div>
+            <canvas id="footer-neural-canvas"></canvas>
+
+            <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+                <div class="lg:col-span-2 space-y-12 text-left">
+                    <a href="index.html" aria-label="Home" class="hidden md:block"><img src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
+                    <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="social-glass-btn" aria-label="LinkedIn" title="AVZDAX LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="social-glass-btn" aria-label="X (Twitter)" title="AVZDAX X Profile">
+                            <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                        <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                        <a href="nest.html" class="footer-link-hover">NEST</a>
+                        <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
+                        <a href="trion.html" class="footer-link-hover">Trion</a>
+                        <a href="arclight.html" class="footer-link-hover">Arclight</a>
+                        <a href="obex.html" class="footer-link-hover">Obex</a>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                        <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                        <a href="industries.html" class="footer-link-hover">Government</a>
+                        <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
+                        <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                        <a href="industries.html" class="footer-link-hover">Maritime</a>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+                </div>
+                <div class="text-left">
+                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+                </div>
+            </div>
+
+            <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/30 uppercase tracking-[0.5em] gap-8">
+                <div class="text-left"><div class="text-[12px] font-bold text-white animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="flex gap-4 mt-2"><div class="text-[11px] font-bold text-white/30 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X</div><div class="text-[11px] font-bold text-white uppercase tracking-[0.3em]">Status: High_Resolution_Sensing</div></div></div>
+                <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+                <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- INSTITUTIONAL VIDEO THEATER -->
+    <div class="video-modal" id="video-theater">
+        <div class="video-close-btn" id="close-video">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            CLOSE THEATER
+        </div>
+        <div class="video-modal-container" id="video-embed-root">
+            <!-- Iframe Injected via JS -->
+        </div>
+    </div>
+
+    <!-- SOVEREIGN READER INTERFACE -->
+    <!-- SOVEREIGN READER INTERFACE -->
+    <div class="reader-overlay" id="intel-reader" data-lenis-prevent>
+        <div class="reader-nav-fixed">
+            <div class="reader-back-btn" id="close-reader" role="button" aria-label="Back to Intelligence">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                BACK TO INTELLIGENCE
+            </div>
+            <div class="text-[12px] font-bold text-black uppercase tracking-[0.3em] hidden md:block">SECURE_CHANNEL_ACTIVE // <span class="text-black/50">ENCRYPTED</span></div>
+        </div>
+        <div class="reader-container" id="reader-content-root">
+            <!-- Content Injected via JS -->
+        </div>
+    </div>
+
+    <script>
+        const intelDB = {
+            "the-end-of-reactive-security": {
+                meta: "THESIS // INSTITUTIONAL BRIEFING // 01",
+                title: "The End of Reactive Security",
+                img: "/media/primusbox.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[12px] text-black/40 tracking-[0.5em] mb-10 block">PHILOSOPHY // THESIS // 01</span>
+                        <h1 class="r-title">The End of <span class="text-black">Reactive</span> Security.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>For most of modern history, security has been built around reaction. An incident occurs, footage is reviewed, reports are written, and lessons are discussed after the fact. The assumption has always been that response, if fast enough, is sufficient.</p>
+                                
+                                <p><strong>That assumption no longer holds.</strong></p>
+
+                                <p>The environments we are trying to protect today are denser, faster, and more interconnected than ever before. Threats do not announce themselves clearly or arrive all at once. They form gradually, through small behavioral signals, subtle deviations, and patterns that only become obvious when viewed over time. By the time a traditional system raises an alarm, the outcome has often already been decided.</p>
+
+                                <p>This is the central failure of reactive security. It is built to explain the past, not to prevent the future.</p>
+
+                                <h3>The Documentation Trap</h3>
+                                <p>Traditional surveillance systems are excellent at answering one question: what happened? Cameras record, logs accumulate, and evidence is preserved. But security is not ultimately about documentation. It is about prevention. And prevention requires a different kind of system—one designed to understand what is unfolding before it reaches a point of no return.</p>
+
+                                <p>Understanding behavior is fundamentally different from detecting motion. It requires context. It requires comparison against norms. It requires the ability to recognize when something is not just moving, but behaving unusually, persistently, or with intent. This is not something that can be achieved by adding more cameras or more screens.</p>
+
+                                <div class="r-quote-full">
+                                    "The most important question is no longer how fast we can respond. It is why we allowed it to happen at all."
+                                </div>
+
+                                <h3>Intelligence as Infrastructure</h3>
+                                <p>At scale, reaction fails because it assumes time is available. In reality, time is the most limited resource in any security scenario. The gap between detection and consequence is often measured in seconds, not minutes. Systems that wait for certainty before acting inevitably act too late.</p>
+
+                                <p>Predictive systems are designed to operate continuously, not episodically. They look for anomalies instead of alarms, patterns instead of isolated events, and early signals instead of obvious outcomes. Their role is not to replace human judgment, but to extend it—to reduce noise, surface meaning, and allow human operators to intervene earlier, with better information and less urgency.</p>
+
+                                <p>As these systems mature, intelligence itself becomes infrastructure. Just as electricity and connectivity reshaped cities, embedded intelligence is reshaping how physical spaces are secured. It no longer lives only in centralized control rooms or cloud dashboards. It exists at the edge, in cameras, sensors, towers, and autonomous systems that can interpret their surroundings in real time.</p>
+
+                                <p>At AVZDAX, we are building systems designed not to document failure after the fact, but to reduce the likelihood of failure in the first place. The goal is not more footage. <strong>The goal is foresight.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="r-side-meta">
+                            <div class="py-12 border-t-2 border-black space-y-12">
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Classification</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">UNCLASSIFIED // THESIS</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Vector Analysis</span>
+                                    <div class="text-[12px] font-bold text-black uppercase tracking-widest leading-relaxed">Behavioral Foresight vs Kinetic Response</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Sovereign Standard</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">NAS Protocol V.4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "surveillance-is-not-enough": {
+                meta: "ANALYSIS // SYSTEMIC CRITIQUE // 02",
+                title: "Why Surveillance Alone Was Never Enough",
+                img: "/media/trion-display.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[12px] text-black/40 tracking-[0.5em] mb-10 block">INTEL // ANALYSIS // 02</span>
+                        <h1 class="r-title">Why Surveillance <span class="text-black">Alone</span> Was Never Enough.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Surveillance has been treated for decades as a proxy for security. Add cameras, increase coverage, store more footage, and safety will follow. The logic feels intuitive, but it has always been incomplete.</p>
+                                
+                                <p><strong>Observation does not equal understanding.</strong></p>
+
+                                <p>Cameras are exceptional at capturing visual data. They are far less effective at interpreting meaning. A camera can record movement endlessly without knowing whether that movement is routine, suspicious, accidental, or intentional. As a result, traditional surveillance systems accumulate vast amounts of information while offering very little insight.</p>
+
+                                <p>This is why many environments today are heavily monitored yet still vulnerable. Surveillance systems were designed for review, not comprehension. They assume that a human will eventually watch, interpret, and decide. At scale, this breaks down. Human attention does not scale linearly with data.</p>
+
+                                <h3>The Inversion of Meaning</h3>
+                                <p>The industry’s response has historically been to add more layers: more monitors, more guards, more alerts. But this approach treats symptoms rather than causes. Security fails not because data is unavailable, but because meaning arrives too late.</p>
+
+                                <p>The difference between safety and incident often lies in subtle shifts: a pattern that deviates slightly from the norm, a behavior that persists longer than expected, a movement that does not align with context. These signals rarely trigger alarms on their own. They only become obvious in hindsight, once an event has already occurred.</p>
+
+                                <div class="r-quote-full">
+                                    "Visibility without understanding is not safety. It is hindsight."
+                                </div>
+
+                                <h3>The Function of Interpretation</h3>
+                                <p>An intelligent security system does not ask whether something moved. It asks whether something changed. It compares behavior against baselines, correlates activity across time and space, and evaluates whether a situation is evolving toward risk. This is not a function of better optics or higher resolution. <strong>It is a function of interpretation.</strong></p>
+
+                                <p>When intelligence is embedded into surveillance, the role of the system changes. It moves from passive observation to active assessment. It begins to reduce noise instead of creating it. It highlights what matters instead of demanding constant attention.</p>
+
+                                <p>This shift also redefines the role of human operators. Instead of watching endlessly and reacting under pressure, humans are positioned as decision-makers. They engage earlier, with context, and with a clearer understanding of why an intervention may be necessary.</p>
+
+                                <p>At AVZDAX, we design security around comprehension, not just coverage. Systems that cannot interpret behavior will always lag behind events. Systems that can will begin to prevent them.</p>
+                            </div>
+                        </div>
+
+                        <div class="r-side-meta">
+                            <div class="py-12 border-t-2 border-black space-y-12">
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Sensing Architecture</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">TRION // MULTI-SPECTRUM</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Logical Standard</span>
+                                    <div class="text-[12px] font-bold text-black uppercase tracking-widest leading-relaxed">Contextual Behavioral Mapping</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Status</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">ACTIVE BRIEFING</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "trion-urban-deployment": {
+                meta: "DEPLOYMENT // NOVEMBER 2025 // URBAN THEATER",
+                title: "Trion Optical Sensors: A New Era of Peacetech.",
+                img: "/media/trion-display.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">03 // HARDWARE LOGISTICS</span>
+                        <h1 class="r-title">Trion <span class="accent-green">Optical</span> Mesh.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>AVZDAX is proud to announce the successful deployment of the TRION Multi-Spectrum Sensing mesh across major urban centers. This implementation represents the largest single deployment of edge-compute sensing hardware in the region, bridging the gap between passive observation and active predictive defense. This is <span class="text-white font-bold">Peacetech</span> in its most tangible form.</p>
+                                
+
+
+                                <p>The TRION units are not just cameras; they are autonomous intelligence nodes. By processing multi-spectrum data at the source, these sensors identify tactical anomalies—from unauthorized thermal signatures to behavioral pattern shifts—allowing for pre-emptive response protocols. The network effectively creates a digital twin of the urban environment, where security is maintained through mathematical oversight.</p>
+
+                                <div class="r-quote-full">"We are turning the city into a conscious environment that can sense and neutralize threats before they reach their objective."</div>
+                                
+                                <p>By moving the analytical heavy lifting to the edge, AVZDAX ensures that critical decisions are made in milliseconds, independent of centralized cloud latency. This decentralized approach is the core of the Sovereign Shield architecture, ensuring that the network remains operational even under extreme conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "energy-infrastructure-protection": {
+                meta: "DEPLOYMENT // CRITICAL ASSETS // ENERGY SECURITY",
+                title: "Energy Infrastructure Protected by Peacetech.",
+                img: "/media/obex-display.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">05 // INFRASTRUCTURE DEFENSE</span>
+                        <h1 class="r-title">Sovereign <span class="accent-green">Energy</span> Shield.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Protecting the energy backbone of a nation requires a security architecture that is as resilient as the infrastructure it guards. AVZDAX has officially transitioned several key national energy assets to the Sovereign Shield protocol, utilizing our <span class="text-white font-bold">Peacetech</span> hardware-logic layer to provide 24/7 autonomous oversight.</p>
+                                
+
+
+                                <p>For energy infrastructure, even a few minutes of compromise can result in millions in losses and national instability. Our deployment utilizes a combination of Trion sensing nodes and Obex architectural imaging to create a 'dead-zone' around critical assets. Any unauthorized approach or systemic anomaly is detected and analyzed by the PRIMUS core instantly, triggering pre-defined non-kinetic response protocols.</p>
+
+                                <div class="r-quote-full">"Energy security is national security. By shielding our power-grids with autonomous intelligence, we are securing the very lifeblood of the nation's economy."</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "energy-security-logic": {
+                meta: "STRATEGY // INSTITUTIONAL BRIEFING // 04",
+                title: "Why Energy Infrastructure Cannot Be Secured Reactively",
+                img: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[12px] text-black/40 tracking-[0.5em] mb-10 block">STRATEG Y // ANALYSIS // 04</span>
+                        <h1 class="r-title">Why Energy Infrastructure <span class="text-black">Cannot</span> Be Secured Reactively.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Energy infrastructure is unforgiving by nature. Power plants, refineries, pipelines, and transmission facilities operate as continuous systems where disruption carries immediate and compounding consequences. Downtime is not an inconvenience. It is a systemic failure that ripples across economies, public safety, and national stability.</p>
+                                
+                                <p><strong>Yet much of the world still secures these assets using reactive models designed for a slower, less interconnected era.</strong></p>
+
+                                <p>Traditional security frameworks assume that threats will be visible, localized, and isolated. An intrusion is detected. An alert is raised. A response is dispatched. This logic works tolerably well for discrete environments. It breaks down completely when applied to energy systems, where small anomalies can escalate into large-scale failures long before a human response is possible.</p>
+
+                                <h3>The Drift of Risk</h3>
+                                <p>Energy infrastructure does not fail suddenly. It degrades. It drifts. It accumulates risk quietly. Security incidents in this sector rarely begin as obvious attacks. They emerge through subtle signals: unusual movement patterns, repeated low-level access attempts, abnormal activity near sensitive zones, or deviations from operational rhythms.</p>
+
+                                <p>Reactive systems are blind to trajectories. They are designed to respond to outcomes. Predictive security changes the frame entirely. Instead of waiting for a breach, predictive systems model how breaches form.</p>
+
+                                <div class="r-quote-full">
+                                    "In systems that power societies, prevention is not an optimization. It is a requirement."
+                                </div>
+
+                                <h3>The Value of Time</h3>
+                                <p>In energy environments, timing is everything. A delayed response can trigger cascading shutdowns, equipment damage, environmental harm, or prolonged outages. Once escalation begins, options narrow rapidly. Predictive systems create time where none previously existed.</p>
+
+                                <p>When intelligence is embedded directly into the security layer, infrastructure becomes more resilient by design. Systems do not merely watch assets; they understand how those assets are used, how people interact with them, and how risk accumulates around them. This understanding enables preventative action that is architectural rather than reactive.</p>
+
+                                <p>At AVZDAX, we approach energy security as a predictive problem. Because sitting at the intersection of economic continuity and national security requires more than coverage. <strong>It requires foresight.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="r-side-meta">
+                            <div class="py-12 border-t-2 border-black space-y-12">
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Sector</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">CRITICAL ENERGY UTILITIES</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Logical Standard</span>
+                                    <div class="text-[12px] font-bold text-black uppercase tracking-widest leading-relaxed">Predictive Timing Architecture</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Status</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">SOVEREIGN_SHIELD_READY</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "plateau-state-security": {
+                meta: "BROADCAST // TVC NEWS INTERVIEW // REGIONAL DEFENSE",
+                title: "Addressing Plateau State Security with Peacetech.",
+                img: "https://img.youtube.com/vi/MMXsmbpqR4g/maxresdefault.jpg",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">06 // REGIONAL INTELLIGENCE</span>
+                        <h1 class="r-title">Plateau State <span class="accent-green">Stabilization</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>In an exclusive interview with TVC News, AVZDAX leadership discusses the deployment of the Sovereign Shield in Plateau State. The discussion centers on how <span class="text-white font-bold">Peacetech</span> is providing a proactive solution to long-standing security challenges.</p>
+                                
+                                <p>We are moving from response to prevention by mapping behavioral anomalies before they turn into kinetic incidents. The Plateau deployment is a testament to how indigenous technology can solve deep-seated regional conflicts through architectural peace rather than traditional force.</p>
+
+                                <div class="r-quote-full">"We are not just monitoring conflict; we are architecting the conditions for its impossibility."</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "the-neural-mesh-expansion": {
+                meta: "GLOBAL INTELLIGENCE // NETWORK REPORT // PHASE IV",
+                title: "Global Peacetech: The Neural Mesh Expansion.",
+                img: "/media/nest_display.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">11 // GLOBAL SCALE</span>
+                        <h1 class="r-title">The Neural <span class="accent-green">Expansion</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>The AVZDAX Neural Mesh is entering its most ambitious phase of growth. As we scale our <span class="text-white font-bold">Peacetech</span> infrastructure across Silicon Valley, London, and West Africa, we are creating a planetary cognitive redundancy—a global temporal shield that learns from every node in the network.</p>
+                                
+                                <p>This expansion is not just about coverage; it's about intelligence density. Every new node adds exponentially to the network's ability to predict and neutralize threat vectors. We are building a future where peace is a global utility, accessible via the AVZDAX backbone.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "maritime-sovereignty": {
+                meta: "MARITIME // DEEP_SENSING // LITTORAL DEFENSE",
+                title: "Maritime Peacetech: Securing Sovereign Waters.",
+                img: "/media/sentinel-hero.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">12 // MARITIME INTELLIGENCE</span>
+                        <h1 class="r-title">Maritime <span class="accent-green">Sovereignty</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>The vast expanses of sovereign waters have traditionally been the most difficult theaters to secure. AVZDAX is changing that with its <span class="text-white font-bold">Peacetech</span> maritime layer, utilizing deep-sensing hydro-acoustic arrays and autonomous littoral monitoring to create a persistent presence where none existed before.</p>
+                                
+
+
+                                <p>How multi-spectrum acoustic sensors are transforming coastal defense and securing sovereign waters through autonomous monitoring. The ocean is no longer a blind spot; it is a monitored theater of architectural peace. By integrating our maritime sensors with the global Neural Mesh, we provide nations with an unblinking eye over their most valuable natural resources.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "neural-network-accuracy": {
+                meta: "TECHNOLOGY // RESEARCH // PRIMUS CORE",
+                title: "Neural Network Achieves 99.97% Accuracy.",
+                img: "/media/primus-core.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">04 // ALGORITHMIC PERFORMANCE</span>
+                        <h1 class="r-title">Algorithmic <span class="accent-green">Dominance</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Our research lab has achieved a significant milestone in predictive modeling. In recent stress-tests across high-density urban theaters, the PRIMUS behavioral engine achieved a staggering 99.97% accuracy rate in threat prediction. This is the mathematical foundation of the <span class="text-white font-bold">Peacetech</span> manifest.</p>
+                                
+                                <p>Accuracy at this scale isn't just a technical achievement; it's a moral imperative. We are proving that safety is a solvable mathematical equation. By analyzing billions of data points in real-time, the system identifies the subtle precursors to a security breach, allowing for an 'architectural' neutralization of the threat. We are moving from a world of 'incidents and responders' to a world of 'variables and neutralizers'.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "proactive-technology-discussion": {
+                meta: "BROADCAST // CHANNELS TV EXCLUSIVE // DIALOGUE",
+                title: "Proactive Tech vs Reactive Response.",
+                img: "https://img.youtube.com/vi/tAotVFKt5cs/maxresdefault.jpg",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">07 // BROADCAST DIALOGUE</span>
+                        <h1 class="r-title">The Proactive <span class="accent-green">Pivot</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Channels TV’s Sunrise Daily hosts a deep-dive into why Africa’s security framework must pivot toward autonomous, indigenous technology. AVZDAX explains the engineering required to build a temporal shield that anticipates threats, rather than simple equipment that responds to casualties. This is the essence of <span class="text-white font-bold">Peacetech</span>.</p>
+                                
+                                <p>For too long, the approach to security has been to buy more hardware after a crisis. We are proposing a different model: invest in the intelligence that prevents the crisis. This requires a transition from reactive policing to architectural peace, where the data itself becomes the primary deterrent.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "state-policing-analysis": {
+                meta: "RESOURCE // INTEL ANALYSIS // GOVERNANCE",
+                title: "State Police & Technology.",
+                img: "https://img.youtube.com/vi/MMXsmbpqR4g/0.jpg",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">08 // GOVERNANCE INTELLIGENCE</span>
+                        <h1 class="r-title">Sovereign <span class="accent-green">Policing</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>This technical analysis explores the infrastructure required for effective state-level policing in the 21st century. By utilizing decentralized data mesh networks and autonomous edge computing, AVZDAX provides states with the ability to maintain sovereign oversight without the latency of centralized federal responses. This is <span class="text-white font-bold">Peacetech</span> at the scale of governance.</p>
+                                
+                                <p>The model moves away from large, centralized surveillance centers toward a distributed, autonomous sensing network. This ensures that response times are localized and intelligence is indigenous to the communities being protected, preserving both liberty and security.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "africa-s-tech-transition": {
+                meta: "INSIGHT // INDUSTRIAL REPORT // PIVOT 2026",
+                title: "Africa’s Tech Transition.",
+                img: "/media/avzdax-ceo.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">09 // INDUSTRIAL INSIGHT</span>
+                        <h1 class="r-title">The <span class="accent-green">Tech</span> Transition.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>The continent is moving from security consumer to autonomous infrastructure exporter. AVZDAX is leading this transformation through indigenous sensing technology and algorithmic sovereignty. This is the global rise of <span class="text-white font-bold">Peacetech</span>.</p>
+                                
+                                <p>African cities are uniquely positioned to leapfrog traditional reactive security models by adopting decentralized, AI-driven infrastructure from the start. We are architecting a future where the cradle of civilization is also its most advanced theater of architectural peace.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "industry-analysis-copy-paste": {
+                meta: "RESEARCH // GLOBAL CRITIQUE // EVALUATION",
+                title: "The Copy-Paste Problem.",
+                img: "/media/teletraan-display.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-10 block">10 // GLOBAL CRITIQUE</span>
+                        <h1 class="r-title">The <span class="accent-green">Copy-Paste</span> Problem.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>A critical examination of the stagnation in traditional security models. AVZDAX argues why Africa must develop indigenous data sovereignty rather than importing foreign frameworks that aren't optimized for the region's specific situational vectors. We need <span class="text-white font-bold">Peacetech</span>, not imported War-tech.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "making-crime-obsolete": {
+                meta: "STRATEGY // INSTITUTIONAL BRIEFING // 09",
+                title: "Making Crime Obsolete",
+                img: "https://images.unsplash.com/photo-1605806616949-1e87b487fc2f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[12px] text-black/40 tracking-[0.5em] mb-10 block">STRATEGY // ANALYSIS // 09</span>
+                        <h1 class="r-title">Making Crime <span class="text-black">Obsolete</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Most security systems are built around a single assumption: crime is inevitable. The goal, therefore, is not to prevent crime, but to respond to it faster, document it better, or punish it more efficiently. Cameras record. Guards intervene. Reports are filed.</p>
+                                
+                                <p><strong>But what if crime is not an inevitability? What if it is a byproduct of delayed awareness?</strong></p>
+
+                                <p>Crime rarely begins with action. It begins with opportunity. Unauthorized presence, pattern probing, repeated low-risk attempts, environmental blind spots, and behavioral anomalies often precede an incident by hours, days, or even weeks. These early signals are typically invisible to reactive systems because they do not violate rules strongly enough to trigger alarms.</p>
+
+                                <div class="r-quote-full">
+                                    "When environments become aware of themselves, crime loses its advantage."
+                                </div>
+
+                                <h3>The Erosion of Opportunity</h3>
+                                <p>The idea of making crime obsolete does not rely on harsher enforcement or constant human monitoring. It relies on removing opportunity before intent can materialize into action. This requires systems that understand environments, behaviors, and trajectories, not just events.</p>
+
+                                <p>In spaces where movement patterns are understood, access behaviors are contextualized, and anomalies are detected early, malicious intent becomes increasingly difficult to execute noticed. The window for exploitation narrows. Uncertainty increases for the attacker. <strong>Opportunity collapses.</strong></p>
+
+                                <h3>The Result is Calm</h3>
+                                <p>This does not require total surveillance or invasive oversight. In fact, predictive systems often reduce unnecessary monitoring by focusing only on meaningful deviations. Normal activity fades into the background. Risk stands out clearly. The result is not a more oppressive environment, but a calmer one.</p>
+
+                                <p>When systems consistently detect intent before action, the cost of attempting crime outweighs the benefit. Over time, behavior adapts. Risk-seeking declines. Environments self-stabilize. This is how crime becomes obsolete—not eliminated by force, but eroded by foresight.</p>
+
+                                <p>At AVZDAX, we believe the future of security is not defined by faster responses, but by fewer incidents. <strong>Intelligence does not chase crime. It removes the conditions that allow it to exist.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="r-side-meta">
+                            <div class="py-12 border-t-2 border-black space-y-12">
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Sector</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">URBAN THEATER // PUBLIC SAFETY</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Logical Standard</span>
+                                    <div class="text-[12px] font-bold text-black uppercase tracking-widest leading-relaxed">Asymmetric Prevention Engine</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Status</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">THESIS_PROVEN</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            "ethical-autonomy": {
+                meta: "GOVERNANCE // POLICY // 10",
+                title: "Ethical Autonomy in Peacetech",
+                img: "/media/sentinel-anatomy.png",
+                content: `
+                    <div class="r-header">
+                        <span class="mono text-[12px] text-black/40 tracking-[0.5em] mb-10 block">GOVERNANCE // POLICY // 10</span>
+                        <h1 class="r-title">Ethical <span class="text-black">Autonomy</span>.</h1>
+                    </div>
+
+                    <div class="r-content-grid">
+                        <div class="r-main-text">
+                            <div class="r-body">
+                                <p>Autonomous systems do not fail because they lack intelligence. They fail because decisions are made too early, too absolutely, or without sufficient context. That is why human-in-the-loop design is foundational to NEST.</p>
+                                
+                                <p><strong>In real security environments, autonomy cannot exist as a binary state where machines act freely until a human intervenes.</strong></p>
+
+                                <p>Effective systems are built around decision boundaries, not overrides. The question is not whether a human can stop the system. The question is when authority should transition. NEST is designed around that transition.</p>
+
+                                <div class="r-quote-full">
+                                    "The result is a system that moves faster than humans when speed is safe, and slower than humans when consequences demand restraint."
+                                </div>
+
+                                <h3>The Escalation of Context</h3>
+                                <p>The system operates independently where confidence is high and consequences are contained. Behavioral baselining and anomaly detection occur continuously without human involvement. These processes are fast, repeatable, and mathematically grounded. Human attention is not wasted where machines are objectively better.</p>
+
+                                <p>When uncertainty increases, the system does not escalate alerts. It escalates context. Operators are presented with structured intelligence, not raw data. The goal is early understanding, not late reaction. Human judgment enters the loop before decisions become irreversible.</p>
+
+                                <h3>Engineering Ethics</h3>
+                                <p>Ethics in autonomous systems is not enforced by slowing machines down. It is enforced by designing systems that recognize the limits of their own certainty and defer authority accordingly.</p>
+
+                                <p>NEST treats human judgment as a scarce and valuable resource. It is applied only where its strengths matter most. That balance is not philosophical. <strong>It is engineered.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="r-side-meta">
+                            <div class="py-12 border-t-2 border-black space-y-12">
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Sovereign Model</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">NEST // ALIGNED_AUTONOMY</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Logical Standard</span>
+                                    <div class="text-[12px] font-bold text-black uppercase tracking-widest leading-relaxed">Human-in-the-Loop Transition</div>
+                                </div>
+                                <div class="space-y-4">
+                                    <span class="mono text-[10px] text-black/40 uppercase tracking-[0.2em] block">Status</span>
+                                    <div class="text-[12px] font-black text-black uppercase tracking-widest">GOVERNANCE_READY</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        const reader = document.getElementById('intel-reader');
+        const readerContent = document.getElementById('reader-content-root');
+        const closeReader = document.getElementById('close-reader');
+
+        function openArticle(id) {
+            const data = intelDB[id];
+            if (!data) return;
+
+            // Updated to support the new cinematic header/grid structure
+            readerContent.innerHTML = data.content;
+
+            reader.style.display = 'block';
+            document.body.classList.add('reader-open');
+            gsap.to(reader, { opacity: 1, duration: 0.8, ease: "power4.out" });
+            
+            // Fade in content blocks
+            gsap.from(".r-header, .r-content-grid > *", { 
+                y: 50, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power3.out", delay: 0.2 
+            });
+
+            // Parallax Effect for Images within Reader
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+                const readerImages = reader.querySelectorAll('.r-grid-img');
+                readerImages.forEach(img => {
+                    gsap.to(img, {
+                        y: -40,
+                        scrollTrigger: {
+                            trigger: img,
+                            scroller: ".reader-overlay", // Important for fixed overlay scrolling
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 1.5
+                        }
+                    });
+                });
+            }, 500);
+
+            if (window.lenis) window.lenis.stop();
+        }
+
+        closeReader.addEventListener('click', () => {
+            gsap.to(reader, { opacity: 0, duration: 0.4, onComplete: () => {
+                reader.style.display = 'none';
+                document.body.classList.remove('reader-open');
+                if (window.lenis) window.lenis.start();
+            }});
+        });
+
+        // ESC key listener
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && reader.style.display === 'block') {
+                closeReader.click();
+            }
+        });
+
+        const theater = document.getElementById('video-theater');
+        const theaterRoot = document.getElementById('video-embed-root');
+        const closeTheater = document.getElementById('close-video');
+
+        function getYoutubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        closeTheater.addEventListener('click', () => {
+            gsap.to(theater, { opacity: 0, duration: 0.4, onComplete: () => {
+                theater.style.display = 'none';
+                theaterRoot.innerHTML = '';
+                document.body.classList.remove('video-open');
+            }});
+        });
+
+        // Initialize Card Click Listeners
+        document.querySelectorAll('.card-wrap').forEach(card => {
+            // Internal Play Button Logic
+            const playBtn = card.querySelector('.play-trigger');
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    
+                    const url = card.getAttribute('data-video-url');
+                    const id = getYoutubeId(url);
+                    if (id) {
+                        theaterRoot.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+                        theater.style.display = 'flex';
+                        document.body.classList.add('video-open');
+                        gsap.to(theater, { opacity: 1, duration: 0.3, ease: "power2.out" }); /* INSTANT DEPLOYMENT */
+                    }
+                });
+            }
+
+            // General Card Click (External & Internal)
+            card.addEventListener('click', () => {
+                const videoUrl = card.getAttribute('data-video-url');
+                const externalUrl = card.getAttribute('data-external-url');
+
+                if (videoUrl || externalUrl) {
+                    window.open(videoUrl || externalUrl, '_blank');
+                    return;
+                }
+
+                const articleId = card.getAttribute('data-article-id');
+                if (articleId && intelDB[articleId]) {
+                    openArticle(articleId);
+                }
+            });
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        window.lenis = lenis; // Expose to global for reader
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // --- DYNAMIC FILTER ENGINE ---
+        const buttons = document.querySelectorAll('.f-item');
+        const cards = document.querySelectorAll('.card-wrap');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                
+                // RESET ALL
+                buttons.forEach(b => {
+                    b.classList.remove('text-black', 'active');
+                    b.classList.add('text-black/40');
+                    const line = b.querySelector('.f-line');
+                    if(line) {
+                        line.classList.remove('scale-x-100');
+                        line.classList.add('scale-x-0');
+                    }
+                });
+
+                // ACTIVATE CLICKED
+                btn.classList.add('text-black', 'active');
+                btn.classList.remove('text-black/40');
+                const activeLine = btn.querySelector('.f-line');
+                if(activeLine) {
+                    activeLine.classList.add('scale-x-100');
+                    activeLine.classList.remove('scale-x-0');
+                }
+                
+                const filter = btn.getAttribute('data-filter');
+
+                gsap.to(cards, { 
+                    opacity: 0, y: 20, scale: 0.98, duration: 0.3, stagger: 0.02,
+                    onComplete: () => {
+                        cards.forEach(card => {
+                            card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? '' : 'none';
+                        });
+                        gsap.to(cards, { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.05, ease: "power3.out" });
+                        ScrollTrigger.refresh();
+                    }
+                });
+            });
+        });
+
+        // --- ENTRANCE ANIMATIONS ---
+        document.querySelectorAll(".reveal-up").forEach(el => {
+            // Check if it has inline styles from my previous edit
+            if (el.style.opacity === "0") {
+                gsap.to(el, { y: 0, opacity: 1, duration: 1.5, ease: "power4.out", scrollTrigger: { trigger: el, start: "top 95%" } });
+            } else {
+                gsap.from(el, { y: 100, opacity: 0, duration: 1.5, ease: "power4.out", scrollTrigger: { trigger: el, start: "top 95%" } });
+            }
+        });
+        gsap.from(".reveal-right", { x: 100, opacity: 0, duration: 1.5, scrollTrigger: { trigger: ".reveal-right", start: "top 95%" } });
+        gsap.from(".reveal-left", { x: -100, opacity: 0, duration: 1.5, scrollTrigger: { trigger: ".reveal-left", start: "top 95%" } });
+
+        // --- MOUSE PARALLAX ---
+        window.addEventListener("mousemove", (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 30;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
+            gsap.to(".m-img", { x: x, y: y, duration: 2, ease: "power2.out" });
+        });
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { 
+            const footer = document.getElementById('sovereign-footer');
+            if(!footer) return;
+            canvas.width = window.innerWidth; 
+            canvas.height = footer.offsetHeight; 
+            pts = []; 
+            for(let i=0; i<100; i++) pts.push(new P()); 
+        }
+        class P { 
+            constructor(){ 
+                this.x=Math.random()*canvas.width; 
+                this.y=Math.random()*canvas.height; 
+                this.vx=(Math.random()-0.5)*0.3; 
+                this.vy=(Math.random()-0.5)*0.3; 
+            } 
+            update(){ 
+                this.x+=this.vx; this.y+=this.vy; 
+                if(this.x<0||this.x>canvas.width)this.vx*=-1; 
+                if(this.y<0||this.y>canvas.height)this.vy*=-1; 
+            } 
+            draw(){ 
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); 
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; 
+                ctx.fill(); 
+            } 
+        }
+        let lastTime = 0;
+        function draw(currentTime){
+            if(currentTime - lastTime < 33) { 
+                requestAnimationFrame(draw);
+                return;
+            }
+            lastTime = currentTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.addEventListener('resize', resize);
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function(){
+            const btn = document.querySelector('.mobile-menu-toggle-modern');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            if(btn){
+                btn.addEventListener('click', function(e){
+                    e.stopImmediatePropagation();
+                    const opened = btn.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    if(overlay) overlay.style.display = opened ? 'flex' : 'none';
+                    document.body.style.overflow = opened ? 'hidden' : '';
+                });
+            }
+            function closeMobileMenu(){
+                if(!btn) return;
+                btn.classList.remove('open');
+                btn.setAttribute('aria-expanded','false');
+                if(overlay) overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            if(overlay){
+                overlay.addEventListener('click', function(e){
+                    if(e.target === overlay){
+                        closeMobileMenu();
+                    }
+                });
+            }
+        });
+
+        // Mobile menu: toggle nav dropdowns inside overlay
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
+            });
+        });
+
+        // Ensure hero fills the viewport on mobile (fix address-bar 100vh issues)
+        function setHeroHeight(){
+            const hero = document.getElementById('hero');
+            if(!hero) return;
+            hero.style.height = window.innerHeight + 'px';
+        }
+        window.addEventListener('resize', setHeroHeight);
+        window.addEventListener('orientationchange', setHeroHeight);
+        setHeroHeight();
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // MISSION IMAGE CHANGE
+        function changeMissionImage(src) {
+            document.getElementById('mission-image').src = '/media/' + src;
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                const previewDefault = document.getElementById('preview-default');
+                if(previewDefault) previewDefault.style.opacity = '1';
+                const missionImage = document.getElementById('mission-image');
+                if(missionImage) missionImage.src = '/media/avzdax-logo.png';
+            });
+        });
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // SEARCH TOGGLE ENGINE
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // SEARCH FUNCTIONALITY
+        document.querySelector('#search-overlay input').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const links = document.querySelectorAll('#search-overlay a');
+            links.forEach(link => {
+                if (link.textContent.toLowerCase().includes(query)) {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CONTACT | SECURE UPLINK | AVZDAX PEACETECH</title>
+    
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --void: #030303; --white: #ffffff; --silver: #E5E5E7; --alloy: #86868B;
+        }
+
+        body { background-color: #ffffff; color: #030303; -webkit-font-smoothing: antialiased; overflow-x: hidden; width: 100%; }
+        .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
+        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
+
+        /* SILICON VALLEY NAVIGATION SYSTEM - NO INITIAL BACKGROUND */
+        nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.nav-scrolled {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* NAV ITEMS - SILICON VALLEY STYLE */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item > a {
+            position: relative;
+            padding: 20px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E2E2E2, #E2E2E2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover > a {
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .nav-item:hover > a::after {
+            width: 100%;
+        }
+
+        .nav-item.is-active > a {
+            color: #ffffff;
+        }
+
+        .nav-item.is-active > a::after {
+            width: 100%;
+        }
+
+        /* MEGA MENU - SILICON VALLEY DESIGN */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        /* Prevent horizontal overflow on mobile */
+        html, body { max-width: 100%; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .mega-menu-content {
+            background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .mega-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* MEGA MENU CONTENT - SILICON VALLEY LAYOUT */
+        .mega-menu-content .max-w-6xl {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 300px;
+            gap: 48px;
+            padding: 0 40px;
+        }
+
+        /* MENU SECTIONS */
+        .menu-section {
+            padding: 24px 0;
+        }
+
+        .menu-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        /* MENU LINKS - APPLE-STYLE */
+        .grid-item-hover {
+            display: block;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .grid-item-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item-hover span:first-child {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover span:last-child {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover:hover span:first-child {
+            color: #00ff41;
+        }
+
+        .grid-item-hover:hover span:last-child {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* MENU PREVIEW IMAGES */
+        .menu-preview-img {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(0.9) translateY(20px) rotateY(10deg);
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .menu-preview-img.active {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateY(0deg);
+        }
+
+        /* MENU STRATEGIC THEATERS */
+        .strategic-theaters {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategic-theaters h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .strategic-theaters ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .strategic-theaters ul li:last-child {
+            border-bottom: none;
+        }
+
+        .strategic-theaters ul li:hover {
+            color: #00ff41;
+            transform: translateX(4px);
+        }
+
+        .strategic-theaters .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .strategic-theaters ul li:hover .dot {
+            background: #00ff41;
+        }
+
+        /* MENU INTELLIGENCE LAYER */
+        .intelligence-layer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intelligence-layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .intelligence-layer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .intelligence-layer .status {
+            font-size: 11px;
+            color: #00ff41;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* MOBILE NAVIGATION - APP-STYLE */
+        @media (max-width: 1024px) {
+            /* Hide desktop nav completely on mobile */
+            #main-nav {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important;
+            }
+            .mobile-nav-bar {
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                border-radius: 10px;
+                transition: transform 0.18s ease, background 0.18s ease;
+                cursor: pointer;
+                padding: 6px;
+            }
+            .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+            .mobile-menu-toggle-modern:active { transform: scale(0.98); }
+            .mobile-menu-toggle-modern .menu-icon { width: 26px; height: 26px; display: block; }
+            .mobile-menu-toggle-modern .bar { stroke: rgba(255,255,255,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
+            .mobile-menu-toggle-modern .menu-icon { overflow: visible; }
+            .mobile-menu-toggle-modern .bar { transform-box: fill-box; transform-origin: center; }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(1) { transform: translateY(4px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(2) { opacity: 0; transform: scaleX(0.2); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(3) { transform: translateY(-4px) rotate(-45deg); }
+        }
+
+        /* LUXURY MOBILE MENU OVERLAY - AVZDAX SECURITY TECH */
+        @media (max-width: 1024px) {
+            #mobile-menu-overlay {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(2, 2, 2, 0.98) 50%, rgba(0, 0, 0, 0.96) 100%);
+                backdrop-filter: blur(60px);
+                -webkit-backdrop-filter: blur(60px);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 80px 24px 40px;
+                position: relative;
+            }
+            #mobile-menu-overlay::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(226, 226, 226, 0.3), transparent);
+                animation: security-scan 3s infinite linear;
+            }
+            @keyframes security-scan {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+            .mobile-nav-content {
+                width: 100%;
+                max-width: 480px;
+                margin: 0 auto;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                box-shadow: none;
+                overflow-y: auto;
+                max-height: calc(100vh - 120px);
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .mobile-nav-content::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* AVZDAX LUXURY NAV DESIGN */
+        .minimalist-nav {
+            width: 100%;
+            position: relative;
+        }
+        .minimalist-nav::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            border-radius: 1px;
+        }
+        .nav-section {
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .nav-section::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5px;
+        }
+        .nav-section:last-child::after {
+            display: none;
+        }
+        .nav-toggle {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-toggle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-toggle:hover::before {
+            width: 100%;
+        }
+        .nav-toggle::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+            background-size: contain;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.6;
+            transform: rotate(0deg);
+        }
+        .nav-toggle.active::after {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+        .nav-toggle:hover {
+            color: #E2E2E2;
+            transform: translateX(4px);
+        }
+        .nav-toggle.active {
+            color: #E2E2E2;
+        }
+        .nav-direct-link {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            text-decoration: none;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 8px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-direct-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-direct-link:hover::before {
+            width: 100%;
+        }
+        .nav-direct-link:hover {
+            color: #E2E2E2;
+            transform: translateX(8px);
+            text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+        }
+        .nav-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 16px;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .nav-dropdown.open {
+            max-height: 800px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .products-list,
+        .intelligence-list,
+        .mission-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .product-link-item,
+        .intelligence-link-item,
+        .mission-link-item {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+            line-height: 1.4;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .product-link-item::before,
+        .intelligence-link-item::before,
+        .mission-link-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            border-radius: 2px 0 0 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-link-item:hover,
+        .intelligence-link-item:hover,
+        .mission-link-item:hover {
+            background: rgba(226, 226, 226, 0.05);
+            border-color: rgba(226, 226, 226, 0.2);
+            color: #ffffff;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+            text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
+        }
+        .product-link-item:hover::before,
+        .intelligence-link-item:hover::before,
+        .mission-link-item:hover::before {
+            opacity: 1;
+        }
+        .product-link-item:active,
+        .intelligence-link-item:active,
+        .mission-link-item:active {
+            transform: translateX(8px) translateY(-2px) scale(0.98);
+        }
+
+        
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .social-glass-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        .social-glass-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* FOOTER - MOBILE OPTIMIZED */
+        @media (max-width: 768px) {
+            #sovereign-footer { padding-top: 80px !important; padding-bottom: 40px !important; padding-left: 20px !important; padding-right: 20px !important; }
+            #sovereign-footer .grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 40px 20px !important; }
+            #sovereign-footer .lg\:col-span-2 { grid-column: span 2 !important; text-align: left !important; margin-bottom: 20px; }
+            #sovereign-footer img { display: none !important; }
+            #sovereign-footer p { font-size: 11px !important; line-height: 1.6; color: rgba(255, 255, 255, 0.6); max-width: 100% !important; letter-spacing: 0.2em !important; }
+            #sovereign-footer h4 { font-size: 9px !important; margin-bottom: 16px !important; color: rgba(255, 255, 255, 0.3) !important; }
+            #sovereign-footer .flex-col { gap: 12px !important; }
+            #sovereign-footer a.footer-link-hover { font-size: 11px !important; padding: 0 !important; background: transparent !important; letter-spacing: 0.15em !important; }
+            #sovereign-footer .footer-watermark { font-size: 35vw !important; opacity: 0.03 !important; }
+            #sovereign-footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-top: 60px !important; padding-top: 30px !important; gap: 24px !important; text-align: left !important; }
+            #sovereign-footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; width: 100%; }
+        }
+
+        /* FORM ARCHITECTURE */
+        .blueprint-grid { 
+            position: fixed; inset: 0; 
+            background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); 
+            background-size: 40px 40px; z-index: 0; pointer-events: none;
+        }
+        input, textarea, select {
+            background: transparent !important; border: none !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+            padding: 18px 0 !important; width: 100%; font-family: 'Inter', sans-serif;
+            font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;
+            border-radius: 0 !important; appearance: none;
+        }
+        input:focus { border-bottom-color: #000 !important; padding-left: 8px !important; }
+        label { font-family: 'JetBrains Mono'; font-size: 9px; color: rgba(0,0,0,0.4); letter-spacing: 0.2em; text-transform: uppercase; }
+
+        /* SMOOTH OVERLAY ANIMATION (mobile overlay styles removed) */
+
+        .menu-preview-img { transition: all 0.5s ease; opacity: 0; position: absolute; pointer-events: none; }
+
+        /* Minimalist mobile nav styles (from index.html) */
+        .minimalist-nav { padding: 20px; }
+        .nav-section { border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; }
+        .nav-toggle { width: 100%; background: transparent; border: none; color: white; font-size: 18px; font-weight: 600; letter-spacing: 0.05em; text-align: left; padding: 20px 0; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .nav-toggle::after { content: '+'; position: absolute; right: 0; font-size: 24px; transition: transform 0.3s ease; }
+        .nav-toggle.active::after { transform: rotate(45deg); }
+        .nav-toggle:hover { color: white; }
+        .nav-direct-link { width: 100%; background: transparent; border: none; color: white; font-size: 18px; font-weight: 600; letter-spacing: 0.05em; text-align: left; padding: 20px 0; text-decoration: none; display: block; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-direct-link:hover { color: white; transform: translateX(4px); }
+        .nav-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-dropdown.open { max-height: 2000px; }
+        .products-showcase { display: flex; flex-direction: column; gap: 32px; padding: 20px 0; }
+        .product-item { display: flex; align-items: center; gap: 20px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+        .product-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .product-info { flex: 1; }
+        .product-info h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 4px 0; }
+        .product-info p { font-size: 12px; color: rgba(255,255,255,0.7); margin: 0; }
+
+        .products-list { display: flex; flex-direction: column; gap: 16px; padding: 20px 0; }
+        .product-link-item { color: white; text-decoration: none; font-size: 16px; font-weight: 600; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.1); }
+        .product-link-item:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+
+        .mission-list { display: flex; flex-direction: column; gap: 16px; padding: 20px 0; }
+        .mission-link-item { color: white; text-decoration: none; font-size: 16px; font-weight: 600; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.1); }
+        .mission-link-item:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+
+        .intelligence-list { display: flex; flex-direction: column; gap: 16px; padding: 20px 0; }
+        .intelligence-link-item { color: white; text-decoration: none; font-size: 16px; font-weight: 600; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.1); }
+        .intelligence-link-item:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+
+        
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="flex items-center justify-center">
+    <button onclick="toggleSearch()" class="absolute top-10 right-10 text-white/40 hover:text-white transition-all">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-4xl w-full px-10">
+        <div class="flex items-center gap-6 border-b border-white/20 pb-6 mb-10">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-white w-full placeholder:text-white/10">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Trending Assets</h4>
+                <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
+                    <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
+                    <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
+                    <a href="teletraan.html" class="hover:text-green-500 transition-colors">TELETRAAN_OS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
+    <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+        <ul class="hidden lg:flex gap-20 items-center">
+            <!-- DEFENSE PLATFORMS -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Ecosystem</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Platforms
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Primus</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Behavioral Predictive AI</span>
+                                    </a>
+                                    <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Teletraan</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Command UI</span>
+                                    </a>
+                                    <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Nest</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Professional Oversight</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Hardware
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Trion</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Edge Optical Sensing</span>
+                                    </a>
+                                    <a href="sentinel.html" onmouseover="showPreview('sentinel')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Sentinel</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Kinetic Unit Fleet</span>
+                                    </a>
+                                    <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Obex</span>
+                                        <span class="text-[10px] text-gray-500 uppercase font-mono tracking-[0.2em]">Architectural Imaging</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Strategic Theaters
+                                </h3>
+                                <ul class="space-y-10 text-[13px] font-black text-gray-400 uppercase tracking-[0.3em] px-4">
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white rounded-full"></div> National Security</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                </ul>
+                            </div>
+                            <div class="relative flex items-center justify-center overflow-visible min-h-[450px] border-l border-white/5 pl-12">
+                                <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale"></div>
+                                <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-sentinel" src="/media/sentinel-hero.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <div id="p-obex" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[85%] flex flex-col items-start translate-x-[15%]">
+                                        <!-- HARDWARE BOX -->
+                                        <img src="media/obexbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="OBEX">
+                                        <!-- SENSOR (BOTTOM LEFT) -->
+                                        <img src="media/obex-display.png" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700" alt="OBEX Sensor">
+                                    </div>
+                                </div>
+                                <div id="p-primus" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[110%] flex flex-col items-start translate-x-[5%]">
+                                        <!-- CORE (TOP LEFT) -->
+                                        <img src="media/primus-core.png" class="w-[30%] h-auto relative z-10 mt-[-5%] mb-[-12%] transition-transform duration-700" alt="PRIMUS Core">
+                                        <!-- BOX -->
+                                        <img src="media/primusbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="PRIMUS">
+                                    </div>
+                                </div>
+                                <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-nest" src="/media/nest_display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- INTELLIGENCE -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Intelligence</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Research Lab
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="whitepaper.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Neural behavior Analysis Archives</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Tactical Status Updates</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Intelligence Resources
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Proprietary Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Vetted Real-World Deployments</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Network Status
+                                </h3>
+                                <div class="p-8 bg-white/5 border border-white/10 rounded-xl space-y-6">
+                                    <div class="text-[10px] font-mono text-green-500 animate-pulse">● LIVE RESEARCH FEED ACTIVE</div>
+                                    <p class="text-[10px] text-white/40 uppercase leading-loose tracking-[0.2em]">Integrated Intelligence Layer providing real-time behavioral foresight models.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- MISSION -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Mission</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Corporate
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="about.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">About AVZDAX</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Institutional Profile & History</span>
+                                    </a>
+                                    <a href="careers.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Careers</span>
+                                        <span class="text-[9px] text-green-500 uppercase font-mono tracking-[0.2em]">● Active Recruitment</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Governance
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="ethics.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Ethics & Policy</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Sovereign Deployment Standards</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">INDUSTRIES</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Strategic Theaters</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Access
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="contact.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">CONTACT</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Establish Tactical Link</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="news.html" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 hover:text-silver transition-colors py-6">Newsroom</a></li>
+        </ul>
+
+        <div class="flex items-center gap-12 relative z-[160]">
+            <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE NAVIGATION BAR -->
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+    <div class="flex justify-between items-center pl-0 pr-6 py-1">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+        </a>
+        <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
+            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bar" d="M4.5 7.2h15" stroke="white" stroke-width="2.6" />
+                    <path class="bar" d="M6 12h12" stroke="white" stroke-width="2.6" opacity="0.95" />
+                    <path class="bar" d="M4.5 16.8h15" stroke="white" stroke-width="2.6" opacity="0.9" />
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+    <div class="mobile-nav-content">
+        <div class="minimalist-nav">
+            <div class="nav-section">
+                <button class="nav-toggle">ECOSYSTEM</button>
+                <div class="nav-dropdown">
+                    <div class="products-list">
+                        <a href="primus.html" class="product-link-item">PRIMUS - Decentralized behavioral engine</a>
+                        <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
+                        <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
+                        <a href="sentinel.html" class="product-link-item">SENTINEL - Autonomous robots</a>
+                        <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
+                        <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">INTELLIGENCE</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="whitepaper.html" class="intelligence-link-item">White Papers - Neural behavior Analysis</a>
+                        <a href="news.html" class="intelligence-link-item">Newsroom - Global Tactical Updates</a>
+                        <a href="news.html" class="intelligence-link-item">The Frontline - Industry Perspectives</a>
+                        <a href="industries.html" class="intelligence-link-item">Case Studies - Real-World Deployments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">MISSION</button>
+                <div class="nav-dropdown">
+                    <div class="mission-list">
+                        <a href="about.html" class="mission-link-item">About AVZDAX</a>
+                        <a href="careers.html" class="mission-link-item">Careers</a>
+                        <a href="contact.html" class="mission-link-item">Contact</a>
+                        <a href="ethics.html" class="mission-link-item">Ethics & Policy</a>
+                        <a href="industries.html" class="mission-link-item">Industries</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <a href="news.html" class="nav-direct-link">NEWSROOM</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENT START -->
+    <main id="viewport">
+        <section class="min-h-screen pt-32 lg:pt-60 pb-20 relative z-10">
+            <div class="max-w-[1500px] mx-auto px-6 lg:px-12 grid grid-cols-12 gap-10 lg:gap-20">
+                
+                <!-- LEFT SIDE -->
+                <div class="col-span-12 lg:col-span-5 space-y-16 lg:space-y-32">
+                    <div class="reveal-up">
+                        <div class="mono text-black/30 mb-4 lg:mb-8 text-[10px] lg:text-xs tracking-[1em] lg:tracking-[1.5em]">Direct Uplink Protocol</div>
+                        <h1 class="synco text-4xl lg:text-7xl font-black mb-6 lg:mb-12">SECURE<br>UPLINK.</h1>
+                        <p class="text-lg lg:text-2xl font-light text-black/60 leading-relaxed uppercase tracking-widest max-w-sm">
+                            Architecting certainty for global infrastructure. Initiate briefing.
+                        </p>
+                    </div>
+
+                    <div class="hidden lg:block space-y-16 reveal-up">
+                        <div class="border-l-2 border-black/10 pl-10">
+                            <div class="mono text-[10px] text-black/40 mb-2">Lag_Node // HQ</div>
+                            <div class="synco text-xl">Victoria Island</div>
+                            <p class="text-[11px] text-black/40 mt-3 uppercase tracking-[0.2em]">Sovereign Plaza, Level 40</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE (FORM) -->
+                <div class="col-span-12 lg:col-span-7 form-container p-8 lg:p-24 border border-black/5 reveal-right shadow-xl lg:shadow-2xl rounded-sm">
+                    <form action="#" class="space-y-10 lg:space-y-16">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+                            <div class="space-y-2">
+                                <label>Identity / Title</label>
+                                <input type="text" placeholder="Full Legal Name" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label>Organization</label>
+                                <input type="text" placeholder="Enterprise / Sovereign">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label>Communication Path</label>
+                            <input type="email" placeholder="Secure Email" required>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label>Mission Category</label>
+                            <select class="cursor-pointer">
+                                <option>Select Objective...</option>
+                                <option>Sovereign Defense</option>
+                                <option>Private Integration</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label>Objective Summary</label>
+                            <textarea rows="3" placeholder="Tactical requirements..."></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button type="submit" class="bg-black text-white synco px-10 py-6 lg:px-16 lg:py-8 hover:bg-zinc-800 transition-all text-xs lg:text-sm w-full lg:w-auto tracking-[0.3em] font-bold">
+                                Transmit Briefing
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- MOBILE NODES (Visible only on mobile) -->
+                <div class="col-span-12 lg:hidden pt-10 border-t border-zinc-100">
+                    <div class="mono text-[9px] text-black/40 mb-4">Lag_Node // Victoria Island</div>
+                    <p class="text-[10px] uppercase tracking-widest text-zinc-400">Sovereign Plaza, Level 40, Lagos</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video autoPlay muted loop playsInline preload="none" src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <a href="index.html" class="hidden md:block"><img src="/media/avzdax-logo.png" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
+                <p class="text-[13px] text-silver-400 uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="social-glass-btn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-glass-btn" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="primus.html" class="footer-link-hover">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                    <a href="sentinel.html" class="footer-link-hover">Sentinel</a>
+                    <a href="obex.html" class="footer-link-hover">Obex</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left">
+                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="industries.html" class="footer-link-hover">Government</a>
+                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
+                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-silver-400 text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <!-- Footer & menu scripts copied from index.html -->
+    <script>
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { 
+            const footer = document.getElementById('sovereign-footer');
+            if(!footer) return;
+            canvas.width = window.innerWidth; 
+            canvas.height = footer.offsetHeight; 
+            pts = []; 
+            for(let i=0; i<100; i++) pts.push(new P()); 
+        }
+        class P { 
+            constructor(){ 
+                this.x=Math.random()*canvas.width; 
+                this.y=Math.random()*canvas.height; 
+                this.vx=(Math.random()-0.5)*0.3; 
+                this.vy=(Math.random()-0.5)*0.3; 
+            } 
+            update(){ 
+                this.x+=this.vx; this.y+=this.vy; 
+                if(this.x<0||this.x>canvas.width)this.vx*=-1; 
+                if(this.y<0||this.y>canvas.height)this.vy*=-1; 
+            } 
+            draw(){ 
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); 
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; 
+                ctx.fill(); 
+            } 
+        }
+        let lastTime = 0;
+        function draw(currentTime){
+            if(currentTime - lastTime < 33) { 
+                requestAnimationFrame(draw);
+                return;
+            }
+            lastTime = currentTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.addEventListener('resize', resize);
+    </script>
+    
+    <script src="/media/site-utils.js"></script>
+    
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Mobile menu: toggle nav dropdowns inside overlay
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
+            });
+        });
+
+        // Mega Menu Previews
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => img.style.opacity = '0');
+            const target = document.getElementById(id);
+            if(target) target.style.opacity = '1';
+        }
+
+        // SEARCH TOGGLE ENGINE
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // RESET PREVIEWS
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                const previewDefault = document.getElementById('preview-default');
+                if(previewDefault) previewDefault.style.opacity = '1';
+            });
+        });
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function(){
+            const btn = document.querySelector('.mobile-menu-toggle-modern');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            if(btn){
+                btn.addEventListener('click', function(e){
+                    e.stopImmediatePropagation();
+                    const opened = btn.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    if(overlay) overlay.style.display = opened ? 'flex' : 'none';
+                    document.body.style.overflow = opened ? 'hidden' : '';
+                });
+            }
+            function closeMobileMenu(){
+                if(!btn) return;
+                btn.classList.remove('open');
+                btn.setAttribute('aria-expanded','false');
+                if(overlay) overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            if(overlay){
+                overlay.addEventListener('click', function(e){
+                    if(e.target === overlay){
+                        closeMobileMenu();
+                    }
+                });
+            }
+        });
+
+        // Mobile menu: toggle nav dropdowns inside overlay
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
+            });
+        });
+
+        // Animations
+        gsap.from(".reveal-up", { y: 40, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power3.out" });
+        gsap.from(".reveal-right", { x: 40, opacity: 0, duration: 1.5, ease: "power3.out", delay: 0.4 });
+    </script>
+</body>
+</html>

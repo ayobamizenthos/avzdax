@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVZDAX | SOVEREIGN PREDICTIVE DEFENSE</title>
+    
+    <!-- APEX STACK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/media/homepage-hero.mp4" as="video" type="video/mp4">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #020202; color: white; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar { display: none; }
+        .text-gradient { background: linear-gradient(to bottom, #fff 40%, #707070 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+        .text-gradient-dark { background: linear-gradient(to bottom, #000 40%, #666 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+        
+        /* SILICON VALLEY NAVIGATION SYSTEM - NO INITIAL BACKGROUND */
+        nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.nav-scrolled {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* NAV ITEMS - SILICON VALLEY STYLE */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item > a {
+            position: relative;
+            padding: 20px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E2E2E2, #E2E2E2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover > a {
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .nav-item:hover > a::after {
+            width: 100%;
+        }
+
+        .nav-item.is-active > a {
+            color: #ffffff;
+        }
+
+        .nav-item.is-active > a::after {
+            width: 100%;
+        }
+
+        /* MEGA MENU - SILICON VALLEY DESIGN */
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        /* Prevent horizontal overflow on mobile */
+        html, body { max-width: 100%; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .mega-menu-content {
+            background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .mega-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* MEGA MENU CONTENT - SILICON VALLEY LAYOUT */
+        .mega-menu-content .max-w-6xl {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 300px;
+            gap: 48px;
+            padding: 0 40px;
+        }
+
+        /* MENU SECTIONS */
+        .menu-section {
+            padding: 24px 0;
+        }
+
+        .menu-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        /* MENU LINKS - APPLE-STYLE */
+        .grid-item-hover {
+            display: block;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .grid-item-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item-hover span:first-child {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover span:last-child {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover:hover span:first-child {
+            color: #00ff41;
+        }
+
+        .grid-item-hover:hover span:last-child {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* MENU PREVIEW IMAGES */
+        .menu-preview-img {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: scale(0.9) translateY(20px) rotateY(10deg);
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .menu-preview-img.active {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateY(0deg);
+        }
+
+        /* MENU STRATEGIC THEATERS */
+        .strategic-theaters {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategic-theaters h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .strategic-theaters ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .strategic-theaters ul li:last-child {
+            border-bottom: none;
+        }
+
+        .strategic-theaters ul li:hover {
+            color: #00ff41;
+            transform: translateX(4px);
+        }
+
+        .strategic-theaters .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .strategic-theaters ul li:hover .dot {
+            background: #00ff41;
+        }
+
+        /* MENU INTELLIGENCE LAYER */
+        .intelligence-layer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intelligence-layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .intelligence-layer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .intelligence-layer .status {
+            font-size: 11px;
+            color: #00ff41;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* VIDEO PERFORMANCE OPTIMIZATION */
+        .hero-video {
+            will-change: transform;
+            transform: translateZ(0); /* Force hardware acceleration */
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+        }
+
+        /* Make hero video truly cover the viewport (handles mobile address bar issues) */
+        .hero-stage { height: 100dvh; min-height: 100vh; }
+        .hero-video-full {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: 0;
+        }
+        
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+        
+        .grid-item-hover:hover { background: #000000; color: #ffffff !important; border-color: #000000; }
+        .grid-item-hover:hover span { color: #ffffff !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #ffffff !important; }
+
+        .premium-white-gloss {
+            background: #FBFBFB;
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-white-gloss::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+            opacity: 0.3; pointer-events: none;
+        }
+
+        /* FULL SCREEN SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        /* SVG GROUNDBREAKING ANIMATION MESH */
+        .svg-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+
+        /* HIDE SCROLLBAR */
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        /* FOOTER TITAN WATERMARK */
+        .footer-watermark { font-size: 28vw; font-weight: 900; color: rgba(255,255,255,0.02); pointer-events: none; white-space: nowrap; font-style: italic; letter-spacing: -0.05em; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        #footer-neural-canvas { position: absolute; inset: 0; opacity: 0.8; pointer-events: none; z-index: 1; }
+        .radiant-footer-border { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 200% 100%; animation: border-shimmer 4s infinite linear; }
+        @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* AWARD-WINNING NEWS GRID LAYOUT */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .featured {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .featured:hover img {
+            transform: scale(1.05);
+        }
+
+        .featured .content {
+            padding: 2rem;
+        }
+
+        .featured .meta {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(0,0,0,0.6);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .featured h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: black;
+        }
+
+        .featured p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+        }
+
+        .featured .cta {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .featured .cta:hover {
+            color: #007f1f;
+            transform: translateX(5px);
+        }
+
+        .side-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .side-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .side-card:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .side-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .side-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .side-card .info {
+            padding: 1rem;
+        }
+
+        .side-card .meta {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(0,0,0,0.6);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .side-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .side-card:hover h4 {
+            color: #00ff41;
+        }
+
+        /* MOBILE NEWS SECTION OPTIMIZATION */
+        @media (max-width: 768px) {
+            #news-highlights {
+                padding: 40px 20px;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .news-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                flex: 1;
+            }
+
+            .featured {
+                height: auto;
+            }
+
+            .featured img {
+                height: 200px;
+            }
+
+            .featured .content {
+                padding: 1.5rem;
+            }
+
+            .featured h3 {
+                font-size: 1.5rem;
+            }
+
+            .side-grid {
+                gap: 1rem;
+            }
+
+            .side-card {
+                height: auto;
+            }
+
+            .side-card img {
+                height: 120px;
+            }
+
+            .side-card .info {
+                padding: 0.75rem;
+            }
+
+            .side-card h4 {
+                font-size: 1rem;
+            }
+        }
+        /* Ensure news cards remain visible if JS animations fail */
+        #news-highlights .news-highlight { opacity: 1 !important; transform: none !important; }
+
+        /* ===========================================
+           PREMIUM MOBILE RESPONSIVENESS
+           =========================================== */
+
+
+        /* HERO SECTION - MOBILE APP EXPERIENCE */
+        @media (max-width: 768px) {
+            .hero-stage {
+                height: 100vh;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-content {
+                padding: 0 24px;
+                bottom: 120px;
+                position: absolute;
+                width: 100%;
+                z-index: 10;
+            }
+            .hero-content .flex {
+                gap: 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .hero-content h1 {
+                font-size: clamp(2.8rem, 14vw, 4.5rem) !important;
+                line-height: 0.85 !important;
+                font-weight: 900;
+                letter-spacing: -0.02em;
+                margin-bottom: 16px;
+                background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+            }
+            .hero-content p {
+                font-size: 16px !important;
+                line-height: 1.5 !important;
+                max-width: 100% !important;
+                opacity: 0.9;
+                margin-bottom: 32px;
+                color: rgba(255, 255, 255, 0.9);
+            }
+            .hero-content button {
+                width: 100%;
+                padding: 16px 24px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.025em;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .hero-content button:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+            }
+            .hero-content button:last-child {
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                margin-top: 12px;
+            }
+            .hero-content button:last-child:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* MOATS SECTION - MOBILE CARDS */
+        @media (max-width: 768px) {
+            .premium-white-gloss {
+                padding: 80px 20px;
+                background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+            }
+            .premium-white-gloss .max-w-6xl {
+                display: flex;
+                flex-direction: column;
+                gap: 48px;
+            }
+            .premium-white-gloss > div {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                border-radius: 20px;
+                padding: 32px 24px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .premium-white-gloss > div:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            }
+            .premium-white-gloss h4 {
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                color: rgba(0, 0, 0, 0.6);
+                margin-bottom: 16px;
+                text-transform: uppercase;
+            }
+            .premium-white-gloss h3 {
+                font-size: 2.2rem !important;
+                font-weight: 800;
+                line-height: 1.1;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #000000 0%, #333333 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+            }
+            .premium-white-gloss p {
+                font-size: 15px;
+                line-height: 1.6;
+                color: rgba(0, 0, 0, 0.7);
+                font-weight: 400;
+            }
+        }
+
+        /* NEURAL LAYER - MOBILE IMMERSIVE */
+        @media (max-width: 768px) {
+            #neural-layer {
+                height: 100vh;
+                padding: 20px;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            #neural-layer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 30% 20%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
+                pointer-events: none;
+            }
+            #neural-layer h4 {
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: 0.15em;
+                color: rgba(255, 255, 255, 0.6);
+                margin-bottom: 12px;
+                text-align: center;
+            }
+            #neural-layer h2 {
+                font-size: clamp(2rem, 10vw, 3rem) !important;
+                line-height: 0.9;
+                margin-bottom: 20px;
+                text-align: center;
+                background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+            }
+            #neural-layer .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                position: relative;
+                z-index: 2;
+                flex: 1;
+                justify-content: center;
+            }
+            #neural-layer p {
+                font-size: 14px;
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 16px;
+            }
+            #neural-layer .flex {
+                flex-direction: column;
+                gap: 12px;
+            }
+            #neural-layer .border-l {
+                border-left: 2px solid rgba(0, 255, 65, 0.3);
+                padding-left: 12px;
+                margin: 8px 0;
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 6px;
+                padding: 12px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            #neural-layer .text-4xl {
+                font-size: 1rem;
+                opacity: 0.6;
+                margin-bottom: 2px;
+            }
+            #neural-layer .text-sm {
+                font-size: 10px;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            #neural-layer .h-[1px] {
+                height: 1px;
+                width: 100%;
+                background: white/10;
+                margin: 10px 0;
+            }
+        }
+
+        /* PRODUCT SECTIONS - MOBILE APP CARDS */
+        @media (max-width: 1024px) {
+            .product-section {
+                padding: 80px 20px;
+                position: relative;
+            }
+            .product-section .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+            }
+            .product-section .image-wrapper {
+                order: -1;
+                margin-bottom: 32px;
+            }
+            .product-section .text-content {
+                text-align: left !important;
+                padding: 0;
+            }
+            .product-section .flex {
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+            .product-section .h-1 {
+                width: 32px;
+                background: linear-gradient(90deg, #00ff41, rgba(0, 255, 65, 0.3));
+            }
+            .product-section span:first-child {
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                color: rgba(255, 255, 255, 0.7);
+                text-transform: uppercase;
+            }
+            .product-section h2 {
+                font-size: clamp(2.8rem, 10vw, 5rem) !important;
+                line-height: 0.85;
+                margin-bottom: 24px;
+                background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+            }
+            .product-section p {
+                font-size: 16px;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 32px;
+                max-width: 100% !important;
+            }
+            .product-section a {
+                display: inline-block;
+                padding: 16px 32px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.025em;
+                text-decoration: none;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .product-section a:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* INDUSTRIES SHOWCASE - MOBILE HORIZONTAL SCROLL */
+        @media (max-width: 768px) {
+            .industries-showcase {
+                display: none;
+            }
+            .industries-showcase .text-center {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .industries-showcase h4 {
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                color: rgba(0, 0, 0, 0.6);
+                margin-bottom: 16px;
+            }
+            .industries-showcase h2 {
+                font-size: clamp(2.5rem, 10vw, 4rem) !important;
+                line-height: 1.1;
+                font-weight: 800;
+                background: linear-gradient(135deg, #000000 0%, #333333 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+                margin-bottom: 48px;
+            }
+
+            /* HORIZONTAL SCROLL CONTAINER */
+            .industries-scroll-container {
+                position: relative;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .industries-scroll-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* HORIZONTAL FLEX LAYOUT */
+            .industries-scroll-container .flex {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                padding: 0 20px 0 20px;
+                width: max-content;
+                scroll-snap-type: x mandatory;
+            }
+
+            /* INDIVIDUAL INDUSTRY CARDS */
+            .industries-scroll-container .flex > a {
+                flex: 0 0 280px;
+                width: 280px;
+                background: white;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                text-decoration: none;
+                color: inherit;
+                scroll-snap-align: start;
+            }
+            .industries-scroll-container .flex > a:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            }
+
+            /* CARD CONTENT */
+            .industries-scroll-container .relative {
+                position: relative;
+                width: 100%;
+                height: 200px;
+            }
+            .industries-scroll-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .industries-scroll-container .flex > a:hover img {
+                transform: scale(1.05);
+            }
+
+            /* TEXT OVERLAY */
+            .industries-scroll-container .absolute {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+                padding: 20px;
+                color: white;
+            }
+            .industries-scroll-container h3 {
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+                line-height: 1.2;
+            }
+            .industries-scroll-container p {
+                font-size: 13px;
+                opacity: 0.9;
+                line-height: 1.4;
+            }
+
+            /* SCROLL INDICATOR */
+            .scroll-indicator {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 20px;
+                padding-bottom: 20px;
+            }
+            .scroll-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .scroll-dot.active {
+                background: #000;
+                transform: scale(1.2);
+            }
+
+            /* TOUCH OPTIMIZATIONS */
+            .industries-scroll-container {
+                cursor: grab;
+            }
+            .industries-scroll-container:active {
+                cursor: grabbing;
+            }
+        }
+
+        /* NEWS SECTION - DESKTOP + SHARED STYLES */
+        #news-highlights {
+            padding: 100px 12px;
+            background: linear-gradient(180deg,#000 0%, #050505 100%);
+            color: #fff;
+        }
+        #news-highlights .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            align-items: start;
+            margin-top: 28px;
+        }
+        #news-highlights .featured {
+            position: relative;
+            background: #070707;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        #news-highlights .featured img { width:100%; height:420px; object-fit: cover; display:block; }
+        #news-highlights .featured .content { padding:28px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6)); margin-top:-80px; position: relative; z-index:2; }
+        #news-highlights .featured .meta { font-size:12px; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+        #news-highlights .featured h3 { font-size: clamp(1.6rem, 2.5vw, 2.6rem); margin:0 0 12px 0; color:#fff; line-height:1.02; }
+        #news-highlights .featured p { color: rgba(255,255,255,0.85); margin-bottom:8px; }
+        #news-highlights .featured a.cta { display:inline-block; margin-top:12px; padding:10px 18px; background:#fff; color:#000; border-radius:8px; font-weight:700; text-decoration:none; }
+
+        #news-highlights .side-grid { display:flex; flex-direction:column; gap:20px; }
+        #news-highlights .side-card { background:#0b0b0b; border-radius:12px; overflow:hidden; display:flex; gap:12px; align-items:center; padding:14px; }
+        #news-highlights .side-card img { width:120px; height:80px; object-fit:cover; border-radius:8px; flex-shrink:0; }
+        #news-highlights .side-card .info h4 { margin:0; font-size:1rem; color:#fff; }
+        #news-highlights .side-card .info .meta { font-size:11px; color: rgba(255,255,255,0.65); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em; }
+
+        @media (max-width: 1024px) {
+            #news-highlights .news-grid { grid-template-columns: 1fr; }
+            #news-highlights .featured img { height: 300px; }
+            #news-highlights .side-card { flex-direction: row; }
+            #news-highlights .side-card img { width:140px; height:100px; }
+        }
+
+        /* NEWS SECTION - MOBILE CARDS (compact single-screen view) */
+        @media (max-width: 768px) {
+            #news-highlights {
+                padding: 18px 12px;
+                background: #000;
+                height: 100vh; /* ensure section fits one viewport */
+                box-sizing: border-box;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+            }
+            #news-highlights .max-w-[1400px] { width:100%; }
+            #news-highlights h4 { font-size:11px; color: rgba(255,255,255,0.6); margin-bottom:6px; text-align:center; }
+            #news-highlights h2 { font-size: clamp(1.6rem,6vw,2.6rem); margin-bottom:8px; text-align:center; }
+
+            /* Stack content and scale down images/text so everything fits in one screen */
+            #news-highlights .news-grid { display:flex; flex-direction:column; gap:12px; height: calc(100vh - 88px); }
+            #news-highlights .featured { flex: 0 0 auto; border-radius:10px; overflow:hidden; }
+            #news-highlights .featured img { width:100%; height:160px; object-fit:cover; display:block; }
+            #news-highlights .featured .content { padding:10px; margin-top:-56px; }
+            #news-highlights .featured .meta { font-size:11px; color: rgba(255,255,255,0.75); margin-bottom:6px; }
+            #news-highlights .featured h3 { font-size:1.1rem; margin:0 0 6px 0; }
+            #news-highlights .featured p { font-size:12px; margin:0; max-height:40px; overflow:hidden; }
+
+            /* Hide the featured CTA on small screens to save vertical space */
+            #news-highlights .featured .cta { display: none !important; }
+
+            /* side cards become small horizontal tiles */
+            #news-highlights .side-grid { display:flex; gap:8px; }
+            #news-highlights .side-card { flex:1; display:flex; flex-direction:column; gap:6px; padding:8px; background:transparent; }
+            #news-highlights .side-card img { width:100%; height:90px; object-fit:cover; border-radius:8px; }
+            #news-highlights .side-card .meta { font-size:10px; color: rgba(255,255,255,0.7); margin-bottom:4px; }
+            #news-highlights .side-card h4 { font-size:0.95rem; margin:0; }
+
+            /* CTA reserved but hidden to save vertical space on small screens (can be toggled visible if desired) */
+            #news-highlights .mt-12 { display:none; }
+        }
+        
+        /* FOOTER - MOBILE OPTIMIZED (TACTICAL REFINEMENT) */
+        @media (max-width: 768px) {
+            footer {
+                padding-top: 80px !important;
+                padding-bottom: 40px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+            footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
+            }
+            footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                text-align: left !important;
+                margin-bottom: 20px;
+            }
+            footer img {
+                display: none !important;
+            }
+            footer p {
+                font-size: 11px !important;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.6);
+                max-width: 100% !important;
+                letter-spacing: 0.2em !important;
+            }
+            footer h4 {
+                font-size: 9px !important;
+                margin-bottom: 16px !important;
+                color: rgba(255, 255, 255, 0.3) !important;
+            }
+            footer .flex-col {
+                gap: 12px !important;
+            }
+            footer a.footer-link-hover {
+                font-size: 11px !important;
+                padding: 0 !important;
+                background: transparent !important;
+                letter-spacing: 0.15em !important;
+            }
+            footer .footer-watermark {
+                font-size: 35vw !important;
+                opacity: 0.03 !important;
+            }
+            
+            /* SHOW THE TACTICAL STATUS ON MOBILE */
+            footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 30px !important;
+                gap: 24px !important;
+                text-align: left !important;
+            }
+            footer .mt-40 .flex.gap-12 {
+                flex-direction: column !important;
+                gap: 8px !important;
+                width: 100%;
+            }
+            footer .mt-40 span {
+                font-size: 8px !important;
+                opacity: 0.4;
+            }
+            footer .text-\[11px\].text-green-500 {
+                font-size: 9px !important;
+            }
+            footer .text-\[10px\].text-white\/20 {
+                font-size: 8px !important;
+            }
+        }
+
+        /* BACK BUTTON - MOBILE FRIENDLY */
+        @media (max-width: 768px) {
+            .px-12.py-8 {
+                padding: 24px 20px !important;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .px-12.py-8 a {
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 20px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.025em;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .px-12.py-8 a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                transform: translateX(-2px);
+            }
+            .px-12.py-8 svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+
+        /* MOBILE RESPONSIVENESS: HIDE DESKTOP HEADER */
+        @media screen and (max-width: 1024px) {
+            /* Targets the most common desktop header selectors */
+            header,
+            .header,
+            #header,
+            .desktop-header,
+            .nav-desktop,
+            nav:not(.mobile-nav-bar) {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important;
+            }
+        }
+
+        /* MOBILE NAVIGATION - APP-STYLE */
+        @media (max-width: 1024px) {
+            .mobile-nav-bar {
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                border-radius: 10px;
+                transition: transform 0.18s ease, background 0.18s ease;
+                cursor: pointer;
+                padding: 6px;
+            }
+            .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+            .mobile-menu-toggle-modern:active { transform: scale(0.98); }
+            .mobile-menu-toggle-modern .menu-icon { width: 26px; height: 26px; display: block; }
+            .mobile-menu-toggle-modern .bar { stroke: rgba(255,255,255,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
+            .mobile-menu-toggle-modern .menu-icon { overflow: visible; }
+            .mobile-menu-toggle-modern .bar { transform-box: fill-box; transform-origin: center; }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(1) { transform: translateY(4px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(2) { opacity: 0; transform: scaleX(0.2); }
+            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(3) { transform: translateY(-4px) rotate(-45deg); }
+        }
+
+        /* LUXURY MOBILE MENU OVERLAY - AVZDAX SECURITY TECH */
+        @media (max-width: 1024px) {
+            #mobile-menu-overlay {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(2, 2, 2, 0.98) 50%, rgba(0, 0, 0, 0.96) 100%);
+                backdrop-filter: blur(60px);
+                -webkit-backdrop-filter: blur(60px);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 80px 24px 40px;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: 9999 !important;
+            }
+            #mobile-menu-overlay::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(226, 226, 226, 0.3), transparent);
+                animation: security-scan 3s infinite linear;
+            }
+            @keyframes security-scan {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
+            }
+            .mobile-nav-content {
+                width: 100%;
+                max-width: 480px;
+                margin: 0 auto;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                box-shadow: none;
+                overflow-y: auto;
+                max-height: calc(100vh - 120px);
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .mobile-nav-content::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* AVZDAX LUXURY NAV DESIGN */
+        .minimalist-nav {
+            width: 100%;
+            position: relative;
+        }
+        .minimalist-nav::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            border-radius: 1px;
+        }
+        .nav-section {
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .nav-section::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5px;
+        }
+        .nav-section:last-child::after {
+            display: none;
+        }
+        .nav-toggle {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-toggle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-toggle:hover::before {
+            width: 100%;
+        }
+        .nav-toggle::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+            background-size: contain;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.6;
+            transform: rotate(0deg);
+        }
+        .nav-toggle.active::after {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+        .nav-toggle:hover {
+            color: #E2E2E2;
+            transform: translateX(4px);
+        }
+        .nav-toggle.active {
+            color: #E2E2E2;
+        }
+        .nav-direct-link {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            text-decoration: none;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 8px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-direct-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-direct-link:hover::before {
+            width: 100%;
+        }
+        .nav-direct-link:hover {
+            color: #E2E2E2;
+            transform: translateX(8px);
+            text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+        }
+        .nav-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 16px;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .nav-dropdown.open {
+            max-height: 800px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .products-list,
+        .intelligence-list,
+        .mission-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .product-link-item,
+        .intelligence-link-item,
+        .mission-link-item {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+            line-height: 1.4;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .product-link-item::before,
+        .intelligence-link-item::before,
+        .mission-link-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            border-radius: 2px 0 0 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-link-item:hover,
+        .intelligence-link-item:hover,
+        .mission-link-item:hover {
+            background: rgba(226, 226, 226, 0.05);
+            border-color: rgba(226, 226, 226, 0.2);
+            color: #ffffff;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+            text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
+        }
+        .product-link-item:hover::before,
+        .intelligence-link-item:hover::before,
+        .mission-link-item:hover::before {
+            opacity: 1;
+        }
+        .product-link-item:active,
+        .intelligence-link-item:active,
+        .mission-link-item:active {
+            transform: translateX(8px) translateY(-2px) scale(0.98);
+        }
+
+        /* TOUCH OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            button, .button, a[role="button"], input, textarea, select {
+                min-height: 44px;
+                padding: 12px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+            button:active, .button:active, a[role="button"]:active {
+                transform: scale(0.98);
+            }
+            * {
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* VIDEO CONTAINERS - MOBILE OPTIMIZED */
+        @media (max-width: 768px) {
+            .vision-frame, .optical-lens, .kinetic-terrain, .command-intelligence, .structural-analysis, .oversight-monitor {
+                height: 250px !important;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+        }
+
+        /* DASHBOARD - MOBILE CARDS */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+            }
+            .dashboard-panel {
+                padding: 24px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .dashboard-panel h4 {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* PURPOSE SECTION - MOBILE STACKED */
+        @media (max-width: 768px) {
+            .purpose-section {
+                padding: 80px 20px;
+                text-align: center;
+            }
+            .purpose-statement h2 {
+                font-size: clamp(2.5rem, 12vw, 5rem) !important;
+                margin-bottom: 32px;
+            }
+            .purpose-values {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+            }
+            .purpose-values > div {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                padding: 32px 24px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .purpose-values > div:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+            .purpose-visual {
+                height: 300px;
+                margin-top: 48px;
+            }
+        }
+
+        /* LOADING ANIMATIONS - MOBILE ENHANCED */
+        @media (max-width: 768px) {
+            @keyframes mobilePulse {
+                0%, 100% { opacity: 0.5; transform: scale(1); }
+                50% { opacity: 1; transform: scale(1.05); }
+            }
+            .animate-pulse {
+                animation: mobilePulse 2s infinite;
+            }
+        }
+
+
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="flex items-center justify-center">
+    <button onclick="toggleSearch()" class="absolute top-10 right-10 text-white/40 hover:text-white transition-all">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-4xl w-full px-10">
+        <div class="flex items-center gap-6 border-b border-white/20 pb-6 mb-10">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-white w-full placeholder:text-white/10">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Trending Assets</h4>
+                <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
+                    <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
+                    <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
+                    <a href="teletraan.html" class="hover:text-green-500 transition-colors">TELETRAAN_OS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- NAVIGATION -->
+<nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
+    <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+
+        <ul class="hidden lg:flex gap-20 items-center">
+            <!-- DEFENSE PLATFORMS -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Ecosystem</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1500px] mx-auto grid grid-cols-5 gap-12 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Platforms
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Primus</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Behavioral Predictive AI</span>
+                                    </a>
+                                    <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Teletraan</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Command UI</span>
+                                    </a>
+                                    <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Nest</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Professional Oversight</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Hardware
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Trion</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Edge Optical Sensing</span>
+                                    </a>
+                                    <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Obex</span>
+                                        <span class="text-[10px] text-gray-500 uppercase font-mono tracking-[0.2em]">Architectural Imaging</span>
+                                    </a>
+                                    <a href="arclight.html" onmouseover="showPreview('arclight')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Arclight</span>
+                                        <span class="text-[10px] text-gray-500 uppercase font-mono tracking-[0.2em]">Urban Surveillance Tower</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Strategic Theaters
+                                </h3>
+                                <ul class="space-y-10 text-[13px] font-black text-gray-400 uppercase tracking-[0.3em] px-4">
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white rounded-full"></div> National Security</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                </ul>
+                            </div>
+ 
+                            <div class="col-span-2 relative flex items-center justify-center overflow-visible min-h-[450px] border-l border-white/5 pl-12">
+                                <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale"></div>
+                                <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <div id="p-obex" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[85%] flex flex-col items-start translate-x-[15%]">
+                                        <!-- HARDWARE BOX -->
+                                        <img src="media/obexbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="OBEX">
+                                        <!-- SENSOR (BOTTOM LEFT) -->
+                                        <img src="media/obex-display.png" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700" alt="OBEX Sensor">
+                                    </div>
+                                </div>
+                                <div id="p-primus" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[110%] flex flex-col items-start translate-x-[5%]">
+                                        <!-- CORE (TOP LEFT) -->
+                                        <img src="media/primus-core.png" class="w-[30%] h-auto relative z-10 mt-[-5%] mb-[-12%] transition-transform duration-700" alt="PRIMUS Core">
+                                        <!-- BOX -->
+                                        <img src="media/primusbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="PRIMUS">
+                                    </div>
+                                </div>
+                                <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-nest" src="/media/nest_display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-arclight" src="/media/arclight-homepage.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- INTELLIGENCE -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Intelligence</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Research Lab
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="whitepaper.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Neural behavior Analysis Archives</span>
+                                    </a>
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Tactical Status Updates</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Intelligence Resources
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Proprietary Industry Perspectives</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Vetted Real-World Deployments</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Network Status
+                                </h3>
+                                <div class="p-8 bg-white/5 border border-white/10 rounded-xl space-y-6">
+                                    <div class="text-[10px] font-mono text-green-500 animate-pulse">● LIVE RESEARCH FEED ACTIVE</div>
+                                    <p class="text-[10px] text-white/40 uppercase leading-loose tracking-[0.2em]">Integrated Intelligence Layer providing real-time behavioral foresight models.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- MISSION -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Mission</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Corporate
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="about.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">About AVZDAX</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Institutional Profile & History</span>
+                                    </a>
+                                    <a href="careers.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Careers</span>
+                                        <span class="text-[9px] text-green-500 uppercase font-mono tracking-[0.2em]">● Active Recruitment</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Governance
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="ethics.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Ethics & Policy</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Sovereign Deployment Standards</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">INDUSTRIES</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Strategic Theaters</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Access
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="contact.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">CONTACT</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Establish Tactical Link</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="news.html" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 hover:text-silver transition-colors py-6">Newsroom</a></li>
+        </ul>
+
+        <div class="flex items-center gap-12 relative z-[160]">
+            <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE NAVIGATION BAR -->
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+    <div class="flex justify-between items-center pl-0 pr-6 py-1">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+        </a>
+        <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
+            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bar" d="M4.5 7.2h15" stroke="white" stroke-width="2.6" />
+                    <path class="bar" d="M6 12h12" stroke="white" stroke-width="2.6" opacity="0.95" />
+                    <path class="bar" d="M4.5 16.8h15" stroke="white" stroke-width="2.6" opacity="0.9" />
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
+    <div class="mobile-nav-content">
+        <div class="minimalist-nav">
+            <div class="nav-section">
+                <button class="nav-toggle">ECOSYSTEM</button>
+                <div class="nav-dropdown">
+                    <div class="products-list">
+                        <a href="primus.html" class="product-link-item">PRIMUS - Decentralized behavioral engine</a>
+                        <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
+                        <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
+                        <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
+                        <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
+                        <a href="arclight.html" class="product-link-item">ARCLIGHT - Urban surveillance tower</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">INTELLIGENCE</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="whitepaper.html" class="intelligence-link-item">White Papers - Neural behavior Analysis</a>
+                        <a href="news.html" class="intelligence-link-item">Newsroom - Global Tactical Updates</a>
+                        <a href="news.html" class="intelligence-link-item">The Frontline - Industry Perspectives</a>
+                        <a href="industries.html" class="intelligence-link-item">Case Studies - Real-World Deployments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">MISSION</button>
+                <div class="nav-dropdown">
+                    <div class="mission-list">
+                        <a href="about.html" class="mission-link-item">About AVZDAX</a>
+                        <a href="careers.html" class="mission-link-item">Careers</a>
+                        <a href="contact.html" class="mission-link-item">Contact</a>
+                        <a href="ethics.html" class="mission-link-item">Ethics & Policy</a>
+                        <a href="industries.html" class="mission-link-item">Industries</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <a href="news.html" class="nav-direct-link">NEWSROOM</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+    <section id="hero" class="relative hero-stage w-full flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop playsinline preload="metadata" poster="/media/hero-poster.jpg" class="hero-video-full">
+            <source src="/media/homepage-hero.webm" type="video/webm">
+            <source src="/media/homepage-hero-optimized.mp4" type="video/mp4">
+        </video>
+        <div class="absolute bottom-0 left-0 z-10 p-6 max-w-md">
+            <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-4">PREDICTING <br> THE UNSEEN.</h1>
+            <p class="text-white/80 text-xs font-light leading-relaxed uppercase tracking-wider mb-6">AVZDAX <span class="font-bold text-white">PEACETECH</span> is the global standard in predictive surveillance. We build the neural infrastructure that secures civilizations.</p>
+            <div class="flex gap-4">
+                <button onclick="document.getElementById('primus').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-white/10 border border-white/20 text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Explore</button>
+                <a href="whitepaper.html" class="inline-block px-6 py-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/60 hover:text-white transition-all underline decoration-white/30 underline-offset-4">Read Thesis</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- GROUNDBREAKING NEW SECTION: THE SOVEREIGN NEURAL LAYER -->
+    <section id="neural-layer" class="py-60 bg-black overflow-hidden border-b border-white/5 px-12 relative">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg width="100%" height="100%" class="svg-mesh">
+                <line class="svg-grid-line" x1="0" y1="20%" x2="100%" y2="20%"></line>
+                <line class="svg-grid-line" x1="0" y1="40%" x2="100%" y2="40%"></line>
+                <line class="svg-grid-line" x1="0" y1="60%" x2="100%" y2="60%"></line>
+                <line class="svg-grid-line" x1="0" y1="80%" x2="100%" y2="80%"></line>
+            </svg>
+        </div>
+        <div class="max-w-[1400px] mx-auto relativewan z-10 flex flex-col items-center text-center">
+            <h4 class="text-[11px] font-mono text-white/30 uppercase tracking-[1em] mb-8">Integrated Ecosystem</h4>
+            <h2 class="text-[clamp(3rem,8vw,7rem)] font-black uppercase tracking-tighter text-gradient leading-none mb-12">ONE BRAIN. <br> TOTAL CONTROL.</h2>
+            <div class="h-[1px] w-full bg-white/10 mb-20"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-32 text-left">
+                <p class="text-silver-400 text-xl font-light leading-relaxed max-w-xl">
+                    AVZDAX is not a collection of parts. It is a singular, intelligent entity. Every Sentinel unit, every Trion sensor, and every Nest watchtower feeds into the Primus engine—creating an unbroken circle of predictive security.
+                </p>
+                <div class="space-y-12">
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">A</span>
+                        <span class="text-sm font-bold uppercase tracking-widest">Hardware Interconnectivity</span>
+                    </div>
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">B</span>
+                        <span class="text-sm font-bold uppercase tracking-widest">Algorithmic Synchronization</span>
+                    </div>
+                    <div class="flex items-center gap-8 border-l border-white/10 pl-8">
+                        <span class="text-4xl font-black italic opacity-20">C</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT MATRIX -->
+    <main id="main-content">
+        <section id="primus" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0 group flex items-center justify-center">
+                    <div class="relative w-full max-w-[800px] flex flex-col items-start translate-x-12 lg:translate-x-24">
+                        <!-- NEURAL CORE (MINIMALIST, TOP LEFT) -->
+                        <img src="media/primus-core.png" class="w-[28%] h-auto relative z-10 mt-[-2%] mb-[-15%] transition-all duration-1000 group-hover:scale-110 group-hover:-translate-x-4 group-hover:-translate-y-4" alt="PRIMUS Neural Core">
+                        <!-- HARDWARE BOX (GIGANTIC TITAN) -->
+                        <img src="media/primusbox.png" class="w-[110%] h-auto self-end relative z-0 transition-all duration-1000 group-hover:scale-[1.03]" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="PRIMUS Integrated Hardware">
+                    </div>
+                </div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Intelligence Nucleus</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">PRIMUS</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Decentralized behavioral engine converting raw metadata into <span class="text-white font-black">predictive certainty.</span> Join the elite defense network.</p>
+                    <a href="primus.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500">Integrate Core</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="trion" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="text-content space-y-10 lg:order-1 order-2 text-right">
+                    <div class="flex items-center gap-4 justify-end"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400 text-right">Optical Vanguard</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none text-right pr-4">TRION</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Multi-spectrum sensing hardware. Featuring proprietary <span class="text-white font-black">Titanium-Edge Compute</span> for zero-fail environments.</p>
+                    <div class="flex justify-end"><a href="trion.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-right">Deploy Asset</a></div>
+                </div>
+                <div class="image-wrapper opacity-0 lg:order-2 order-1"><img src="/media/trion-core.png" alt="TRION" class="product-image w-full h-auto" loading="lazy"></div>
+            </div>
+        </section>
+
+        <section id="teletraan" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/teletraan-core.png" class="product-image w-full h-auto" loading="lazy"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Command OS</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">TELETRAAN</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Unified situational OS merging global data streams into a <span class="text-white font-black">Digital Twin of Reality.</span> Command whole territories.</p>
+                    <a href="teletraan.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-left">Initialize OS</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="nest" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/nest_display.png" class="product-image w-full h-auto" loading="lazy"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Hybrid Watchtower</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">NEST</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">Where foresight meets human precision. <span class="text-white font-black">24/7 Professional Hybrid Oversight</span> for mission-critical assets.</p>
+                    <a href="nest.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-left">Establish Link</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="obex" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="right">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="text-content space-y-10 lg:order-1 order-2 text-right">
+                    <div class="flex items-center gap-4 justify-end"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400 text-right">Architectural Imaging</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none text-right pr-4">OBEX</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Predictive security for the world's most <span class="text-white font-black">exclusive architectural domains.</span> Blending total silence with total cognitive awareness.</p>
+                    <div class="flex justify-end"><a href="obex.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500 text-right">Secure Domain</a></div>
+                </div>
+                <div class="image-wrapper opacity-0 lg:order-2 order-1 group flex items-center justify-center">
+                    <div class="relative w-full max-w-[800px] flex flex-col items-start translate-x-12 lg:translate-x-20">
+                        <!-- HARDWARE BOX (GIGANTIC TITAN) -->
+                        <img src="media/obexbox.png" class="w-[110%] h-auto self-end relative z-0 transition-all duration-1000 group-hover:scale-[1.03]" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="OBEX Sovereign Hardware">
+                        <!-- ARCHITECTURAL SENSOR (POSITIONED PER SKETCH: BOTTOM LEFT) -->
+                        <img src="media/obex-display.png" alt="OBEX" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-18%] transition-all duration-1000 group-hover:scale-110 group-hover:-translate-x-4 group-hover:translate-y-4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arclight" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0"><img src="/media/arclight-homepage.png" class="product-image w-full h-auto" loading="lazy"></div>
+                <div class="text-content space-y-10 text-left">
+                    <div class="flex items-center gap-4"><div class="h-[1px] w-12 bg-white/20"></div><span class="text-[10px] font-mono uppercase tracking-[0.6em] text-silver-400">Civilizational Sentinel</span></div>
+                    <h2 class="product-title text-7xl md:text-9xl font-black italic uppercase tracking-tighter text-gradient leading-none">ARCLIGHT</h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">The temporal lighthouse for civilizations. Providing autonomous intelligence fabric where human observation reaches its <span class="text-white font-black">physical limit.</span></p>
+                    <a href="arclight.html" class="inline-block px-12 py-5 border-thin bg-white/5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-left">Establish Sovereignty</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- INDUSTRIES SHOWCASE -->
+    <section class="industries-showcase h-screen bg-white border-b border-black/10 px-12 overflow-hidden flex flex-col justify-center">
+        <div class="w-full">
+            <div class="text-center mb-16">
+                <h4 class="text-[11px] font-mono text-black/40 uppercase tracking-[0.8em] mb-6">Critical Sectors</h4>
+                <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black leading-none">PROTECTING GLOBAL INFRASTRUCTURE</h2>
+            </div>
+            <div class="industries-scroll-container">
+                <div class="flex space-x-12">
+                <!-- Government -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=2000" alt="Government Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Government</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">National security & critical infrastructure protection systems</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Energy -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Energy Infrastructure" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Energy</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Power grids & infrastructure security intelligence</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Banking -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?q=80&w=1000" alt="Banking Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Banking</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Financial systems & fraud prevention technology</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Healthcare -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000" alt="Healthcare Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Healthcare</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Medical data & facility protection solutions</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Airport -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1473862170180-84427c485aca?q=80&w=2670" alt="Airport Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Airport</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Aviation security & passenger safety systems</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Residential -->
+                <a href="industries.html" class="flex-shrink-0 w-[600px] relative group cursor-pointer block">
+                    <div class="relative overflow-hidden rounded-3xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Residential Security" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-10 left-10 right-10">
+                            <h3 class="text-4xl font-black text-white uppercase tracking-wider">Residential</h3>
+                            <p class="text-white/90 text-lg mt-4 leading-relaxed">Community & home security intelligence</p>
+                        </div>
+                    </div>
+                </a>
+                </div>
+
+                <!-- SCROLL INDICATOR DOTS -->
+                <div class="scroll-indicator">
+                    <div class="scroll-dot active" data-slide="0"></div>
+                    <div class="scroll-dot" data-slide="1"></div>
+                    <div class="scroll-dot" data-slide="2"></div>
+                    <div class="scroll-dot" data-slide="3"></div>
+                    <div class="scroll-dot" data-slide="4"></div>
+                    <div class="scroll-dot" data-slide="5"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS HIGHLIGHTS SECTION -->
+    <section id="news-highlights">
+        <div class="max-w-[1400px] mx-auto">
+            
+            <h2 class="text-[clamp(2.6rem,6vw,4rem)] font-black uppercase tracking-tighter text-white leading-none text-center">LATEST INTELLIGENCE</h2>
+
+            <div class="news-grid">
+                <a href="news.html" class="featured group">
+                    <img src="/media/trion-display.png" alt="Trion Deployment">
+                    <div class="content">
+                        <div class="meta">DEPLOYMENT • NOVEMBER 20, 2025</div>
+                        <h3>Trion Optical Sensors Deployed in Urban Network</h3>
+                        <p>AVZDAX has deployed Trion optical sensors across an urban network to enhance real-time situational awareness and edge analytics.</p>
+                        <a href="news.html" class="cta"></a>
+                    </div>
+                </a>
+
+                <div class="side-grid">
+                    <a href="news.html" class="side-card">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Breakthrough">
+                        <div class="info">
+                            <div class="meta">TECHNOLOGY • NOVEMBER 28, 2025</div>
+                            <h4>Neural Network Achieves 99.97% Threat Prediction Accuracy</h4>
+                        </div>
+                    </a>
+                    <a href="news.html" class="side-card">
+                        <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Energy Security">
+                        <div class="info">
+                            <div class="meta">DEPLOYMENT • NOVEMBER 15, 2025</div>
+                            <h4>Energy Infrastructure Protected by Sovereign AI Network</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="news.html" class="inline-block px-12 py-4 border border-white/20 text-white bg-white/5 hover:bg-white hover:text-black text-[11px] font-mono uppercase tracking-[0.3em] transition-all">Explore Newsroom</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
+
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video muted loop playsinline preload="none" data-lazy-video class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web-optimized.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
+
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <a href="index.html" aria-label="Home" class="hidden md:block"><img src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
+                <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4">
+                    <a href="https://linkedin.com/company/avzdax" class="social-glass-btn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
+                    <a href="trion.html" class="footer-link-hover">Trion</a>
+                    <a href="obex.html" class="footer-link-hover">Obex</a>
+                    <a href="arclight.html" class="footer-link-hover">Arclight</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
+                    <a href="industries.html" class="footer-link-hover">Government</a>
+                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
+                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
+                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality - More reliable for production
+        function initMobileMenu() {
+            const btn = document.querySelector('.mobile-menu-toggle-modern');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            if(btn && overlay){
+                btn.addEventListener('click', function(e){
+                    e.stopImmediatePropagation();
+                    const opened = btn.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    if(opened) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                        // Ensure menu is visible by scrolling to top if needed
+                        window.scrollTo(0, 0);
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+
+                // Close menu when clicking overlay
+                overlay.addEventListener('click', function(e){
+                    if(e.target === overlay){
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded','false');
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        }
+
+        // Try to initialize immediately, fallback to DOMContentLoaded
+        if(document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMobileMenu);
+        } else {
+            initMobileMenu();
+        }
+
+        // Mobile menu: toggle nav dropdowns inside overlay
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
+            });
+        });
+
+        // Ensure hero fills the viewport on mobile (fix address-bar 100vh issues)
+        function setHeroHeight(){
+            const hero = document.getElementById('hero');
+            if(!hero) return;
+            hero.style.height = window.innerHeight + 'px';
+        }
+        window.addEventListener('resize', setHeroHeight);
+        window.addEventListener('orientationchange', setHeroHeight);
+        setHeroHeight();
+
+        // PREVIEW ENGINE
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+        // MISSION IMAGE CHANGE
+        function changeMissionImage(src) {
+            document.getElementById('mission-image').src = '/media/' + src;
+        }
+
+        // Reset ecosystem preview on menu leave
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                const previewDefault = document.getElementById('preview-default');
+                if(previewDefault) previewDefault.style.opacity = '1';
+                const missionImage = document.getElementById('mission-image');
+                if(missionImage) missionImage.src = '/media/avzdax-logo.png';
+            });
+        });
+
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Neural Layer Text Reveal
+        gsap.from("#neural-layer h2", {
+            scrollTrigger: { trigger: "#neural-layer", start: "top 70%" },
+            y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+        });
+
+        document.querySelectorAll('.product-section').forEach((section) => {
+            const align = section.getAttribute('data-align');
+            const img = section.querySelector('.image-wrapper');
+            const text = section.querySelector('.text-content');
+            gsap.fromTo(img, 
+                { x: align === 'left' ? -150 : 150, opacity: 0, scale: 0.85, rotateY: align === 'left' ? 10 : -10 },
+                { x: 0, opacity: 1, scale: 1, rotateY: 0, scrollTrigger: { trigger: section, start: "top 75%", end: "top 25%", scrub: 1.5 } }
+            );
+            gsap.fromTo(text.children, { y: 80, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.2, duration: 1.2, ease: "power4.out", scrollTrigger: { trigger: section, start: "top 65%" } });
+        });
+
+        // Industries Showcase Horizontal Scroll Animation
+        const industriesSection = document.querySelector('.industries-showcase');
+        const industriesContainer = industriesSection.querySelector('.flex');
+
+        // Calculate total width of all cards (6 cards * 600px + 5 spaces * 48px = 3600 + 240 = 3840px)
+        const totalWidth = 6 * 600 + 5 * 48; // 3840px
+        const moveDistance = totalWidth - window.innerWidth + 200;
+
+        gsap.to(industriesContainer, {
+            x: -moveDistance,
+            ease: "none",
+            scrollTrigger: {
+                trigger: industriesSection,
+                start: "top top",
+                end: "+=" + (moveDistance + 400),
+                scrub: 1,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        // Industries Cards Fade In
+        gsap.from(".industries-showcase .flex > div", {
+            scrollTrigger: { trigger: ".industries-showcase", start: "top 80%" },
+            y: 60, opacity: 0, stagger: 0.2, duration: 1.2, ease: "power4.out"
+        });
+
+        // MOBILE INDUSTRIES HORIZONTAL SCROLL INDICATOR
+        function initIndustriesScroll() {
+            const scrollContainer = document.querySelector('.industries-scroll-container');
+            const scrollDots = document.querySelectorAll('.scroll-dot');
+
+            if (!scrollContainer || !scrollDots.length) return;
+
+            // Update active dot on scroll
+            function updateActiveDot() {
+                const scrollLeft = scrollContainer.scrollLeft;
+                const cardWidth = 280 + 16; // 296
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+                const clampedIndex = Math.max(0, Math.min(activeIndex, scrollDots.length - 1));
+
+                scrollDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === clampedIndex);
+                });
+            }
+
+            // Add scroll event listener
+            scrollContainer.addEventListener('scroll', updateActiveDot);
+
+            // Add click handlers to dots
+            scrollDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const cardWidth = 280 + 16; // card width + gap
+                    const scrollPosition = index * cardWidth;
+                    scrollContainer.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Initial update
+            updateActiveDot();
+        }
+
+        // Initialize industries scroll on load
+        document.addEventListener('DOMContentLoaded', initIndustriesScroll);
+
+        // Debug footer visibility
+        console.log('Footer display style:', document.querySelector('footer').style.display);
+        console.log('Footer computed style display:', window.getComputedStyle(document.querySelector('footer')).display);
+
+
+        // Desktop nav scroll background
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                if (window.scrollY > 0) {
+                    nav.classList.add('bg-black');
+                } else {
+                    nav.classList.remove('bg-black');
+                }
+            }
+        });
+
+        // Optimized News Highlights Fast Slide In
+        gsap.from("#news-highlights .news-grid", {
+            scrollTrigger: { trigger: "#news-highlights", start: "top 85%" },
+            x: -50, opacity: 0, duration: 0.4, ease: "power2.out"
+        });
+
+
+        // OPTIMIZED FOOTER CANVAS
+        const canvas = document.getElementById('footer-neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<30; i++) pts.push(new P()); }
+        class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
+        let lastTime = 0;
+        function draw(currentTime){
+            if(currentTime - lastTime < 33) { // ~30fps
+                requestAnimationFrame(draw);
+                return;
+            }
+            lastTime = currentTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.2 - (dSq/maxDistSq)*0.2;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw(); window.onresize=resize;
+
+        // SEARCH TOGGLE ENGINE
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // SEARCH FUNCTIONALITY
+        document.querySelector('#search-overlay input').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const links = document.querySelectorAll('#search-overlay a');
+            links.forEach(link => {
+                if (link.textContent.toLowerCase().includes(query)) {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+
+        // ============================================
+        // SILICON VALLEY PERFORMANCE OPTIMIZATIONS
+        // ============================================
+
+        // LAZY VIDEO LOADING - Only load when visible
+        const lazyVideoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    if (video.dataset.lazyVideo !== undefined && !video.dataset.loaded) {
+                        video.load();
+                        video.play();
+                        video.dataset.loaded = 'true';
+                    }
+                } else {
+                    // Pause video when out of view to save battery
+                    if (video.dataset.loaded === 'true') {
+                        video.pause();
+                    }
+                }
+            });
+        }, { rootMargin: '200px' });
+
+        // Observe all lazy videos
+        document.querySelectorAll('video[data-lazy-video]').forEach(video => {
+            lazyVideoObserver.observe(video);
+        });
+
+        // PAUSE CANVAS ANIMATION WHEN FOOTER NOT VISIBLE
+        let canvasAnimationPaused = true;
+        const canvasObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                canvasAnimationPaused = !entry.isIntersecting;
+            });
+        }, { rootMargin: '100px' });
+        
+        const footerEl = document.getElementById('sovereign-footer');
+        if (footerEl) canvasObserver.observe(footerEl);
+
+        // Override draw function to respect pause state
+        const originalDraw = draw;
+        function optimizedDraw(currentTime) {
+            if (canvasAnimationPaused) {
+                requestAnimationFrame(optimizedDraw);
+                return;
+            }
+            if(currentTime - lastTime < 50) { // Throttle to ~20fps for better perf
+                requestAnimationFrame(optimizedDraw);
+                return;
+            }
+            lastTime = currentTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.15 - (dSq/maxDistSq)*0.15;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(optimizedDraw);
+        }
+        // Restart with optimized draw
+        requestAnimationFrame(optimizedDraw);
+
+    </script>
+                <script src="/media/site-utils.js"></script>
+
+
+
+
+</body>
+</html>
