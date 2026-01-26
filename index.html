@@ -1068,76 +1068,114 @@
         }
         
         /* FOOTER - MOBILE OPTIMIZED (TACTICAL REFINEMENT) */
-        @media (max-width: 768px) {
+        /* FOOTER - PIXEL PERFECT MOBILE SYNC (2-COLUMN GRID) */
+        @media (max-width: 1024px) {
             footer {
-                padding-top: 80px !important;
-                padding-bottom: 40px !important;
-                padding-left: 20px !important;
-                padding-right: 20px !important;
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
             }
-            footer .grid {
+            #sovereign-footer .grid {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 40px 20px !important;
             }
-            footer .lg\:col-span-2 {
+            #sovereign-footer .lg\:col-span-2 {
                 grid-column: span 2 !important;
                 text-align: left !important;
                 margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
-            footer img {
+            #sovereign-footer img {
                 display: none !important;
             }
-            footer p {
-                font-size: 11px !important;
-                line-height: 1.6;
-                color: rgba(255, 255, 255, 0.6);
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
                 max-width: 100% !important;
-                letter-spacing: 0.2em !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+                margin-bottom: 20px !important;
             }
-            footer h4 {
-                font-size: 9px !important;
-                margin-bottom: 16px !important;
-                color: rgba(255, 255, 255, 0.3) !important;
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-bottom: none !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
             }
-            footer .flex-col {
+            #sovereign-footer .flex-col {
                 gap: 12px !important;
             }
-            footer a.footer-link-hover {
-                font-size: 11px !important;
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
                 padding: 0 !important;
                 background: transparent !important;
-                letter-spacing: 0.15em !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+                transform: none !important;
             }
-            footer .footer-watermark {
-                font-size: 35vw !important;
-                opacity: 0.03 !important;
+            #sovereign-footer .footer-watermark {
+                font-size: 40vw !important;
+                opacity: 0.02 !important;
             }
             
-            /* SHOW THE TACTICAL STATUS ON MOBILE */
-            footer .mt-40 {
+            /* TACTICAL TELEMETRY STACK */
+            #sovereign-footer .mt-40 {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: flex-start !important;
                 margin-top: 60px !important;
-                padding-top: 30px !important;
-                gap: 24px !important;
+                padding-top: 40px !important;
+                gap: 40px !important;
                 text-align: left !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
-            footer .mt-40 .flex.gap-12 {
+            #sovereign-footer .mt-40 .flex.gap-12 {
                 flex-direction: column !important;
-                gap: 8px !important;
+                gap: 12px !important;
                 width: 100%;
             }
-            footer .mt-40 span {
-                font-size: 8px !important;
-                opacity: 0.4;
+            #sovereign-footer .mt-40 span {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                opacity: 0.3 !important;
+                letter-spacing: 0.3em !important;
             }
-            footer .text-\[11px\].text-green-500 {
-                font-size: 9px !important;
+            #sovereign-footer .text-\[11px\].text-green-500 {
+                font-size: 11px !important;
+                letter-spacing: 0.2em !important;
+                color: #00ff41 !important;
             }
-            footer .text-\[10px\].text-white\/20 {
-                font-size: 8px !important;
+            #sovereign-footer .text-\[10px\].text-white\/20 {
+                font-size: 10px !important;
+                letter-spacing: 0.15em !important;
+                opacity: 0.2 !important;
+            }
+            #sovereign-footer .flex.gap-4 {
+                gap: 24px !important;
+                margin-top: 20px !important;
+            }
+            .social-glass-btn {
+                width: auto !important;
+                height: auto !important;
+                background: transparent !important;
+                border: none !important;
+            }
+            .social-glass-btn svg {
+                width: 28px !important;
+                height: 28px !important;
             }
         }
 
@@ -1807,7 +1845,7 @@
 </nav>
 
 <!-- MOBILE NAVIGATION BAR -->
-<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
             <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
@@ -2189,33 +2227,33 @@
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
                     <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
                     <a href="nest.html" class="footer-link-hover">NEST</a>
-                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
-                    <a href="trion.html" class="footer-link-hover">Trion</a>
-                    <a href="obex.html" class="footer-link-hover">Obex</a>
-                    <a href="arclight.html" class="footer-link-hover">Arclight</a>
+                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">TRION</a>
+                    <a href="obex.html" class="footer-link-hover">OBEX</a>
+                    <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
-                    <a href="industries.html" class="footer-link-hover">Government</a>
-                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
-                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
-                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                    <a href="industries.html" class="footer-link-hover italic">OIL & GAS</a>
+                    <a href="industries.html" class="footer-link-hover">GOVERNMENT</a>
+                    <a href="industries.html" class="footer-link-hover">FINANCE & BANKING</a>
+                    <a href="industries.html" class="footer-link-hover">HEALTHCARE</a>
+                    <a href="industries.html" class="footer-link-hover">MARITIME</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">MISSION</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">ABOUT US</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="news.html" class="footer-link-hover">NEWSROOM</a><a href="ethics.html" class="footer-link-hover">ETHICS POLICY</a></div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">HELP CENTER</a><a href="#" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">PRIVACY POLICY</a><a href="#" class="footer-link-hover">TERMS</a></div>
             </div>
         </div>
 
@@ -2227,45 +2265,65 @@
     </footer>
 
     <script>
-        // Mobile menu toggle functionality - More reliable for production
+        // MOBILE MENU TOGGLE - ROBUST MULTI-BUTTON SYNC
         function initMobileMenu() {
-            const btn = document.querySelector('.mobile-menu-toggle-modern');
+            const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
             const overlay = document.getElementById('mobile-menu-overlay');
 
-            if(btn && overlay){
-                btn.addEventListener('click', function(e){
+            if (!btns.length || !overlay) return;
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
                     e.stopImmediatePropagation();
-                    const opened = btn.classList.toggle('open');
-                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
-                    if(opened) {
+                    const opened = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    
+                    // Sync all buttons found on page
+                    btns.forEach(b => {
+                        if (b !== this) {
+                            if (opened) b.classList.add('open');
+                            else b.classList.remove('open');
+                            b.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                        }
+                    });
+
+                    if (opened) {
                         overlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
-                        // Ensure menu is visible by scrolling to top if needed
                         window.scrollTo(0, 0);
                     } else {
                         overlay.style.display = 'none';
                         document.body.style.overflow = '';
                     }
                 });
+            });
 
-                // Close menu when clicking overlay
-                overlay.addEventListener('click', function(e){
-                    if(e.target === overlay){
+            // Close menu when clicking overlay background
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    btns.forEach(btn => {
                         btn.classList.remove('open');
-                        btn.setAttribute('aria-expanded','false');
-                        overlay.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close on link click
+            overlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
                 });
-            }
+            });
         }
 
-        // Try to initialize immediately, fallback to DOMContentLoaded
-        if(document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMobileMenu);
-        } else {
-            initMobileMenu();
-        }
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
 
         // Mobile menu: toggle nav dropdowns inside overlay
         document.addEventListener('DOMContentLoaded', function(){

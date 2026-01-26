@@ -922,7 +922,7 @@
 </nav>
 
 <!-- MOBILE NAVIGATION BAR -->
-<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
             <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
@@ -940,7 +940,7 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
     <div class="mobile-nav-content">
         <div class="minimalist-nav">
             <div class="nav-section">
@@ -1243,34 +1243,65 @@
             });
         });
 
-        // Mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function(){
-            const btn = document.querySelector('.mobile-menu-toggle-modern');
+        // MOBILE MENU TOGGLE - ROBUST MULTI-BUTTON SYNC
+        function initMobileMenu() {
+            const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
             const overlay = document.getElementById('mobile-menu-overlay');
-            if(btn){
-                btn.addEventListener('click', function(e){
+
+            if (!btns.length || !overlay) return;
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
                     e.stopImmediatePropagation();
-                    const opened = btn.classList.toggle('open');
-                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
-                    if(overlay) overlay.style.display = opened ? 'flex' : 'none';
-                    document.body.style.overflow = opened ? 'hidden' : '';
-                });
-            }
-            function closeMobileMenu(){
-                if(!btn) return;
-                btn.classList.remove('open');
-                btn.setAttribute('aria-expanded','false');
-                if(overlay) overlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-            if(overlay){
-                overlay.addEventListener('click', function(e){
-                    if(e.target === overlay){
-                        closeMobileMenu();
+                    const opened = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    
+                    // Sync all buttons found on page
+                    btns.forEach(b => {
+                        if (b !== this) {
+                            if (opened) b.classList.add('open');
+                            else b.classList.remove('open');
+                            b.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                        }
+                    });
+
+                    if (opened) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                        window.scrollTo(0, 0);
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
                     }
                 });
-            }
-        });
+            });
+
+            // Close menu when clicking overlay background
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close on link click
+            overlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
 
         // Mobile menu: toggle nav dropdowns inside overlay
         document.addEventListener('DOMContentLoaded', function(){

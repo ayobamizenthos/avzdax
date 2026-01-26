@@ -1,0 +1,69 @@
+<!-- ============================================
+     STANDARDIZED MOBILE HEADER & MENU
+     Copy this exact implementation to all pages
+     ============================================ -->
+
+<!-- MOBILE NAVIGATION BAR -->
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
+    <div class="flex justify-between items-center pl-0 pr-6 py-1">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+        </a>
+        <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
+            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bar" d="M4.5 7.2h15" stroke="white" stroke-width="2.6" />
+                    <path class="bar" d="M6 12h12" stroke="white" stroke-width="2.6" opacity="0.95" />
+                    <path class="bar" d="M4.5 16.8h15" stroke="white" stroke-width="2.6" opacity="0.9" />
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
+    <div class="mobile-nav-content">
+        <div class="minimalist-nav">
+            <div class="nav-section">
+                <button class="nav-toggle">ECOSYSTEM</button>
+                <div class="nav-dropdown">
+                    <div class="products-list">
+                        <a href="primus.html" class="product-link-item">PRIMUS - Decentralized behavioral engine</a>
+                        <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
+                        <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
+                        <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
+                        <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
+                        <a href="arclight.html" class="product-link-item">ARCLIGHT - Urban surveillance tower</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">INTELLIGENCE</button>
+                <div class="nav-dropdown">
+                    <div class="intelligence-list">
+                        <a href="whitepaper.html" class="intelligence-link-item">White Papers - Neural behavior Analysis</a>
+                        <a href="news.html" class="intelligence-link-item">Newsroom - Global Tactical Updates</a>
+                        <a href="news.html" class="intelligence-link-item">The Frontline - Industry Perspectives</a>
+                        <a href="industries.html" class="intelligence-link-item">Case Studies - Real-World Deployments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <button class="nav-toggle">MISSION</button>
+                <div class="nav-dropdown">
+                    <div class="mission-list">
+                        <a href="about.html" class="mission-link-item">About AVZDAX</a>
+                        <a href="careers.html" class="mission-link-item">Careers</a>
+                        <a href="contact.html" class="mission-link-item">Contact</a>
+                        <a href="ethics.html" class="mission-link-item">Ethics &amp; Policy</a>
+                        <a href="industries.html" class="mission-link-item">Industries</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-section">
+                <a href="news.html" class="nav-direct-link">NEWSROOM</a>
+            </div>
+        </div>
+    </div>
+</div>

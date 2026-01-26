@@ -86,27 +86,102 @@
         }
         .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
 
-        /* MOBILE OVERLAY STYLES */
-        #mobile-menu-overlay {
-            background: #000; display: none; flex-direction: column;
-            padding: 100px 40px; overflow-y: auto; 
-        }
-        .mobile-nav-content { max-width: 600px; margin: 0 auto; width: 100%; }
-        .nav-toggle {
-            width: 100%; text-align: left; background: transparent; border: none;
-            color: #fff; font-size: 32px; font-weight: 900; letter-spacing: -0.02em;
-            padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .nav-dropdown { max-height: 0; overflow: hidden; transition: all 0.5s ease; }
-        .nav-dropdown.open { max-height: 500px; padding: 20px 0; }
-        .product-link-item { display: block; color: rgba(255,255,255,0.6); padding: 12px 0; font-size: 16px; text-decoration: none; }
-        
-        .mobile-menu-toggle-modern {
-            width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.05); border-radius: 50%;
-        }
+        /* MOBILE NAVIGATION & MASTER FOOTER SYNC */
+        @media (max-width: 1024px) {
+            /* Mobile Nav Logic */
+            #main-nav { display: none !important; visibility: hidden !important; }
+            .mobile-nav-bar {
+                background: #000;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 15px 0;
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+            }
+            .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+            /* Master Footer Assembly */
+            footer {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            #sovereign-footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
+            }
+            #sovereign-footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            #sovereign-footer img {
+                display: none !important;
+            }
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
+                max-width: 100% !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+            }
+            
+            /* TACTICAL TELEMETRY STACK */
+            #sovereign-footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 40px !important;
+                gap: 40px !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            #sovereign-footer .mt-40 .flex.gap-12 {
+                flex-direction: column !important;
+                gap: 12px !important;
+                width: 100%;
+            }
+            #sovereign-footer .mt-40 span {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                opacity: 0.3 !important;
+                letter-spacing: 0.3em !important;
+            }
+            .social-glass-btn svg { width: 28px !important; height: 28px !important; }
+        }
         /* HUD ANIMATION */
         @keyframes scan {
             0% { left: -30%; }
@@ -217,6 +292,43 @@
             background: rgba(0, 255, 65, 0.5);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
             z-index: 20; opacity: 0;
+        }
+        /* CAPABILITIES GRID STYLES - SYNCED WITH PRIMUS */
+        .cap-card { 
+            flex: 1;
+            background: #080808;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 2px;
+            min-height: 380px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
+        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+        .cap-card.active-node .cap-card-border { width: 100%; }
+        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+        @media (max-width: 1024px) {
+            .capabilities-carousel { 
+                display: flex !important; 
+                overflow-x: auto !important; 
+                scroll-snap-type: x mandatory !important;
+                padding: 0 5vw !important;
+                gap: 15px !important;
+            }
+            .cap-card { 
+                flex: 0 0 85% !important; 
+                min-width: 85% !important; 
+                scroll-snap-align: center !important;
+                opacity: 0.3;
+                transform: scale(0.95);
+            }
+            .mobile-scroll-hint { display: flex; }
+            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
         }
     </style>
 </head>
@@ -422,7 +534,7 @@
 </nav>
 
 <!-- MOBILE NAVIGATION BAR -->
-<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
             <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
@@ -440,7 +552,7 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
     <div class="mobile-nav-content">
         <div class="minimalist-nav">
             <div class="nav-section">
@@ -827,14 +939,81 @@
         </div>
     </section>
 
-    <!-- GOD-TIER BLACK SHIELD FOOTER -->
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+
+        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
+        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
+            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
+                <!-- Cap 01 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">MOBILE_BASE</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">RAPID<br>DEPLOYMENT</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Tactical setup in under 15 minutes. Instant infrastructure for fluid and high-stakes security environments.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Ready</span>
+                    </div>
+                </div>
+
+                <!-- Cap 02 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">HYBRID_GRID</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">AUTONOMOUS<br>POWER</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Intelligent switching between solar and internal backup for uninterrupted field presence in any territory.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
+                    </div>
+                </div>
+
+                <!-- Cap 03 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">MESH_NET</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">MULTI-NODAL<br>SYNC</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Seamless communication between NEST units creating a mobile situational fortress across large perimeters.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Linked</span>
+                    </div>
+                </div>
+
+                <!-- Cap 04 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">EDGE_TRIAGE</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">FIELD<br>INTELLIGENCE</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Localized neural processing for immediate identification of loitering or intent, directly at the edge.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Enabled</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mobile-scroll-hint">
+                <div class="hint-bar"></div>
+                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
+            </div>
+        </section>
+
     <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
         <div class="radiant-footer-border"></div>
 
         <!-- MACRO BACKDROP VIDEO -->
         <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-            <video muted loop playsinline preload="none" data-lazy-video class="w-full h-full object-cover blur-[80px] grayscale">
-                <source src="/media/XBAThero-web-optimized.mp4" type="video/mp4">
+            <video muted loop playsinline preload="none" data-lazy-video poster="/media/general-poster.png" class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
         </div>
@@ -859,33 +1038,33 @@
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="primus.html" class="footer-link-hover">PRIMUS</a>
                     <a href="nest.html" class="footer-link-hover">NEST</a>
-                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
-                    <a href="trion.html" class="footer-link-hover">Trion</a>
-                    <a href="obex.html" class="footer-link-hover">Obex</a>
-                    <a href="arclight.html" class="footer-link-hover">Arclight</a>
+                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">TRION</a>
+                    <a href="obex.html" class="footer-link-hover">OBEX</a>
+                    <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
-                    <a href="industries.html" class="footer-link-hover">Government</a>
-                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
-                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
-                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                    <a href="industries.html" class="footer-link-hover italic">OIL & GAS</a>
+                    <a href="industries.html" class="footer-link-hover">GOVERNMENT</a>
+                    <a href="industries.html" class="footer-link-hover">FINANCE & BANKING</a>
+                    <a href="industries.html" class="footer-link-hover">HEALTHCARE</a>
+                    <a href="industries.html" class="footer-link-hover">MARITIME</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">MISSION</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">ABOUT US</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="news.html" class="footer-link-hover">NEWSROOM</a><a href="ethics.html" class="footer-link-hover">ETHICS POLICY</a></div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">HELP CENTER</a><a href="#" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">PRIVACY POLICY</a><a href="#" class="footer-link-hover">TERMS</a></div>
             </div>
         </div>
 
@@ -922,18 +1101,65 @@
         });
     });
 
-    // --- MOBILE MENU ---
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle-modern');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    
-    if (mobileMenuToggle && mobileMenuOverlay) {
-        mobileMenuToggle.addEventListener('click', function() {
-            this.classList.toggle('open');
-            const isOpen = this.classList.contains('open');
-            mobileMenuOverlay.style.display = isOpen ? 'flex' : 'none';
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+    // --- MOBILE MENU TOGGLE - ROBUST MULTI-BUTTON SYNC ---
+    function initMobileMenu() {
+        const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
+        const overlay = document.getElementById('mobile-menu-overlay');
+
+        if (!btns.length || !overlay) return;
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopImmediatePropagation();
+                const opened = this.classList.toggle('open');
+                this.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                
+                // Sync all buttons found on page
+                btns.forEach(b => {
+                    if (b !== this) {
+                        if (opened) b.classList.add('open');
+                        else b.classList.remove('open');
+                        b.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    }
+                });
+
+                if (opened) {
+                    overlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    window.scrollTo(0, 0);
+                } else {
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Close menu when clicking overlay background
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                btns.forEach(btn => {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close on link click
+        overlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                btns.forEach(btn => {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            });
         });
     }
+
+    initMobileMenu();
 
     // --- LAZY VIDEO ---
     const observer = new IntersectionObserver((entries) => {
@@ -1049,6 +1275,17 @@
         else nav.classList.remove('nav-scrolled');
     });
 
-</script>
+        // KINETIC CAROUSEL OBSERVER
+        const capObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-node');
+                } else {
+                    entry.target.classList.remove('active-node');
+                }
+            });
+        }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
+        document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
+    </script>
 </body>
 </html>

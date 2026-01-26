@@ -186,7 +186,7 @@
         }
 
         .grid-item-hover:hover span:first-child {
-            color: #00ff41;
+            color: #ffffff;
         }
 
         .grid-item-hover:hover span:last-child {
@@ -236,7 +236,7 @@
         }
 
         .strategic-theaters ul li:hover {
-            color: #00ff41;
+            color: #ffffff;
             transform: translateX(4px);
         }
 
@@ -251,7 +251,7 @@
         }
 
         .strategic-theaters ul li:hover .dot {
-            background: #00ff41;
+            background: #ffffff;
         }
 
         /* MENU INTELLIGENCE LAYER */
@@ -280,7 +280,7 @@
 
         .intelligence-layer .status {
             font-size: 11px;
-            color: #00ff41;
+            color: #ffffff;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -324,7 +324,16 @@
         }
 
         
+        /* NEW PRIMUS GRAND CLASSES */
+        .cursor-cell { cursor: cell; }
+        .cap-section { min-height: 100vh; position: relative; }
+        #particles-js { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
         
+        @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .group:hover .animate-spin-slow { animation: spin-slow 10s linear infinite; }
         /* ELITE TYPOGRAPHY REFINEMENT */
         .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.08em; line-height: 0.85; }
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
@@ -340,9 +349,14 @@
             display: flex; justify-content: space-between; align-items: center; padding: 0 24px;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .nav-inverted { background: rgba(255, 255, 255, 0.8) !important; border-color: rgba(0,0,0,0.1) !important; }
+        .nav-inverted { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(0,0,0,0.1) !important; }
         .nav-inverted .synco, .nav-inverted .mono { color: var(--void) !important; }
         .nav-inverted .bg-white { background: var(--void) !important; color: var(--white) !important; }
+        .nav-inverted ul, .nav-minimal ul { opacity: 0 !important; pointer-events: none !important; }
+        
+        .nav-minimal { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
+        .nav-minimal .synco, .nav-minimal .mono { color: #ffffff !important; }
+        .nav-minimal a img { filter: brightness(1); }
 
         .pinned-stage { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         
@@ -392,6 +406,27 @@
         @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
+        /* LUXURY CAPABILITIES GRID - SYNCED WITH OBEX */
+        .cap-card { 
+            flex: 1;
+            background: #080808;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 2px;
+            min-height: 380px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
+        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+        .cap-card.active-node .cap-card-border { width: 100%; }
+        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+
         .social-glass-btn {
             width: 48px;
             height: 48px;
@@ -437,174 +472,267 @@
                 z-index: 10;
             }
 
-            /* 1. Video Container: High-Tech Viewport */
-            .act-content .video-bg {
+        /* ==========================================================================
+           MILLION DOLLAR AGENCY RESPONSIVE SYSTEM (MOBILE & TABLET)
+           ========================================================================== */
+
+        @media (max-width: 1024px) {
+
+
+            /* 02. MANIFESTO */
+            #manifesto-trigger { height: auto !important; padding: 100px 20px !important; }
+            .manifesto-line { font-size: 2rem !important; line-height: 1.2 !important; margin-bottom: 2rem !important; }
+
+            /* 03. PRODUCT SHOWCASE (SCENES 1-4) - BOLD CINEMATIC REVEAL */
+            #capabilities-track { 
+                overflow: visible !important; 
+                scroll-snap-type: y mandatory !important; /* ENABLE STATIC DRAG-TO-SCROLL FEEL */
+            }
+            .cap-section { 
+                height: 100vh !important; height: 100svh !important; 
+                scroll-snap-align: start !important;
+                display: flex !important; flex-direction: column !important; 
+                justify-content: center !important; padding: 60px 20px !important;
+                background: #000 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                position: relative !important;
+            }
+
+            /* Bold Video Viewport */
+            .scene-1-video-wrapper, .scene-2-video, .scene-3-video, .scene-4-video {
                 position: relative !important; inset: auto !important;
-                width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important;
-                background: #050505;
-                border: 1px solid rgba(255,255,255,0.15);
-                border-radius: 12px;
+                width: 100% !important; height: auto !important; 
+                aspect-ratio: 16/9 !important;
+                border: none !important;
+                border-radius: 4px !important;
+                transform: none !important; opacity: 1 !important;
+                margin-bottom: 30px;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+                z-index: 10 !important;
                 overflow: hidden;
-                box-shadow: 0 0 30px rgba(0,0,0,0.8);
-                margin-bottom: 20px;
-                flex: none;
             }
-            .act-content .video-bg video { width: 100% !important; height: 100% !important; object-fit: cover !important; opacity: 0.9; }
-            /* Remove scanline grid that appears in bars */
-            .act-content .video-bg::after { display: none !important; }
-            .video-overlay { display: none !important; }
+            video { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
-            /* 2. Text Container: Glassmorphic Floating HUD */
-            .act-content .relative.z-20 {
+            /* Integrated Data Panels (No Isolated Boxes) */
+            .scene-1-subtext, .scene-2-text, .scene-3-text, .scene-4-text {
                 position: relative !important; inset: auto !important;
-                flex: 1; width: 100% !important;
-                background: rgba(15, 15, 15, 0.85); /* Dark Glass */
-                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-                border: 1px solid rgba(255,255,255,0.08);
-                border-top: 1px solid rgba(255,255,255,0.15); /* Highlight top edge */
-                border-radius: 20px;
-                padding: 24px !important;
-                display: flex; flex-direction: column; justify-content: flex-start;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+                width: 100% !important; height: auto !important;
+                background: transparent !important;
+                backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+                border: none !important;
+                padding: 0 !important;
+                transform: none !important; opacity: 1 !important;
+                text-align: left !important;
+                align-items: flex-start !important;
+                z-index: 5 !important;
             }
 
-            /* HUD Label */
-            .act-content .mono.text-\[10px\] { 
-                font-size: 8px !important; letter-spacing: 0.4em !important; 
-                color: #00ff41 !important; /* Cyber Green Accent */
-                text-shadow: 0 0 10px rgba(0,255,65,0.3);
-                margin-bottom: 1rem !important; opacity: 1 !important;
+            /* High-Impact Typography */
+            .cap-section h2 { 
+                font-size: 2.25rem !important; 
+                line-height: 0.95 !important;
+                margin-bottom: 16px !important; 
+                letter-spacing: -0.04em !important;
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                text-transform: uppercase;
+            }
+            .cap-section p { 
+                font-size: 14px !important; 
+                line-height: 1.5 !important; 
+                margin-bottom: 30px !important; 
+                color: rgba(255,255,255,0.5) !important; 
+                max-width: 100% !important;
             }
 
-            /* Title Typography */
-            .act-content .synco.text-7xl { 
-                font-size: 1.75rem !important; margin-bottom: 1rem !important; line-height: 1 !important; 
-                background: linear-gradient(90deg, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            /* Unified Tactical Metrics - MICRO SIZE FOR CLEAR HIERARCHY */
+            .metric-card { 
+                background: transparent !important; 
+                border: none !important; 
+                border-left: 1px solid rgba(255,255,255,0.15) !important;
+                padding: 0 0 0 16px !important; 
+                border-radius: 0 !important; 
+                width: auto !important; 
+                margin-bottom: 12px;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            /* Making "Zone Integrity", "Pattern" etc very small */
+            .metric-card .synco { font-size: 0.75rem !important; color: rgba(255,255,255,0.5) !important; opacity: 0.8; letter-spacing: 0.1em !important; }
+            .metric-card span, .metric-card .text-white { font-size: 1.15rem !important; color: #fff !important; font-weight: 700 !important; }
+            .metric-card .mono { font-size: 8px !important; color: rgba(255,255,255,0.2) !important; margin: 0 !important; }
+
+            /* HUD cleanup */
+            .hud-corner { display: none !important; }
+            .data-panel-accent { display: none !important; }
+            .absolute.top-10, .absolute.bottom-10, .absolute.top-8, .absolute.bottom-8 { 
+                position: relative !important; top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
+                margin-bottom: 8px;
+                font-size: 8px !important; letter-spacing: 0.4em !important; color: rgba(255,255,255,0.2) !important;
             }
 
-            /* Description Text */
-            .act-content p { 
-                font-family: 'Inter', sans-serif; font-size: 13px !important; line-height: 1.6 !important; 
-                color: #999 !important; margin-bottom: auto !important; /* Push metrics to bottom */
-            }
-
-            /* Metrics Bar */
-            .act-content .flex.gap-12 { 
-                margin-top: 20px;
-                padding-top: 20px;
-                border-top: 1px solid rgba(255,255,255,0.1);
-                gap: 2rem !important; 
-            }
-            .act-content .synco.text-2xl, .act-content .synco.text-3xl, .act-content .synco.text-5xl { 
-                font-size: 1.5rem !important; color: #fff !important;
-            }
-
-            /* ALTERNATING ALIGNMENT LOGIC (Refined for Card Internal Layout) */
-            .act-content.justify-end .relative.z-20 { text-align: right !important; align-items: flex-end !important; }
-            .act-content.justify-end .flex.gap-12 { justify-content: flex-end !important; }
-
-            /* SPECS: LABORATORY REPORT STYLE (PERFECTED MOBILE) */
-            #specs { 
-                padding: 80px 24px !important; 
-                background: var(--white) !important; 
-                color: var(--void) !important; 
-                height: auto !important;
-                min-height: auto !important;
-            }
-            #specs .grid { 
-                display: flex !important; 
-                flex-direction: column !important; 
-                gap: 40px !important; 
-                width: 100% !important;
-                margin: 0 !important;
-            }
-            #specs .col-span-5, #specs .col-span-7 { 
-                width: 100% !important; 
-                margin: 0 !important; 
-            }
-            /* Image Container */
-            #specs .col-span-7 { 
-                order: -1; 
-                display: flex; 
-                justify-content: center; 
-                align-items: center;
-                padding: 20px 0;
-            }
-            #specs img { 
-                width: 65% !important; 
-                max-width: 280px !important;
-                margin: 0 auto; 
-                filter: invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.1)) !important;
-                transform: rotate(0deg) scale(1) !important; /* Reset rotation for clean mobile look */
-            }
+            /* 06. LABORATORY (SPECS) */
+            #specs { padding: 40px 20px !important; background: #fff !important; height: 100vh !important; height: 100svh !important; min-height: auto !important; scroll-snap-align: start !important; }
+            #specs .grid { display: flex !important; flex-direction: column !important; gap: 20px !important; }
+            #specs .col-span-5 { order: 2; margin-top: 20px; width: 100% !important; }
+            #specs .col-span-7 { order: 1; margin: 0 auto !important; width: 90% !important; }
+            #specs h2 { font-size: 2rem !important; color: #000 !important; }
+            #specs .text-2xl { font-size: 1.15rem !important; color: #000 !important; }
+            #specs .mono { color: #666 !important; font-size: 8px !important; }
+            #specs .space-y-16 { gap: 1.5rem !important; }
+            #specs .space-y-8 { gap: 0.75rem !important; }
             
-            /* Text Content */
-            #specs .col-span-5.space-y-16 {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 3rem !important; /* Reduce the huge desktop space-y-16 */
-            }
-            /* Title Block */
-            #specs .col-span-5 > div:first-child { margin-bottom: 1rem; }
-            #specs .synco.text-6xl { 
-                color: var(--void) !important; 
-                font-size: 2.5rem !important; 
-                line-height: 0.9 !important;
-                letter-spacing: -0.05em !important;
-            }
-            #specs .mono.text-\[10px\] {
-                color: #666 !important;
-                font-size: 9px !important;
-                margin-bottom: 1rem !important;
-            }
+            /* Specific inversion logic for mobile white phase */
+            #specs img[src*="primus-core"] { filter: invert(1) !important; width: 35% !important; margin-left: 0 !important; }
+            #specs img[src*="primusbox"] { filter: none !important; width: 100% !important; transform: none !important; }
+            #specs .hardware-core { position: relative !important; width: 100% !important; margin: 0 !important; }
 
-            /* Data Grid */
-            #specs .space-y-8 {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 1.5rem !important;
+            /* 05. CORE CAPABILITIES (KINETIC MICRO-GRID) */
+            #capabilities-grid { padding: 40px 0 !important; }
+            .capabilities-carousel { 
+                display: flex !important; 
+                overflow-x: auto !important; 
+                scroll-snap-type: x mandatory !important;
+                padding: 0 5vw !important;
+                gap: 15px !important;
             }
-            #specs .border-b { 
-                border-color: rgba(0,0,0,0.1) !important; 
-                padding-bottom: 1rem !important;
+            .cap-card { 
+                flex: 0 0 85% !important; 
+                min-width: 85% !important; 
+                scroll-snap-align: center !important;
+                opacity: 0.3;
+                transform: scale(0.95);
+                padding: 32px !important;
+                min-height: 360px !important;
             }
-            #specs .synco.text-2xl { 
-                color: var(--void) !important; 
-                font-size: 1.5rem !important; 
-            }
-            #specs .mono.text-\[9px\] {
-                color: #888 !important;
-                font-size: 10px !important;
-                font-weight: 500 !important;
-            }
+            .mobile-scroll-hint { display: flex; }
+            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
 
-            /* DEPLOY: MINIMALIST CARDS */
-            #deploy { padding: 40px 16px 80px 16px !important; }
-            #deploy .grid { gap: 12px !important; }
-            #deploy .p-12 { 
-                padding: 24px !important; 
-                background: linear-gradient(145deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%);
-                border: 1px solid rgba(255,255,255,0.05);
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            }
-            #deploy h3 { color: #fff; font-size: 1.15rem !important; letter-spacing: -0.05em; }
-            #deploy p { color: #666 !important; font-size: 0.8rem !important; }
+            /* Moving Animation: Active card focus */
+            .cap-card.active-node { opacity: 1 !important; transform: scale(1) !important; border-color: rgba(255,255,255,0.1) !important; }
+
+            .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+            .cap-card.active-node .cap-card-border { width: 100%; }
+
+            .mobile-scroll-hint { margin-top: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+
+            #capabilities-grid::after { display: none !important; }
+
+            /* 07. FOOTER */
+            #sovereign-footer { padding: 80px 20px 40px 20px !important; }
+            #sovereign-footer .grid { display: grid !important; grid-template-columns: 1fr !important; gap: 40px !important; }
+            /* Footer grid column rules for mobile */
+            #sovereign-footer .lg\:col-span-2 { grid-column: span 1 !important; text-align: left !important; }
+            #sovereign-footer .footer-watermark { font-size: 35vw !important; opacity: 0.03 !important; }
+            
+            /* Footer bottom bar */
+            #sovereign-footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+            #sovereign-footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; width: 100%; }
+
         }
 
-        /* FOOTER - MOBILE OPTIMIZED */
-        @media (max-width: 768px) {
-            #sovereign-footer { padding-top: 80px !important; padding-bottom: 40px !important; padding-left: 20px !important; padding-right: 20px !important; }
-            #sovereign-footer .grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 40px 20px !important; }
-            #sovereign-footer .lg\:col-span-2 { grid-column: span 2 !important; text-align: left !important; margin-bottom: 20px; }
-            #sovereign-footer img { display: none !important; }
-            #sovereign-footer p { font-size: 11px !important; line-height: 1.6; color: rgba(255, 255, 255, 0.6); max-width: 100% !important; letter-spacing: 0.2em !important; }
-            #sovereign-footer h4 { font-size: 9px !important; margin-bottom: 16px !important; color: rgba(255, 255, 255, 0.3) !important; }
-            #sovereign-footer .flex-col { gap: 12px !important; }
-            #sovereign-footer a.footer-link-hover { font-size: 11px !important; padding: 0 !important; background: transparent !important; letter-spacing: 0.15em !important; }
-            #sovereign-footer .footer-watermark { font-size: 35vw !important; opacity: 0.03 !important; }
-            #sovereign-footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-top: 60px !important; padding-top: 30px !important; gap: 24px !important; text-align: left !important; }
-            #sovereign-footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; width: 100%; }
+        /* 08. SYMBIOSIS - PIXEL PERFECT MOBILE FIX */
+        @media (max-width: 1024px) {
+            #symbiosis { padding: 60px 16px !important; }
+            #symbiosis .px-12 { padding-left: 0 !important; padding-right: 0 !important; }
+            #symbiosis .mb-32 { margin-bottom: 40px !important; }
+            #symbiosis .gap-12 { gap: 24px !important; }
+            
+            /* Card sizing */
+            #symbiosis .group.relative { 
+                width: 100% !important; 
+                aspect-ratio: 4/3 !important;
+                padding: 24px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                overflow: hidden !important;
+            }
+            
+            /* Image Container - Pushed back */
+            #symbiosis .group .relative.flex {
+                z-index: 10 !important;
+            }
+            #symbiosis img {
+                max-width: 75% !important;
+                height: auto !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Node labels - Top Layer */
+            #symbiosis .absolute.top-8 { 
+                top: 20px !important; 
+                left: 20px !important; 
+                font-size: 9px !important;
+                z-index: 20 !important;
+            }
+            #symbiosis .absolute.top-8.right-8 { 
+                left: auto !important;
+                right: 20px !important; 
+            }
+            
+            /* Bottom text container - Top Layer & Positioned */
+            #symbiosis .absolute.bottom-8 { 
+                bottom: 20px !important; 
+                left: 20px !important; 
+                right: 20px !important;
+                z-index: 30 !important; /* Force on top of image */
+            }
+            
+            /* Title typography - EXACT OBEX MATCH */
+            #symbiosis h3.synco.text-3xl { 
+                font-size: 1.6rem !important; 
+                line-height: 0.9 !important;
+                letter-spacing: -0.06em !important;
+                margin-bottom: 6px !important;
+                color: #ffffff !important;
+                text-shadow: 0 2px 20px rgba(0,0,0,0.8); /* Ensure readability */
+            }
+            
+            /* Subtitle */
+            #symbiosis .mono.text-\[9px\] { 
+                font-size: 7px !important; 
+                letter-spacing: 0.2em !important;
+                opacity: 0.8 !important;
+            }
+            
+            /* Corner brackets */
+            #symbiosis .w-12.h-12 { 
+                width: 36px !important; 
+                height: 36px !important; 
+                z-index: 20 !important;
+            }
+            
+            /* Bridge connector */
+            #symbiosis .h-24 { height: 60px !important; }
+            #symbiosis .w-16.h-16 { width: 48px !important; height: 48px !important; }
+        }
+
+        /* CAREERS LINK GREEN */
+        .footer-link-hover[href="careers.html"] { color: #00ff41 !important; }
+        .mission-link-item[href="careers.html"] { color: #00ff41 !important; }
+        .grid-item-hover[href="careers.html"] span { color: #00ff41 !important; }
+
+        /* NODE IMAGE CENTERED IN GRID */
+        #symbiosis .relative.w-full.h-full { position: relative !important; }
+        #symbiosis .relative.w-\[50\%\].aspect-square {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+        }
+
+        /* Landscape/Tablet Nuances */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #capabilities-grid .lg\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+            #sovereign-footer .grid { grid-template-columns: repeat(2, 1fr) !important; }
+            #sovereign-footer .lg\:col-span-2 { grid-column: span 2 !important; }
         }
 
         /* MOBILE RESPONSIVENESS: HIDE DESKTOP HEADER */
@@ -625,10 +753,25 @@
         /* MOBILE NAVIGATION - APP-STYLE */
         @media (max-width: 1024px) {
             .mobile-nav-bar {
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                background: #000;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 15px 0;
+            }
+            .social-glass-btn {
+                width: 44px !important;
+                height: 44px !important;
+                background: transparent !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            .social-glass-btn svg {
+                width: 24px !important;
+                height: 24px !important;
+                fill: #fff !important;
+            }
+            footer .flex.gap-4 {
+                gap: 20px !important;
+                margin-bottom: 60px;
             }
             .mobile-menu-toggle-modern {
                 display: flex !important;
@@ -643,6 +786,8 @@
                 transition: transform 0.18s ease, background 0.18s ease;
                 cursor: pointer;
                 padding: 6px;
+                position: relative;
+                z-index: 10001; /* Above overlay */
             }
             .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
             .mobile-menu-toggle-modern:active { transform: scale(0.98); }
@@ -661,20 +806,22 @@
                 background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(2, 2, 2, 0.98) 50%, rgba(0, 0, 0, 0.96) 100%);
                 backdrop-filter: blur(60px);
                 -webkit-backdrop-filter: blur(60px);
-                display: flex;
+                display: none;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: stretch;
-                padding: 80px 24px 40px;
-                position: relative;
+                padding: 100px 24px 40px;
+                position: fixed !important;
+                inset: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: 9999 !important;
+                overflow: hidden;
             }
             #mobile-menu-overlay::before {
                 content: '';
                 position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 1px;
+                top: 0; left: 0; right: 0; height: 1px;
                 background: linear-gradient(90deg, transparent, rgba(226, 226, 226, 0.3), transparent);
                 animation: security-scan 3s infinite linear;
             }
@@ -687,220 +834,202 @@
                 max-width: 480px;
                 margin: 0 auto;
                 background: transparent;
-                border: none;
-                border-radius: 0;
-                padding: 0;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                box-shadow: none;
                 overflow-y: auto;
-                max-height: calc(100vh - 120px);
+                max-height: calc(100vh - 140px);
                 scrollbar-width: none;
                 -ms-overflow-style: none;
             }
-            .mobile-nav-content::-webkit-scrollbar {
-                display: none;
+        /* FOOTER - MOBILE OPTIMIZED (SYNCED WITH INDEX.HTML) */
+        /* FOOTER - PIXEL PERFECT MOBILE SYNC (2-COLUMN GRID) */
+        @media (max-width: 1024px) {
+            footer {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            #sovereign-footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
+            }
+            #sovereign-footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                text-align: left !important;
+                margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            #sovereign-footer img {
+                display: none !important;
+            }
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
+                max-width: 100% !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+                margin-bottom: 20px !important;
+            }
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-bottom: none !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer .flex-col {
+                gap: 12px !important;
+            }
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
+                padding: 0 !important;
+                background: transparent !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+                transform: none !important;
+            }
+            #sovereign-footer .footer-watermark {
+                font-size: 40vw !important;
+                opacity: 0.02 !important;
+            }
+            
+            /* TACTICAL TELEMETRY STACK */
+            #sovereign-footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 40px !important;
+                gap: 40px !important;
+                text-align: left !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            #sovereign-footer .mt-40 .flex.gap-12 {
+                flex-direction: column !important;
+                gap: 12px !important;
+                width: 100%;
+            }
+            #sovereign-footer .mt-40 span {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                opacity: 0.3 !important;
+                letter-spacing: 0.3em !important;
+            }
+            #sovereign-footer .text-\[11px\].text-green-500 {
+                font-size: 11px !important;
+                letter-spacing: 0.2em !important;
+                color: #00ff41 !important;
+            }
+            #sovereign-footer .text-\[10px\].text-white\/20 {
+                font-size: 10px !important;
+                letter-spacing: 0.15em !important;
+                opacity: 0.2 !important;
+            }
+            #sovereign-footer .flex.gap-4 {
+                gap: 24px !important;
+                margin-top: 20px !important;
+            }
+            .social-glass-btn {
+                width: auto !important;
+                height: auto !important;
+                background: transparent !important;
+                border: none !important;
+            }
+            .social-glass-btn svg {
+                width: 28px !important;
+                height: 28px !important;
             }
         }
-
-        /* AVZDAX LUXURY NAV DESIGN */
-        .minimalist-nav {
-            width: 100%;
-            position: relative;
-        }
+    </style>
+    <style>
+        .minimalist-nav { width: 100%; position: relative; }
         .minimalist-nav::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            border-radius: 1px;
+            content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 2px; background: linear-gradient(90deg, transparent, #ffffff, transparent);
         }
-        .nav-section {
-            margin-bottom: 32px;
-            position: relative;
-        }
+        .nav-section { margin-bottom: 32px; position: relative; }
         .nav-section::after {
-            content: '';
-            position: absolute;
-            bottom: -16px;
-            left: 0;
-            width: 40px;
-            height: 1px;
+            content: ''; position: absolute; bottom: -16px; left: 0; width: 40px; height: 1px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 0.5px;
         }
-        .nav-section:last-child::after {
-            display: none;
-        }
+        .nav-section:last-child::after { display: none; }
         .nav-toggle {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            font-size: 22px;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            text-align: left;
-            padding: 20px 0;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: 'Inter', sans-serif;
+            width: 100%; background: transparent; border: none; color: #ffffff;
+            font-size: 22px; font-weight: 300; letter-spacing: 0.05em; text-align: left;
+            padding: 20px 0; cursor: pointer; transition: all 0.4s ease;
+            display: flex; align-items: center; justify-content: space-between;
             text-transform: uppercase;
-        }
-        .nav-toggle::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
-            transition: width 0.4s ease;
-        }
-        .nav-toggle:hover::before {
-            width: 100%;
         }
         .nav-toggle::after {
-            content: '';
-            width: 20px;
-            height: 20px;
+            content: ''; width: 20px; height: 20px;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
-            background-size: contain;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            opacity: 0.6;
-            transform: rotate(0deg);
+            background-size: contain; transition: transform 0.4s ease;
         }
-        .nav-toggle.active::after {
-            transform: rotate(180deg);
-            opacity: 1;
-        }
-        .nav-toggle:hover {
-            color: #E2E2E2;
-            transform: translateX(4px);
-        }
-        .nav-toggle.active {
-            color: #E2E2E2;
-        }
+        .nav-toggle.active::after { transform: rotate(180deg); }
         .nav-direct-link {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            font-size: 22px;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            text-align: left;
-            padding: 20px 0;
-            text-decoration: none;
-            display: block;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-radius: 8px;
-            position: relative;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
+            width: 100%; background: transparent; border: none; color: #ffffff;
+            font-size: 22px; font-weight: 300; letter-spacing: 0.05em; text-align: left;
+            padding: 20px 0; text-decoration: none; display: block;
+            transition: all 0.4s ease; text-transform: uppercase;
         }
-        .nav-direct-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
-            transition: width 0.4s ease;
+        .nav-dropdown { max-height: 0; overflow: hidden; transition: all 0.5s ease; margin-top: 16px; opacity: 0; }
+        .nav-dropdown.open { max-height: 800px; opacity: 1; }
+        .products-list, .intelligence-list, .mission-list { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 20px; }
+        .product-link-item, .intelligence-link-item, .mission-link-item {
+            color: rgba(255, 255, 255, 0.85); text-decoration: none; font-size: 15px;
+            padding: 16px 20px; background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px;
+            transition: all 0.3s ease; display: block; line-height: 1.4;
         }
-        .nav-direct-link:hover::before {
-            width: 100%;
+        .product-link-item:hover, .intelligence-link-item:hover, .mission-link-item:hover {
+            background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff; transform: translateX(8px);
         }
-        .nav-direct-link:hover {
-            color: #E2E2E2;
-            transform: translateX(8px);
-            text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+
+
+        /* PREMIUM HUD ELEMENTS */
+        .hud-corner { position: absolute; width: 20px; height: 20px; border: 1px solid rgba(255,255,255,0.3); z-index: 10; pointer-events: none; }
+        .hud-corner.tl { top: 40px; left: 40px; border-right: 0; border-bottom: 0; }
+        .hud-corner.tr { top: 40px; right: 40px; border-left: 0; border-bottom: 0; }
+        .hud-corner.bl { bottom: 40px; left: 40px; border-right: 0; border-top: 0; }
+        .hud-corner.br { bottom: 40px; right: 40px; border-left: 0; border-top: 0; }
+
+        .scan-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            animation: scanning 4s linear infinite;
+            z-index: 5; pointer-events: none;
         }
-        .nav-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            margin-top: 16px;
-            opacity: 0;
-            transform: translateY(-10px);
+        @keyframes scanning { 0% { top: 0%; } 100% { top: 100%; } }
+
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00ff41; box-shadow: 0 0 10px #00ff41; display: inline-block; margin-right: 8px; }
+        .status-dot.pulse { animation: status-pulse 2s infinite; }
+        @keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        .data-panel-accent {
+            position: absolute; top: 0; right: 0; width: 1px; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
         }
-        .nav-dropdown.open {
-            max-height: 800px;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .products-list,
-        .intelligence-list,
-        .mission-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-            margin-top: 20px;
-        }
-        .product-link-item,
-        .intelligence-link-item,
-        .mission-link-item {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 400;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.02);
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: block;
-            line-height: 1.4;
-            position: relative;
-            font-family: 'Inter', sans-serif;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        .product-link-item::before,
-        .intelligence-link-item::before,
-        .mission-link-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
-            border-radius: 2px 0 0 2px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .product-link-item:hover,
-        .intelligence-link-item:hover,
-        .mission-link-item:hover {
-            background: rgba(226, 226, 226, 0.05);
-            border-color: rgba(226, 226, 226, 0.2);
-            color: #ffffff;
-            transform: translateX(8px) translateY(-2px);
-            box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
-            text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
-        }
-        .product-link-item:hover::before,
-        .intelligence-link-item:hover::before,
-        .mission-link-item:hover::before {
-            opacity: 1;
-        }
-        .product-link-item:active,
-        .intelligence-link-item:active,
-        .mission-link-item:active {
-            transform: translateX(8px) translateY(-2px) scale(0.98);
-        }
-
-
+        .metric-card:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body>
@@ -1099,13 +1228,40 @@
         </ul>
 
         <div class="hidden lg:flex items-center gap-12 relative z-[160]">
+            <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
             <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
         </div>
     </div>
 </nav>
 
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="fixed inset-0 z-[11000] bg-black/95 backdrop-blur-3xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
+    <button onclick="toggleSearch()" class="absolute top-10 right-10 text-white/40 hover:text-white transition-all" aria-label="Close Search" title="Close Search">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-4xl w-full px-10">
+        <div class="flex items-center gap-6 border-b border-white/20 pb-6 mb-10">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-white w-full placeholder:text-white/10">
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Trending Assets</h4>
+                <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
+                    <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
+                    <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
+                    <a href="teletraan.html" class="hover:text-green-500 transition-colors">TELETRAAN_OS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- MOBILE NAVIGATION BAR -->
-<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
             <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
@@ -1123,7 +1279,7 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
     <div class="mobile-nav-content">
         <div class="minimalist-nav">
             <div class="nav-section">
@@ -1171,7 +1327,8 @@
 
 
 
-<div id="viewport">
+<div id="viewport" class="overflow-hidden">
+        
         <!-- ACT 0: HERO -->
         <section class="pinned-stage" id="hero">
             <div class="relative z-10 text-center">
@@ -1189,70 +1346,147 @@
             </div>
         </section>
 
-        <!-- THE 5 HIGHLIGHTS TRACK -->
-        <div id="story-trigger">
-            <section class="pinned-stage" id="story-pin">
+        <!-- 02. THE MANIFESTO: SCROLL TEXT REVEAL -->
+        <section class="py-40 px-12 bg-black min-h-screen flex items-center justify-center relative z-30" id="manifesto">
+            <div class="max-w-4xl mx-auto text-center space-y-24">
+                <p class="synco text-4xl md:text-6xl font-bold leading-tight text-white/20 manifesto-line transition-colors duration-1000">
+                    Surveillance is passive. <span class="text-white">Cognitive Sovereignty is active.</span>
+                </p>
+                <p class="synco text-4xl md:text-6xl font-bold leading-tight text-white/20 manifesto-line transition-colors duration-1000">
+                    We do not record history. <span class="text-white">We dictate the future.</span>
+                </p>
+                <p class="synco text-4xl md:text-6xl font-bold leading-tight text-white/20 manifesto-line transition-colors duration-1000">
+                    Latency is death. <span class="text-white">PRIMUS is instant.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 03. PRODUCT SHOWCASE: THE CINEMATIC STREAM -->
+        <div class="relative bg-[#020202] overflow-hidden" id="capabilities-track">
+            
+            <!-- SCENE 1: THE EXPANSION (Central Scale) -->
+            <section class="cap-section h-screen flex flex-col items-center justify-center relative" id="scene-1">
+                <!-- Text (Minimal, Top) -->
+                <div class="scene-1-text text-center mb-12 opacity-0 select-none">
+                    <h2 class="synco text-6xl text-white font-bold tracking-tighter">NEURAL NODE</h2>
+                </div>
+
+                <!-- Video (Starts constrained, Swells to width) -->
+                <div class="scene-1-video-wrapper relative w-[40vw] aspect-video bg-[#050505] overflow-hidden rounded-lg shadow-2xl z-10 will-change-transform">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-90" src="media/highlight_1.mp4"></video>
+                    <!-- Gloss -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none"></div>
+                </div>
                 
-                <!-- 1. NEURAL NODE / RETROFIT -->
-                <div class="act-content" id="act-1">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_1.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 w-full h-full flex items-center px-12 md:px-24">
-                        <div class="max-w-2xl">
-                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 01</div>
-                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">NEURAL<br>NODE.</h2>
-                            <p class="text-silver/60 text-lg leading-relaxed mb-10">PRIMUS functions as an intelligent retrofit node, injecting predictive AI into passive legacy infrastructure. Transforming standard CCTV into autonomous sentinels without hardware replacement.</p>
-                            <div class="flex gap-12">
-                                <div><div class="mono text-[9px] text-white/30 mb-1">Compatibility</div><div class="synco text-2xl chrome-text">UNIVERSAL</div></div>
-                                <div><div class="mono text-[9px] text-white/30 mb-1">Integration</div><div class="synco text-2xl chrome-text">INSTANT</div></div>
-                            </div>
+                <!-- Background Context (Enhanced Legibility with Glassmorphism) -->
+                <div class="absolute bottom-16 left-0 w-full flex justify-center z-20 pointer-events-none px-6">
+                     <div class="scene-1-subtext opacity-0 flex flex-col items-center gap-8 p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl max-w-2xl">
+                        <p class="text-white/90 text-sm md:text-base text-center leading-relaxed font-light tracking-wide drop-shadow-lg">
+                            Intelligent retrofit node for legacy infrastructure. Transmuting standard CCTV into autonomous sentinels without hardware replacement.
+                        </p>
+                        <div class="flex gap-20">
+                            <div class="text-center"><div class="synco text-2xl text-white font-bold drop-shadow-md">UNIVERSAL</div><div class="mono text-[9px] text-white/40 mt-2 tracking-[0.3em]">COMPATIBILITY</div></div>
+                            <div class="text-center"><div class="synco text-2xl text-white font-bold drop-shadow-md">INSTANT</div><div class="mono text-[9px] text-white/40 mt-2 tracking-[0.3em]">INTEGRATION</div></div>
                         </div>
-                    </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- SCENE 2: THREAT RECOGNITION (Premium HUD - Mirrored) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-2">
+                <!-- Video Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-2-video -translate-x-[20%] opacity-0 border-r border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <div class="scan-line"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 contrast-125" src="media/highlight_2.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent"></div>
+                    <div class="absolute top-10 left-10 mono text-[9px] text-white/20 tracking-[0.5em]">CAM_2 // AREA_RECOGNITION</div>
                 </div>
 
-                <!-- 2. THREAT RECOGNITION -->
-                <div class="act-content justify-end" id="act-2">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_2.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 w-full h-full flex items-center justify-end px-12 md:px-24 text-right">
-                        <div class="max-w-2xl">
-                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 02</div>
-                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">THREAT<br>RECOGNITION.</h2>
-                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Real-time identification within 0.3 seconds. PRIMUS classifies 847 distinct threat categories from retail intent to coordinated intrusion.</p>
-                            <div class="flex gap-12 justify-end">
-                                <div><div class="mono text-[9px] text-white/30 mb-1">Latency</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="0.3">0.0</span>s</div></div>
-                                <div><div class="mono text-[9px] text-white/30 mb-1">Classifications</div><div class="synco text-2xl chrome-text"><span class="counter" data-val="847">0</span></div></div>
-                            </div>
+                <!-- Data Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-l border-white/5 scene-2-text translate-x-full text-right items-end">
+                    <div class="mb-10 flex items-center gap-4 justify-end">
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Status: Neural Feed Active</span>
+                        <span class="status-dot pulse"></span>
+                    </div>
+                    
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">THREAT<br>RECOGNITION</h2>
+                    
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        Real-time identification within 0.3 seconds. PRIMUS classifies 847 distinct threat categories from retail intent to coordinated intrusion.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 w-full">
+                        <div class="metric-card !p-5">
+                            <div class="synco text-2xl text-white font-bold">0.3s</div>
+                            <div class="mono text-[8px] text-white/20 mt-2 uppercase tracking-widest">Latency</div>
+                        </div>
+                        <div class="metric-card !p-5">
+                            <div class="synco text-2xl text-white font-bold">847</div>
+                            <div class="mono text-[8px] text-white/20 mt-2 uppercase tracking-widest">Vectors</div>
                         </div>
                     </div>
+                    <div class="data-panel-accent" style="left: 0; right: auto;"></div>
+                </div>
+            </section>
+
+            <!-- SCENE 3: INTRUSION ALERT (Premium HUD) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-3">
+                <!-- Video Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-3-video translate-x-[20%] opacity-0 border-l border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-70 contrast-125" src="media/highlight_3.webm"></video>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                    <div class="absolute top-10 right-10 mono text-[9px] text-white/20 tracking-[0.5em]">SEC_NODE // SECTOR_07</div>
                 </div>
 
-                <!-- 3. INTRUSION & PERMISSION ALERT -->
-                <div class="act-content" id="act-3">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_3.webm"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 w-full h-full flex items-center px-12 md:px-24">
-                        <div class="max-w-2xl">
-                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 03</div>
-                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">INTRUSION<br>ALERT.</h2>
-                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Sovereign Zone Enforcement. PRIMUS constructs an invisible, computational fortress around secure zones. Analyzing spatial credentials in real-time, it detects unauthorized access and 'piggybacking' vectors instantly, neutralizing the threat before the physical perimeter is breached.</p>
-                            <div class="synco text-3xl chrome-text">ZONE INTEGRITY: <span class="text-green-500">ABSOLUTE</span></div>
-                        </div>
+                <!-- Data Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-r border-white/5 scene-3-text -translate-x-full">
+                    <div class="mb-10 flex items-center gap-4">
+                        <span class="status-dot pulse" style="background: #ff3b3b; box-shadow: 0 0 10px #ff3b3b;"></span>
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Alert Level: Critical</span>
                     </div>
-                </div>
 
-                <!-- 4. BEHAVIORAL ANOMALY (SELF-LEARNING) -->
-                <div class="act-content justify-end" id="act-4">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/primus-poster.png" src="media/highlight_4.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 w-full h-full flex items-center justify-end px-12 md:px-24 text-right">
-                        <div class="max-w-2xl">
-                            <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Capability // 04</div>
-                            <h2 class="synco text-7xl font-bold mb-8 leading-[0.9]">BEHAVIORAL<br>ANOMALY.</h2>
-                            <p class="text-silver/60 text-lg leading-relaxed mb-10">Autonomous Pattern Recognition. PRIMUS establishes a dynamic baseline of normal human flow for any environment. It instantly isolates micro deviations, loitering, or erratic movement that precedes a kinetic event. It does not just monitor but understands intent through motion.</p>
-                            <div class="synco text-3xl chrome-text">PATTERN: <span class="text-red-500">ANOMALOUS</span></div>
-                        </div>
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">INTRUSION<br>ALERT</h2>
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        Sovereign Zone Enforcement. PRIMUS constructs an invisible, computational fortress around secure zones, neutralizing threats before the physical perimeter is breached.
+                    </p>
+                    
+                    <div class="metric-card border-white/10 !p-5">
+                        <div class="synco text-xl md:text-2xl text-white font-black tracking-widest uppercase">ZONE INTEGRITY: <span class="text-white">ABSOLUTE</span></div>
                     </div>
+                    <div class="data-panel-accent"></div>
+                </div>
+            </section>
+
+            <!-- SCENE 4: BEHAVIORAL ANOMALY (Premium HUD - Mirrored) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-4">
+                <!-- Video Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-4-video -translate-x-[20%] opacity-0 border-r border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <div class="scan-line" style="animation-duration: 6s;"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 contrast-125" src="media/highlight_4.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 mono text-[9px] text-white/20 tracking-[0.5em]">BEH_MDL // ANOMALY_FILTER_V4</div>
                 </div>
 
+                <!-- Data Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-l border-white/5 scene-4-text translate-x-full text-right items-end">
+                    <div class="mb-10 flex items-center gap-4 justify-end">
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Anomaly Detection: Enabled</span>
+                        <span class="status-dot pulse" style="background: #fdfc47; box-shadow: 0 0 10px #fdfc47;"></span>
+                    </div>
 
-
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">BEHAVIORAL<br>ANOMALY</h2>
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        Autonomous Pattern Recognition. PRIMUS establishes a dynamic baseline of normal human flow, isolating micro deviations loitering or erratic movement before a kinetic event.
+                    </p>
+                    
+                    <div class="metric-card border-white/10 w-full !p-5">
+                        <div class="synco text-xl md:text-2xl text-white font-black tracking-widest uppercase">PATTERN: <span class="text-white">ANOMALOUS</span></div>
+                    </div>
+                    <div class="data-panel-accent" style="left: 0; right: auto;"></div>
+                </div>
             </section>
         </div>
 
@@ -1261,51 +1495,171 @@
             <div class="max-w-[1400px] w-full px-12 grid grid-cols-12 gap-20 items-center">
                 <div class="col-span-5 space-y-16">
                     <div>
-                        <div class="mono text-[10px] tracking-[0.6em] mb-6">Integration Architecture</div>
-                        <h2 class="synco text-6xl font-black leading-none">OVERLAY<br>INTELLIGENCE.</h2>
+                        <div class="mono text-[10px] tracking-[0.6em] mb-6">Hardware Specifications</div>
+                        <h2 class="synco text-6xl font-black leading-none">EDGE<br>INTELLIGENCE.</h2>
                     </div>
                     <div class="space-y-8">
-                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">Protocol</div><div class="synco text-2xl">RTSP / ONVIF</div></div>
-                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">Neural Rate</div><div class="synco text-2xl"><span class="counter" data-val="2400">0</span> P/S</div></div>
-                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">Accuracy</div><div class="synco text-2xl"><span class="counter" data-val="99.7">0.0</span> %</div></div>
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">Camera Capacity</div><div class="synco text-2xl">Up to <span class="counter" data-val="64">0</span> IP Cameras</div></div>
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">GPU</div><div class="synco text-2xl">NVIDIA RTX 4080</div></div>
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[9px] mb-2">Storage</div><div class="synco text-2xl">4TB NVMe RAID</div></div>
                     </div>
                 </div>
                 <div class="col-span-7 flex flex-col items-start relative max-w-[800px] mx-auto">
                     <!-- NEURAL CORE (MINIMALIST, TOP LEFT) -->
-                    <img src="media/primus-core.png" class="w-[28%] h-auto relative z-10 mt-[-2%] mb-[-15%] invert contrast-150 transition-all duration-1000 hover:scale-110" alt="PRIMUS Neural Core">
+                    <div class="relative w-[28%] z-10 mt-[-2%] mb-[-15%] transition-all duration-1000 hover:scale-110 group cursor-crosshair">
+                        <img src="media/primus-core.png" class="w-full h-auto invert contrast-150 drop-shadow-[0_0_30px_rgba(0,0,0,0.2)]" alt="PRIMUS Neural Core">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
                     <!-- HARDWARE BOX (GIGANTIC TITAN) -->
-                    <img src="media/primusbox.png" class="w-[110%] h-auto self-end relative z-0 transition-all duration-1000 hover:scale-105" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="PRIMUS Integrated Hardware">
+                    <div class="relative w-[110%] self-end z-0 transition-all duration-1000 hover:scale-[1.02] hardware-core">
+                        <img src="media/primusbox.png" class="w-full h-auto" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="PRIMUS Integrated Hardware">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer pointer-events-none"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- DEPLOYMENTS -->
-        <section class="py-60 px-12 bg-black border-t border-white/5" id="deploy">
-            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="p-12 border border-white/5 bg-white/[0.02]">
-                    <h3 class="synco text-2xl mb-6">Government</h3>
-                    <p class="text-silver/40 text-sm leading-relaxed">Sovereign border protection and critical metropolitan networks.</p>
+        <!-- 05. ARCHITECTURAL SYMBIOSIS (PREMIUM UPGRADE) -->
+        <section class="py-60 bg-black relative overflow-hidden" id="symbiosis">
+            <!-- Giant Watermark Title -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none">
+                <div class="synco text-[25vw] font-black leading-none">SYMBIOSIS</div>
+            </div>
+
+            <div class="max-w-[1400px] mx-auto px-12 relative z-10">
+                <div class="text-center mb-32">
+                    <h2 class="synco text-6xl md:text-8xl text-white font-black mb-8 tracking-tight">TOTAL<br>SYMBIOSIS.</h2>
+                    <div class="w-32 h-1 bg-white mx-auto mb-10"></div>
+                    <p class="mono text-xs text-white/40 tracking-[0.5em] uppercase max-w-2xl mx-auto leading-relaxed">
+                        The Chassis is the Vessel. PRIMUS is the Consciousness. A unified architecture of silicon and neural logic.
+                    </p>
                 </div>
-                <div class="p-12 border border-white/5 bg-white/[0.02]">
-                    <h3 class="synco text-2xl mb-6">Energy</h3>
-                    <p class="text-silver/40 text-sm leading-relaxed">Predictive security for power grids and maritime installations.</p>
-                </div>
-                <div class="p-12 border border-white/5 bg-white/[0.02]">
-                    <h3 class="synco text-2xl mb-6">Enterprise</h3>
-                    <p class="text-silver/40 text-sm leading-relaxed">High-fidelity threat intelligence for global financial campuses.</p>
+
+                <div class="relative flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0">
+                    <!-- Component 01: CHASSIS -->
+                    <div class="group relative w-full lg:w-[42%] aspect-[4/3] bg-white/[0.02] border border-white/10 rounded-sm p-12 transition-all duration-700 hover:bg-white/[0.04] hover:border-white/20 overflow-hidden">
+                        <div class="absolute top-8 left-8 mono text-[10px] text-white/20 tracking-widest uppercase">Node 01 // Structural</div>
+                        <div class="relative w-full h-full flex flex-col items-center justify-center">
+                            <img src="media/primusbox.png" class="w-[85%] drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-1000 group-hover:scale-105" alt="PRIMUS Chassis">
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+                            <div>
+                                <h3 class="synco text-3xl text-white mb-2">INTEGRATED<br>SERVER.</h3>
+                                <div class="mono text-[9px] text-white/30 tracking-widest uppercase">Edge Process Infrastructure</div>
+                            </div>
+                            <div class="w-12 h-12 border-t border-r border-white/20"></div>
+                        </div>
+                    </div>
+
+                    <!-- The Neural Bridge -->
+                    <div class="relative flex items-center justify-center w-full lg:w-[16%] h-24 lg:h-auto">
+                        <div class="hidden lg:block w-full h-[1px] bg-gradient-to-r from-white/0 via-white/40 to-white/0"></div>
+                        <div class="lg:hidden w-[1px] h-full bg-gradient-to-b from-white/0 via-white/40 to-white/0"></div>
+                        <div class="absolute center-flex w-16 h-16 bg-black border border-white/20 rounded-full flex items-center justify-center z-10">
+                            <span class="synco text-xl text-white/50">+</span>
+                        </div>
+                    </div>
+
+                    <!-- Component 02: CORE -->
+                    <div class="group relative w-full lg:w-[42%] aspect-[4/3] bg-white/[0.02] border border-white/10 rounded-sm p-12 transition-all duration-700 hover:bg-white/[0.04] hover:border-white/20 overflow-hidden">
+                        <div class="absolute top-8 right-8 mono text-[10px] text-white/20 tracking-widest uppercase text-right">Node 02 // Cognitive</div>
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <div class="relative w-[50%] aspect-square">
+                                <img src="media/primus-core.png" class="w-full h-auto drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] transition-all duration-1000 group-hover:rotate-[5deg]" alt="PRIMUS Neural Core">
+                                <!-- Core Pulse Effect -->
+                                <div class="absolute inset-0 bg-white/5 rounded-full blur-2xl animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8 flex justify-between items-end text-right">
+                            <div class="w-12 h-12 border-b border-l border-white/20"></div>
+                            <div>
+                                <h3 class="synco text-3xl text-white mb-2">COGNITIVE<br>CENTRAL CORE.</h3>
+                                <div class="mono text-[9px] text-white/30 tracking-widest uppercase">Predictive Consciousness Layer</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-    </div>
+        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
+        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
+            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
+                <!-- Activity Recognition -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">REAL-TIME</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">ACTIVITY<br>RECOGNITION</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Understanding fluid moments. Processing gestures and unusual events for instantaneous tactical intervention.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Enabled</span>
+                    </div>
+                </div>
 
-    <!-- GOD-TIER BLACK SHIELD FOOTER -->
+                <!-- Tracking -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">KINETIC</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">OBJECT<br>TRACKING</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Surgical focus. Locking onto personnel, vehicles, or assets for continuous institutional awareness.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
+                    </div>
+                </div>
+
+                <!-- Alerts -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">PERIMETER</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">INTRUSION<br>ALERTS</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Architecting digital boundaries. Instant detection of loitering or unauthorized spatial violation.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Secured</span>
+                    </div>
+                </div>
+
+                <!-- Anomaly -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">COGNITIVE</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">BEHAVIORAL<br>ANOMALY</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Beyond rules, PRIMUS learns. Flagging unusual pacing or erratic intent automatically.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Neural</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mobile-scroll-hint">
+                <div class="hint-bar"></div>
+                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
+            </div>
+        </section>
+        </section>
+
+</div>
+
+    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
     <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
         <div class="radiant-footer-border"></div>
 
         <!-- MACRO BACKDROP VIDEO -->
         <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-            <video muted loop playsinline preload="none" poster="/media/general-poster.png" data-lazy-video data-src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
+            <video muted loop playsinline preload="none" data-lazy-video poster="/media/general-poster.png" class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
             <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
         </div>
 
@@ -1329,33 +1683,33 @@
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
                     <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
                     <a href="nest.html" class="footer-link-hover">NEST</a>
-                    <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
-                    <a href="trion.html" class="footer-link-hover">Trion</a>
-                    <a href="obex.html" class="footer-link-hover">Obex</a>
-                    <a href="arclight.html" class="footer-link-hover">Arclight</a>
+                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">TRION</a>
+                    <a href="obex.html" class="footer-link-hover">OBEX</a>
+                    <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
-                    <a href="industries.html" class="footer-link-hover">Government</a>
-                    <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
-                    <a href="industries.html" class="footer-link-hover">Healthcare</a>
-                    <a href="industries.html" class="footer-link-hover">Maritime</a>
+                    <a href="industries.html" class="footer-link-hover italic">OIL & GAS</a>
+                    <a href="industries.html" class="footer-link-hover">GOVERNMENT</a>
+                    <a href="industries.html" class="footer-link-hover">FINANCE & BANKING</a>
+                    <a href="industries.html" class="footer-link-hover">HEALTHCARE</a>
+                    <a href="industries.html" class="footer-link-hover">MARITIME</a>
                 </div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">MISSION</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">ABOUT US</a><a href="careers.html" class="footer-link-hover" style="color: #00ff41;">CAREERS</a><a href="news.html" class="footer-link-hover">NEWSROOM</a><a href="ethics.html" class="footer-link-hover">ETHICS POLICY</a></div>
             </div>
             <div class="text-left">
-                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">HELP CENTER</a><a href="#" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">PRIVACY POLICY</a><a href="#" class="footer-link-hover">TERMS</a></div>
             </div>
         </div>
 
@@ -1372,6 +1726,12 @@
             const overlay = document.getElementById('search-overlay');
             if (!overlay) return;
             overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
         // PREVIEW ENGINE
@@ -1384,7 +1744,8 @@
 
         // MISSION IMAGE CHANGE
         function changeMissionImage(src) {
-            document.getElementById('mission-image').src = '/media/' + src;
+            const img = document.getElementById('mission-image');
+            if(img) img.src = '/media/' + src;
         }
 
         // Reset ecosystem preview on menu leave
@@ -1398,8 +1759,15 @@
             });
         });
 
+        // REGISTER GSAP
         gsap.registerPlugin(ScrollTrigger);
-        const lenis = new Lenis({ lerp: 0.1 });
+        
+        // SMOOTH SCROLL (LENIS)
+        const lenis = new Lenis({ 
+            lerp: 0.05, 
+            smoothWheel: true,
+            wheelMultiplier: 0.8 
+        });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
@@ -1411,44 +1779,121 @@
             });
         };
 
-        // HERO REVEAL
+        // 01. ORIGINAL HERO REVEAL (RESTORED)
         const hTl = gsap.timeline({ scrollTrigger: { trigger: "#hero", start: "top top", end: "+=100%", scrub: true, pin: true } });
         hTl.to("#h-title", { opacity: 1, y: 0, duration: 1 }).to("#main-core", { opacity: 1, y: -20, duration: 1.5 }, "-=0.5");
 
-        // THE 5 HIGHLIGHTS TRACK
-        const sTl = gsap.timeline({
-            scrollTrigger: { trigger: "#story-trigger", start: "top top", end: "+=800%", scrub: 1, pin: "#story-pin" }
-        });
-
-        ["#act-1", "#act-2", "#act-3", "#act-4"].forEach((act, i) => {
-            sTl.to(act, { 
-                opacity: 1, visibility: 'visible', duration: 1,
-                onStart: () => initCounters(document.querySelector(act)) 
-            });
-            sTl.to("#main-core", { x: i % 2 === 0 ? 300 : -300, scale: 0.8, opacity: 0.4, duration: 1 }, "-=1");
-            sTl.to(act, { opacity: 0, visibility: 'hidden', duration: 1, delay: 1 });
-        });
-
-        // LAB PHASE (WHITE SHIFT + NAV INVERSION)
-        gsap.to("#specs", {
-            scrollTrigger: {
-                trigger: "#specs", start: "top top", end: "+=150%", pin: true, scrub: true,
-                onToggle: self => document.getElementById('main-nav').classList.toggle('nav-inverted', self.isActive),
-                onEnter: () => {
-                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
-                    initCounters(document.getElementById('specs'));
-                },
-                onLeaveBack: () => gsap.to("body", { backgroundColor: "#030303", duration: 0.5 })
+        // 02. MANIFESTO TEXT REVEAL (KEPT)
+        const manifestoLines = document.querySelectorAll(".manifesto-line");
+        manifestoLines.forEach((line) => {
+            gsap.fromTo(line, 
+                { opacity: 0.1, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1.5, 
+                    scrollTrigger: {
+                        trigger: line,
+                        start: "top 80%",
+                        end: "top 40%",
+                        scrub: 1
+                    }
+                }
+            );
+            const span = line.querySelector('span');
+            if(span) {
+                gsap.fromTo(span, { color: "#333" }, { color: "#fff", scrollTrigger: { trigger: line, start: "top 60%", end: "top 30%", scrub: 1 } });
             }
         });
 
+        // 03. PRODUCT SHOWCASE: THE CINEMATIC STREAM ANIMATIONS
+        
+        // 03. HIGH-FIDELITY RESPONSIVE ANIMATION SYSTEM
+        ScrollTrigger.matchMedia({
+            // DESKTOP: PREMIUM CINEMATIC EXPERIENCE
+            "(min-width: 1025px)": function() {
+                // Nav hiding during showcase
+                ScrollTrigger.create({
+                    trigger: "#capabilities-track", start: "top 20%", endTrigger: "#specs", end: "top top",
+                    onEnter: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeave: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 }),
+                    onEnterBack: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeaveBack: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 })
+                });
+
+                // Scene 1: Central Scale-up
+                const s1 = document.querySelector('#scene-1');
+                if(s1) {
+                    const tl = gsap.timeline({ scrollTrigger: { trigger: s1, start: "top top", end: "+=100%", scrub: true, pin: true } });
+                    tl.to(s1.querySelector('.scene-1-video-wrapper'), { width: "95vw", height: "80vh", duration: 1.5, ease: "power2.inOut" })
+                      .to(s1.querySelector('.scene-1-text'), { opacity: 1, y: -20, duration: 0.5 }, "<")
+                      .to(s1.querySelector('.scene-1-subtext'), { opacity: 1, duration: 0.5 }, "-=0.5");
+                }
+
+                // Scenes 2-4: Lateral Slide Reveals
+                [2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const tl = gsap.timeline({ scrollTrigger: { trigger: sn, start: "top center", end: "center center", scrub: 1 } });
+                        tl.to(sn.querySelector(`.scene-${num}-text`), { x: "0%", duration: 1, ease: "power2.out" })
+                          .to(sn.querySelector(`.scene-${num}-video`), { x: "0%", opacity: 1, duration: 1, ease: "power2.out" }, "<");
+                    }
+                });
+
+                // Lab Phase: Pinned Specs
+                gsap.to("#specs", {
+                    scrollTrigger: {
+                        trigger: "#specs", start: "top top", end: "+=150%", pin: true, scrub: true,
+                        onToggle: self => document.getElementById('main-nav').classList.toggle('nav-inverted', self.isActive),
+                        onEnter: () => { gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 }); initCounters(document.getElementById('specs')); },
+                        onLeaveBack: () => gsap.to("body", { backgroundColor: "#030303", duration: 0.5 })
+                    }
+                });
+            },
+
+            // MOBILE/TABLET: FLUID VERTICAL REVEALS
+            "(max-width: 1024px)": function() {
+                // Showreel sections: No pinning, natural reveal
+                [1, 2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const vwrap = sn.querySelector(`.scene-${num}-video`) || sn.querySelector('.scene-1-video-wrapper');
+                        const twrap = sn.querySelector(`.scene-${num}-text`) || sn.querySelector('.scene-1-subtext');
+                        if(vwrap) gsap.fromTo(vwrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 60%" } });
+                        if(twrap) gsap.fromTo(twrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 40%" } });
+                    }
+                });
+
+                // Lab phase: Just background shift
+                const specs = document.getElementById('specs');
+                if(specs) {
+                    ScrollTrigger.create({
+                        trigger: specs, start: "top 20%",
+                        onEnter: () => { document.getElementById('main-nav').classList.add('nav-inverted'); initCounters(specs); },
+                        onLeaveBack: () => { document.getElementById('main-nav').classList.remove('nav-inverted'); }
+                    });
+                }
+            }
+        });
+
+        // 05. SYMBIOSIS INTERACTION (SHARED ACROSS DEVICES)
+        const symbiosisSection = document.getElementById('symbiosis');
+        if(symbiosisSection) {
+            ScrollTrigger.create({
+                trigger: symbiosisSection, start: "top 10% ", end: "bottom top",
+                onToggle: self => document.getElementById('main-nav').classList.toggle('nav-minimal', self.isActive)
+            });
+            gsap.fromTo(symbiosisSection.querySelector('h2'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, scrollTrigger: { trigger: symbiosisSection, start: "top 70%" } });
+        }
+
+        // MOUSE PARALLAX FOR CORE
         window.addEventListener("mousemove", (e) => {
             const x = (e.clientX / window.innerWidth - 0.5) * 20;
             const y = (e.clientY / window.innerHeight - 0.5) * 20;
             gsap.to("#main-core", { rotationY: x, rotationX: -y, duration: 2, ease: "power2.out" });
         });
 
-        // Desktop nav scroll background
+        // NAV SCROLL LOGIC
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('main-nav');
             if (nav) {
@@ -1470,7 +1915,7 @@
             canvas.width = window.innerWidth; 
             canvas.height = footer.offsetHeight; 
             pts = []; 
-            for(let i=0; i<100; i++) pts.push(new P()); 
+            for(let i=0; i<30; i++) pts.push(new P()); 
         }
         class P { 
             constructor(){ 
@@ -1515,39 +1960,125 @@
         }
         resize(); draw(); window.addEventListener('resize', resize);
 
-        // MOBILE MENU TOGGLE
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle-modern');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        
-        if (mobileMenuToggle && mobileMenuOverlay) {
-            mobileMenuToggle.addEventListener('click', function() {
-                this.classList.toggle('open');
-                const isOpen = this.classList.contains('open');
-                mobileMenuOverlay.style.display = isOpen ? 'flex' : 'none';
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-                this.setAttribute('aria-expanded', isOpen);
+        // LAZY VIDEO LOADING - Only load when visible
+        const lazyVideoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    if (video.dataset.lazyVideo !== undefined && !video.dataset.loaded) {
+                        video.load();
+                        video.play();
+                        video.dataset.loaded = 'true';
+                    }
+                } else {
+                    if (video.dataset.loaded === 'true') {
+                        video.pause();
+                    }
+                }
             });
-        }
+        }, { rootMargin: '200px' });
 
-        // MOBILE NAV DROPDOWNS
-        document.querySelectorAll('.nav-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const dropdown = this.nextElementSibling;
-                const isActive = this.classList.contains('active');
-                
-                // Close all other dropdowns
-                document.querySelectorAll('.nav-toggle').forEach(t => {
-                    if (t !== this) {
-                        t.classList.remove('active');
-                        t.nextElementSibling?.classList.remove('open');
+        document.querySelectorAll('video[data-lazy-video]').forEach(video => {
+            lazyVideoObserver.observe(video);
+        });
+
+        // PAUSE CANVAS ANIMATION WHEN FOOTER NOT VISIBLE
+        let canvasAnimationPaused = true;
+        const canvasObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                canvasAnimationPaused = !entry.isIntersecting;
+            });
+        }, { rootMargin: '100px' });
+        
+        const footerEl = document.getElementById('sovereign-footer');
+        if (footerEl) canvasObserver.observe(footerEl);
+
+        const originalDraw = draw;
+        function optimizedDraw(currentTime) {
+            if (canvasAnimationPaused) {
+                requestAnimationFrame(optimizedDraw);
+                return;
+            }
+            if(currentTime - lastTime < 50) { 
+                requestAnimationFrame(optimizedDraw);
+                return;
+            }
+            lastTime = currentTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const maxDistSq = 200 * 200;
+            pts.forEach((p,i)=>{
+                p.update(); p.draw();
+                for(let j=i+1;j<pts.length;j++){
+                    const dx = p.x-pts[j].x, dy = p.y-pts[j].y, dSq = dx*dx + dy*dy;
+                    if(dSq < maxDistSq){
+                        const alpha = 0.15 - (dSq/maxDistSq)*0.15;
+                        ctx.beginPath(); ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+                        ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(optimizedDraw);
+        }
+        requestAnimationFrame(optimizedDraw);
+
+        // Mobile menu toggle functionality - Mirrored from Index
+        function initMobileMenu() {
+            const btn = document.querySelector('.mobile-menu-toggle-modern');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            if(btn && overlay){
+                btn.addEventListener('click', function(e){
+                    e.stopImmediatePropagation();
+                    const opened = btn.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    if(opened) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                        window.scrollTo(0, 0);
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
                     }
                 });
-                
-                // Toggle current
-                this.classList.toggle('active');
-                dropdown?.classList.toggle('open');
+
+                overlay.addEventListener('click', function(e){
+                    if(e.target === overlay){
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded','false');
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        }
+
+        if(document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMobileMenu);
+        } else {
+            initMobileMenu();
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
             });
         });
+
+        // KINETIC CAROUSEL OBSERVER (Optimized)
+        const capObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-node');
+                } else {
+                    entry.target.classList.remove('active-node');
+                }
+            });
+        }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
+        document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
 
         // MEGA MENU PREVIEW
         function showPreview(product) {

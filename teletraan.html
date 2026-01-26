@@ -360,20 +360,14 @@
         @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
-        /* MOBILE NAVIGATION - APP-STYLE */
+        /* MOBILE NAVIGATION & MASTER FOOTER SYNC */
         @media (max-width: 1024px) {
-            /* Hide desktop nav completely on mobile */
-            #main-nav {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important;
-            }
+            /* Mobile Nav Logic */
+            #main-nav { display: none !important; visibility: hidden !important; }
             .mobile-nav-bar {
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                background: #000;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 15px 0;
             }
             .mobile-menu-toggle-modern {
                 display: flex !important;
@@ -383,69 +377,84 @@
                 height: 48px;
                 background: transparent;
                 border: none;
-                box-shadow: none;
-                border-radius: 10px;
-                transition: transform 0.18s ease, background 0.18s ease;
                 cursor: pointer;
-                padding: 6px;
             }
-            .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
-            .mobile-menu-toggle-modern:active { transform: scale(0.98); }
-            .mobile-menu-toggle-modern .menu-icon { width: 26px; height: 26px; display: block; }
-            .mobile-menu-toggle-modern .bar { stroke: rgba(255,255,255,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
-            .mobile-menu-toggle-modern .menu-icon { overflow: visible; }
-            .mobile-menu-toggle-modern .bar { transform-box: fill-box; transform-origin: center; }
-            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(1) { transform: translateY(4px) rotate(45deg); }
-            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(2) { opacity: 0; transform: scaleX(0.2); }
-            .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(3) { transform: translateY(-4px) rotate(-45deg); }
-        }
+            .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-        /* LUXURY MOBILE MENU OVERLAY - AVZDAX SECURITY TECH */
-        @media (max-width: 1024px) {
-            #mobile-menu-overlay {
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(2, 2, 2, 0.98) 50%, rgba(0, 0, 0, 0.96) 100%);
-                backdrop-filter: blur(60px);
-                -webkit-backdrop-filter: blur(60px);
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: stretch;
-                padding: 80px 24px 40px;
-                position: relative;
+            /* Master Footer Assembly */
+            footer {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
             }
-            #mobile-menu-overlay::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(226, 226, 226, 0.3), transparent);
-                animation: security-scan 3s infinite linear;
+            #sovereign-footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
             }
-            @keyframes security-scan {
-                0% { transform: translateX(-100%); }
-                100% { transform: translateX(100%); }
+            #sovereign-footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
-            .mobile-nav-content {
+            #sovereign-footer img {
+                display: none !important;
+            }
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
+                max-width: 100% !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+            }
+            
+            /* TACTICAL TELEMETRY STACK */
+            #sovereign-footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 40px !important;
+                gap: 40px !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            #sovereign-footer .mt-40 .flex.gap-12 {
+                flex-direction: column !important;
+                gap: 12px !important;
                 width: 100%;
-                max-width: 480px;
-                margin: 0 auto;
-                background: transparent;
-                border: none;
-                border-radius: 0;
-                padding: 0;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                box-shadow: none;
-                overflow-y: auto;
-                max-height: calc(100vh - 120px);
-                scrollbar-width: none;
-                -ms-overflow-style: none;
             }
-            .mobile-nav-content::-webkit-scrollbar {
-                display: none;
+            #sovereign-footer .mt-40 span {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                opacity: 0.3 !important;
+                letter-spacing: 0.3em !important;
             }
+            .social-glass-btn svg { width: 28px !important; height: 28px !important; }
         }
 
         /* AVZDAX LUXURY NAV DESIGN */
@@ -716,6 +725,43 @@
             #sovereign-footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-top: 60px !important; padding-top: 30px !important; gap: 24px !important; text-align: left !important; }
             #sovereign-footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; width: 100%; }
         }
+        /* CAPABILITIES GRID STYLES - SYNCED WITH PRIMUS */
+        .cap-card { 
+            flex: 1;
+            background: #080808;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 2px;
+            min-height: 380px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
+        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+        .cap-card.active-node .cap-card-border { width: 100%; }
+        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+        @media (max-width: 1024px) {
+            .capabilities-carousel { 
+                display: flex !important; 
+                overflow-x: auto !important; 
+                scroll-snap-type: x mandatory !important;
+                padding: 0 5vw !important;
+                gap: 15px !important;
+            }
+            .cap-card { 
+                flex: 0 0 85% !important; 
+                min-width: 85% !important; 
+                scroll-snap-align: center !important;
+                opacity: 0.3;
+                transform: scale(0.95);
+            }
+            .mobile-scroll-hint { display: flex; }
+            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        }
     </style>
 
 </head>
@@ -947,7 +993,7 @@
 </nav>
 
 <!-- MOBILE NAVIGATION BAR -->
-<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[350] lg:hidden">
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
             <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
@@ -965,7 +1011,7 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[200] lg:hidden" style="display: none;">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
     <div class="mobile-nav-content">
         <div class="minimalist-nav">
             <div class="nav-section">
@@ -1110,70 +1156,141 @@
             </section>
         </div>
 
+
+        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
+        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
+            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
+                <!-- Cap 01 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SINGLE_GLASS</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">UNIFIED<br>DASHBOARD</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Every sensor, every node, every alert synchronized into a terminal of absolute civilizational control.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Synced</span>
+                    </div>
+                </div>
+
+                <!-- Cap 02 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">NEURAL_TRIAGE</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">PREDICTIVE<br>FLOWS</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Real-time behavioral mapping identifying anomalies across large datasets before they manifest physically.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
+                    </div>
+                </div>
+
+                <!-- Cap 03 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SMART_SCAN</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">INSTANT<br>ARCHIVE</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        Zero-latency retrieval of event highlights across years of logs, powered by Teletraan's neural backbone.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Indexed</span>
+                    </div>
+                </div>
+
+                <!-- Cap 04 -->
+                <div class="cap-card group">
+                    <div class="cap-card-border"></div>
+                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SECURE_LINK</div>
+                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">SOVEREIGN<br>PROTOCOLS</h3>
+                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
+                        AES-4096-Sovereign encryption for every data packet across the mesh, ensuring total digital sovereignty.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
+                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Shielded</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mobile-scroll-hint">
+                <div class="hint-bar"></div>
+                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
+            </div>
+        </section>
+
         <!-- GOD-TIER BLACK SHIELD FOOTER -->
-        <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
-            <div class="radiant-footer-border"></div>
+    <footer class="relative bg-black pt-96 pb-24 px-12 overflow-hidden border-t border-white/5" id="sovereign-footer">
+        <div class="radiant-footer-border"></div>
 
-            <!-- MACRO BACKDROP VIDEO -->
-            <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
-                <video muted loop playsinline preload="none" poster="/media/general-poster.png" data-lazy-video data-src="/media/XBAThero-web.mp4" class="w-full h-full object-cover blur-[80px] grayscale"></video>
-                <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
-            </div>
+        <!-- MACRO BACKDROP VIDEO -->
+        <div class="absolute top-0 left-0 w-[85%] h-[80%] opacity-20 pointer-events-none z-0">
+            <video muted loop playsinline preload="none" data-lazy-video poster="/media/general-poster.png" class="w-full h-full object-cover blur-[80px] grayscale">
+                <source src="/media/XBAThero-web.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 25%, transparent 0%, #000 85%);"></div>
+        </div>
 
-            <div class="footer-watermark">AVZDAX</div>
-            <canvas id="footer-neural-canvas"></canvas>
+        <div class="footer-watermark">AVZDAX</div>
+        <canvas id="footer-neural-canvas"></canvas>
 
-            <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
-                <div class="lg:col-span-2 space-y-12 text-left">
-                    <a href="index.html" aria-label="Home" class="hidden md:block"><img src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
-                    <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="social-glass-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                        <a href="#" class="social-glass-btn" aria-label="X (Twitter)">
-                            <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="text-left">
-                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                        <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
-                        <a href="nest.html" class="footer-link-hover">NEST</a>
-                        <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
-                        <a href="trion.html" class="footer-link-hover">Trion</a>
-                        <a href="obex.html" class="footer-link-hover">Obex</a>
-                        <a href="arclight.html" class="footer-link-hover">Arclight</a>
-                    </div>
-                </div>
-                <div class="text-left">
-                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                        <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
-                        <a href="industries.html" class="footer-link-hover">Government</a>
-                        <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
-                        <a href="industries.html" class="footer-link-hover">Healthcare</a>
-                        <a href="industries.html" class="footer-link-hover">Maritime</a>
-                    </div>
-                </div>
-                <div class="text-left">
-                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
-                </div>
-                <div class="text-left">
-                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <a href="index.html" aria-label="Home" class="hidden md:block"><img src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
+                <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
+                <div class="flex gap-4">
+                    <a href="https://linkedin.com/company/avzdax" class="social-glass-btn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
                 </div>
             </div>
-
-            <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
-                <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
-                <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
-                <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="nest.html" class="footer-link-hover">NEST</a>
+                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover">TRION</a>
+                    <a href="obex.html" class="footer-link-hover">OBEX</a>
+                    <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
+                </div>
             </div>
-        </footer>
-    </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="industries.html" class="footer-link-hover italic">OIL & GAS</a>
+                    <a href="industries.html" class="footer-link-hover">GOVERNMENT</a>
+                    <a href="industries.html" class="footer-link-hover">FINANCE & BANKING</a>
+                    <a href="industries.html" class="footer-link-hover">HEALTHCARE</a>
+                    <a href="industries.html" class="footer-link-hover">MARITIME</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">MISSION</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">ABOUT US</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="news.html" class="footer-link-hover">NEWSROOM</a><a href="ethics.html" class="footer-link-hover">ETHICS POLICY</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">HELP CENTER</a><a href="#" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">PRIVACY POLICY</a><a href="#" class="footer-link-hover">TERMS</a></div>
+            </div>
+        </div>
+
+        <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+            <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
+            <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
+            <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
+        </div>
+    </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -1270,34 +1387,65 @@
         }
         resize(); draw(); window.addEventListener('resize', resize);
 
-        // Mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function(){
-            const btn = document.querySelector('.mobile-menu-toggle-modern');
+        // MOBILE MENU TOGGLE - ROBUST MULTI-BUTTON SYNC
+        function initMobileMenu() {
+            const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
             const overlay = document.getElementById('mobile-menu-overlay');
-            if(btn){
-                btn.addEventListener('click', function(e){
+
+            if (!btns.length || !overlay) return;
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
                     e.stopImmediatePropagation();
-                    const opened = btn.classList.toggle('open');
-                    btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
-                    if(overlay) overlay.style.display = opened ? 'flex' : 'none';
-                    document.body.style.overflow = opened ? 'hidden' : '';
-                });
-            }
-            function closeMobileMenu(){
-                if(!btn) return;
-                btn.classList.remove('open');
-                btn.setAttribute('aria-expanded','false');
-                if(overlay) overlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-            if(overlay){
-                overlay.addEventListener('click', function(e){
-                    if(e.target === overlay){
-                        closeMobileMenu();
+                    const opened = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    
+                    // Sync all buttons found on page
+                    btns.forEach(b => {
+                        if (b !== this) {
+                            if (opened) b.classList.add('open');
+                            else b.classList.remove('open');
+                            b.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                        }
+                    });
+
+                    if (opened) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                        window.scrollTo(0, 0);
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
                     }
                 });
-            }
-        });
+            });
+
+            // Close menu when clicking overlay background
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close on link click
+            overlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
 
         // Mobile menu: toggle nav dropdowns inside overlay
         document.addEventListener('DOMContentLoaded', function(){
@@ -1358,6 +1506,17 @@
                 document.body.style.overflow = '';
             }
         }
+        // KINETIC CAROUSEL OBSERVER
+        const capObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-node');
+                } else {
+                    entry.target.classList.remove('active-node');
+                }
+            });
+        }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
+        document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
     </script>
 </body>
 </html>
