@@ -23,7 +23,7 @@
         body { font-family: 'Inter', sans-serif; background: var(--void); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
-        .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* RETAINED ISLAND NAV */
         .island-nav { 
@@ -69,6 +69,73 @@
             background: rgba(0, 0, 0, 0.9);
             -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
+        }
+
+        /* NAV INVERTED - FOR WHITE SECTIONS */
+        nav.nav-inverted {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-inverted .nav-item > a {
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        nav.nav-inverted .nav-item:hover > a {
+            color: #000 !important;
+        }
+
+        nav.nav-inverted .nav-item > a::after {
+            background: linear-gradient(90deg, #000, #000) !important;
+        }
+
+        nav.nav-inverted .text-white,
+        nav.nav-inverted [class*="text-white"] {
+            color: #000 !important;
+        }
+
+        /* Hide nav links in inverted mode, show logo and CTA */
+        nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .brand-logo {
+            filter: invert(1) brightness(0) !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-inverted .schedule-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        nav.nav-inverted .schedule-btn:hover {
+            background: #333 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* MOBILE NAV INVERSION */
+        .mobile-nav-bar.nav-inverted {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+            filter: invert(1) brightness(0);
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+            stroke: #000 !important;
         }
 
         /* NAV ITEMS - SILICON VALLEY STYLE */
@@ -233,20 +300,15 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* MENU PREVIEW IMAGES */
+        /* MENU PREVIEW IMAGES - NEST MEGA STYLE */
         .menu-preview-img {
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: scale(0.9) translateY(20px) rotateY(10deg);
-            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
-            border-radius: 16px;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; opacity: 0; 
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
         }
-
-        .menu-preview-img.active {
-            opacity: 1;
-            transform: scale(1) translateY(0) rotateY(0deg);
-        }
+        .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
 
         /* STRATEGIC THEATERS */
         .strategic-theaters {
@@ -940,6 +1002,630 @@
             .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
             @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
         }
+
+        /* ==========================================================================
+           AWARD-WINNING MOBILE RESPONSIVE SYSTEM - ARCLIGHT EXCLUSIVE
+           Senior UI/UX Mobile Optimization (10+ Years Experience)
+           ========================================================================== */
+        
+        @media (max-width: 1024px) {
+            /* ============================================
+               01. HUD ELEMENTS - SCALED FOR MOBILE
+               ============================================ */
+            .hud-border {
+                inset: 12px !important;
+                border-color: rgba(255, 255, 255, 0.03) !important;
+            }
+            .hud-data {
+                font-size: 6px !important;
+                letter-spacing: 0.15em !important;
+                opacity: 0.6 !important;
+            }
+            .hud-data.top-10 { top: 16px !important; }
+            .hud-data.bottom-10 { bottom: 16px !important; }
+            .hud-data.left-10 { left: 16px !important; }
+            .hud-data.right-10 { right: 16px !important; }
+            
+            /* ============================================
+               02. PINNED STAGE & TOWER - MOBILE FIT
+               ============================================ */
+            .pinned-stage {
+                height: 100svh !important;
+                min-height: 100vh !important;
+            }
+            
+            .tower-wrap {
+                height: 60vh !important;
+                max-height: 450px !important;
+            }
+            
+            .tower-core {
+                height: 100% !important;
+                width: auto !important;
+                max-width: 85vw !important;
+                filter: drop-shadow(0 0 60px rgba(0, 243, 255, 0.08)) !important;
+            }
+            
+            /* ============================================
+               03. HERO LAYER - MONUMENTAL MOBILE
+               ============================================ */
+            #act-hero .text-center {
+                padding: 0 20px !important;
+            }
+            
+            #act-hero .mono.text-\[10px\] {
+                font-size: 7px !important;
+                letter-spacing: 0.5em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            /* ARCLIGHT HERO TITLE - PERFECT FIT */
+            #act-hero h1.synco {
+                font-size: 14vw !important;
+                line-height: 0.9 !important;
+                letter-spacing: -0.02em !important;
+            }
+            
+            #act-hero p.mono {
+                font-size: 7px !important;
+                letter-spacing: 0.3em !important;
+                margin-top: 24px !important;
+                padding: 0 16px !important;
+                line-height: 1.5 !important;
+            }
+            
+            /* ============================================
+               04. ACT SENTINEL - URBAN DOMINANCE
+               ============================================ */
+            #act-sentinel {
+                padding: 0 20px !important;
+            }
+            
+            #act-sentinel .grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important;
+            }
+            
+            #act-sentinel .col-span-7 {
+                width: 100% !important;
+                transform: none !important;
+                perspective: none !important;
+            }
+            
+            #act-sentinel .space-y-16 {
+                gap: 16px !important;
+            }
+            
+            #act-sentinel .mono.text-cyan {
+                font-size: 8px !important;
+                letter-spacing: 0.3em !important;
+                margin-bottom: 12px !important;
+            }
+            
+            #act-sentinel h2.synco {
+                font-size: 2.5rem !important;
+                line-height: 0.9 !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-sentinel .h-\[1px\] {
+                margin: 16px 0 !important;
+            }
+            
+            #act-sentinel p {
+                font-size: 12px !important;
+                line-height: 1.6 !important;
+                letter-spacing: 0.1em !important;
+            }
+            
+            /* ============================================
+               05. BRIEF CARDS - MOBILE STRUCTURE
+               ============================================ */
+            .brief-card {
+                padding: 20px !important;
+                margin: 16px !important;
+                max-width: calc(100vw - 32px) !important;
+                max-height: 92svh !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+            
+            .brief-card .grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 16px !important;
+            }
+            
+            .brief-card .col-span-5,
+            .brief-card .col-span-7,
+            .brief-card .col-span-12 {
+                width: 100% !important;
+            }
+            
+            /* ============================================
+               06. ACT ENERGY - OFF-GRID SOVEREIGNTY
+               SPLIT SCREEN: VIDEO TOP, TEXT BOTTOM
+               ============================================ */
+            #act-energy .brief-card {
+                display: flex !important;
+                flex-direction: column !important;
+                padding: 16px !important;
+                gap: 0 !important;
+            }
+            
+            #act-energy .brief-card > .grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important;
+                height: 100% !important;
+            }
+            
+            /* VIDEO SECTION - TOP HALF */
+            #act-energy .col-span-5 {
+                order: 1 !important;
+                width: 100% !important;
+                flex: 0 0 auto !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-energy .evidence-vid {
+                width: 100% !important;
+                height: 35vh !important;
+                min-height: 180px !important;
+                max-height: 280px !important;
+                border-radius: 8px !important;
+                object-fit: cover !important;
+                margin-top: 0 !important;
+                margin-bottom: 8px !important;
+            }
+            
+            #act-energy .mono.text-\[8px\] {
+                font-size: 6px !important;
+                margin-top: 4px !important;
+                margin-bottom: 0 !important;
+                opacity: 0.5 !important;
+            }
+            
+            /* TEXT SECTION - BOTTOM HALF */
+            #act-energy .col-span-7,
+            #act-energy .data-column {
+                order: 2 !important;
+                width: 100% !important;
+                flex: 1 1 auto !important;
+                border-left: 0 !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+                padding-left: 0 !important;
+                padding-top: 16px !important;
+            }
+            
+            #act-energy h3.synco {
+                font-size: 1.4rem !important;
+                line-height: 0.95 !important;
+                margin-bottom: 12px !important;
+            }
+            
+            #act-energy p {
+                font-size: 10px !important;
+                line-height: 1.5 !important;
+                letter-spacing: 0.08em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-energy .flex.gap-16 {
+                flex-direction: row !important;
+                gap: 10px !important;
+                flex-wrap: nowrap !important;
+            }
+            
+            #act-energy .bg-white\/5 {
+                padding: 12px !important;
+                flex: 1 1 50% !important;
+                min-width: 0 !important;
+            }
+            
+            #act-energy .bg-white\/5 .mono {
+                font-size: 6px !important;
+            }
+            
+            #act-energy .bg-white\/5 .synco {
+                font-size: 0.9rem !important;
+            }
+            
+            /* ============================================
+               07. ACT OPTICS - ABSURD ACUITY
+               ============================================ */
+            #act-optics {
+                padding: 0 20px !important;
+                justify-content: center !important;
+            }
+            
+            #act-optics .max-w-4xl {
+                max-width: 100% !important;
+                text-align: center !important;
+            }
+            
+            #act-optics .mono.text-white\/20 {
+                font-size: 7px !important;
+                letter-spacing: 0.5em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-optics h2.synco {
+                font-size: 12vw !important;
+                line-height: 0.9 !important;
+                margin-bottom: 24px !important;
+            }
+            
+            #act-optics .space-y-20 {
+                border-right: 0 !important;
+                border-left: 2px solid rgba(0, 243, 255, 0.2) !important;
+                padding-right: 0 !important;
+                padding-left: 16px !important;
+                text-align: left !important;
+            }
+            
+            #act-optics .synco.text-3xl {
+                font-size: 1.25rem !important;
+                margin-bottom: 8px !important;
+            }
+            
+            #act-optics .text-xs {
+                font-size: 10px !important;
+                line-height: 1.6 !important;
+                letter-spacing: 0.1em !important;
+            }
+            
+            #act-optics .bg-white\/5 {
+                padding: 16px !important;
+                display: block !important;
+                margin-top: 20px !important;
+            }
+            
+            #act-optics .bg-white\/5 .synco {
+                font-size: 0.9rem !important;
+            }
+            
+            /* ============================================
+               08. ACT BRAIN - SOVEREIGN STATE
+               ============================================ */
+            #act-brain .brief-card {
+                padding: 24px !important;
+            }
+            
+            #act-brain .grid {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                gap: 20px !important;
+            }
+            
+            #act-brain .col-span-7,
+            #act-brain .col-span-5 {
+                width: 100% !important;
+            }
+            
+            #act-brain .mono.text-cyan {
+                font-size: 7px !important;
+                letter-spacing: 0.3em !important;
+                margin-bottom: 12px !important;
+            }
+            
+            #act-brain h2.synco {
+                font-size: 1.75rem !important;
+                line-height: 0.9 !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-brain p {
+                font-size: 11px !important;
+                line-height: 1.6 !important;
+                letter-spacing: 0.1em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            #act-brain .flex.gap-10 {
+                flex-direction: row !important;
+                gap: 20px !important;
+            }
+            
+            #act-brain .flex.gap-10 .text-left {
+                flex: 1 !important;
+            }
+            
+            #act-brain .flex.gap-10 .mono {
+                font-size: 7px !important;
+            }
+            
+            #act-brain .flex.gap-10 .synco {
+                font-size: 1rem !important;
+            }
+            
+            #act-brain .evidence-vid {
+                width: 100% !important;
+                height: 200px !important;
+                border-radius: 8px !important;
+            }
+            
+            /* ============================================
+               09. ACT HEGEMONY - FINAL SOVEREIGNTY
+               ============================================ */
+            #act-hegemony > div {
+                padding: 30px 20px !important;
+                margin: 20px !important;
+                max-width: calc(100vw - 40px) !important;
+            }
+            
+            #act-hegemony .synco.text-\[12vw\] {
+                font-size: 20vw !important;
+                opacity: 0.03 !important;
+            }
+            
+            #act-hegemony .mono.text-white\/30 {
+                font-size: 7px !important;
+                letter-spacing: 0.8em !important;
+                margin-bottom: 20px !important;
+            }
+            
+            #act-hegemony h2.synco {
+                font-size: 2rem !important;
+                line-height: 0.9 !important;
+            }
+            
+            #act-hegemony p {
+                font-size: 10px !important;
+                line-height: 1.6 !important;
+                letter-spacing: 0.2em !important;
+                margin-top: 24px !important;
+            }
+            
+            /* ============================================
+               10. LABORATORY - THE WHITE PHASE
+               IMAGE BIGGER, TEXT SMALLER
+               ============================================ */
+            #specs {
+                padding: 0 !important;
+                height: 100svh !important;
+                overflow: hidden !important;
+            }
+            
+            #specs .max-w-\[1500px\] {
+                padding: 70px 16px 30px 16px !important;
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+            }
+            
+            #specs .col-span-5,
+            #specs .col-span-7 {
+                width: 100% !important;
+            }
+            
+            /* TEXT SECTION - COMPACT AT BOTTOM */
+            #specs .col-span-5 {
+                order: 2 !important;
+                flex: 0 0 auto !important;
+            }
+            
+            #specs .space-y-16 {
+                gap: 8px !important;
+            }
+            
+            /* IMAGE SECTION - BIGGER AT TOP */
+            #specs .col-span-7 {
+                order: 1 !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                flex: 1 1 auto !important;
+            }
+            
+            #specs .mono.text-\[10px\] {
+                font-size: 6px !important;
+                letter-spacing: 0.4em !important;
+                color: rgba(0, 0, 0, 0.4) !important;
+                margin-bottom: 4px !important;
+            }
+            
+            #specs h2.synco {
+                font-size: 1.5rem !important;
+                line-height: 0.9 !important;
+                color: var(--void) !important;
+            }
+            
+            #specs .space-y-8 {
+                gap: 6px !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            
+            #specs .border-b {
+                padding-bottom: 6px !important;
+            }
+            
+            #specs .mono.text-\[8px\] {
+                font-size: 5px !important;
+                color: rgba(0, 0, 0, 0.4) !important;
+                margin-bottom: 0 !important;
+            }
+            
+            #specs .synco.text-3xl {
+                font-size: 0.95rem !important;
+                color: var(--void) !important;
+            }
+            
+            /* IMAGE - MUCH BIGGER */
+            #specs #lab-core {
+                height: auto !important;
+                max-height: 50vh !important;
+                width: auto !important;
+                max-width: 90% !important;
+                transform: none !important;
+                scale: 1 !important;
+            }
+            
+            #specs .blueprint-grid {
+                background-size: 25px 25px !important;
+                opacity: 0.3 !important;
+            }
+            
+            /* ============================================
+               11. LAYER GENERAL MOBILE OPTIMIZATION
+               ============================================ */
+            .layer {
+                padding: 80px 16px !important;
+            }
+            
+            .layer.px-24 {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+            
+            /* ============================================
+               12. TYPOGRAPHY SCALE FOR MOBILE
+               ============================================ */
+            .synco.text-7xl { font-size: 2.25rem !important; }
+            .synco.text-6xl { font-size: 2rem !important; }
+            .synco.text-5xl { font-size: 1.75rem !important; }
+            .synco.text-4xl { font-size: 1.5rem !important; }
+            .synco.text-3xl { font-size: 1.25rem !important; }
+            .synco.text-2xl { font-size: 1.1rem !important; }
+            .synco.text-xl { font-size: 1rem !important; }
+            
+            .mono.tracking-\[2em\] { letter-spacing: 0.5em !important; }
+            .mono.tracking-\[1em\] { letter-spacing: 0.4em !important; }
+            .mono.tracking-\[0\.5em\] { letter-spacing: 0.25em !important; }
+            
+            /* ============================================
+               13. MOBILE TOUCH OPTIMIZATIONS
+               ============================================ */
+            .brief-card,
+            .cap-card,
+            .layer > div {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Smooth momentum scrolling */
+            .main-container {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* ============================================
+               14. EVIDENCE VIDEO MOBILE OPTIMIZATION
+               ============================================ */
+            .evidence-vid {
+                height: auto !important;
+                min-height: 150px !important;
+                max-height: 200px !important;
+                border-radius: 8px !important;
+                object-fit: cover !important;
+            }
+            
+            /* ============================================
+               15. MOBILE ANIMATION ADJUSTMENTS
+               ============================================ */
+            /* Reduce parallax intensity on mobile */
+            @supports (-webkit-touch-callout: none) {
+                .tower-wrap,
+                #tower {
+                    transform: none !important;
+                }
+            }
+        }
+        
+        /* SMALL PHONE OPTIMIZATIONS (iPhone SE, etc) */
+        @media (max-width: 375px) {
+            #act-hero h1.synco {
+                font-size: 20vw !important;
+            }
+            
+            #act-sentinel h2.synco,
+            #act-energy h3.synco,
+            #act-brain h2.synco {
+                font-size: 1.5rem !important;
+            }
+            
+            #act-optics h2.synco {
+                font-size: 14vw !important;
+            }
+            
+            #act-hegemony h2.synco {
+                font-size: 1.75rem !important;
+            }
+            
+            .brief-card {
+                padding: 16px !important;
+            }
+            
+            #specs h2.synco {
+                font-size: 1.6rem !important;
+            }
+            
+            #specs .synco.text-4xl {
+                font-size: 1.2rem !important;
+            }
+            
+            .cap-card {
+                padding: 24px !important;
+                min-height: 300px !important;
+            }
+            
+            .cap-card h3.synco {
+                font-size: 1.15rem !important;
+            }
+        }
+        
+        /* LANDSCAPE MOBILE OPTIMIZATION */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .pinned-stage {
+                height: 100vw !important;
+                min-height: 100vh !important;
+            }
+            
+            .tower-wrap {
+                height: 80vh !important;
+                max-height: none !important;
+            }
+            
+            .brief-card {
+                max-height: 85vh !important;
+                flex-direction: row !important;
+            }
+            
+            .brief-card .grid {
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+            }
+            
+            .brief-card .col-span-5 {
+                flex: 1 1 45% !important;
+            }
+            
+            .brief-card .col-span-7 {
+                flex: 1 1 50% !important;
+            }
+            
+            #specs .max-w-\[1500px\] {
+                flex-direction: row !important;
+                align-items: center !important;
+            }
+            
+            #specs .col-span-5 {
+                order: 1 !important;
+                flex: 1 1 40% !important;
+            }
+            
+            #specs .col-span-7 {
+                order: 2 !important;
+                flex: 1 1 50% !important;
+            }
+            
+            #specs #lab-core {
+                max-height: 60vh !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -953,15 +1639,15 @@
 
     <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
         <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
-            <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="brand-logo h-8 md:h-10 w-auto"></a>
 
-            <ul class="hidden lg:flex gap-20 items-center">
+        <ul class="nav-links-container hidden lg:flex gap-20 items-center">
                 <!-- DEFENSE PLATFORMS -->
                 <li class="nav-item group static cursor-pointer">
                     <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Ecosystem</a>
                     <div class="mega-menu-wrapper">
                         <div class="mega-menu-content text-left">
-                            <div class="max-w-[1400px] mx-auto grid grid-cols-4 gap-12 px-10">
+                            <div class="max-w-[1500px] mx-auto grid grid-cols-5 gap-12 px-10">
                                 <div class="space-y-10 text-left">
                                     <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
                                         <span class="opacity-30 italic">01 //</span> Platforms
@@ -1010,10 +1696,9 @@
                                         <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Sovereign Borders</li>
                                     </ul>
                                 </div>
-                                <div class="relative flex items-center justify-center overflow-visible min-h-[450px] border-l border-white/5 pl-12">
+                                <div class="col-span-2 relative flex items-center justify-center overflow-visible min-h-[450px] border-l border-white/5 pl-12">
                                     <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale"></div>
                                     <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
-                                    <img id="p-sentinel" src="/media/sentinel-hero.png" class="menu-preview-img w-full h-full scale-125 object-contain">
                                     <div id="p-obex" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
                                         <div class="relative w-[85%] flex flex-col items-start translate-x-[15%]">
                                             <!-- HARDWARE BOX -->
@@ -1195,8 +1880,8 @@
                             <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
                             <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
                             <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
-                            <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
                             <a href="arclight.html" class="product-link-item">ARCLIGHT - Urban surveillance tower</a>
+                            <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
                         </div>
                     </div>
                 </div>
@@ -1346,19 +2031,19 @@
         <section data-nav-theme="light" class="pinned-stage lab-phase" id="specs">
             <div class="blueprint-grid"></div>
             <div class="max-w-[1500px] w-full px-12 grid grid-cols-12 gap-24 items-center relative z-10">
-                <div class="col-span-5 space-y-20">
+                <div class="col-span-5 space-y-16">
                     <div>
-                        <div class="mono text-[10px] tracking-[1em] mb-6 text-black/40">Technical Fidelity</div>
-                        <h2 class="synco text-6xl font-black">MIL-SPEC<br>DYNAMICS.</h2>
+                        <div class="mono text-[10px] tracking-[1em] mb-4 text-black/40">SURVEILLANCE SPECIFICATIONS</div>
+                        <h2 class="synco text-5xl font-black">ALWAYS<br>WATCHING.</h2>
                     </div>
-                    <div class="space-y-12">
-                        <div class="border-b border-black/10 pb-8"><div class="mono text-[9px] mb-2 uppercase">Core Processing</div><div class="synco text-4xl"><span class="counter" data-val="180">0</span> TOPS</div></div>
-                        <div class="border-b border-black/10 pb-8"><div class="mono text-[9px] mb-2 uppercase">Chassis</div><div class="synco text-4xl">TITANIUM G5</div></div>
-                        <div class="border-b border-black/10 pb-8"><div class="mono text-[9px] mb-2 uppercase">Seal</div><div class="synco text-4xl">IP69K RATED</div></div>
+                    <div class="space-y-8">
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Visual Range</div><div class="synco text-3xl">8K ULTRA-HD @ 1.5KM</div></div>
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Power Source</div><div class="synco text-3xl">100% SOLAR AUTONOMOUS</div></div>
+                        <div class="border-b border-black/10 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Coverage</div><div class="synco text-3xl">360° REAL-TIME TRACKING</div></div>
                     </div>
                 </div>
                 <div class="col-span-7 flex justify-center">
-                    <img src="media/archlight-anatomy.png" class="h-[90vh] scale-110 grayscale brightness-110" id="lab-core">
+                    <img src="media/archlight-anatomy.png" alt="ARCLIGHT Tower Anatomy" class="h-[90vh] scale-110 grayscale brightness-110" id="lab-core">
                 </div>
             </div>
         </section>
@@ -1466,10 +2151,10 @@
             <div class="text-left">
                 <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
                 <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                    <a href="primus.html" class="footer-link-hover">PRIMUS</a>
                     <a href="nest.html" class="footer-link-hover">NEST</a>
-                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
-                    <a href="trion.html" class="footer-link-hover">TRION</a>
+                    <a href="teletraan.html" class="footer-link-hover text-white">TELETRAAN</a>
+                    <a href="trion.html" class="footer-link-hover text-white">TRION</a>
                     <a href="obex.html" class="footer-link-hover">OBEX</a>
                     <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
                 </div>
@@ -1553,7 +2238,6 @@
                     if (opened) {
                         overlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
-                        window.scrollTo(0, 0);
                     } else {
                         overlay.style.display = 'none';
                         document.body.style.overflow = '';
@@ -1594,18 +2278,27 @@
 
         gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-        const lenis = new Lenis({ lerp: 0.05, smoothWheel: true });
+        // MOBILE-OPTIMIZED LENIS - faster scroll on mobile
+        const isMobile = window.innerWidth <= 1024;
+        const lenis = new Lenis({ 
+            lerp: isMobile ? 0.12 : 0.05, 
+            smoothWheel: true,
+            touchMultiplier: isMobile ? 2.5 : 1 // Faster touch scrolling on mobile
+        });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // --- THE MASTER ENGINE (50,000PX SCROLL) ---
+        // --- THE MASTER ENGINE (RESPONSIVE SCROLL DISTANCE) ---
+        // Mobile: 8000px (quick transitions), Desktop: 45000px (cinematic)
+        const scrollDistance = isMobile ? 8000 : 45000;
+        
         const masterTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#master-pin",
                 start: "top top",
-                end: "+=45000", 
+                end: "+=" + scrollDistance, 
                 pin: true,
-                scrub: 1,
+                scrub: isMobile ? 0.5 : 1, // Faster scrub on mobile
             }
         });
 
@@ -1639,11 +2332,16 @@
                 .to("#act-hegemony", { opacity: 1, visibility: 'visible', scale: 1, duration: 6 }, "-=4")
                 .to("#act-hegemony", { opacity: 0, scale: 0.9, duration: 3, delay: 4 });
 
-        // LABORATORY TRANSITION
+        // LABORATORY TRANSITION (Shorter on mobile)
+        const labScrollEnd = isMobile ? "+=80%" : "+=150%";
         gsap.to("#specs", {
             scrollTrigger: {
-                trigger: "#specs", start: "top top", end: "+=150%", pin: true, scrub: true,
-                onToggle: self => document.getElementById('main-nav').classList.toggle('nav-inverted', self.isActive),
+                trigger: "#specs", start: "top top", end: labScrollEnd, pin: true, scrub: isMobile ? 0.5 : true,
+                onToggle: self => {
+                    document.getElementById('main-nav').classList.toggle('nav-inverted', self.isActive);
+                    const mobileNav = document.querySelector('.mobile-nav-bar');
+                    if (mobileNav) mobileNav.classList.toggle('nav-inverted', self.isActive);
+                },
                 onEnter: () => {
                     gsap.to("body", { backgroundColor: "#ffffff", duration: 0.6 });
                     document.querySelectorAll('.counter').forEach(c => {
@@ -1654,12 +2352,14 @@
             }
         });
 
-        // Mouse Parallax
-        window.addEventListener("mousemove", (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 60;
-            const y = (e.clientY / window.innerHeight - 0.5) * 60;
-            gsap.to("#tower, #lab-core", { rotationY: x, rotationX: -y, x: x * 2, y: y * 2, duration: 3, ease: "power2.out" });
-        });
+        // Mouse Parallax (Desktop only - disabled on mobile for performance)
+        if (!isMobile) {
+            window.addEventListener("mousemove", (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 60;
+                const y = (e.clientY / window.innerHeight - 0.5) * 60;
+                gsap.to("#tower, #lab-core", { rotationY: x, rotationX: -y, x: x * 2, y: y * 2, duration: 3, ease: "power2.out" });
+            });
+        }
         // KINETIC CAROUSEL OBSERVER
         const capObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

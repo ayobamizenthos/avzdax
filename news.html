@@ -25,7 +25,7 @@
         .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
 
-        /* SILICON VALLEY NAVIGATION SYSTEM - DYNAMIC VOID TRANSITION */
+        /* SILICON VALLEY NAVIGATION SYSTEM - NO INITIAL BACKGROUND */
         nav {
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             background: transparent;
@@ -33,32 +33,78 @@
             z-index: 1000;
         }
 
-        nav:hover {
+        nav:hover, nav.nav-scrolled {
             background: #000 !important;
             border-bottom-color: rgba(255,255,255,0.15);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
         }
 
-        nav:hover .nav-item > a,
-        nav:hover .mono,
-        nav:hover .nav-direct-link,
-        nav:hover button span,
-        nav:hover .text-black,
-        nav:hover .text-black\/40 {
-            color: #fff !important;
+        /* NAV INVERTED - FOR WHITE SECTIONS */
+        nav.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
         }
 
-        nav:hover svg {
-            stroke: #fff !important;
-            color: #fff !important;
+        nav.nav-inverted .nav-item > a {
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        nav.nav-inverted .nav-item:hover > a {
+            color: #000 !important;
+        }
+
+        nav.nav-inverted .nav-item > a::after {
+            background: linear-gradient(90deg, #000, #000) !important;
+        }
+
+        nav.nav-inverted .text-white,
+        nav.nav-inverted [class*="text-white"] {
+            color: #000 !important;
+        }
+
+        /* Hide nav links in inverted mode, show logo and CTA */
+        nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .brand-logo {
+            filter: invert(1) brightness(0) !important;
             opacity: 1 !important;
-        }
-        
-        nav:hover .nav-item > a::after {
-            background: #fff !important;
+            pointer-events: auto !important;
         }
 
-        nav:hover .nav-logo-img {
-            filter: invert(1) brightness(10);
+        nav.nav-inverted .schedule-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        nav.nav-inverted .schedule-btn:hover {
+            background: #333 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* MOBILE NAV INVERSION */
+        .mobile-nav-bar.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+            filter: invert(1) brightness(0);
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+            stroke: #000 !important;
         }
 
         /* NAV ITEMS - SILICON VALLEY STYLE */
@@ -243,13 +289,13 @@
         }
 
         .mega-menu-content {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.1),
-                0 0 0 1px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             padding: 60px 0;
@@ -263,7 +309,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         }
 
         /* MEGA MENU CONTENT - SILICON VALLEY LAYOUT */
@@ -283,10 +329,10 @@
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.1em;
-            color: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
             margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 12px;
         }
 
@@ -302,24 +348,24 @@
         }
 
         .grid-item-hover:hover {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
             transform: translateX(4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .grid-item-hover span:first-child {
             display: block;
             font-size: 15px;
             font-weight: 600;
-            color: #000000;
+            color: #ffffff;
             margin-bottom: 4px;
             transition: color 0.3s ease;
         }
 
         .grid-item-hover span:last-child {
             font-size: 12px;
-            color: rgba(0, 0, 0, 0.6);
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
             transition: color 0.3s ease;
         }
@@ -329,7 +375,7 @@
         }
 
         .grid-item-hover:hover span:last-child {
-            color: rgba(0, 0, 0, 0.8);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         /* MENU PREVIEW IMAGES */
@@ -349,8 +395,8 @@
 
         /* MENU STRATEGIC THEATERS */
         .strategic-theaters {
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 24px;
         }
@@ -358,7 +404,7 @@
         .strategic-theaters h3 {
             font-size: 12px;
             font-weight: 600;
-            color: rgba(0, 0, 0, 0.7);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 16px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -366,7 +412,7 @@
 
         .strategic-theaters ul li {
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
 
@@ -384,7 +430,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.4);
             margin-right: 12px;
             transition: background 0.3s ease;
         }
@@ -395,8 +441,8 @@
 
         /* MENU INTELLIGENCE LAYER */
         .intelligence-layer {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 248, 248, 0.8) 100%);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 24px;
             backdrop-filter: blur(10px);
@@ -406,13 +452,13 @@
         .intelligence-layer h4 {
             font-size: 14px;
             font-weight: 600;
-            color: #000000;
+            color: #ffffff;
             margin-bottom: 12px;
         }
 
         .intelligence-layer p {
             font-size: 12px;
-            color: rgba(0, 0, 0, 0.7);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.5;
             margin-bottom: 16px;
         }
@@ -516,10 +562,10 @@
                 overflow: hidden !important;
             }
             .mobile-nav-bar {
-                background: rgba(255, 255, 255, 0.95);
+                background: rgba(0, 0, 0, 0.8);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             .mobile-menu-toggle-modern {
                 display: flex !important;
@@ -538,7 +584,7 @@
             .mobile-menu-toggle-modern:hover { transform: translateY(-2px); background: rgba(0,0,0,0.04); }
             .mobile-menu-toggle-modern:active { transform: scale(0.98); }
             .mobile-menu-toggle-modern .menu-icon { width: 26px; height: 26px; display: block; }
-            .mobile-menu-toggle-modern .bar { stroke: rgba(0,0,0,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
+            .mobile-menu-toggle-modern .bar { stroke: rgba(255,255,255,0.95); transition: transform 0.22s ease, opacity 0.18s ease; stroke-linecap: round; }
             .mobile-menu-toggle-modern .menu-icon { overflow: visible; }
             .mobile-menu-toggle-modern .bar { transform-box: fill-box; transform-origin: center; }
             .mobile-menu-toggle-modern.open .menu-icon .bar:nth-of-type(1) { transform: translateY(4px) rotate(45deg); }
@@ -549,7 +595,7 @@
         /* LUXURY MOBILE MENU OVERLAY - AVZDAX SECURITY TECH */
         @media (max-width: 1024px) {
             #mobile-menu-overlay {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 248, 248, 0.98) 50%, rgba(255, 255, 255, 0.96) 100%);
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.96) 0%, rgba(2, 2, 2, 0.98) 50%, rgba(0, 0, 0, 0.96) 100%);
                 backdrop-filter: blur(60px);
                 -webkit-backdrop-filter: blur(60px);
                 display: flex;
@@ -557,7 +603,14 @@
                 justify-content: flex-start;
                 align-items: stretch;
                 padding: 80px 24px 40px;
-                position: relative;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: 9999 !important;
             }
             #mobile-menu-overlay::before {
                 content: '';
@@ -566,7 +619,7 @@
                 left: 0;
                 right: 0;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
+                background: linear-gradient(90deg, transparent, rgba(226, 226, 226, 0.3), transparent);
                 animation: security-scan 3s infinite linear;
             }
             @keyframes security-scan {
@@ -621,7 +674,7 @@
             left: 0;
             width: 40px;
             height: 1px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 0.5px;
         }
         .nav-section:last-child::after {
@@ -631,7 +684,7 @@
             width: 100%;
             background: transparent;
             border: none;
-            color: #000000;
+            color: #ffffff;
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 0.05em;
@@ -653,7 +706,7 @@
             bottom: 0;
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg, #000000, rgba(0, 0, 0, 0.3));
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
             transition: width 0.4s ease;
         }
         .nav-toggle:hover::before {
@@ -663,7 +716,7 @@
             content: '';
             width: 20px;
             height: 20px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
             background-size: contain;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             opacity: 0.6;
@@ -674,17 +727,17 @@
             opacity: 1;
         }
         .nav-toggle:hover {
-            color: #000000;
+            color: #E2E2E2;
             transform: translateX(4px);
         }
         .nav-toggle.active {
-            color: #000000;
+            color: #E2E2E2;
         }
         .nav-direct-link {
             width: 100%;
             background: transparent;
             border: none;
-            color: #000000;
+            color: #ffffff;
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 0.05em;
@@ -705,16 +758,16 @@
             bottom: 0;
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg, #000000, rgba(0, 0, 0, 0.3));
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
             transition: width 0.4s ease;
         }
         .nav-direct-link:hover::before {
             width: 100%;
         }
         .nav-direct-link:hover {
-            color: #000000;
+            color: #E2E2E2;
             transform: translateX(8px);
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
         }
         .nav-dropdown {
             max-height: 0;
@@ -740,13 +793,13 @@
         .product-link-item,
         .intelligence-link-item,
         .mission-link-item {
-            color: rgba(0, 0, 0, 0.85);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-size: 15px;
             font-weight: 400;
             padding: 16px 20px;
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: block;
@@ -765,7 +818,7 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: linear-gradient(180deg, #000000, rgba(0, 0, 0, 0.3));
+            background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
             border-radius: 2px 0 0 2px;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -773,12 +826,12 @@
         .product-link-item:hover,
         .intelligence-link-item:hover,
         .mission-link-item:hover {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.2);
+            background: rgba(226, 226, 226, 0.05);
+            border-color: rgba(226, 226, 226, 0.2);
             color: #ffffff;
             transform: translateX(8px) translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+            text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
         }
         .product-link-item:hover::before,
         .intelligence-link-item:hover::before,
@@ -819,10 +872,8 @@
         body { background-color: #020202; color: white; overflow-x: hidden; }
 
         /* HEADER REDESIGN - BLACK BACKGROUND */
-        nav#main-nav { background: var(--void) !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        nav#main-nav .nav-item a, 
-        nav#main-nav .text-black,
-        nav#main-nav button span { color: var(--ghost) !important; }
+        nav#main-nav .nav-item > a, 
+        nav#main-nav button:not(.bg-white) span { color: var(--ghost) !important; }
         nav#main-nav svg { color: var(--ghost) !important; }
         nav#main-nav .bg-white\/5 { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.1) !important; }
         
@@ -1053,44 +1104,106 @@
             text-transform: uppercase;
             position: relative;
         }
-        .r-quote-full::before { content: 'PEACETECH_VISION'; position: absolute; top: 20px; left: 0; font-family: 'JetBrains Mono'; fontSize: 10px; opacity: 0.3; letter-spacing: 0.5em; }
+        .r-quote-full::before { content: 'PEACETECH_VISION'; position: absolute; top: 20px; left: 0; font-family: 'JetBrains Mono'; font-size: 10px; opacity: 0.3; letter-spacing: 0.5em; }
 
         .accent-green { color: #00ff41; }
         
-        @media (max-width: 1100px) {
-            .r-content-grid { grid-template-columns: 1fr; }
-            .r-main-text, .r-side-meta { grid-column: span 1; }
-            .r-image-grid { grid-template-columns: 1fr; }
-            .r-title { font-size: 15vw; }
-            .r-quote-full { font-size: 32px; }
+        /* ==========================================================================
+           ULTIMATE RESPONSIVE SYSTEM (SENIOR UI/UX VERSION)
+           ========================================================================== */
+
+        /* TOP-TIER TABLET & LAPTOP (1400px - 1025px) */
+        @media (max-width: 1400px) {
+            .news-container { padding-left: 40px; padding-right: 40px; }
+            .c-title { font-size: 2.8vw; }
+            .featured-card .c-title { font-size: 4vw; }
         }
 
-        .r-sidenote {
-            position: absolute;
-            left: -200px;
-            width: 150px;
-            font-family: 'JetBrains Mono';
-            font-size: 10px;
-            color: rgba(255,255,255,0.3);
-            text-transform: uppercase;
-            line-height: 1.7;
-            padding-top: 5px;
-        }
-
-        /* MOBILE OVERLAY FIXES */
-        /* MOBILE GRID REFINEMENT */
-        @media (max-width: 1100px) {
-            .news-container { padding: 160px 30px 60px; }
-            .news-grid { grid-template-columns: 1fr; gap: 30px; }
-            .featured-card, .standard-card, .wide-card, .compact-card { grid-column: span 1 !important; height: auto !important; min-height: auto !important; }
+        /* TABLET OPTIMIZATION (1024px) */
+        @media (max-width: 1024px) {
+            .news-container { padding: 160px 24px 80px; }
+            .news-hero-title { font-size: 15vw; }
+            
+            .news-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .featured-card, .wide-card, .standard-card, .compact-card { grid-column: span 2 !important; height: auto !important; min-height: auto !important; }
+            
             .featured-card { grid-template-columns: 1fr; }
-            .featured-card .card-media { height: 400px; grid-column: span 1; }
-            .featured-card .card-body { grid-column: span 1; padding: 40px 30px; }
-            .c-title { font-size: 32px !important; }
-            .news-hero-title { font-size: 18vw; }
-            .r-quote { margin: 60px 0; padding: 40px 20px; font-size: 24px; }
-            .r-sidenote { display: none; }
-            .r-title { font-size: 42px; }
+            .featured-card .card-media { grid-column: span 1; height: 350px; }
+            .featured-card .card-body { grid-column: span 1; padding: 40px; }
+
+            .card-body { padding: 40px; }
+            .c-title { font-size: 28px !important; }
+            
+            /* FILTER BAR MOBILE REFINEMENT */
+            #filter-bar .max-w-\[1700px\] { padding: 0 20px; height: 60px !important; }
+            #filter-bar { height: 60px !important; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+            .filter-nav { 
+                gap: 20px; 
+                width: 100%; 
+                overflow-x: auto; 
+                padding: 10px 0; 
+                scrollbar-width: none;
+                justify-content: flex-start;
+                -ms-overflow-style: none;
+            }
+            .filter-nav::-webkit-scrollbar { display: none; }
+            .f-item { white-space: nowrap; font-size: 11px; }
+
+            /* READER MOBILE ADAPTATION */
+            .reader-container { padding: 120px 24px 80px; }
+            .r-header { margin-bottom: 60px; padding-bottom: 40px; }
+            .r-title { font-size: 12vw; }
+            .r-content-grid { gap: 40px; }
+            .r-main-text, .r-side-meta { grid-column: span 12; }
+            .r-body { font-size: 18px; }
+            .r-quote-full { font-size: 32px; padding: 40px 0; margin: 40px 0; }
+            
+            .r-image-grid { margin: 60px 0; gap: 12px; }
+            .r-grid-img { grid-column: span 12 !important; height: 300px !important; }
+            
+            .reader-nav-fixed { height: 80px; padding: 0 20px; }
+            .reader-back-btn { font-size: 8px; }
+        }
+
+        /* MOBILE PERFECT (768px & BELOW) */
+        @media (max-width: 768px) {
+            .news-container { padding-top: 140px; }
+            .news-hero-title { font-size: 18vw; letter-spacing: -0.04em; }
+            .news-sub-label { letter-spacing: 0.4em; font-size: 10px; margin-bottom: 20px; }
+            .news-header-section { margin-bottom: 60px; }
+
+            .news-grid { grid-template-columns: 1fr; gap: 20px; }
+            .featured-card, .wide-card, .standard-card, .compact-card { grid-column: span 1 !important; }
+            
+            .card-body { padding: 30px 24px; }
+            .c-meta { margin-bottom: 20px; font-size: 9px; }
+            .c-title { font-size: 24px !important; line-height: 1.2; }
+            .c-excerpt { font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
+            
+            .standard-card .card-media { height: 250px; }
+            .featured-card .card-media { height: 280px; }
+
+            /* MODAL / THEATER REFINEMENT */
+            .video-modal { padding: 20px; }
+            .video-close-btn { top: 20px; right: 20px; font-size: 8px; }
+            .play-btn { width: 60px; }
+        }
+
+        /* MICRO SCREEN OPTIMIZATION (480px) */
+        @media (max-width: 480px) {
+            .news-hero-title { font-size: 22vw; }
+            .c-title { font-size: 22px !important; }
+            .card-body { padding: 25px 20px; }
+            .news-container { padding-left: 16px; padding-right: 16px; }
+            
+            .r-title { font-size: 15vw; }
+            .r-body { font-size: 16px; }
+            .r-body p { margin-bottom: 25px; }
+            .r-body h3 { font-size: 24px; margin: 50px 0 20px; }
+
+            .filter-nav { padding-right: 40px !important; } /* Padding for scroll end */
+            .c-title { word-wrap: break-word; hyphens: auto; }
+            .news-hero-title { font-size: 24vw !important; }
         }
         /* UTILITIES */
         .img-glow-effect { filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6)); }
@@ -1107,6 +1220,67 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
+
+        /* MEGA MENU SYSTEM - NEST STYLE */
+        .nav-item { position: static; }
+        .mega-menu-wrapper {
+            position: absolute; top: 100%; left: 0; width: 100%;
+            background: rgba(3, 3, 3, 0.98); 
+            -webkit-backdrop-filter: blur(50px); backdrop-filter: blur(50px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transform: translateY(10px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+        .nav-item:hover .mega-menu-wrapper { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+        
+        .grid-item-hover {
+            display: block; padding: 16px 20px; border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid transparent; text-decoration: none;
+        }
+        .grid-item-hover:hover {
+            background: rgba(255, 255, 255, 0.03); 
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .grid-item-hover span:first-child { display: block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
+        
+        .menu-preview-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; opacity: 0; 
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
+
+        /* MOBILE NAV STYLES - NEST VERSION */
+        @media (max-width: 1024px) {
+            #main-nav { display: none !important; visibility: hidden !important; }
+            .mobile-nav-bar {
+                background: #000;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 15px 0;
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+            }
+            .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+            
+            .nav-dropdown.open { display: block !important; }
+        }
     </style>
 </head>
 <body>
@@ -1115,17 +1289,17 @@
 
 <!-- SEARCH OVERLAY -->
 <div id="search-overlay" class="flex items-center justify-center">
-    <button onclick="toggleSearch()" aria-label="Close search" class="absolute top-10 right-10 text-black/40 hover:text-black transition-all">
+    <button onclick="toggleSearch()" class="absolute top-10 right-10 text-white/40 hover:text-white transition-all">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
     <div class="max-w-4xl w-full px-10">
-        <div class="flex items-center gap-6 border-b border-black/20 pb-6 mb-10">
+        <div class="flex items-center gap-6 border-b border-white/20 pb-6 mb-10">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-black w-full placeholder:text-black/10">
+            <input type="text" placeholder="TYPE TO SEARCH THE ECOSYSTEM..." class="bg-transparent border-none outline-none text-2xl md:text-4xl font-black uppercase tracking-widest text-white w-full placeholder:text-white/10">
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div class="space-y-4">
-                <h4 class="text-[10px] font-mono text-black/20 uppercase tracking-widest">Trending Assets</h4>
+                <h4 class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Trending Assets</h4>
                 <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
                     <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
                     <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
@@ -1139,54 +1313,135 @@
 <!-- NAVIGATION -->
 <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
     <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
-        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="brand-logo h-8 md:h-10 w-auto"></a>
 
-        <ul class="hidden lg:flex gap-20 items-center relative z-[160]">
-            <!-- BRIEFINGS -->
+        <ul class="nav-links-container hidden lg:flex gap-20 items-center">
+            <!-- DEFENSE PLATFORMS -->
             <li class="nav-item group static cursor-pointer">
-                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Briefings</a>
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Ecosystem</a>
+                <div class="mega-menu-wrapper">
+                    <div class="mega-menu-content text-left">
+                        <div class="max-w-[1500px] mx-auto grid grid-cols-5 gap-12 px-10">
+                            <div class="space-y-10 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Platforms
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="primus.html" onmouseover="showPreview('primus')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Primus</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Behavioral Predictive AI</span>
+                                    </a>
+                                    <a href="teletraan.html" onmouseover="showPreview('teletraan')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Teletraan</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Command UI</span>
+                                    </a>
+                                    <a href="nest.html" onmouseover="showPreview('nest')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Nest</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Professional Oversight</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Hardware
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="trion.html" onmouseover="showPreview('trion')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Trion</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Edge Optical Sensing</span>
+                                    </a>
+                                    <a href="obex.html" onmouseover="showPreview('obex')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Obex</span>
+                                        <span class="text-[10px] text-gray-500 uppercase font-mono tracking-[0.2em]">Architectural Imaging</span>
+                                    </a>
+                                    <a href="arclight.html" onmouseover="showPreview('arclight')" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Arclight</span>
+                                        <span class="text-[10px] text-gray-500 uppercase font-mono tracking-[0.2em]">Urban Surveillance Tower</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-12 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Strategic Theaters
+                                </h3>
+                                <ul class="space-y-10 text-[13px] font-black text-gray-400 uppercase tracking-[0.3em] px-4">
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white rounded-full"></div> National Security</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Energy Infrastructure</li>
+                                    <li class="hover:text-white cursor-pointer transition-all flex items-center gap-6"><div class="w-2 h-2 bg-white/20 rounded-full"></div> Sovereign Borders</li>
+                                </ul>
+                            </div>
+
+                            <div class="col-span-2 relative flex items-center justify-center overflow-visible min-h-[450px] border-l border-white/5 pl-12">
+                                <div id="preview-default" class="text-center transition-opacity duration-500"><img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale"></div>
+                                <img id="p-trion" src="/media/trion-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <div id="p-obex" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[85%] flex flex-col items-start translate-x-[15%]">
+                                        <!-- HARDWARE BOX -->
+                                        <img src="media/obexbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="OBEX">
+                                        <!-- SENSOR (BOTTOM LEFT) -->
+                                        <img src="media/obex-display.png" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700" alt="OBEX Sensor">
+                                    </div>
+                                </div>
+                                <div id="p-primus" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
+                                    <div class="relative w-[110%] flex flex-col items-start translate-x-[5%]">
+                                        <!-- CORE (TOP LEFT) -->
+                                        <img src="media/primus-core.png" class="w-[30%] h-auto relative z-10 mt-[-5%] mb-[-12%] transition-transform duration-700" alt="PRIMUS Core">
+                                        <!-- BOX -->
+                                        <img src="media/primusbox.png" class="w-[100%] h-auto self-end relative z-0" style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0,0,0,0.6));" alt="PRIMUS">
+                                    </div>
+                                </div>
+                                <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-nest" src="/media/nest_display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-arclight" src="/media/arclight-homepage.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- INTELLIGENCE -->
+            <li class="nav-item group static cursor-pointer">
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Intelligence</a>
                 <div class="mega-menu-wrapper">
                     <div class="mega-menu-content text-left">
                         <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
                             <div class="space-y-10 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">01 //</span> Strategic Theses
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Research Lab
                                 </h3>
                                 <div class="flex flex-col gap-2">
-                                    <a href="javascript:void(0)" onclick="openArticle('the-end-of-reactive-security')" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The End of Reactive Security</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Institutional Foundation</span>
+                                    <a href="whitepaper.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">White Papers</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Neural behavior Analysis Archives</span>
                                     </a>
-                                    <a href="javascript:void(0)" onclick="openArticle('surveillance-is-not-enough')" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Surveillance Limitation</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Systemic Critique</span>
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Newsroom</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Tactical Status Updates</span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">02 //</span> Performance Analysis
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Intelligence Resources
                                 </h3>
                                 <div class="flex flex-col gap-2">
-                                    <a href="javascript:void(0)" onclick="openArticle('making-crime-obsolete')" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Making Crime Obsolete</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Opportunity Collapse Strategy</span>
+                                    <a href="news.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">The Frontline</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Proprietary Industry Perspectives</span>
                                     </a>
-                                    <a href="javascript:void(0)" onclick="openArticle('energy-security-logic')" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Energy Infrastructure Logic</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Critical Asset Defense</span>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Case Studies</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Vetted Real-World Deployments</span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">03 //</span> Neural Standards
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Network Status
                                 </h3>
-                                <div class="flex flex-col gap-2">
-                                    <a href="javascript:void(0)" onclick="openArticle('ethical-autonomy')" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Ethical Autonomy</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">NAS Governance Protocol</span>
-                                    </a>
+                                <div class="p-8 bg-white/5 border border-white/10 rounded-xl space-y-6">
+                                    <div class="text-[10px] font-mono text-green-500 animate-pulse">● LIVE RESEARCH FEED ACTIVE</div>
+                                    <p class="text-[10px] text-white/40 uppercase leading-loose tracking-[0.2em]">Integrated Intelligence Layer providing real-time behavioral foresight models.</p>
                                 </div>
                             </div>
                         </div>
@@ -1194,35 +1449,50 @@
                 </div>
             </li>
 
-            <!-- BROADCASTS -->
+            <!-- MISSION -->
             <li class="nav-item group static cursor-pointer">
-                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Broadcasts</a>
+                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Mission</a>
                 <div class="mega-menu-wrapper">
                     <div class="mega-menu-content text-left">
                         <div class="max-w-[1400px] mx-auto grid grid-cols-3 gap-16 px-10">
                             <div class="space-y-10 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">01 //</span> Media Network
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">01 //</span> Corporate
                                 </h3>
                                 <div class="flex flex-col gap-2">
-                                    <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">TVC News Interview</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Plateau State Stabilization</span>
+                                    <a href="about.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">About AVZDAX</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Institutional Profile & History</span>
                                     </a>
-                                    <a href="https://www.youtube.com/watch?v=tAotVFKt5cs" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">Channels TV Sunrise</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">The Proactive Tech Pivot</span>
+                                    <a href="careers.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Careers</span>
+                                        <span class="text-[9px] text-green-500 uppercase font-mono tracking-[0.2em]">● Active Recruitment</span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="space-y-10 border-l border-black/5 pl-16 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">02 //</span> Resource Videos
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">02 //</span> Governance
                                 </h3>
                                 <div class="flex flex-col gap-2">
-                                    <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">State Police & Technology</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Infrastructural Analysis</span>
+                                    <a href="ethics.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">Ethics & Policy</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Sovereign Deployment Standards</span>
+                                    </a>
+                                    <a href="industries.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">INDUSTRIES</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Strategic Theaters</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="space-y-10 border-l border-white/5 pl-16 text-left">
+                                <h3 class="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] mb-6 border-b border-white/5 pb-4 flex items-center gap-4">
+                                    <span class="opacity-30 italic">03 //</span> Access
+                                </h3>
+                                <div class="flex flex-col gap-2">
+                                    <a href="contact.html" class="grid-item-hover block p-8 border border-transparent transition-all">
+                                        <span class="text-lg font-black uppercase text-white tracking-widest block mb-2">CONTACT</span>
+                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Establish Tactical Link</span>
                                     </a>
                                 </div>
                             </div>
@@ -1230,47 +1500,11 @@
                     </div>
                 </div>
             </li>
-
-            <!-- BLOG -->
-            <li class="nav-item group static cursor-pointer">
-                <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-black group-hover:text-black transition-colors py-6">Blog</a>
-                <div class="mega-menu-wrapper">
-                    <div class="mega-menu-content text-left">
-                        <div class="max-w-[1400px] mx-auto grid grid-cols-2 gap-16 px-10">
-                            <div class="space-y-10 text-left">
-                                <h3 class="text-[10px] font-mono text-black/20 uppercase tracking-[0.5em] mb-6 border-b border-black/5 pb-4 flex items-center gap-4">
-                                    <span class="opacity-30 italic">01 //</span> Medium Articles
-                                </h3>
-                                <div class="flex flex-col gap-2">
-                                    <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The Copy-Paste Problem</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Global Industry Critique</span>
-                                    </a>
-                                    <a href="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27" target="_blank" class="grid-item-hover block p-8 border border-transparent transition-all">
-                                        <span class="text-lg font-black uppercase text-black tracking-widest block mb-2">The AI Renaissance</span>
-                                        <span class="text-[9px] text-gray-500 uppercase font-mono tracking-[0.2em]">Indigenous Intelligence Strategy</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="space-y-10 border-l border-black/5 pl-16 text-left flex items-center justify-center">
-                                <div class="p-8 bg-black/5 border border-black/10 rounded-xl space-y-6 text-center">
-                                    <div class="text-[10px] font-mono text-black/40">EXTERNAL_RSS_LINK_READY</div>
-                                    <a href="https://medium.com/@AVZDAXtechnologies" target="_blank" class="text-[11px] font-black uppercase tracking-widest text-black border-b-2 border-black inline-block pb-2">Visit Full Medium Gallery</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item"><a href="news.html" class="text-[13px] uppercase tracking-[0.6em] font-black text-black hover:text-black transition-colors py-6">Newsroom</a></li>
+            <li class="nav-item"><a href="news.html" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 hover:text-silver transition-colors py-6">Newsroom</a></li>
         </ul>
 
         <div class="flex items-center gap-12 relative z-[160]">
-            <button id="search-toggle" onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-black/10 group hover:border-black transition-all bg-white/5">
-                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-black/40 group-hover:text-black">Search</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-black/40 group-hover:text-black"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
-            <a href="contact.html" class="bg-black text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-black/80 transition-all duration-300 inline-block">Schedule Demonstration</a>
+            <a href="contact.html" class="schedule-btn bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
         </div>
     </div>
 </nav>
@@ -1279,14 +1513,14 @@
 <div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
-            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX Logo" title="AVZDAX Official" class="h-8 w-auto" loading="lazy">
         </a>
         <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
-            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
                 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path class="bar" d="M4.5 7.2h15" stroke="black" stroke-width="2.6" />
-                    <path class="bar" d="M6 12h12" stroke="black" stroke-width="2.6" opacity="0.95" />
-                    <path class="bar" d="M4.5 16.8h15" stroke="black" stroke-width="2.6" opacity="0.9" />
+                    <path class="bar" d="M6 8h12" stroke="white" stroke-width="1.8" />
+                    <path class="bar" d="M9 12h9" stroke="white" stroke-width="1.8" opacity="0.8" />
+                    <path class="bar" d="M6 16h12" stroke="white" stroke-width="1.8" opacity="0.6" />
                 </g>
             </svg>
         </button>
@@ -1294,47 +1528,90 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
-    <div class="mobile-nav-content">
-        <div class="minimalist-nav">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display:none">
+    <!-- Close Button -->
+    <button onclick="closeMobileMenu()" aria-label="Close menu" title="Close menu" class="mobile-close-btn absolute top-5 right-5 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-all z-[10001] rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-110">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-content h-full flex flex-col">
+
+        <!-- MOBILE SEARCH BAR -->
+        <div class="mobile-search-section">
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="SEARCH" title="Search" class="bg-transparent border-none outline-none text-white text-sm font-black uppercase tracking-widest w-full placeholder:text-white/20">
+            </div>
+        </div>
+        
+        <!-- NAVIGATION SECTIONS -->
+        <div class="minimalist-nav space-y-2 flex-1">
+            <!-- ECOSYSTEM -->
             <div class="nav-section">
-                <button class="nav-toggle">BRIEFINGS</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Ecosystem Menu">
+                    <span>ECOSYSTEM</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="intelligence-list">
-                        <a href="javascript:void(0)" onclick="openArticle('the-end-of-reactive-security')" class="intelligence-link-item">The End of Reactive Security</a>
-                        <a href="javascript:void(0)" onclick="openArticle('surveillance-is-not-enough')" class="intelligence-link-item">Surveillance Limitation</a>
-                        <a href="javascript:void(0)" onclick="openArticle('making-crime-obsolete')" class="intelligence-link-item">Making Crime Obsolete</a>
-                        <a href="javascript:void(0)" onclick="openArticle('energy-security-logic')" class="intelligence-link-item">Energy Infrastructure Logic</a>
-                        <a href="javascript:void(0)" onclick="openArticle('ethical-autonomy')" class="intelligence-link-item">Ethical Autonomy</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="primus.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">PRIMUS — Behavioral AI</a>
+                        <a href="teletraan.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TELETRAAN — Command UI</a>
+                        <a href="nest.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">NEST — Oversight Station</a>
+                        <a href="trion.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TRION — Optical Sensing</a>
+                        <a href="obex.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">OBEX — Architectural Imaging</a>
+                        <a href="arclight.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">ARCLIGHT — Urban Tower</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- INTELLIGENCE -->
             <div class="nav-section">
-                <button class="nav-toggle">BROADCASTS</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Intelligence Menu">
+                    <span>INTELLIGENCE</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="intelligence-list">
-                        <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="intelligence-link-item">TVC News: Plateau State</a>
-                        <a href="https://www.youtube.com/watch?v=tAotVFKt5cs" target="_blank" class="intelligence-link-item">Channels TV: Proactive Pivot</a>
-                        <a href="https://www.youtube.com/watch?v=MMXsmbpqR4g" target="_blank" class="intelligence-link-item">Video: State Police Architecture</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="whitepaper.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">White Papers</a>
+                        <a href="news.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Newsroom</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Case Studies</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- MISSION -->
             <div class="nav-section">
-                <button class="nav-toggle">BLOG</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Mission Menu">
+                    <span>MISSION</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="intelligence-list">
-                        <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" class="intelligence-link-item">The Copy-Paste Problem</a>
-                        <a href="https://medium.com/@AVZDAXtechnologies" target="_blank" class="intelligence-link-item">View Full Medium Gallery</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="about.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">About AVZDAX</a>
+                        <a href="careers.html" class="text-green-500 hover:text-green-400 py-3 text-sm uppercase tracking-widest transition-colors flex items-center gap-2">Careers <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a>
+                        <a href="ethics.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Ethics & Policy</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Industries</a>
+                        <a href="contact.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Contact</a>
                     </div>
                 </div>
             </div>
-            <div class="nav-section">
-                <a href="index.html" class="nav-direct-link">HOME</a>
+            
+            <!-- DIRECT LINK -->
+            <div class="nav-section pt-2">
+                <a href="news.html" class="block text-lg font-black uppercase tracking-[0.2em] text-white/80 hover:text-white py-5 border-b border-white/5 transition-colors">NEWSROOM</a>
+            </div>
+        </div>
+        
+        <!-- MOBILE CTA BUTTONS -->
+        <div class="mt-8 space-y-4">
+            <a href="contact.html" class="block w-full bg-white text-black text-center py-4 text-xs font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all">Schedule Demonstration</a>
+            <div class="flex items-center justify-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                NEURAL MESH ACTIVE
             </div>
         </div>
     </div>
 </div>
-
 
     <div id="viewport" class="relative z-10">
         
@@ -1350,7 +1627,7 @@
             <div class="container mx-auto px-12 relative z-10 flex justify-between items-end pb-32">
                 <div class="max-w-4xl">
                     <span class="mono text-[11px] text-white/40 tracking-[0.5em] mb-6 block reveal-up" style="opacity: 0; transform: translateY(30px);">AVZDAX // INSTITUTIONAL INTELLIGENCE</span>
-                    <h1 class="text-[120px] font-black uppercase tracking-tighter leading-[0.8] text-white synco reveal-up mb-8" style="opacity: 0; transform: translateY(50px);">NEWSROOM</h1>
+                    <h1 class="text-[40px] md:text-[80px] lg:text-[120px] news-hero-title font-black uppercase tracking-tighter leading-[0.8] text-white synco reveal-up mb-8" style="opacity: 0; transform: translateY(50px);">NEWSROOM</h1>
                     <p class="text-white/60 text-lg font-light leading-relaxed max-w-xl reveal-up" style="opacity: 0; transform: translateY(30px);">Official press coverage, broadcast appearances, and institutional intelligence from the frontlines of autonomous defense.</p>
                 </div>
 
@@ -1590,47 +1867,50 @@
                     <a href="index.html" aria-label="Home" class="hidden md:block"><img src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
                     <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">The apex standard in sovereign defense intelligence. Architecting the temporal shield for civilizations.</p>
                     <div class="flex gap-4">
-                        <a href="#" class="social-glass-btn" aria-label="LinkedIn" title="AVZDAX LinkedIn">
+                        <a href="https://linkedin.com/company/avzdax" class="social-glass-btn" aria-label="LinkedIn">
                             <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                         </a>
-                        <a href="#" class="social-glass-btn" aria-label="X (Twitter)" title="AVZDAX X Profile">
+                        <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
                             <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                         </a>
                     </div>
                 </div>
                 <div class="text-left">
-                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Solutions</h4>
+                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
                     <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                        <a href="primus.html" class="footer-link-hover text-white">PRIMUS</a>
+                        <a href="primus.html" class="footer-link-hover">PRIMUS</a>
                         <a href="nest.html" class="footer-link-hover">NEST</a>
-                        <a href="teletraan.html" class="footer-link-hover">Teletraan</a>
-                        <a href="trion.html" class="footer-link-hover">Trion</a>
-                        <a href="arclight.html" class="footer-link-hover">Arclight</a>
-                        <a href="obex.html" class="footer-link-hover">Obex</a>
+                        <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                        <a href="trion.html" class="footer-link-hover">TRION</a>
+                        <a href="obex.html" class="footer-link-hover">OBEX</a>
+                        <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
                     </div>
                 </div>
                 <div class="text-left">
-                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Industries</h4>
+                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
                     <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                        <a href="industries.html" class="footer-link-hover italic text-white/70">Oil & Gas</a>
-                        <a href="industries.html" class="footer-link-hover">Government</a>
-                        <a href="industries.html" class="footer-link-hover">Finance & Banking</a>
-                        <a href="industries.html" class="footer-link-hover">Healthcare</a>
-                        <a href="industries.html" class="footer-link-hover">Maritime</a>
+                        <a href="industries.html" class="footer-link-hover italic">OIL & GAS</a>
+                        <a href="industries.html" class="footer-link-hover">GOVERNMENT</a>
+                        <a href="industries.html" class="footer-link-hover">FINANCE & BANKING</a>
+                        <a href="industries.html" class="footer-link-hover">HEALTHCARE</a>
+                        <a href="industries.html" class="footer-link-hover">MARITIME</a>
                     </div>
                 </div>
                 <div class="text-left">
-                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Mission</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">About Us</a><a href="careers.html" class="footer-link-hover font-black">Careers</a><a href="news.html" class="footer-link-hover">Newsroom</a><a href="ethics.html" class="footer-link-hover">Ethics Policy</a></div>
+                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">MISSION</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="about.html" class="footer-link-hover">ABOUT US</a><a href="careers.html" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="news.html" class="footer-link-hover text-white">NEWSROOM</a><a href="ethics.html" class="footer-link-hover">ETHICS POLICY</a></div>
                 </div>
                 <div class="text-left">
-                    <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">Support</h4>
-                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">Help Center</a><a href="#" class="footer-link-hover flex items-center gap-3">Status <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">Privacy Policy</a><a href="#" class="footer-link-hover">Terms</a></div>
+                    <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="#" class="footer-link-hover">HELP CENTER</a><a href="#" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="#" class="footer-link-hover">PRIVACY POLICY</a><a href="#" class="footer-link-hover">TERMS</a></div>
                 </div>
             </div>
 
-            <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/30 uppercase tracking-[0.5em] gap-8">
-                <div class="text-left"><div class="text-[12px] font-bold text-white animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="flex gap-4 mt-2"><div class="text-[11px] font-bold text-white/30 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X</div><div class="text-[11px] font-bold text-white uppercase tracking-[0.3em]">Status: High_Resolution_Sensing</div></div></div>
+            <div class="max-w-[1700px] mx-auto relative z-10 mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-mono text-white/10 uppercase tracking-[0.5em] gap-8">
+                <div class="text-left"><div class="text-[11px] font-mono text-green-500 animate-pulse uppercase tracking-[0.4em]">● GLOBAL NEURAL MESH: OPERATIONAL</div><div class="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Protocol_ID: AVX-7782-X // Enc: AES-4096-Sovereign</div></div>
                 <div class="flex gap-12"><span>SV_HQ: 37.7749° N</span><span>LDN_NODE: 51.5074° N</span><span>LOS_NODE: 6.5244° N</span></div>
                 <span>©2026 AVZDAX CORP. // ALL LOGS CLASSIFIED</span>
             </div>
@@ -2425,7 +2705,7 @@
                     
                     // Sync all buttons found on page
                     btns.forEach(b => {
-                        if (b !== this) {
+                        if (b !== this) { // Only sync other buttons
                             if (opened) b.classList.add('open');
                             else b.classList.remove('open');
                             b.setAttribute('aria-expanded', opened ? 'true' : 'false');
@@ -2435,7 +2715,6 @@
                     if (opened) {
                         overlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
-                        window.scrollTo(0, 0);
                     } else {
                         overlay.style.display = 'none';
                         document.body.style.overflow = '';
@@ -2470,15 +2749,145 @@
 
         document.addEventListener('DOMContentLoaded', initMobileMenu);
 
-        // Mobile menu: toggle nav dropdowns inside overlay
-        document.addEventListener('DOMContentLoaded', function(){
-            document.querySelectorAll('.nav-toggle').forEach(btn => {
-                btn.addEventListener('click', function(){
-                    btn.classList.toggle('active');
-                    const dd = btn.nextElementSibling;
-                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+        // Desktop nav scroll background
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                if (window.scrollY > 0) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            }
+        });
+
+        // SEARCH TOGGLE ENGINE
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // SEARCH FUNCTIONALITY
+        const searchInput = document.querySelector('#search-overlay input');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const links = document.querySelectorAll('#search-overlay a');
+                links.forEach(link => {
+                    if (link.textContent.toLowerCase().includes(query)) {
+                        link.style.display = 'block';
+                    } else {
+                        link.style.display = 'none';
+                    }
                 });
             });
+        }
+
+        // ============================================
+        // UNIFIED MOBILE MENU SYSTEM (INDEX.HTML SYNC)
+        // ============================================
+        (function() {
+            function initMobileMenu() {
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (!btn || !overlay) return;
+                
+                // Toggle menu open/close
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    
+                    if (isOpen) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close when clicking overlay background
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        closeMobileMenu();
+                    }
+                });
+                
+                // Close on link click
+                overlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+                
+                // NAV DROPDOWN TOGGLES (only bind once) - CSS ANIMATED
+                overlay.querySelectorAll('.nav-toggle').forEach(toggleBtn => {
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const dropdown = this.nextElementSibling;
+                        const chevron = this.querySelector('.nav-chevron');
+                        const isCurrentlyOpen = dropdown && dropdown.classList.contains('open');
+                        
+                        // Close all dropdowns first (accordion behavior)
+                        overlay.querySelectorAll('.nav-dropdown').forEach(dd => {
+                            dd.classList.remove('open');
+                        });
+                        overlay.querySelectorAll('.nav-toggle').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        overlay.querySelectorAll('.nav-chevron').forEach(ch => {
+                            ch.style.transform = 'rotate(0deg)';
+                        });
+                        
+                        // Toggle this dropdown if it wasn't already open
+                        if (!isCurrentlyOpen && dropdown && dropdown.classList.contains('nav-dropdown')) {
+                            dropdown.classList.add('open');
+                            this.classList.add('active');
+                            if (chevron) chevron.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+            
+            function closeMobileMenu() {
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (btn) {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+                document.body.style.overflow = '';
+            }
+            
+            // Expose globally
+            window.closeMobileMenu = closeMobileMenu;
+            
+            // Initialize on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+
+        // Close mobile menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.style.display !== 'none') {
+                    if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+                }
+            }
         });
 
         // Ensure hero fills the viewport on mobile (fix address-bar 100vh issues)
@@ -2514,34 +2923,7 @@
                 if(missionImage) missionImage.src = '/media/avzdax-logo.png';
             });
         });
-
-        // GSAP ANIMATIONS
-        gsap.registerPlugin(ScrollTrigger);
-
-        // SEARCH TOGGLE ENGINE
-        function toggleSearch() {
-            const overlay = document.getElementById('search-overlay');
-            overlay.classList.toggle('is-open');
-            if(overlay.classList.contains('is-open')) {
-                overlay.querySelector('input').focus();
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        }
-
-        // SEARCH FUNCTIONALITY
-        document.querySelector('#search-overlay input').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const links = document.querySelectorAll('#search-overlay a');
-            links.forEach(link => {
-                if (link.textContent.toLowerCase().includes(query)) {
-                    link.style.display = 'block';
-                } else {
-                    link.style.display = 'none';
-                }
-            });
-        });
     </script>
 </body>
 </html>
+```

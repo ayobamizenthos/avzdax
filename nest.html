@@ -77,6 +77,34 @@
         }
         .grid-item-hover span:first-child { display: block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
         
+        /* SEARCH OVERLAY */
+        #search-overlay {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0,0,0,0.98);
+            -webkit-backdrop-filter: blur(60px);
+            backdrop-filter: blur(60px);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #search-overlay.active { display: flex; opacity: 1; }
+        .search-input-tactical {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            width: 100%;
+            padding: 20px 0;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .search-input-tactical:focus { border-color: rgba(255,255,255,0.4); }
+        .search-input-tactical::placeholder { color: rgba(255,255,255,0.2); }
+
         .menu-preview-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: contain; opacity: 0; 
@@ -181,6 +209,211 @@
                 letter-spacing: 0.3em !important;
             }
             .social-glass-btn svg { width: 28px !important; height: 28px !important; }
+
+            /* =============================================
+               PREMIUM MOBILE DROPDOWN ANIMATIONS
+               ============================================= */
+            /* Mobile Nav Dropdown Container */
+            .nav-dropdown {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: 
+                    max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.4s ease,
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-dropdown.open {
+                max-height: 500px;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            /* Staggered Item Animation */
+            .nav-dropdown a {
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-dropdown.open a {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .nav-dropdown.open a:nth-child(1) { transition-delay: 0.05s; }
+            .nav-dropdown.open a:nth-child(2) { transition-delay: 0.1s; }
+            .nav-dropdown.open a:nth-child(3) { transition-delay: 0.15s; }
+            .nav-dropdown.open a:nth-child(4) { transition-delay: 0.2s; }
+            .nav-dropdown.open a:nth-child(5) { transition-delay: 0.25s; }
+            .nav-dropdown.open a:nth-child(6) { transition-delay: 0.3s; }
+            
+            /* Hover glow effect on dropdown items */
+            .nav-dropdown a:hover {
+                color: #fff !important;
+                text-shadow: 0 0 20px rgba(255,255,255,0.3);
+                transform: translateX(8px) !important;
+            }
+            
+            /* Nav Toggle Button Styling */
+            .nav-toggle {
+                position: relative;
+            }
+            .nav-toggle::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: linear-gradient(90deg, #00ff41, transparent);
+                transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-toggle.active::after {
+                width: 40%;
+            }
+            
+            /* Chevron Smooth Rotation */
+            .nav-chevron {
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            }
+            
+            /* ====== MOBILE MENU OVERLAY ====== */
+            #mobile-menu-overlay {
+                position: fixed !important;
+                inset: 0 !important;
+                z-index: 9999 !important;
+                background: linear-gradient(180deg, 
+                    rgba(0, 0, 0, 0.99) 0%, 
+                    rgba(5, 5, 8, 0.99) 50%,
+                    rgba(0, 0, 0, 0.99) 100%) !important;
+                -webkit-backdrop-filter: blur(80px) !important;
+                backdrop-filter: blur(80px) !important;
+                display: none;
+                flex-direction: column !important;
+                overflow: hidden !important;
+            }
+            
+            /* Mobile Nav Content Container */
+            .mobile-nav-content {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100% !important;
+                width: 100% !important;
+                padding-top: 90px !important;
+                padding-bottom: 40px !important;
+                padding-left: 28px !important;
+                padding-right: 28px !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                position: relative;
+            }
+            
+            /* Tactical Background Accent */
+            #mobile-menu-overlay::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+                background-size: 24px 24px;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            .mobile-nav-content::-webkit-scrollbar {
+                display: none;
+            }
+            
+            /* Close Button */
+            .mobile-close-btn {
+                position: fixed !important;
+                top: 20px !important;
+                right: 20px !important;
+                width: 44px !important;
+                height: 44px !important;
+                background: rgba(255,255,255,0.03) !important;
+                border: 1px solid rgba(255,255,255,0.08) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .mobile-close-btn:hover {
+                background: rgba(255,255,255,0.1) !important;
+                border-color: rgba(255,255,255,0.2) !important;
+                transform: scale(1.05);
+            }
+            
+            /* Search Bar Styling */
+            .mobile-search-section {
+                margin-bottom: 24px !important;
+                margin-top: 0 !important;
+                opacity: 0;
+                transform: translateY(10px);
+                animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                animation-delay: 0.1s;
+            }
+            .mobile-search-section .flex.items-center {
+                padding: 16px 0 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+                position: relative;
+            }
+            .mobile-search-section .flex.items-center::before {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                right: 0;
+                width: 4px;
+                height: 4px;
+                border-right: 1px solid rgba(255,255,255,0.5);
+                border-bottom: 1px solid rgba(255,255,255,0.5);
+            }
+            .mobile-search-section .flex.items-center::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 20px;
+                height: 1px;
+                background: white;
+                opacity: 0.3;
+            }
+            .mobile-nav-content input[placeholder*="SEARCH"] {
+                font-size: 11px !important;
+                letter-spacing: 0.25em !important;
+                font-weight: 900 !important;
+                text-transform: uppercase !important;
+            }
+            
+            /* Navigation Animation */
+            .nav-section {
+                opacity: 0;
+                transform: translateY(10px);
+                animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            }
+            .nav-section:nth-child(1) { animation-delay: 0.15s; }
+            .nav-section:nth-child(2) { animation-delay: 0.2s; }
+            .nav-section:nth-child(3) { animation-delay: 0.25s; }
+            .nav-section:nth-child(4) { animation-delay: 0.3s; }
+            
+            @keyframes mobileFadeUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* CTA Section at Bottom */
+            .mobile-nav-content > .mt-8 {
+                margin-top: auto !important;
+                padding-top: 32px !important;
+                border-top: 1px solid rgba(255,255,255,0.05);
+                opacity: 0;
+                animation: finaleFade 0.8s ease forwards 0.4s;
+            }
+            @keyframes finaleFade {
+                to { opacity: 1; }
+            }
         }
         /* HUD ANIMATION */
         @keyframes scan {
@@ -236,7 +469,7 @@
         /* HIGH-TECH HUD SYSTEM */
         .hud-bracket { 
             position: relative; border: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(0,0,0,0.4); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            background: rgba(0,0,0,0.4); -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px);
         }
         .hud-bracket::before, .hud-bracket::after, .hud-bracket span::before, .hud-bracket span::after {
             content: ''; position: absolute; width: 10px; height: 10px; border: 2px solid; pointer-events: none;
@@ -528,7 +761,7 @@
         </ul>
 
         <div class="hidden lg:flex items-center gap-12 relative z-[160]">
-            <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+        <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
         </div>
     </div>
 </nav>
@@ -537,14 +770,14 @@
 <div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
-            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX Logo" title="AVZDAX Official" class="h-8 w-auto" loading="lazy">
         </a>
         <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
-            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
                 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path class="bar" d="M4.5 7.2h15" stroke="white" stroke-width="2.6" />
-                    <path class="bar" d="M6 12h12" stroke="white" stroke-width="2.6" opacity="0.95" />
-                    <path class="bar" d="M4.5 16.8h15" stroke="white" stroke-width="2.6" opacity="0.9" />
+                    <path class="bar" d="M6 8h12" stroke="white" stroke-width="1.8" />
+                    <path class="bar" d="M9 12h9" stroke="white" stroke-width="1.8" opacity="0.8" />
+                    <path class="bar" d="M6 16h12" stroke="white" stroke-width="1.8" opacity="0.6" />
                 </g>
             </svg>
         </button>
@@ -552,48 +785,103 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
-    <div class="mobile-nav-content">
-        <div class="minimalist-nav">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display:none">
+    <!-- Close Button -->
+    <button onclick="closeMobileMenu()" aria-label="Close menu" title="Close menu" class="mobile-close-btn absolute top-5 right-5 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-all z-[10001] rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-110">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-content h-full flex flex-col">
+
+        <!-- MOBILE SEARCH BAR -->
+        <div class="mobile-search-section">
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="SEARCH" title="Search" class="bg-transparent border-none outline-none text-white text-sm font-black uppercase tracking-widest w-full placeholder:text-white/20">
+            </div>
+        </div>
+        
+        <!-- NAVIGATION SECTIONS -->
+        <div class="minimalist-nav space-y-2 flex-1">
+            <!-- ECOSYSTEM -->
             <div class="nav-section">
-                <button class="nav-toggle">ECOSYSTEM</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Ecosystem Menu">
+                    <span>ECOSYSTEM</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="products-list">
-                        <a href="primus.html" class="product-link-item">PRIMUS - Decentralized behavioral engine</a>
-                        <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
-                        <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
-                        <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
-                        <a href="arclight.html" class="product-link-item">ARCLIGHT - Urban surveillance tower</a>
-                        <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="primus.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">PRIMUS — Behavioral AI</a>
+                        <a href="teletraan.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TELETRAAN — Command UI</a>
+                        <a href="nest.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">NEST — Oversight Station</a>
+                        <a href="trion.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TRION — Optical Sensing</a>
+                        <a href="obex.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">OBEX — Architectural Imaging</a>
+                        <a href="arclight.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">ARCLIGHT — Urban Tower</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- INTELLIGENCE -->
             <div class="nav-section">
-                <button class="nav-toggle">INTELLIGENCE</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Intelligence Menu">
+                    <span>INTELLIGENCE</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="intelligence-list">
-                        <a href="whitepaper.html" class="intelligence-link-item">White Papers - Neural behavior Analysis</a>
-                        <a href="news.html" class="intelligence-link-item">Newsroom - Global Tactical Updates</a>
-                        <a href="news.html" class="intelligence-link-item">The Frontline - Industry Perspectives</a>
-                        <a href="industries.html" class="intelligence-link-item">Case Studies - Real-World Deployments</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="whitepaper.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">White Papers</a>
+                        <a href="news.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Newsroom</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Case Studies</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- MISSION -->
             <div class="nav-section">
-                <button class="nav-toggle">MISSION</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Mission Menu">
+                    <span>MISSION</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="mission-list">
-                        <a href="about.html" class="mission-link-item">About AVZDAX</a>
-                        <a href="careers.html" class="mission-link-item">Careers</a>
-                        <a href="contact.html" class="mission-link-item">Contact</a>
-                        <a href="ethics.html" class="mission-link-item">Ethics & Policy</a>
-                        <a href="industries.html" class="mission-link-item">Industries</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="about.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">About AVZDAX</a>
+                        <a href="careers.html" class="text-green-500 hover:text-green-400 py-3 text-sm uppercase tracking-widest transition-colors flex items-center gap-2">Careers <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a>
+                        <a href="ethics.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Ethics & Policy</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Industries</a>
+                        <a href="contact.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Contact</a>
                     </div>
                 </div>
             </div>
-            <div class="nav-section">
-                <a href="news.html" class="nav-direct-link">NEWSROOM</a>
+            
+            <!-- DIRECT LINK -->
+            <div class="nav-section pt-2">
+                <a href="news.html" class="block text-lg font-black uppercase tracking-[0.2em] text-white/80 hover:text-white py-5 border-b border-white/5 transition-colors">NEWSROOM</a>
             </div>
+        </div>
+        
+        <!-- MOBILE CTA BUTTONS -->
+        <div class="mt-8 space-y-4">
+            <a href="contact.html" class="block w-full bg-white text-black text-center py-4 text-xs font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all">Schedule Demonstration</a>
+            <div class="flex items-center justify-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                NEURAL MESH ACTIVE
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="fixed inset-0 z-[10000] hidden items-center justify-center px-12">
+    <button onclick="toggleSearch()" class="absolute top-10 right-10 text-white/20 hover:text-white transition-colors">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="w-full max-w-4xl">
+        <input type="text" id="search-input" placeholder="SEARCH ECOSYSTEM..." title="Search Ecosystem" class="search-input-tactical inter-black">
+        <div class="mt-8 flex gap-8 mono text-[10px] text-white/20">
+            <span>PRESS ESC TO CANCEL</span>
+            <span>ENTER TO EXECUTE</span>
         </div>
     </div>
 </div>
@@ -607,7 +895,7 @@
         <div class="absolute inset-0 z-0 bg-[#020202]">
             <!-- The 8K Command Room Image with Ken Burns Effect -->
             <div class="absolute inset-0 transition-transform duration-[20s] ease-linear scale-110 group-hover:scale-100 animate-slow-zoom">
-                <img src="media/nest-hero.png" alt="NEST Command Center" class="w-full h-full object-cover opacity-60 grayscale-[0.3] contrast-110 brightness-75">
+                <img src="media/nest-hero.png" alt="NEST Command Center" title="NEST Sovereign Oversight Station" class="w-full h-full object-cover opacity-60 grayscale-[0.3] contrast-110 brightness-75">
             </div>
 
             <!-- Tactical Overlays -->
@@ -784,7 +1072,7 @@
 
                         <!-- ARCLIGHT (BACK/OFFSET) -->
                         <div class="absolute left-0 top-[15%] w-[45%] z-10 scale-90 group-hover:scale-100 group-hover:-translate-x-10 transition-all duration-[1.5s] ease-out opacity-40 group-hover:opacity-100 grayscale hover:grayscale-0">
-                            <img src="media/arclight-hero.png" alt="ARCLIGHT" class="w-full h-auto drop-shadow-2xl">
+                            <img src="media/arclight-hero.png" alt="ARCLIGHT Sentinel Tower" title="ARCLIGHT Sentinel Tower" class="w-full h-auto drop-shadow-2xl">
                             <div class="absolute top-0 -left-12 rotate-[-90deg] mono text-[10px] text-black/20 font-black">SENTINEL_TOWER_V2</div>
                         </div>
 
@@ -792,7 +1080,7 @@
                         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] z-30 transition-transform duration-1000 group-hover:scale-110">
                             <div class="relative">
                                 <div class="absolute inset-0 bg-black/5 blur-3xl rounded-full group-hover:bg-black/10 transition-colors"></div>
-                                <img src="media/primusbox.png" alt="PRIMUS" class="relative w-full h-auto drop-shadow-[0_40px_100px_rgba(0,0,0,0.4)]">
+                                <img src="media/primusbox.png" alt="PRIMUS Predictive Engine" title="PRIMUS Predictive Engine" class="relative w-full h-auto drop-shadow-[0_40px_100px_rgba(0,0,0,0.4)]">
                                 <div class="absolute -top-12 left-1/2 -translate-x-1/2 px-6 py-2 bg-black text-white synco text-sm font-black italic tracking-widest shadow-2xl skew-x-[-12deg]">
                                     CORE_ENGINE
                                 </div>
@@ -801,7 +1089,7 @@
 
                         <!-- TRION (FOREGROUND) -->
                         <div class="absolute right-0 bottom-12 w-[40%] z-40 group-hover:translate-x-12 group-hover:-translate-y-8 transition-all duration-[1s] ease-out">
-                            <img src="media/trion-display.png" alt="TRION" class="w-full h-auto drop-shadow-[20px_40px_80px_rgba(0,0,0,0.5)] contrast-125 filter grayscale hover:grayscale-0 transition-all">
+                            <img src="media/trion-display.png" alt="TRION Sensing Hardware" title="TRION Sensing Hardware" class="w-full h-auto drop-shadow-[20px_40px_80px_rgba(0,0,0,0.5)] contrast-125 filter grayscale hover:grayscale-0 transition-all">
                             <div class="mt-4 flex justify-end gap-4 p-2 border-r-4 border-black">
                                 <span class="mono text-[10px] font-black uppercase text-right leading-none">TRION_MULTISPEC<br><span class="text-black/30">EDGE_SENSING</span></span>
                             </div>
@@ -1101,64 +1389,119 @@
         });
     });
 
-    // --- MOBILE MENU TOGGLE - ROBUST MULTI-BUTTON SYNC ---
+    // ============================================
+    // SEARCH OVERLAY TOGGLE
+    // ============================================
+    function toggleSearch() {
+        const overlay = document.getElementById('search-overlay');
+        if (!overlay) return;
+        if (overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
+            document.body.style.overflow = '';
+        } else {
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('search-input')?.focus(), 100);
+        }
+    }
+    window.toggleSearch = toggleSearch;
+
+    // Close search on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('search-overlay');
+            if (overlay?.classList.contains('active')) toggleSearch();
+            const mobileMenu = document.getElementById('mobile-menu-overlay');
+            if (mobileMenu?.style.display !== 'none') closeMobileMenu();
+        }
+    });
+
+    // ============================================
+    // UNIFIED MOBILE MENU SYSTEM (NO DUPLICATES)
+    // ============================================
     function initMobileMenu() {
-        const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
+        const btn = document.querySelector('.mobile-menu-toggle-modern');
         const overlay = document.getElementById('mobile-menu-overlay');
-
-        if (!btns.length || !overlay) return;
-
-        btns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopImmediatePropagation();
-                const opened = this.classList.toggle('open');
-                this.setAttribute('aria-expanded', opened ? 'true' : 'false');
-                
-                // Sync all buttons found on page
-                btns.forEach(b => {
-                    if (b !== this) {
-                        if (opened) b.classList.add('open');
-                        else b.classList.remove('open');
-                        b.setAttribute('aria-expanded', opened ? 'true' : 'false');
-                    }
-                });
-
-                if (opened) {
-                    overlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                    window.scrollTo(0, 0);
-                } else {
-                    overlay.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-
-        // Close menu when clicking overlay background
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                btns.forEach(btn => {
-                    btn.classList.remove('open');
-                    btn.setAttribute('aria-expanded', 'false');
-                });
+        
+        if (!btn || !overlay) return;
+        
+        // Toggle menu open/close
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = this.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            
+            if (isOpen) {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
             }
         });
-
+        
+        // Close when clicking overlay background
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeMobileMenu();
+            }
+        });
+        
         // Close on link click
         overlay.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                btns.forEach(btn => {
-                    btn.classList.remove('open');
-                    btn.setAttribute('aria-expanded', 'false');
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // NAV DROPDOWN TOGGLES (only bind once) - CSS ANIMATED
+        overlay.querySelectorAll('.nav-toggle').forEach(toggleBtn => {
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.nextElementSibling;
+                const chevron = this.querySelector('.nav-chevron');
+                const isCurrentlyOpen = dropdown && dropdown.classList.contains('open');
+                
+                // Close all dropdowns first (accordion behavior)
+                overlay.querySelectorAll('.nav-dropdown').forEach(dd => {
+                    dd.classList.remove('open');
                 });
-                overlay.style.display = 'none';
-                document.body.style.overflow = '';
+                overlay.querySelectorAll('.nav-toggle').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                overlay.querySelectorAll('.nav-chevron').forEach(ch => {
+                    ch.style.transform = 'rotate(0deg)';
+                });
+                
+                // Toggle this dropdown if it wasn't already open
+                if (!isCurrentlyOpen && dropdown && dropdown.classList.contains('nav-dropdown')) {
+                    dropdown.classList.add('open');
+                    this.classList.add('active');
+                    if (chevron) chevron.style.transform = 'rotate(180deg)';
+                }
             });
         });
     }
-
+    
+    function closeMobileMenu() {
+        const btn = document.querySelector('.mobile-menu-toggle-modern');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        
+        if (btn) {
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+        }
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+        document.body.style.overflow = '';
+    }
+    
+    // Expose globally
+    window.closeMobileMenu = closeMobileMenu;
+    
     initMobileMenu();
 
     // --- LAZY VIDEO ---
@@ -1286,6 +1629,15 @@
             });
         }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
         document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
+        // Close mobile menu on Escape key (uses globally exposed function)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.style.display !== 'none') {
+                    if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+                }
+            }
+        });
     </script>
 </body>
 </html>

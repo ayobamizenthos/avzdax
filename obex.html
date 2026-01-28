@@ -22,7 +22,7 @@
         
         .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.08em; line-height: 0.85; }
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
-        .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
 
         /* CINEMATIC STAGING */
@@ -80,8 +80,75 @@
 
         nav.nav-scrolled {
             background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        /* NAV INVERTED - FOR WHITE SECTIONS */
+        nav.nav-inverted {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-inverted .nav-item > a {
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        nav.nav-inverted .nav-item:hover > a {
+            color: #000 !important;
+        }
+
+        nav.nav-inverted .nav-item > a::after {
+            background: linear-gradient(90deg, #000, #000) !important;
+        }
+
+        nav.nav-inverted .text-white,
+        nav.nav-inverted [class*="text-white"] {
+            color: #000 !important;
+        }
+
+        /* Hide nav links in inverted mode, show logo and CTA */
+        nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .brand-logo {
+            filter: invert(1) brightness(0) !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-inverted .schedule-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        nav.nav-inverted .schedule-btn:hover {
+            background: #333 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* MOBILE NAV INVERSION */
+        .mobile-nav-bar.nav-inverted {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+            filter: invert(1) brightness(0);
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+            stroke: #000 !important;
         }
 
         /* NAV ITEMS - SILICON VALLEY STYLE */
@@ -239,27 +306,22 @@
         }
 
         .grid-item-hover:hover span:first-child {
-            color: #00ff41;
+            color: #3b82f6;
         }
 
         .grid-item-hover:hover span:last-child {
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* MENU PREVIEW IMAGES */
+        /* MENU PREVIEW IMAGES - NEST MEGA STYLE */
         .menu-preview-img {
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: scale(0.9) translateY(20px) rotateY(10deg);
-            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
-            border-radius: 16px;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; opacity: 0; 
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
         }
-
-        .menu-preview-img.active {
-            opacity: 1;
-            transform: scale(1) translateY(0) rotateY(0deg);
-        }
+        .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
 
         /* MENU STRATEGIC THEATERS */
         .strategic-theaters {
@@ -289,7 +351,7 @@
         }
 
         .strategic-theaters ul li:hover {
-            color: #00ff41;
+            color: #3b82f6;
             transform: translateX(4px);
         }
 
@@ -304,7 +366,7 @@
         }
 
         .strategic-theaters ul li:hover .dot {
-            background: #00ff41;
+            background: #3b82f6;
         }
 
         /* MENU INTELLIGENCE LAYER */
@@ -333,7 +395,7 @@
 
         .intelligence-layer .status {
             font-size: 11px;
-            color: #00ff41;
+            color: #3b82f6;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -577,7 +639,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
             border-radius: 1px;
         }
         .nav-section {
@@ -815,6 +877,49 @@
             }
             .video-overlay { display: none !important; }
 
+            #act-2.act-content {
+                justify-content: space-between !important;
+                padding-bottom: 40px !important;
+            }
+            #act-2 .video-bg {
+                height: 60vh !important; /* Slightly reduced height to make room */
+                flex: none !important;
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                margin-top: -10px;
+                z-index: 10 !important;
+            }
+            #act-2 .video-bg img {
+                height: 100% !important;
+                width: auto !important;
+                max-width: 90vw !important;
+                filter: drop-shadow(0 0 50px rgba(59,130,246,0.35)) !important;
+                transform: scale(1.1);
+                object-fit: contain;
+            }
+            #act-2 .relative.z-20 {
+                padding: 10px 20px 140px 20px !important; /* Massive bottom padding to push text up */
+                margin-top: -40px !important; /* Pull container up slightly */
+                background: linear-gradient(to top, rgba(0,0,0,1) 85%, transparent) !important;
+                text-align: center !important;
+                align-items: center !important;
+                border: none !important;
+                box-shadow: none !important;
+                flex: none !important;
+            }
+            #act-2 .relative.z-20 h2 { font-size: 1.8rem !important; }
+            #act-2 .relative.z-20 p { font-size: 11px !important; line-height: 1.4 !important; opacity: 0.7; }
+            #act-2 .chrome-text { margin-bottom: 30px !important; }
+            #act-2 .relative.z-20 .flex.gap-12 {
+                justify-content: center !important;
+                width: 100% !important;
+                margin-top: 15px !important;
+            }
+
             /* 2. Text Container: Glassmorphic Floating HUD */
             .act-content .relative.z-20 {
                 position: relative !important; inset: auto !important;
@@ -832,15 +937,15 @@
             /* HUD Label */
             .act-content .mono.text-\[10px\] {
                 font-size: 8px !important; letter-spacing: 0.4em !important;
-                color: #00ff41 !important; /* Cyber Green Accent */
-                text-shadow: 0 0 10px rgba(0,255,65,0.3);
+                color: #3b82f6 !important; /* Cyber Blue Accent */
+                text-shadow: 0 0 10px rgba(59,130,246,0.3);
                 margin-bottom: 1rem !important; opacity: 1 !important;
             }
 
             /* Title Typography */
             .act-content .synco.text-7xl {
                 font-size: 1.75rem !important; margin-bottom: 1rem !important; line-height: 1 !important;
-                background: linear-gradient(90deg, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                background: linear-gradient(90deg, #fff, #aaa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
             }
 
             /* Description Text */
@@ -1024,6 +1129,235 @@
             .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
             @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
         }
+
+        /* =============================================
+           PREMIUM MOBILE DROPDOWN ANIMATIONS (INDEX.HTML SYNC)
+           ============================================= */
+        @media (max-width: 1024px) {
+            /* Mobile Nav Dropdown Container */
+            .nav-dropdown {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: 
+                    max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.4s ease,
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-dropdown.open {
+                max-height: 500px;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            /* Staggered Item Animation */
+            .nav-dropdown a {
+                opacity: 0;
+                transform: translateX(-15px);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-dropdown.open a {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .nav-dropdown.open a:nth-child(1) { transition-delay: 0.05s; }
+            .nav-dropdown.open a:nth-child(2) { transition-delay: 0.1s; }
+            .nav-dropdown.open a:nth-child(3) { transition-delay: 0.15s; }
+            .nav-dropdown.open a:nth-child(4) { transition-delay: 0.2s; }
+            .nav-dropdown.open a:nth-child(5) { transition-delay: 0.25s; }
+            .nav-dropdown.open a:nth-child(6) { transition-delay: 0.3s; }
+            
+            /* Hover glow effect on dropdown items */
+            .nav-dropdown a:hover {
+                color: #fff !important;
+                text-shadow: 0 0 20px rgba(255,255,255,0.3);
+                transform: translateX(8px) !important;
+            }
+            
+            /* Nav Toggle Button Styling */
+            .nav-toggle {
+                position: relative;
+            }
+            .nav-toggle::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: linear-gradient(90deg, #00ff41, transparent);
+                transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-toggle.active::after {
+                width: 40%;
+            }
+            
+            /* Chevron Smooth Rotation */
+            .nav-chevron {
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            }
+            
+            /* ====== MOBILE MENU OVERLAY ====== */
+            #mobile-menu-overlay {
+                position: fixed !important;
+                inset: 0 !important;
+                z-index: 9999 !important;
+                background: linear-gradient(180deg, 
+                    rgba(0, 0, 0, 0.99) 0%, 
+                    rgba(5, 5, 8, 0.99) 50%,
+                    rgba(0, 0, 0, 0.99) 100%) !important;
+                -webkit-backdrop-filter: blur(80px) !important;
+                backdrop-filter: blur(80px) !important;
+                display: none;
+                flex-direction: column !important;
+                overflow: hidden !important;
+            }
+            
+            /* Mobile Nav Content Container */
+            .mobile-nav-content {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100% !important;
+                width: 100% !important;
+                padding-top: 70px !important;
+                padding-bottom: 40px !important;
+                padding-left: 28px !important;
+                padding-right: 28px !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                position: relative;
+            }
+            
+            /* Tactical Background Accent */
+            #mobile-menu-overlay::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+                background-size: 24px 24px;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            .mobile-nav-content::-webkit-scrollbar {
+                display: none;
+            }
+            
+            /* Close Button */
+            .mobile-close-btn {
+                position: fixed !important;
+                top: 20px !important;
+                right: 20px !important;
+                width: 44px !important;
+                height: 44px !important;
+                background: rgba(255,255,255,0.03) !important;
+                border: 1px solid rgba(255,255,255,0.08) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .mobile-close-btn:hover {
+                background: rgba(255,255,255,0.1) !important;
+                border-color: rgba(255,255,255,0.2) !important;
+                transform: scale(1.05);
+            }
+            
+            /* Search Bar Styling */
+            .mobile-search-section {
+                margin-bottom: 24px !important;
+                margin-top: 0 !important;
+                opacity: 0;
+                transform: translateY(10px);
+                animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                animation-delay: 0.1s;
+            }
+            .mobile-search-section .flex.items-center {
+                padding: 16px 0 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+                position: relative;
+            }
+            .mobile-search-section .flex.items-center::before {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                right: 0;
+                width: 4px;
+                height: 4px;
+                border-right: 1px solid rgba(255,255,255,0.5);
+                border-bottom: 1px solid rgba(255,255,255,0.5);
+            }
+            .mobile-search-section .flex.items-center::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 20px;
+                height: 1px;
+                background: white;
+                opacity: 0.3;
+            }
+            .mobile-nav-content input[placeholder*="SEARCH"] {
+                font-size: 11px !important;
+                letter-spacing: 0.25em !important;
+                font-weight: 900 !important;
+                text-transform: uppercase !important;
+            }
+            
+            /* Navigation Animation */
+            .nav-section {
+                opacity: 0;
+                transform: translateY(10px);
+                animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            }
+            .nav-section:nth-child(1) { animation-delay: 0.15s; }
+            .nav-section:nth-child(2) { animation-delay: 0.2s; }
+            .nav-section:nth-child(3) { animation-delay: 0.25s; }
+            .nav-section:nth-child(4) { animation-delay: 0.3s; }
+            
+            @keyframes mobileFadeUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* CTA Section at Bottom */
+            .mobile-nav-content > .mt-8 {
+                margin-top: auto !important;
+                padding-top: 32px !important;
+                border-top: 1px solid rgba(255,255,255,0.05);
+                opacity: 0;
+                animation: finaleFade 0.8s ease forwards 0.4s;
+            }
+            @keyframes finaleFade {
+                to { opacity: 1; }
+            }
+        }
+        
+        /* Small Mobile (< 375px) */
+        @media (max-width: 375px) {
+            .mobile-nav-content {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                padding-top: 40px !important;
+            }
+            .nav-toggle {
+                font-size: 13px !important;
+            }
+        }
+        
+        /* Safe Area for Notched Devices */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            @media (max-width: 1024px) {
+                .mobile-nav-content {
+                    padding-top: max(100px, calc(80px + env(safe-area-inset-top))) !important;
+                    padding-bottom: max(40px, env(safe-area-inset-bottom)) !important;
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -1042,9 +1376,9 @@
             <div class="space-y-4">
                 <h4 class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Trending Assets</h4>
                 <div class="flex flex-col gap-2 font-black uppercase text-xs tracking-widest">
-                    <a href="primus.html" class="hover:text-green-500 transition-colors">PRIMUS_CORE</a>
-                    <a href="trion.html" class="hover:text-green-500 transition-colors">TRION_SENSOR</a>
-                    <a href="teletraan.html" class="hover:text-green-500 transition-colors">TELETRAAN_OS</a>
+                    <a href="primus.html" class="hover:text-blue-500 transition-colors">PRIMUS_CORE</a>
+                    <a href="trion.html" class="hover:text-blue-500 transition-colors">TRION_SENSOR</a>
+                    <a href="teletraan.html" class="hover:text-blue-500 transition-colors">TELETRAAN_OS</a>
                 </div>
             </div>
         </div>
@@ -1054,9 +1388,9 @@
 <!-- NAVIGATION -->
 <nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-6">
     <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
-        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 md:h-10 w-auto"></a>
+        <a href="index.html" class="block relative z-[160]"><img src="/media/avzdax-logo.png" alt="AVZDAX" class="brand-logo h-8 md:h-10 w-auto"></a>
 
-        <ul class="hidden lg:flex gap-20 items-center">
+        <ul class="nav-links-container hidden lg:flex gap-20 items-center">
             <!-- DEFENSE PLATFORMS -->
             <li class="nav-item group static cursor-pointer">
                 <a href="javascript:void(0)" class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-6">Ecosystem</a>
@@ -1123,7 +1457,6 @@
                                         <img src="media/obex-display.png" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700" alt="OBEX Sensor">
                                     </div>
                                 </div>
-                                <div id="p-arclight" class="menu-preview-img w-full h-full flex items-center justify-center"><img src="/media/arclight-homepage.png" class="w-full h-full scale-125 object-contain"></div>
                                 <div id="p-primus" class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none">
                                     <div class="relative w-[110%] flex flex-col items-start translate-x-[5%]">
                                         <!-- CORE (TOP LEFT) -->
@@ -1134,6 +1467,7 @@
                                 </div>
                                 <img id="p-teletraan" src="/media/teletraan-display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
                                 <img id="p-nest" src="/media/nest_display.png" class="menu-preview-img w-full h-full scale-125 object-contain">
+                                <img id="p-arclight" src="/media/arclight-homepage.png" class="menu-preview-img w-full h-full scale-125 object-contain">
                             </div>
                         </div>
                     </div>
@@ -1245,11 +1579,7 @@
         </ul>
 
         <div class="flex items-center gap-12 relative z-[160]">
-            <button onclick="toggleSearch()" class="flex items-center gap-3 px-6 py-3 border border-white/10 group hover:border-white transition-all bg-white/5">
-                <span class="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 group-hover:text-white">Search</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-white/40 group-hover:text-white"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
-            <a href="contact.html" class="bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
+            <a href="contact.html" class="schedule-btn bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block">Schedule Demonstration</a>
         </div>
     </div>
 </nav>
@@ -1258,14 +1588,14 @@
 <div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
     <div class="flex justify-between items-center pl-0 pr-6 py-1">
         <a href="index.html" class="mobile-nav-logo">
-            <img src="/media/avzdax-logo.png" alt="AVZDAX" class="h-8 w-auto" loading="lazy">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX Logo" title="AVZDAX Official" class="h-8 w-auto" loading="lazy">
         </a>
         <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
-            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
                 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path class="bar" d="M4.5 7.2h15" stroke="white" stroke-width="2.6" />
-                    <path class="bar" d="M6 12h12" stroke="white" stroke-width="2.6" opacity="0.95" />
-                    <path class="bar" d="M4.5 16.8h15" stroke="white" stroke-width="2.6" opacity="0.9" />
+                    <path class="bar" d="M6 8h12" stroke="white" stroke-width="1.8" />
+                    <path class="bar" d="M9 12h9" stroke="white" stroke-width="1.8" opacity="0.8" />
+                    <path class="bar" d="M6 16h12" stroke="white" stroke-width="1.8" opacity="0.6" />
                 </g>
             </svg>
         </button>
@@ -1273,52 +1603,90 @@
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none;">
-    <div class="mobile-nav-content">
-        <div class="minimalist-nav">
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display:none">
+    <!-- Close Button -->
+    <button onclick="closeMobileMenu()" aria-label="Close menu" title="Close menu" class="mobile-close-btn absolute top-5 right-5 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-all z-[10001] rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-110">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-content h-full flex flex-col">
+
+        <!-- MOBILE SEARCH BAR -->
+        <div class="mobile-search-section">
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="SEARCH" title="Search" class="bg-transparent border-none outline-none text-white text-sm font-black uppercase tracking-widest w-full placeholder:text-white/20">
+            </div>
+        </div>
+        
+        <!-- NAVIGATION SECTIONS -->
+        <div class="minimalist-nav space-y-2 flex-1">
+            <!-- ECOSYSTEM -->
             <div class="nav-section">
-                <button class="nav-toggle">ECOSYSTEM</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Ecosystem Menu">
+                    <span>ECOSYSTEM</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="products-list">
-                        <a href="primus.html" class="product-link-item">PRIMUS - Decentralized behavioral engine</a>
-                        <a href="trion.html" class="product-link-item">TRION - Multi-spectrum sensing hardware</a>
-                        <a href="teletraan.html" class="product-link-item">TELETRAAN - Unified situational OS</a>
-                        <a href="nest.html" class="product-link-item">NEST - Hybrid watchtower</a>
-                        <a href="arclight.html" class="product-link-item">ARCLIGHT - Urban surveillance tower</a>
-                        <a href="obex.html" class="product-link-item">OBEX - Predictive security</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="primus.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">PRIMUS — Behavioral AI</a>
+                        <a href="teletraan.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TELETRAAN — Command UI</a>
+                        <a href="nest.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">NEST — Oversight Station</a>
+                        <a href="trion.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TRION — Optical Sensing</a>
+                        <a href="obex.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">OBEX — Architectural Imaging</a>
+                        <a href="arclight.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">ARCLIGHT — Urban Tower</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- INTELLIGENCE -->
             <div class="nav-section">
-                <button class="nav-toggle">INTELLIGENCE</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Intelligence Menu">
+                    <span>INTELLIGENCE</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="intelligence-list">
-                        <a href="whitepaper.html" class="intelligence-link-item">White Papers - Neural behavior Analysis</a>
-                        <a href="news.html" class="intelligence-link-item">Newsroom - Global Tactical Updates</a>
-                        <a href="news.html" class="intelligence-link-item">The Frontline - Industry Perspectives</a>
-                        <a href="industries.html" class="intelligence-link-item">Case Studies - Real-World Deployments</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="whitepaper.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">White Papers</a>
+                        <a href="news.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Newsroom</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Case Studies</a>
                     </div>
                 </div>
             </div>
+            
+            <!-- MISSION -->
             <div class="nav-section">
-                <button class="nav-toggle">MISSION</button>
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Mission Menu">
+                    <span>MISSION</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
                 <div class="nav-dropdown">
-                    <div class="mission-list">
-                        <a href="about.html" class="mission-link-item">About AVZDAX</a>
-                        <a href="careers.html" class="mission-link-item">Careers</a>
-                        <a href="contact.html" class="mission-link-item">Contact</a>
-                        <a href="ethics.html" class="mission-link-item">Ethics & Policy</a>
-                        <a href="industries.html" class="mission-link-item">Industries</a>
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="about.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">About AVZDAX</a>
+                        <a href="careers.html" class="text-green-500 hover:text-green-400 py-3 text-sm uppercase tracking-widest transition-colors flex items-center gap-2">Careers <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a>
+                        <a href="ethics.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Ethics & Policy</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Industries</a>
+                        <a href="contact.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Contact</a>
                     </div>
                 </div>
             </div>
-            <div class="nav-section">
-                <a href="news.html" class="nav-direct-link">NEWSROOM</a>
+            
+            <!-- DIRECT LINK -->
+            <div class="nav-section pt-2">
+                <a href="news.html" class="block text-lg font-black uppercase tracking-[0.2em] text-white/80 hover:text-white py-5 border-b border-white/5 transition-colors">NEWSROOM</a>
+            </div>
+        </div>
+        
+        <!-- MOBILE CTA BUTTONS -->
+        <div class="mt-8 space-y-4">
+            <a href="contact.html" class="block w-full bg-white text-black text-center py-4 text-xs font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all">Schedule Demonstration</a>
+            <div class="flex items-center justify-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                NEURAL MESH ACTIVE
             </div>
         </div>
     </div>
 </div>
-
 
     <div id="viewport">
         <!-- ACT 0: HERO -->
@@ -1408,23 +1776,18 @@
                     
                     <div class="space-y-8">
                         <div class="border-b border-black/10 pb-6">
-                            <div class="mono text-[9px] mb-2 text-black/40">Cognitive Fabric</div>
-                            <div class="synco text-2xl text-black">32-Core Neural Nucleus</div>
+                            <div class="mono text-[8px] mb-1 text-black/50 uppercase">Design</div>
+                            <div class="synco text-2xl text-black">100% INVISIBLE INSTALL</div>
                         </div>
 
                         <div class="border-b border-black/10 pb-6">
-                            <div class="mono text-[9px] mb-2 text-black/40">Tactical Mesh</div>
-                            <div class="synco text-2xl text-black">Up to <span class="counter" data-val="12">0</span> Linked Nodes</div>
+                            <div class="mono text-[8px] mb-1 text-black/50 uppercase">Coverage</div>
+                            <div class="synco text-2xl text-black">UP TO 12 CAMERAS</div>
                         </div>
 
                         <div class="border-b border-black/10 pb-6">
-                            <div class="mono text-[9px] mb-2 text-black/40">Data Integrity</div>
-                            <div class="synco text-2xl text-black">AES-512 Local Caching</div>
-                        </div>
-
-                        <div class="border-b border-black/10 pb-6">
-                            <div class="mono text-[9px] mb-2 text-black/40">Timeline Recall</div>
-                            <div class="synco text-2xl text-black">2TB High-Density NVMe</div>
+                            <div class="mono text-[8px] mb-1 text-black/50 uppercase">Control</div>
+                            <div class="synco text-2xl text-black">MOBILE COMMAND APP</div>
                         </div>
                     </div>
                 </div>
@@ -1601,14 +1964,14 @@
             </div>
             <div class="text-left">
                 <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="primus.html" class="footer-link-hover">PRIMUS</a>
-                    <a href="nest.html" class="footer-link-hover">NEST</a>
-                    <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
-                    <a href="trion.html" class="footer-link-hover">TRION</a>
-                    <a href="obex.html" class="footer-link-hover text-white">OBEX</a>
-                    <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
-                </div>
+                    <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                        <a href="primus.html" class="footer-link-hover">PRIMUS</a>
+                        <a href="nest.html" class="footer-link-hover">NEST</a>
+                        <a href="teletraan.html" class="footer-link-hover">TELETRAAN</a>
+                        <a href="trion.html" class="footer-link-hover">TRION</a>
+                        <a href="obex.html" class="footer-link-hover">OBEX</a>
+                        <a href="arclight.html" class="footer-link-hover">ARCLIGHT</a>
+                    </div>
             </div>
             <div class="text-left">
                 <h4 class="text-white/20 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
@@ -1671,11 +2034,25 @@
                 trigger: "#specs", start: "top top", end: "+=150%", pin: true, scrub: true,
                 onEnter: () => {
                     gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
                     initCounters(document.getElementById('specs'));
                 },
-                onLeave: () => gsap.to("body", { backgroundColor: "#030303", duration: 0.5 }),
-                onEnterBack: () => gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 }),
-                onLeaveBack: () => gsap.to("body", { backgroundColor: "#030303", duration: 0.5 })
+                onLeave: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                },
+                onEnterBack: () => {
+                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeaveBack: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                }
             }
         });
 
@@ -1766,7 +2143,6 @@
                     if (opened) {
                         overlay.style.display = 'flex';
                         document.body.style.overflow = 'hidden';
-                        window.scrollTo(0, 0);
                     } else {
                         overlay.style.display = 'none';
                         document.body.style.overflow = '';
@@ -1895,6 +2271,112 @@
         if(symbiosisSection) {
             gsap.fromTo(symbiosisSection.querySelector('h2'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, scrollTrigger: { trigger: symbiosisSection, start: "top 70%" } });
         }
+
+        // ============================================
+        // UNIFIED MOBILE MENU SYSTEM (INDEX.HTML SYNC)
+        // ============================================
+        (function() {
+            let initialized = false;
+            
+            function initMobileMenu() {
+                if (initialized) return;
+                initialized = true;
+                
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (!btn || !overlay) return;
+                
+                // Toggle menu open/close
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    
+                    if (isOpen) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close when clicking overlay background
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        closeMobileMenu();
+                    }
+                });
+                
+                // Close on link click
+                overlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+                
+                // NAV DROPDOWN TOGGLES (only bind once) - CSS ANIMATED
+                overlay.querySelectorAll('.nav-toggle').forEach(toggleBtn => {
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const dropdown = this.nextElementSibling;
+                        const chevron = this.querySelector('.nav-chevron');
+                        const isCurrentlyOpen = dropdown && dropdown.classList.contains('open');
+                        
+                        // Close all dropdowns first (accordion behavior)
+                        overlay.querySelectorAll('.nav-dropdown').forEach(dd => {
+                            dd.classList.remove('open');
+                        });
+                        overlay.querySelectorAll('.nav-toggle').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        overlay.querySelectorAll('.nav-chevron').forEach(ch => {
+                            ch.style.transform = 'rotate(0deg)';
+                        });
+                        
+                        // Toggle this dropdown if it wasn't already open
+                        if (!isCurrentlyOpen && dropdown && dropdown.classList.contains('nav-dropdown')) {
+                            dropdown.classList.add('open');
+                            this.classList.add('active');
+                            if (chevron) chevron.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+            
+            function closeMobileMenu() {
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (btn) {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+                document.body.style.overflow = '';
+            }
+            
+            // Expose globally
+            window.closeMobileMenu = closeMobileMenu;
+            
+            // Initialize on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+
+        // Close mobile menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.style.display !== 'none') {
+                    closeMobileMenu();
+                }
+            }
+        });
     </script>
 </body>
 </html>
