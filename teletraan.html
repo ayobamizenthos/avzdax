@@ -2159,9 +2159,13 @@
         });
 
         // UNIFIED LABORATORY & NAV INVERSION (OBEX STYLE - PINNED SCROLL FREEZE)
-        gsap.to("#specs", {
+        const specsTl = gsap.timeline({
             scrollTrigger: {
-                trigger: "#spec-trigger", start: "top top", end: "+=150%", pin: true, scrub: true,
+                trigger: "#spec-trigger", 
+                start: "top top", 
+                end: "+=150%", 
+                pin: true, 
+                scrub: true,
                 onEnter: () => {
                     gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
                     document.getElementById('main-nav')?.classList.add('nav-inverted');
@@ -2184,6 +2188,10 @@
                 }
             }
         });
+
+        // Pop-out image animation - zoom to fullscreen
+        specsTl.to("#spec-ui", { opacity: 0, scale: 0.9, duration: 0.3 }, 0.3)
+               .to("#pop-out-container", { opacity: 1, scale: 1, duration: 0.5 }, 0.4);
 
         // CAPABILITIES HORIZONTAL SCROLL (EXACT INDEX.HTML INDUSTRIES COPY)
         (function() {
