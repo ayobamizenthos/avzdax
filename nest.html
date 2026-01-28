@@ -114,6 +114,394 @@
         }
         .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
 
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
+        /* CAPABILITIES HORIZONTAL SCROLL - TEXT EXPLAINER CARDS (OBEX EXACT) */
+        .capabilities-horizontal-section {
+            background: #030303;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* HORIZONTAL SCROLL WRAPPER */
+        .capabilities-scroll-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            padding: 0 60px;
+            will-change: transform;
+        }
+
+        /* TEXT EXPLAINER CARD STYLES (OBEX EXACT) */
+        .cap-card {
+            flex: 0 0 480px;
+            min-width: 480px;
+            height: 560px;
+            background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            position: relative;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cap-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12,12,12,0.98) 100%);
+            transform: translateY(-12px);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-number {
+            position: absolute;
+            top: 40px;
+            right: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: rgba(255,255,255,0.15);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 30px 0;
+        }
+
+        .cap-card-description {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            max-width: 380px;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Progress Bar */
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        /* CTA Button */
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE DESKTOP */
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 520px;
+                min-width: 520px;
+                height: 600px;
+                padding: 55px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .cap-card-description {
+                font-size: 16px;
+            }
+        }
+
+        /* DESKTOP */
+        @media (min-width: 769px) and (max-width: 1399px) {
+            .capabilities-container {
+                padding: 0;
+            }
+            .capabilities-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* MOBILE - PIXEL-PERFECT TELETRAAN MATCH */
+        @media (max-width: 768px) {
+            .capabilities-horizontal-section {
+                min-height: 100vh;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px;
+                min-height: 100vh;
+            }
+            .capabilities-header {
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+            .capabilities-logo {
+                height: 20px;
+                margin-bottom: 24px;
+            }
+            .capabilities-title {
+                font-size: 2.2rem;
+                letter-spacing: -0.03em;
+            }
+            .capabilities-cards-track {
+                gap: 16px;
+                padding: 0 16px;
+            }
+            .cap-card {
+                flex: 0 0 calc(100vw - 48px);
+                min-width: calc(100vw - 48px);
+                max-width: calc(100vw - 48px);
+                height: 520px;
+                padding: 36px;
+                border-radius: 12px;
+            }
+            .cap-card-tag {
+                font-size: 9px;
+                letter-spacing: 0.4em;
+                margin-bottom: 16px;
+            }
+            .cap-card-title {
+                font-size: 2rem;
+                margin-bottom: 24px;
+                line-height: 0.9;
+            }
+            .cap-card-description {
+                font-size: 14px;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.5);
+            }
+            .cap-card-footer {
+                padding-top: 30px;
+            }
+            .cap-card-number {
+                top: 32px;
+                right: 32px;
+                font-size: 11px;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px);
+                margin: 40px 16px 0;
+                height: 3px;
+            }
+            .capabilities-cta {
+                padding: 0 16px;
+                margin-top: 40px;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px);
+                max-width: 360px;
+                justify-content: center;
+                padding: 18px 32px;
+                font-size: 11px;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+
         /* MOBILE NAVIGATION & MASTER FOOTER SYNC */
         @media (max-width: 1024px) {
             /* Mobile Nav Logic */
@@ -208,7 +596,8 @@
                 opacity: 0.3 !important;
                 letter-spacing: 0.3em !important;
             }
-            .social-glass-btn svg { width: 28px !important; height: 28px !important; }
+
+            #capabilities-grid::after { display: none !important; }
 
             /* =============================================
                PREMIUM MOBILE DROPDOWN ANIMATIONS
@@ -1216,82 +1605,134 @@
         </div>
     </section>
 
-    <!-- THE FINALE -->
-    <section class="min-h-screen bg-black flex flex-col items-center justify-center text-center px-12 relative overflow-hidden">
-        <div class="relative z-10 space-y-12">
-            <div class="mono text-[11px] text-phosphor uppercase tracking-[0.8em] animate-pulse">Awaiting Tactical Command Link</div>
-            <h2 class="synco text-6xl md:text-9xl text-white font-black leading-tight chrome-text">SECURE THE<br>NEST.</h2>
-            <div class="pt-12">
-                <a href="contact.html" class="glitch-btn inline-block px-20 py-8 bg-white text-black synco text-xl font-black uppercase hover:bg-phosphor transition-all hover:scale-110 active:scale-95 duration-500 cursor-pointer" data-text="Establish Command Link">Establish Command Link</a>
-            </div>
-        </div>
-    </section>
+    <!-- CORE CAPABILITIES - HORIZONTAL SCROLL -->
+        <section class="capabilities-horizontal-section" id="capabilities-grid">
+            <!-- Animated Grid Background -->
+            <div class="capabilities-bg-grid"></div>
 
-    <!-- GOD-TIER BLACK SHIELD FOOTER (FINAL MASTER ASSEMBLY) -->
+            <div class="capabilities-container">
+                
+                <!-- Header -->
+                <div class="capabilities-header">
+                    <!-- AVZDAX Logo (shows when nav inverted) -->
+                    <img src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo">
+                    <h2 class="capabilities-title synco">
+                        HYBRID<br>
+                        <span>INTELLIGENCE</span>
+                    </h2>
+                </div>
 
-        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
-        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
-            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
-                <!-- Cap 01 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">MOBILE_BASE</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">RAPID<br>DEPLOYMENT</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Tactical setup in under 15 minutes. Instant infrastructure for fluid and high-stakes security environments.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Ready</span>
+                <!-- Horizontal Scroll Wrapper -->
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        <!-- Card: Human-in-the-Hub -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Sovereign Oversight</div>
+                                <h3 class="cap-card-title synco">HUMAN-IN<br>THE-HUB</h3>
+                                <p class="cap-card-description">
+                                    NEST places certified Sovereign Operators at the core of every critical decision. AI processes the data streams, but human operators validate high-consequence actions—ensuring every intervention is ethical, legally defensible, and culturally informed.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Verified</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Behavioral AI -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Advanced Detection</div>
+                                <h3 class="cap-card-title synco">BEHAVIORAL<br>AI</h3>
+                                <p class="cap-card-description">
+                                    AI-backed algorithms identify suspicious activity beyond basic motion detection. NEST recognizes behavioral indicators—unusual loitering, inconsistent movement patterns, unauthorized zone access—and routes flagged events for immediate human assessment.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Intelligent</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Pre-Crime Recognition -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Threat Prediction</div>
+                                <h3 class="cap-card-title synco">PRE-CRIME<br>RECOGNITION</h3>
+                                <p class="cap-card-description">
+                                    NEST identifies pre-incident behavioral signatures: hesitation patterns, perimeter scouting, repeated approach attempts. The system detects intent before it becomes action—enabling proactive intervention and de-escalation.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Predictive</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: False Alarm Reduction -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Signal Clarity</div>
+                                <h3 class="cap-card-title synco">FALSE ALARM<br>REDUCTION</h3>
+                                <p class="cap-card-description">
+                                    Differentiating routine activity from genuine threats eliminates alert fatigue. NEST's behavioral analysis dramatically reduces false positives—pets, shadows, weather—ensuring your team responds only to real priorities.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Filtered</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: 24/7 Professional Monitoring -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Always-On</div>
+                                <h3 class="cap-card-title synco">24/7 REMOTE<br>MONITORING</h3>
+                                <p class="cap-card-description">
+                                    NEST combines AI technology with round-the-clock remote security monitoring by trained professionals. Your property is never unattended—every alert is assessed, verified, and escalated according to sovereign protocols.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Legacy System Integration -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Universal Node</div>
+                                <h3 class="cap-card-title synco">INFRASTRUCTURE<br>FUSION</h3>
+                                <p class="cap-card-description">
+                                    NEST integrates seamlessly with existing CCTV, access control, and alarm infrastructure. Transform legacy systems into AI-augmented sentinels without replacing hardware—maximizing ROI on your security investments.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Compatible</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Cap 02 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">HYBRID_GRID</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">AUTONOMOUS<br>POWER</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Intelligent switching between solar and internal backup for uninterrupted field presence in any territory.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
-                    </div>
+                <!-- Progress Indicator -->
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
                 </div>
 
-                <!-- Cap 03 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">MESH_NET</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">MULTI-NODAL<br>SYNC</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Seamless communication between NEST units creating a mobile situational fortress across large perimeters.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Linked</span>
-                    </div>
+                <!-- CTA -->
+                <div class="capabilities-cta">
+                    <a href="contact.html" class="cap-cta-btn">
+                        Request Technical Brief
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
-
-                <!-- Cap 04 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">EDGE_TRIAGE</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">FIELD<br>INTELLIGENCE</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Localized neural processing for immediate identification of loitering or intent, directly at the edge.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Enabled</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mobile-scroll-hint">
-                <div class="hint-bar"></div>
-                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
             </div>
         </section>
 
@@ -1556,6 +1997,91 @@
         links.forEach((l, i) => l.style.opacity = i === index ? '1' : '0.4');
         lines.forEach((l, i) => l.style.backgroundColor = i === index ? '#00ff41' : 'rgba(255,255,255,0.1)');
     }
+
+    // CAPABILITIES HORIZONTAL SCROLL (OBEX EXACT)
+    (function() {
+        function initCapabilitiesHorizontalScroll() {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            
+            const section = document.querySelector('#capabilities-grid');
+            const track = document.querySelector('.capabilities-cards-track');
+            const progressBar = document.querySelector('.cap-progress-bar');
+            
+            if (!section || !track) return;
+            
+            // Kill existing triggers for this section
+            ScrollTrigger.getAll().forEach(t => {
+                if (t.trigger === section) t.kill();
+            });
+            
+            const cards = track.querySelectorAll('.cap-card');
+            if (cards.length === 0) return;
+            
+            // Calculate scroll distance
+            const isMobile = window.innerWidth <= 768;
+            const cardWidth = cards[0].offsetWidth;
+            const gap = isMobile ? 16 : 32;
+            const padding = isMobile ? 32 : 120;
+            const totalCardsWidth = (cardWidth * cards.length) + (gap * (cards.length - 1));
+            const viewportWidth = window.innerWidth;
+            const scrollDistance = totalCardsWidth - viewportWidth + padding;
+            
+            if (scrollDistance <= 0) return;
+            
+            gsap.to(track, {
+                x: -scrollDistance,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: "+=" + (scrollDistance * 1.2),
+                    pin: true,
+                    scrub: 0.8,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        if (progressBar) {
+                            progressBar.style.width = (self.progress * 100) + '%';
+                        }
+                    },
+                    onEnter: () => {
+                        document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                        document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                    },
+                    onLeave: () => {
+                        document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                        document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                    },
+                    onEnterBack: () => {
+                        document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                        document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                    },
+                    onLeaveBack: () => {
+                        document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                        document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                    }
+                }
+            });
+        }
+
+        // Initialize on load
+        if (document.readyState === 'complete') {
+            setTimeout(initCapabilitiesHorizontalScroll, 200);
+        } else {
+            window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+        }
+
+        // Reinitialize on resize with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                ScrollTrigger.refresh();
+                initCapabilitiesHorizontalScroll();
+            }, 250);
+        });
+    })();
+
 
     // --- NEURAL CANVAS (PRIMUS VERSION) ---
     const canvas = document.getElementById('footer-neural-canvas');

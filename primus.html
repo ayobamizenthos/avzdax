@@ -98,6 +98,54 @@
             stroke: #000 !important;
         }
 
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
         /* NAV ITEMS - SILICON VALLEY STYLE */
         .nav-item {
             position: relative;
@@ -468,24 +516,244 @@
         @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
-        /* LUXURY CAPABILITIES GRID - SYNCED WITH OBEX */
-        .cap-card { 
-            flex: 1;
-            background: #080808;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 2px;
-            min-height: 380px;
+        /* CAPABILITIES HORIZONTAL SCROLL - TELETRAAN STYLE */
+        .capabilities-horizontal-section {
+            background: linear-gradient(180deg, #050505 0%, #030303 100%);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            width: 100%;
+            padding: 60px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .capabilities-scroll-wrapper {
+            overflow: visible;
+            padding: 0 60px;
+        }
+
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            will-change: transform;
+        }
+
+        /* Text Explainer Cards */
+        .cap-card {
+            flex: 0 0 420px;
+            max-width: 420px;
+            min-height: 520px;
+            background: linear-gradient(165deg, rgba(20,20,20,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 4px;
+            padding: 50px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
         }
-        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
-        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
-        .cap-card.active-node .cap-card-border { width: 100%; }
-        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .cap-card:hover {
+            background: linear-gradient(165deg, rgba(30,30,30,0.95) 0%, rgba(15,15,15,0.98) 100%);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-8px);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 24px 0;
+        }
+
+        .cap-card-description {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+            margin: 0;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Progress Bar */
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        /* CTA Button */
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE DESKTOP */
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 480px;
+                max-width: 480px;
+                min-height: 560px;
+                padding: 60px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .capabilities-scroll-wrapper {
+                padding: 0 100px;
+            }
+        }
 
         .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
 
@@ -651,39 +919,77 @@
             #specs img[src*="primusbox"] { filter: none !important; width: 100% !important; transform: none !important; }
             #specs .hardware-core { position: relative !important; width: 100% !important; margin: 0 !important; }
 
-            /* 05. CORE CAPABILITIES (KINETIC MICRO-GRID) */
-            #capabilities-grid { padding: 40px 0 !important; }
-            .capabilities-carousel { 
-                display: flex !important; 
-                overflow-x: auto !important; 
-                scroll-snap-type: x mandatory !important;
-                padding: 0 5vw !important;
-                gap: 15px !important;
+            /* 05. CORE CAPABILITIES - MOBILE HORIZONTAL SCROLL (PIXEL-PERFECT STANDARD) */
+            .capabilities-horizontal-section {
+                min-height: 100vh !important;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px !important;
+                min-height: 100vh !important;
+            }
+            .capabilities-header {
+                padding: 0 20px !important;
+                margin-bottom: 40px !important;
+            }
+            .capabilities-logo {
+                height: 20px !important;
+                margin-bottom: 24px !important;
+            }
+            .capabilities-title {
+                font-size: 2.2rem !important;
+                letter-spacing: -0.03em !important;
+            }
+            .capabilities-scroll-wrapper {
+                padding: 0 16px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+            }
+            .capabilities-cards-track {
+                gap: 16px !important;
             }
             .cap-card { 
-                flex: 0 0 85% !important; 
-                min-width: 85% !important; 
-                scroll-snap-align: center !important;
-                opacity: 0.3;
-                transform: scale(0.95);
-                padding: 32px !important;
-                min-height: 360px !important;
+                flex: 0 0 calc(100vw - 48px) !important;
+                min-width: calc(100vw - 48px) !important;
+                max-width: calc(100vw - 48px) !important;
+                height: 520px !important;
+                padding: 36px !important;
+                border-radius: 12px !important;
             }
-            .mobile-scroll-hint { display: flex; }
-            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
-            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
-            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
-
-            /* Moving Animation: Active card focus */
-            .cap-card.active-node { opacity: 1 !important; transform: scale(1) !important; border-color: rgba(255,255,255,0.1) !important; }
-
-            .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
-            .cap-card.active-node .cap-card-border { width: 100%; }
-
-            .mobile-scroll-hint { margin-top: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
-            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
-            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+            .cap-card-tag {
+                font-size: 9px !important;
+                letter-spacing: 0.4em !important;
+                margin-bottom: 16px !important;
+            }
+            .cap-card-title {
+                font-size: 2rem !important;
+                margin-bottom: 24px !important;
+                line-height: 0.9 !important;
+            }
+            .cap-card-description {
+                font-size: 14px !important;
+                line-height: 1.7 !important;
+                color: rgba(255,255,255,0.5) !important;
+            }
+            .cap-card-footer {
+                padding-top: 30px !important;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px) !important;
+                margin: 40px 16px 0 !important;
+                height: 3px !important;
+            }
+            .capabilities-cta {
+                padding: 0 16px !important;
+                margin-top: 40px !important;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px) !important;
+                max-width: 360px !important;
+                justify-content: center !important;
+                padding: 18px 32px !important;
+                font-size: 11px !important;
+                letter-spacing: 0.2em !important;
+            }
 
             #capabilities-grid::after { display: none !important; }
 
@@ -1911,69 +2217,134 @@
             </div>
         </section>
 
-        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
-        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
-            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
-                <!-- Activity Recognition -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">REAL-TIME</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">ACTIVITY<br>RECOGNITION</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Understanding fluid moments. Processing gestures and unusual events for instantaneous tactical intervention.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Enabled</span>
+        <!-- CORE CAPABILITIES - HORIZONTAL SCROLL -->
+        <section class="capabilities-horizontal-section" id="capabilities-grid">
+            <!-- Animated Grid Background -->
+            <div class="capabilities-bg-grid"></div>
+
+            <div class="capabilities-container">
+                
+                <!-- Header -->
+                <div class="capabilities-header">
+                    <!-- AVZDAX Logo (shows when nav inverted) -->
+                    <img src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo">
+                    <h2 class="capabilities-title synco">
+                        BEHAVIORAL<br>
+                        <span>INTELLIGENCE</span>
+                    </h2>
+                </div>
+
+                <!-- Horizontal Scroll Wrapper -->
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        <!-- Card: Predictive Analytics -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Crime Prevention</div>
+                                <h3 class="cap-card-title synco">PREDICTIVE<br>ANALYTICS</h3>
+                                <p class="cap-card-description">
+                                    PRIMUS analyzes behavioral patterns, access logs, and temporal movement data to identify potential threats before they materialize. The system shifts security from reactive recording to proactive prevention.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Proactive</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Behavioral Anomaly -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Pattern Recognition</div>
+                                <h3 class="cap-card-title synco">BEHAVIORAL<br>ANOMALY</h3>
+                                <p class="cap-card-description">
+                                    Continuous neural learning identifies deviations from established patterns—unusual pacing, loitering in sensitive zones, erratic movement. PRIMUS distinguishes routine activities from genuine risks, minimizing false alarms.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Learning</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Threat Classification -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Real-Time Analysis</div>
+                                <h3 class="cap-card-title synco">THREAT<br>CLASSIFICATION</h3>
+                                <p class="cap-card-description">
+                                    Sub-second threat identification across multiple categories—from retail intent to coordinated intrusions. PRIMUS classifies and prioritizes alerts based on severity, context, and historical data patterns.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Instant</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Zone Enforcement -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Perimeter Defense</div>
+                                <h3 class="cap-card-title synco">ZONE<br>ENFORCEMENT</h3>
+                                <p class="cap-card-description">
+                                    Define virtual boundaries around secure areas. PRIMUS constructs invisible computational fortresses that detect unauthorized access attempts before physical perimeters are breached.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Secured</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Autonomous Learning -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Adaptive AI</div>
+                                <h3 class="cap-card-title synco">AUTONOMOUS<br>LEARNING</h3>
+                                <p class="cap-card-description">
+                                    PRIMUS continuously learns environmental patterns without extensive manual programming. The system adapts to site-specific behaviors, improving detection accuracy over time while reducing operational overhead.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Evolving</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Legacy Integration -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Universal Node</div>
+                                <h3 class="cap-card-title synco">LEGACY<br>INTEGRATION</h3>
+                                <p class="cap-card-description">
+                                    Transform existing CCTV infrastructure into AI-powered sentinels. PRIMUS retrofits standard cameras with behavioral intelligence—no complete hardware overhaul required, protecting existing investments.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Compatible</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Tracking -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">KINETIC</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">OBJECT<br>TRACKING</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Surgical focus. Locking onto personnel, vehicles, or assets for continuous institutional awareness.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
-                    </div>
+                <!-- Progress Indicator -->
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
                 </div>
 
-                <!-- Alerts -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">PERIMETER</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">INTRUSION<br>ALERTS</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Architecting digital boundaries. Instant detection of loitering or unauthorized spatial violation.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Secured</span>
-                    </div>
+                <!-- CTA -->
+                <div class="capabilities-cta">
+                    <a href="contact.html" class="cap-cta-btn">
+                        Request Technical Brief
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
-
-                <!-- Anomaly -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">COGNITIVE</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">BEHAVIORAL<br>ANOMALY</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Beyond rules, PRIMUS learns. Flagging unusual pacing or erratic intent automatically.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Neural</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mobile-scroll-hint">
-                <div class="hint-bar"></div>
-                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
             </div>
         </section>
 
@@ -2213,6 +2584,86 @@
             });
             gsap.fromTo(symbiosisSection.querySelector('h2'), { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, scrollTrigger: { trigger: symbiosisSection, start: "top 70%" } });
         }
+
+        // CAPABILITIES HORIZONTAL SCROLL
+        (function() {
+            function initCapabilitiesHorizontalScroll() {
+                const section = document.querySelector('.capabilities-horizontal-section');
+                const track = document.querySelector('.capabilities-cards-track');
+                const progressBar = document.querySelector('.cap-progress-bar');
+                
+                if (!section || !track) return;
+                
+                // Kill existing triggers for this section
+                ScrollTrigger.getAll().forEach(t => {
+                    if (t.trigger === section) t.kill();
+                });
+                
+                const cards = track.querySelectorAll('.cap-card');
+                if (cards.length === 0) return;
+                
+                // Calculate scroll distance
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 32;
+                const totalCardsWidth = (cardWidth * cards.length) + (gap * (cards.length - 1));
+                const viewportWidth = window.innerWidth;
+                const scrollDistance = totalCardsWidth - viewportWidth + 120;
+                
+                if (scrollDistance <= 0) return;
+                
+                gsap.to(track, {
+                    x: -scrollDistance,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=" + (scrollDistance * 1.2),
+                        pin: true,
+                        scrub: 0.8,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (progressBar) {
+                                progressBar.style.width = (self.progress * 100) + '%';
+                            }
+                        },
+                        onEnter: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeave: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        },
+                        onEnterBack: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeaveBack: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        }
+                    }
+                });
+            }
+
+            // Initialize on load
+            if (document.readyState === 'complete') {
+                setTimeout(initCapabilitiesHorizontalScroll, 200);
+            } else {
+                window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+            }
+
+            // Reinitialize on resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                    initCapabilitiesHorizontalScroll();
+                }, 250);
+            });
+        })();
 
         // MOUSE PARALLAX FOR CORE
         window.addEventListener("mousemove", (e) => {

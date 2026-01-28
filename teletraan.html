@@ -103,6 +103,54 @@
             stroke: #000 !important;
         }
 
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
         /* NAV ITEMS - SILICON VALLEY STYLE */
         .nav-item {
             position: relative;
@@ -735,7 +783,7 @@
 
         /* CINEMATIC STAGING */
         .pinned-stage { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .console-wrap { position: absolute; width: 900px; z-index: 50; pointer-events: none; will-change: transform, scale; filter: drop-shadow(0 0 100px rgba(255,255,255,0.05)); }
+        .console-wrap { position: absolute; width: 900px; z-index: 50; pointer-events: none; will-change: transform, scale; filter: drop-shadow(0 0 100px rgba(255,255,255,0.05)); opacity: 0; transform: translateY(40px); }
         
         .act-content { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; }
         .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
@@ -787,42 +835,550 @@
             #sovereign-footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-top: 60px !important; padding-top: 30px !important; gap: 24px !important; text-align: left !important; }
             #sovereign-footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; width: 100%; }
         }
-        /* CAPABILITIES GRID STYLES - SYNCED WITH PRIMUS */
-        .cap-card { 
-            flex: 1;
-            background: #080808;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 2px;
-            min-height: 380px;
+        /* CAPABILITIES HORIZONTAL SCROLL - TEXT EXPLAINER CARDS */
+        .capabilities-horizontal-section {
+            background: #030303;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
-        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
-        .cap-card.active-node .cap-card-border { width: 100%; }
-        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
 
-        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            color: rgba(255,255,255,0.2);
+        }
+
+        @keyframes cap-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        /* HORIZONTAL SCROLL WRAPPER */
+        .capabilities-scroll-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            padding: 0 60px;
+            will-change: transform;
+        }
+
+        /* TEXT EXPLAINER CARD STYLES */
+        .cap-card {
+            flex: 0 0 480px;
+            min-width: 480px;
+            height: 560px;
+            background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            position: relative;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cap-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12,12,12,0.98) 100%);
+            transform: translateY(-12px);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-number {
+            position: absolute;
+            top: 40px;
+            right: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: rgba(255,255,255,0.15);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 30px 0;
+        }
+
+        .cap-card-description {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            max-width: 380px;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Progress Bar */
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        /* CTA Button */
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE DESKTOP */
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 520px;
+                min-width: 520px;
+                height: 600px;
+                padding: 55px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .cap-card-description {
+                font-size: 16px;
+            }
+        }
+
+        /* DESKTOP */
+        @media (min-width: 769px) and (max-width: 1399px) {
+            .capabilities-container {
+                padding: 0;
+            }
+            .capabilities-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* MOBILE - PIXEL-PERFECT STANDARD */
+        @media (max-width: 768px) {
+            .capabilities-horizontal-section {
+                min-height: 100vh;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px;
+                min-height: 100vh;
+            }
+            .capabilities-header {
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+            .capabilities-logo {
+                height: 20px;
+                margin-bottom: 24px;
+            }
+            .capabilities-title {
+                font-size: 2.2rem;
+                letter-spacing: -0.03em;
+            }
+            .capabilities-cards-track {
+                gap: 16px;
+                padding: 0 16px;
+            }
+            .cap-card {
+                flex: 0 0 calc(100vw - 48px);
+                min-width: calc(100vw - 48px);
+                max-width: calc(100vw - 48px);
+                height: 520px;
+                padding: 36px;
+                border-radius: 12px;
+            }
+            .cap-card-tag {
+                font-size: 9px;
+                letter-spacing: 0.4em;
+                margin-bottom: 16px;
+            }
+            .cap-card-title {
+                font-size: 2rem;
+                margin-bottom: 24px;
+                line-height: 0.9;
+            }
+            .cap-card-description {
+                font-size: 14px;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.5);
+            }
+            .cap-card-footer {
+                padding-top: 30px;
+            }
+            .cap-card-number {
+                top: 32px;
+                right: 32px;
+                font-size: 11px;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px);
+                margin: 40px 16px 0;
+                height: 3px;
+            }
+            .capabilities-cta {
+                padding: 0 16px;
+                margin-top: 40px;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px);
+                max-width: 360px;
+                justify-content: center;
+                padding: 18px 32px;
+                font-size: 11px;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        /* PRIMUS-STYLE SCENE ANIMATION SYSTEM */
+        .cap-section { min-height: 100vh; position: relative; }
+        #particles-js { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+        
+        /* HUD CORNERS */
+        .hud-corner { position: absolute; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); pointer-events: none; z-index: 20; }
+        .hud-corner.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .hud-corner.tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .hud-corner.bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .hud-corner.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        /* SCAN LINE */
+        .scan-line { position: absolute; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: scan 4s infinite ease-in-out; z-index: 15; pointer-events: none; }
+        @keyframes scan { 0%, 100% { top: 10%; opacity: 0; } 50% { top: 90%; opacity: 1; } }
+
+        /* STATUS DOT */
+        .status-dot { width: 8px; height: 8px; background: #00ff41; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #00ff41; }
+        .status-dot.pulse { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } 50% { opacity: 0.5; box-shadow: 0 0 20px #00ff41; } }
+
+        /* METRIC CARDS */
+        .metric-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; }
+
+        /* DATA PANEL ACCENT */
+        .data-panel-accent { position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent); }
+
+        /* SCENE SECTIONS - MOBILE RESPONSIVE (PIXEL-PERFECT PRIMUS MATCH) */
         @media (max-width: 1024px) {
-            .capabilities-carousel { 
-                display: flex !important; 
-                overflow-x: auto !important; 
-                scroll-snap-type: x mandatory !important;
-                padding: 0 5vw !important;
-                gap: 15px !important;
+            /* HERO MOBILE - PROPER SIZING */
+            #hero {
+                padding: 100px 20px 40px !important;
+                height: 100vh !important;
+                height: 100svh !important;
+                flex-direction: column !important;
             }
-            .cap-card { 
-                flex: 0 0 85% !important; 
-                min-width: 85% !important; 
-                scroll-snap-align: center !important;
-                opacity: 0.3;
-                transform: scale(0.95);
+            #hero .relative.z-10 {
+                margin-bottom: 30px;
             }
-            .mobile-scroll-hint { display: flex; }
-            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
-            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
-            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+            #hero h1 {
+                font-size: 12vw !important;
+                margin-bottom: 12px !important;
+                line-height: 0.9 !important;
+                opacity: 1 !important;
+            }
+            .console-wrap {
+                position: relative !important;
+                width: 100% !important;
+                max-width: 85vw !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+            .console-wrap img {
+                width: 100% !important;
+                height: auto !important;
+                max-height: 50vh !important;
+                object-fit: contain !important;
+            }
+
+            /* PRODUCT SHOWCASE (SCENES 1-4) - BOLD CINEMATIC REVEAL */
+            #capabilities-track { 
+                overflow: visible !important; 
+                scroll-snap-type: y mandatory !important; /* ENABLE STATIC DRAG-TO-SCROLL FEEL */
+            }
+            .cap-section { 
+                height: 100vh !important; height: 100svh !important; 
+                scroll-snap-align: start !important;
+                display: flex !important; flex-direction: column !important; 
+                justify-content: center !important; padding: 60px 20px !important;
+                background: #000 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                position: relative !important;
+            }
+
+            /* Bold Video Viewport */
+            .scene-1-video-wrapper, .scene-2-video, .scene-3-video, .scene-4-video {
+                position: relative !important; inset: auto !important;
+                width: 100% !important; height: auto !important; 
+                aspect-ratio: 16/9 !important;
+                border: none !important;
+                border-radius: 4px !important;
+                transform: none !important; opacity: 1 !important;
+                margin-bottom: 30px;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+                z-index: 10 !important;
+                overflow: hidden;
+            }
+            video { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+
+            /* Integrated Data Panels (No Isolated Boxes) */
+            .scene-1-text, .scene-1-subtext, .scene-2-text, .scene-3-text, .scene-4-text {
+                position: relative !important; inset: auto !important;
+                width: 100% !important; height: auto !important;
+                background: transparent !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+                border: none !important;
+                padding: 0 !important;
+                transform: none !important; opacity: 1 !important;
+                text-align: left !important;
+                align-items: flex-start !important;
+                z-index: 5 !important;
+            }
+
+            /* Scene 1 specific mobile fixes */
+            #scene-1 { 
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding-top: 80px !important;
+            }
+            #scene-1 .scene-1-text { 
+                margin-bottom: 20px !important;
+                order: 1 !important;
+            }
+            #scene-1 .scene-1-video-wrapper { 
+                order: 2 !important;
+                width: 100% !important;
+            }
+            #scene-1 .absolute.bottom-16 { 
+                position: relative !important;
+                bottom: auto !important;
+                order: 3 !important;
+                padding: 0 !important;
+            }
+            #scene-1 .scene-1-subtext {
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+            }
+            #scene-1 .scene-1-subtext .flex.gap-20 {
+                gap: 40px !important;
+                justify-content: flex-start !important;
+            }
+
+            /* High-Impact Typography */
+            .cap-section h2 { 
+                font-size: 2.25rem !important; 
+                line-height: 0.95 !important;
+                margin-bottom: 16px !important; 
+                letter-spacing: -0.04em !important;
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                text-transform: uppercase;
+            }
+            .cap-section p { 
+                font-size: 14px !important; 
+                line-height: 1.5 !important; 
+                margin-bottom: 30px !important; 
+                color: rgba(255,255,255,0.5) !important; 
+                max-width: 100% !important;
+            }
+
+            /* Unified Tactical Metrics - MICRO SIZE FOR CLEAR HIERARCHY */
+            .metric-card { 
+                background: transparent !important; 
+                border: none !important; 
+                border-left: 1px solid rgba(255,255,255,0.15) !important;
+                padding: 0 0 0 16px !important; 
+                border-radius: 0 !important; 
+                width: auto !important; 
+                margin-bottom: 12px;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            /* Making labels very small */
+            .metric-card .synco { font-size: 0.75rem !important; color: rgba(255,255,255,0.5) !important; opacity: 0.8; letter-spacing: 0.1em !important; }
+            .metric-card span, .metric-card .text-white { font-size: 1.15rem !important; color: #fff !important; font-weight: 700 !important; }
+            .metric-card .mono { font-size: 8px !important; color: rgba(255,255,255,0.2) !important; margin: 0 !important; }
+
+            /* HUD cleanup */
+            .hud-corner { display: none !important; }
+            .data-panel-accent { display: none !important; }
+            .absolute.top-10, .absolute.bottom-10, .absolute.top-8, .absolute.bottom-8 { 
+                position: relative !important; top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
+                margin-bottom: 8px;
+                font-size: 8px !important; letter-spacing: 0.4em !important; color: rgba(255,255,255,0.2) !important;
+            }
+
+            /* LABORATORY (SPECS) MOBILE */
+            #specs { padding: 40px 20px !important; background: #fff !important; height: 100vh !important; height: 100svh !important; min-height: auto !important; scroll-snap-align: start !important; }
+            #specs .grid { display: flex !important; flex-direction: column !important; gap: 20px !important; }
+            #specs .col-span-4 { order: 2; margin-top: 20px; width: 100% !important; }
+            #specs .col-span-8 { order: 1; margin: 0 auto !important; width: 90% !important; }
+            #specs h2 { font-size: 2rem !important; color: #000 !important; }
+            #specs .text-3xl { font-size: 1.15rem !important; color: #000 !important; }
+            #specs .mono { color: #666 !important; font-size: 8px !important; }
+            #specs .space-y-12 { gap: 1.5rem !important; }
+            #specs .space-y-8 { gap: 0.75rem !important; }
+            
+            /* Specific image handling for mobile white phase */
+            #specs img { width: 100% !important; transform: none !important; }
+            
+            /* Status tags on mobile */
+            .status-dot { width: 6px !important; height: 6px !important; }
+            
+            /* Grid metrics on mobile */
+            .grid.grid-cols-2 { display: flex !important; flex-wrap: wrap !important; gap: 16px !important; }
+            .grid.grid-cols-2 > div { flex: 1 1 45% !important; min-width: 120px !important; }
         }
     </style>
 
@@ -1051,6 +1607,109 @@
     </div>
 </nav>
 
+<!-- MOBILE NAVIGATION BAR -->
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
+    <div class="flex justify-between items-center pl-0 pr-6 py-1">
+        <a href="index.html" class="mobile-nav-logo">
+            <img src="/media/avzdax-logo.png" alt="AVZDAX Logo" title="AVZDAX Official" class="h-8 w-auto" loading="lazy">
+        </a>
+        <button class="mobile-menu-toggle-modern" aria-label="Open menu" title="Open menu" aria-expanded="false">
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bar" d="M6 8h12" stroke="white" stroke-width="1.8" />
+                    <path class="bar" d="M9 12h9" stroke="white" stroke-width="1.8" opacity="0.8" />
+                    <path class="bar" d="M6 16h12" stroke="white" stroke-width="1.8" opacity="0.6" />
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display:none">
+    <!-- Close Button -->
+    <button onclick="closeMobileMenu()" aria-label="Close menu" title="Close menu" class="mobile-close-btn absolute top-5 right-5 w-11 h-11 flex items-center justify-center text-white/50 hover:text-white transition-all z-[10001] rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-110">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <div class="mobile-nav-content h-full flex flex-col">
+
+        <!-- MOBILE SEARCH BAR -->
+        <div class="mobile-search-section">
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="SEARCH" title="Search" class="bg-transparent border-none outline-none text-white text-sm font-black uppercase tracking-widest w-full placeholder:text-white/20">
+            </div>
+        </div>
+        
+        <!-- NAVIGATION SECTIONS -->
+        <div class="minimalist-nav space-y-2 flex-1">
+            <!-- ECOSYSTEM -->
+            <div class="nav-section">
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Ecosystem Menu">
+                    <span>ECOSYSTEM</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
+                <div class="nav-dropdown">
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="primus.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">PRIMUS — Behavioral AI</a>
+                        <a href="teletraan.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TELETRAAN — Command UI</a>
+                        <a href="nest.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">NEST — Oversight Station</a>
+                        <a href="trion.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">TRION — Optical Sensing</a>
+                        <a href="obex.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">OBEX — Architectural Imaging</a>
+                        <a href="arclight.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">ARCLIGHT — Urban Tower</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- INTELLIGENCE -->
+            <div class="nav-section">
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Intelligence Menu">
+                    <span>INTELLIGENCE</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
+                <div class="nav-dropdown">
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="whitepaper.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">White Papers</a>
+                        <a href="news.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Newsroom</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Case Studies</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MISSION -->
+            <div class="nav-section">
+                <button class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between" title="Toggle Mission Menu">
+                    <span>MISSION</span>
+                    <svg class="nav-chevron w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+                </button>
+                <div class="nav-dropdown">
+                    <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+                        <a href="about.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">About AVZDAX</a>
+                        <a href="careers.html" class="text-green-500 hover:text-green-400 py-3 text-sm uppercase tracking-widest transition-colors flex items-center gap-2">Careers <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a>
+                        <a href="ethics.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Ethics & Policy</a>
+                        <a href="industries.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Industries</a>
+                        <a href="contact.html" class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DIRECT LINK -->
+            <div class="nav-section pt-2">
+                <a href="news.html" class="block text-lg font-black uppercase tracking-[0.2em] text-white/80 hover:text-white py-5 border-b border-white/5 transition-colors">NEWSROOM</a>
+            </div>
+        </div>
+        
+        <!-- MOBILE CTA BUTTONS -->
+        <div class="mt-8 space-y-4">
+            <a href="contact.html" class="block w-full bg-white text-black text-center py-4 text-xs font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all">Schedule Demonstration</a>
+            <div class="flex items-center justify-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                NEURAL MESH ACTIVE
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <div id="viewport">
@@ -1061,161 +1720,294 @@
                 <h1 class="synco text-[11vw] font-black mb-8 chrome-text opacity-0" id="h-title">TELETRAAN</h1>
                 <p class="mono text-[11px] text-white/40" id="h-tag">The Digital Twin of Reality.</p>
             </div>
-            <div class="console-wrap opacity-0 translate-y-40" id="main-console">
+            <div class="console-wrap" id="main-console">
                 <img src="media/teletraan-console.png" class="w-full" alt="Teletraan Console">
             </div>
         </section>
 
-        <!-- HIGHLIGHTS TRACK -->
-        <div id="story-trigger">
-            <section class="pinned-stage" id="story-pin">
+        <!-- HIGHLIGHTS TRACK - PRIMUS STYLE CINEMATIC SCENES -->
+        <div class="relative bg-[#020202] overflow-hidden" id="capabilities-track">
+            
+            <!-- SCENE 1: UNIFIED CAMERA COMMAND (Central Scale) -->
+            <section class="cap-section h-screen flex flex-col items-center justify-center relative" id="scene-1">
+                <!-- Text (Minimal, Top) -->
+                <div class="scene-1-text text-center mb-12 opacity-0 select-none">
+                    <h2 class="synco text-6xl text-white font-bold tracking-tighter">UNIFIED CAMERA COMMAND</h2>
+                </div>
+
+                <!-- Video (Starts constrained, Swells to width) -->
+                <div class="scene-1-video-wrapper relative w-[40vw] aspect-video bg-[#050505] overflow-hidden rounded-lg shadow-2xl z-10 will-change-transform">
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-90" src="media/tele_highlight_1.mp4"></video>
+                    <!-- Gloss -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none"></div>
+                </div>
                 
-                <!-- 1. UNIFIED DOMAIN AWARENESS -->
-                <div class="act-content px-24" id="act-1">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_1.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 01</div>
-                        <h2 class="synco text-7xl font-bold mb-8">TOTAL VISUAL<br>ORCHESTRATION.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed">Absolute domain awareness. TELETRAAN merges every node into a singular, seamless theater of operations. Command expansive territories with an unbroken line of sight.</p>
-                        <div class="synco text-2xl chrome-text mt-8">ALL SENSORS LINKED</div>
-                    </div>
+                <!-- Background Context (Enhanced Legibility with Glassmorphism) -->
+                <div class="absolute bottom-16 left-0 w-full flex justify-center z-20 pointer-events-none px-6">
+                     <div class="scene-1-subtext opacity-0 flex flex-col items-center gap-8 p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl max-w-2xl">
+                        <p class="text-white/90 text-sm md:text-base text-center leading-relaxed font-light tracking-wide drop-shadow-lg">
+                            Every camera. Every angle. Every location—orchestrated into a single, seamless visual theater. TELETRAAN delivers absolute situational awareness across your entire surveillance network.
+                        </p>
+                        <div class="flex gap-20">
+                            <div class="text-center"><div class="synco text-2xl text-white font-bold drop-shadow-md">1000+</div><div class="mono text-[9px] text-white/40 mt-2 tracking-[0.3em]">CAMERAS UNIFIED</div></div>
+                            <div class="text-center"><div class="synco text-2xl text-white font-bold drop-shadow-md">GLOBAL</div><div class="mono text-[9px] text-white/40 mt-2 tracking-[0.3em]">SYNCHRONIZATION</div></div>
+                        </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- SCENE 2: REAL-TIME THREAT ALERTS (Premium HUD - Mirrored) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-2">
+                <!-- Video Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-2-video -translate-x-[20%] opacity-0 border-r border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <div class="scan-line"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 contrast-125" src="media/tele_highlight_2.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent"></div>
+                    <div class="absolute top-10 left-10 mono text-[9px] text-white/20 tracking-[0.5em]">CAM_NET // THREAT_MONITOR</div>
                 </div>
 
-                <!-- 2. PREDICTIVE ALERT TRIAGE -->
-                <div class="act-content px-24 justify-end" id="act-2">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_2.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl text-right">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 02</div>
-                        <h2 class="synco text-7xl font-bold mb-8">PREDICTIVE<br>ALERT TRIAGE.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed">Driven by the PRIMUS engine, TELETRAAN identifies behavioral deviations and unauthorized breach attempts in sub-0.3 seconds—surfacing threats before perimeters are compromised.</p>
-                        <div class="synco text-3xl chrome-text mt-4">SUB-0.3s LATENCY</div>
+                <!-- Data Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-l border-white/5 scene-2-text translate-x-full text-right items-end">
+                    <div class="mb-10 flex items-center gap-4 justify-end">
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Status: Alert Engine Active</span>
+                        <span class="status-dot pulse"></span>
                     </div>
+                    
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">REAL-TIME<br>THREAT ALERTS</h2>
+                    
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        The instant an anomaly occurs, you know. TELETRAAN's intelligent alert engine surfaces breaches, intrusions, and behavioral deviations in sub-second latency—before situations escalate.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 w-full">
+                        <div class="metric-card !p-5">
+                            <div class="synco text-2xl text-white font-bold">0.3s</div>
+                            <div class="mono text-[8px] text-white/20 mt-2 uppercase tracking-widest">Latency</div>
+                        </div>
+                        <div class="metric-card !p-5">
+                            <div class="synco text-2xl text-white font-bold">24/7</div>
+                            <div class="mono text-[8px] text-white/20 mt-2 uppercase tracking-widest">Monitoring</div>
+                        </div>
+                    </div>
+                    <div class="data-panel-accent" style="left: 0; right: auto;"></div>
+                </div>
+            </section>
+
+            <!-- SCENE 3: INTELLIGENT FACE SEARCH (Premium HUD) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-3">
+                <!-- Video Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-3-video translate-x-[20%] opacity-0 border-l border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-70 contrast-125" src="media/tele_highlight_3.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                    <div class="absolute top-10 right-10 mono text-[9px] text-white/20 tracking-[0.5em]">FACIAL_DB // NEURAL_SEARCH</div>
                 </div>
 
-                <!-- 3. TEMPORAL RECONSTRUCTION -->
-                <div class="act-content px-24" id="act-3">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_3.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 03</div>
-                        <h2 class="synco text-7xl font-bold mb-8">TEMPORAL<br>RECONSTRUCTION.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed">Navigate the past with neural precision. Reconstruct events across cameras using multi-point identity persistence—filtering by facial signature and gait patterns.</p>
-                        <div class="synco text-2xl chrome-text mt-8">NEURAL SEARCH ACTIVE</div>
+                <!-- Data Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-r border-white/5 scene-3-text -translate-x-full">
+                    <div class="mb-10 flex items-center gap-4">
+                        <span class="status-dot pulse" style="background: #00d4ff; box-shadow: 0 0 10px #00d4ff;"></span>
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Neural Search: Online</span>
                     </div>
+
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">INTELLIGENT<br>FACE SEARCH</h2>
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        Navigate the past with surgical precision. Track any individual across your entire camera network using advanced facial recognition and behavioral patterns—filtering through months of footage instantly.
+                    </p>
+                    
+                    <div class="metric-card border-white/10 !p-5">
+                        <div class="synco text-xl md:text-2xl text-white font-black tracking-widest uppercase">NEURAL SEARCH: <span class="text-white">ACTIVE</span></div>
+                    </div>
+                    <div class="data-panel-accent"></div>
+                </div>
+            </section>
+
+            <!-- SCENE 4: TOTAL ACCESS CONTROL (Premium HUD - Mirrored) -->
+            <section class="cap-section h-screen relative flex items-center overflow-hidden" id="scene-4">
+                <!-- Video Panel (Left) -->
+                <div class="absolute left-0 top-0 h-full w-[70%] bg-[#020202] overflow-hidden scene-4-video -translate-x-[20%] opacity-0 border-r border-white/5">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <div class="scan-line" style="animation-duration: 6s;"></div>
+                    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 contrast-125" src="media/tele_highlight_4.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10 mono text-[9px] text-white/20 tracking-[0.5em]">ACCESS_MGR // KINETIC_CTRL</div>
                 </div>
 
-                <!-- 4. SOVEREIGN SHIELD COMMAND -->
-                <div class="act-content px-24 justify-end" id="act-4">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_4.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl text-right">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 04</div>
-                        <h2 class="synco text-7xl font-bold mb-8">SOVEREIGN SHIELD<br>COMMAND.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed">Master the physical layer. Remote kinetic control over restricted zones globally. Execute automated lock-down protocols and responder routing from a single tactical interface.</p>
-                        <div class="synco text-3xl chrome-text">KINETIC LOCKDOWN</div>
+                <!-- Data Panel (Right) -->
+                <div class="absolute right-0 top-0 h-full w-[35%] flex flex-col justify-center px-16 z-20 bg-black/95 backdrop-blur-xl border-l border-white/5 scene-4-text translate-x-full text-right items-end">
+                    <div class="mb-10 flex items-center gap-4 justify-end">
+                        <span class="mono text-[10px] text-white/40 tracking-[0.4em] uppercase">Access Control: Enabled</span>
+                        <span class="status-dot pulse" style="background: #ff3b3b; box-shadow: 0 0 10px #ff3b3b;"></span>
                     </div>
-                </div>
 
-                <!-- 5. DIGITAL TWIN OF REALITY -->
-                <div class="act-content px-24" id="act-5">
-                    <div class="video-bg"><video autoplay muted loop playsinline preload="metadata" poster="/media/general-poster.png" src="media/tele_highlight_5.mp4"></video><div class="video-overlay"></div></div>
-                    <div class="relative z-20 max-w-2xl">
-                        <div class="mono text-[10px] text-white/40 mb-6 tracking-[0.5em]">Command // 05</div>
-                        <h2 class="synco text-7xl font-bold mb-8">A DIGITAL TWIN<br>OF REALITY.</h2>
-                        <p class="text-silver/60 text-lg leading-relaxed">The central nervous system of global security. Transform fragmented data into an immersive 3D environment. This is absolute situational certainty.</p>
+                    <h2 class="synco text-5xl text-white font-bold leading-none mb-10 tracking-tighter uppercase">TOTAL ACCESS<br>CONTROL</h2>
+                    <p class="text-silver/50 text-sm md:text-base leading-relaxed font-light tracking-wide mb-16 max-w-md">
+                        Master every entry point. Remote command over doors, gates, and barriers globally. Execute automated lockdowns and access protocols from a single sovereign interface.
+                    </p>
+                    
+                    <div class="metric-card border-white/10 w-full !p-5">
+                        <div class="synco text-xl md:text-2xl text-white font-black tracking-widest uppercase">LOCKDOWN: <span class="text-white">READY</span></div>
                     </div>
+                    <div class="data-panel-accent" style="left: 0; right: auto;"></div>
                 </div>
             </section>
         </div>
 
-        <!-- THE LABORATORY (SOFTWARE ARCHITECTURE) -->
+        <!-- THE LABORATORY (SOFTWARE ARCHITECTURE) - NEST STYLE -->
         <div id="spec-trigger">
-            <section class="pinned-stage lab-phase" id="specs">
+            <section class="pinned-stage lab-phase h-screen" id="specs">
                 <div class="blueprint-grid"></div>
-                <div class="max-w-[1400px] w-full px-12 grid grid-cols-12 gap-20 items-center relative z-10" id="spec-ui">
-                    <div class="col-span-4 space-y-12">
+                <div class="max-w-[1400px] w-full px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10" id="spec-ui">
+                    <div class="lg:col-span-5 space-y-16">
                         <div><div class="mono text-[10px] tracking-[0.6em] mb-6 text-black/40">Architectural Core</div><h2 class="synco text-6xl font-black">UNIFIED<br>STACK.</h2></div>
                         <div class="space-y-8">
-                            <div class="border-b border-black/5 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Network Capacity</div><div class="synco text-3xl">1000+ CAMERAS UNIFIED</div></div>
-                            <div class="border-b border-black/5 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Alert Latency</div><div class="synco text-3xl">SUB-0.3 SECOND TRIAGE</div></div>
-                            <div class="border-b border-black/5 pb-6"><div class="mono text-[8px] mb-1 uppercase text-black/50">Availability</div><div class="synco text-3xl">24/7 GLOBAL COMMAND</div></div>
+                            <div class="border-b border-black/5 pb-6"><div class="mono text-[9px] mb-1 uppercase text-black/50">Network Capacity</div><div class="synco text-2xl">1000+ CAMERAS UNIFIED</div></div>
+                            <div class="border-b border-black/5 pb-6"><div class="mono text-[9px] mb-1 uppercase text-black/50">Alert Latency</div><div class="synco text-2xl">SUB-0.3 SECOND TRIAGE</div></div>
+                            <div class="border-b border-black/5 pb-6"><div class="mono text-[9px] mb-1 uppercase text-black/50">Availability</div><div class="synco text-2xl">24/7 GLOBAL COMMAND</div></div>
                         </div>
                     </div>
-                    <div class="col-span-8 relative flex items-center justify-center">
+                    <div class="lg:col-span-7 relative flex items-center justify-center">
                         <!-- IMAGE: teletraan-stack.png -->
-                        <img src="media/teletraan-stack.png" class="w-[110%] scale-110 relative z-10" id="stack-img" alt="OS Architecture">
+                        <img src="media/teletraan-stack.png" class="w-[90%] relative z-10" id="stack-img" alt="OS Architecture">
                     </div>
                 </div>
 
                 <!-- THE POP-OUT REVEAL (8K COMMAND UI) -->
                 <div class="absolute inset-0 z-[100] flex items-center justify-center opacity-0 scale-[0.8] pointer-events-none" id="pop-out-container">
-                    <img src="media/teletraan-ui-full.png" class="w-screen h-screen object-contain" id="pop-out-img">
+                    <img src="media/teletraan-ui-full.png" class="w-screen h-screen object-contain" id="pop-out-img" alt="TELETRAAN Command Interface">
                 </div>
             </section>
         </div>
 
 
-        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
-        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
-            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
-                <!-- Cap 01 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SINGLE_GLASS</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">UNIFIED<br>DASHBOARD</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Every sensor, every node, every alert synchronized into a terminal of absolute civilizational control.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Synced</span>
-                    </div>
-                </div>
-
-                <!-- Cap 02 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">NEURAL_TRIAGE</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">PREDICTIVE<br>FLOWS</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Real-time behavioral mapping identifying anomalies across large datasets before they manifest physically.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
-                    </div>
-                </div>
-
-                <!-- Cap 03 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SMART_SCAN</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">INSTANT<br>ARCHIVE</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Zero-latency retrieval of event highlights across years of logs, powered by Teletraan's neural backbone.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Indexed</span>
-                    </div>
-                </div>
-
-                <!-- Cap 04 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SECURE_LINK</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">SOVEREIGN<br>PROTOCOLS</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        AES-4096-Sovereign encryption for every data packet across the mesh, ensuring total digital sovereignty.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Shielded</span>
-                    </div>
-                </div>
-            </div>
+        <!-- CORE CAPABILITIES - TEXT EXPLAINER HORIZONTAL SCROLL -->
+        <section id="capabilities-grid" class="capabilities-horizontal-section">
             
-            <div class="mobile-scroll-hint">
-                <div class="hint-bar"></div>
-                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
+            <!-- Animated Grid Background -->
+            <div class="capabilities-bg-grid"></div>
+
+            <div class="capabilities-container">
+                
+                <!-- Header -->
+                <div class="capabilities-header">
+                    <!-- AVZDAX Logo (shows when nav inverted) -->
+                    <img src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo">
+                    <h2 class="capabilities-title synco">
+                        UNIFIED COMMAND<br>
+                        <span>ARCHITECTURE</span>
+                    </h2>
+                </div>
+
+                <!-- Horizontal Scroll Wrapper -->
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        <!-- Card: Multi-Site Command -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Distributed Operations</div>
+                                <h3 class="cap-card-title synco">MULTI-SITE<br>COMMAND</h3>
+                                <p class="cap-card-description">
+                                    Manage multiple locations from a single workstation. Teletraan's geo-distributed architecture enables security operators to monitor facilities across regions with low-latency response and no central point of failure.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Distributed</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Hardware Agnostic -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Universal Compatibility</div>
+                                <h3 class="cap-card-title synco">HARDWARE<br>AGNOSTIC</h3>
+                                <p class="cap-card-description">
+                                    Native integration with Hikvision, Dahua, Axis, Bosch, and other major camera manufacturers. Teletraan eliminates vendor lock-in by supporting ONVIF, RTSP, and proprietary protocols—protecting your existing infrastructure investment.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Compatible</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: AI Video Analytics -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Deep Learning Core</div>
+                                <h3 class="cap-card-title synco">AI VIDEO<br>ANALYTICS</h3>
+                                <p class="cap-card-description">
+                                    Convolutional neural networks continuously trained on security events. Detect loitering, perimeter breaches, crowd density anomalies, and PPE compliance—significantly reducing false positives compared to rule-based systems.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Learning</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Forensic Timeline -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Evidence Reconstruction</div>
+                                <h3 class="cap-card-title synco">FORENSIC<br>TIMELINE</h3>
+                                <p class="cap-card-description">
+                                    Reconstruct incidents with court-admissible evidence chains. Teletraan automatically correlates footage from multiple cameras, applies precise timestamps, and exports complete case files with cryptographic integrity verification.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Verified</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Role-Based Permissions -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Operator Hierarchy</div>
+                                <h3 class="cap-card-title synco">GRANULAR<br>PERMISSIONS</h3>
+                                <p class="cap-card-description">
+                                    Define operator access at camera, zone, and action levels. Complete audit trails track every view, export, and system modification. Integrates with Active Directory, LDAP, and SSO providers for enterprise identity management.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Governed</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Edge-to-Cloud -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Hybrid Deployment</div>
+                                <h3 class="cap-card-title synco">EDGE-TO-<br>CLOUD</h3>
+                                <p class="cap-card-description">
+                                    Deploy on-premise for data sovereignty, cloud-native for scalability, or hybrid for optimal performance. Teletraan adapts to your compliance requirements—GDPR, HIPAA, SOC 2—without compromising operational capability.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Adaptive</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="capabilities-cta">
+                    <a href="contact.html" class="cap-cta-btn">
+                        Request Technical Brief
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1294,37 +2086,192 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // HERO REVEAL
-        const hTl = gsap.timeline({ scrollTrigger: { trigger: "#hero", start: "top top", end: "+=150%", scrub: true, pin: true } });
+        // HERO REVEAL WITH SCROLL EFFECT
+        const hTl = gsap.timeline({ scrollTrigger: { trigger: "#hero", start: "top top", end: "+=100%", scrub: true, pin: true } });
         hTl.to("#h-title", { opacity: 1, y: 0, duration: 1 })
-           .to("#main-console", { opacity: 1, scale: 3, y: -300, filter: "blur(40px)", duration: 2 }, "-=0.5");
+           .to("#main-console", { opacity: 1, y: 0, scale: 1, duration: 1 }, "-=0.5")
+           .to("#main-console", { opacity: 0, scale: 1.2, y: -100, filter: "blur(20px)", duration: 1.5 }, "+=0.5")
+           .to("#h-title", { opacity: 0, y: -50, duration: 1 }, "-=1");
 
-        // 5-ACT STORY TRACK
-        const sTl = gsap.timeline({ scrollTrigger: { trigger: "#story-trigger", start: "top top", end: "+=800%", scrub: 1, pin: "#story-pin" } });
-        ["#act-1", "#act-2", "#act-3", "#act-4", "#act-5"].forEach((act, i) => {
-            sTl.to(act, { opacity: 1, visibility: 'visible', duration: 1 });
-            sTl.to(`${act} .video-bg`, { scale: 1.15, duration: 2 }, "-=1");
-            sTl.to(act, { opacity: 0, visibility: 'hidden', duration: 1, delay: 0.5 });
-        });
+        // PRIMUS-STYLE SCENE ANIMATIONS
+        ScrollTrigger.matchMedia({
+            // DESKTOP: PREMIUM CINEMATIC EXPERIENCE
+            "(min-width: 1025px)": function() {
+                // Nav hiding during showcase
+                ScrollTrigger.create({
+                    trigger: "#capabilities-track", start: "top 20%", endTrigger: "#spec-trigger", end: "top top",
+                    onEnter: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeave: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 }),
+                    onEnterBack: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeaveBack: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 })
+                });
 
-        // SPECS & POP-OUT REVEAL
-        const specTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#spec-trigger", start: "top top", end: "+=400%", pin: true, scrub: true,
-                onToggle: self => {
-                    document.getElementById('main-nav').classList.toggle('nav-inverted', self.isActive);
-                    const mobileNav = document.querySelector('.mobile-nav-bar');
-                    if (mobileNav) mobileNav.classList.toggle('nav-inverted', self.isActive);
-                },
-                onEnter: () => gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 }),
-                onLeaveBack: () => gsap.to("body", { backgroundColor: "#030303", duration: 0.5 })
+                // Scene 1: Central Scale-up
+                const s1 = document.querySelector('#scene-1');
+                if(s1) {
+                    const tl = gsap.timeline({ scrollTrigger: { trigger: s1, start: "top top", end: "+=100%", scrub: true, pin: true } });
+                    tl.to(s1.querySelector('.scene-1-video-wrapper'), { width: "95vw", height: "80vh", duration: 1.5, ease: "power2.inOut" })
+                      .to(s1.querySelector('.scene-1-text'), { opacity: 1, y: -20, duration: 0.5 }, "<")
+                      .to(s1.querySelector('.scene-1-subtext'), { opacity: 1, duration: 0.5 }, "-=0.5");
+                }
+
+                // Scenes 2-4: Lateral Slide Reveals
+                [2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const tl = gsap.timeline({ scrollTrigger: { trigger: sn, start: "top center", end: "center center", scrub: 1 } });
+                        tl.to(sn.querySelector(`.scene-${num}-text`), { x: "0%", duration: 1, ease: "power2.out" })
+                          .to(sn.querySelector(`.scene-${num}-video`), { x: "0%", opacity: 1, duration: 1, ease: "power2.out" }, "<");
+                    }
+                });
+            },
+
+            // MOBILE/TABLET: FLUID VERTICAL REVEALS
+            "(max-width: 1024px)": function() {
+                // Showreel sections: No pinning, natural reveal
+                [1, 2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const vwrap = sn.querySelector(`.scene-${num}-video`) || sn.querySelector('.scene-1-video-wrapper');
+                        const twrap = sn.querySelector(`.scene-${num}-text`) || sn.querySelector('.scene-1-subtext');
+                        const titleWrap = sn.querySelector('.scene-1-text');
+                        if(vwrap) gsap.fromTo(vwrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 60%" } });
+                        if(twrap) gsap.fromTo(twrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 40%" } });
+                        if(titleWrap) gsap.fromTo(titleWrap, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: sn, start: "top 70%" } });
+                    }
+                });
+
+                // Lab phase: Just background shift
+                const specs = document.getElementById('specs');
+                if(specs) {
+                    ScrollTrigger.create({
+                        trigger: specs, start: "top 20%",
+                        onEnter: () => { 
+                            document.getElementById('main-nav').classList.add('nav-inverted'); 
+                            const mobileNav = document.querySelector('.mobile-nav-bar');
+                            if (mobileNav) mobileNav.classList.add('nav-inverted');
+                        },
+                        onLeaveBack: () => { 
+                            document.getElementById('main-nav').classList.remove('nav-inverted'); 
+                            const mobileNav = document.querySelector('.mobile-nav-bar');
+                            if (mobileNav) mobileNav.classList.remove('nav-inverted');
+                        }
+                    });
+                }
             }
         });
 
-        specTl.from("#stack-img", { scale: 1.5, opacity: 0, filter: "blur(20px)", duration: 1.5 })
-              .to("#spec-ui", { opacity: 0, scale: 0.9, duration: 1, delay: 1 })
-              .to("#pop-out-container", { opacity: 1, scale: 1, pointerEvents: 'auto', duration: 1.5 })
-              .to("#pop-out-img", { scale: 1.1, duration: 2 });
+        // UNIFIED LABORATORY & NAV INVERSION (OBEX STYLE - PINNED SCROLL FREEZE)
+        gsap.to("#specs", {
+            scrollTrigger: {
+                trigger: "#spec-trigger", start: "top top", end: "+=150%", pin: true, scrub: true,
+                onEnter: () => {
+                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeave: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                },
+                onEnterBack: () => {
+                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeaveBack: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                }
+            }
+        });
+
+        // CAPABILITIES HORIZONTAL SCROLL (EXACT INDEX.HTML INDUSTRIES COPY)
+        (function() {
+            function initCapabilitiesHorizontalScroll() {
+                const section = document.querySelector('#capabilities-grid');
+                const track = document.querySelector('.capabilities-cards-track');
+                const progressBar = document.querySelector('.cap-progress-bar');
+                
+                if (!section || !track || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+                // Calculate scroll distance based on screen size
+                const cards = track.querySelectorAll('.cap-card');
+                const isMobile = window.innerWidth <= 768;
+                const gap = isMobile ? 16 : 24;
+                const padding = isMobile ? 40 : 80;
+                
+                // Get actual card width
+                const cardWidth = cards[0].offsetWidth;
+                const totalWidth = (cardWidth * cards.length) + (gap * (cards.length - 1)) + padding;
+                const viewportWidth = window.innerWidth;
+                const scrollDistance = totalWidth - viewportWidth;
+
+                // Kill any existing ScrollTrigger for this section
+                ScrollTrigger.getAll().forEach(st => {
+                    if (st.trigger === section) st.kill();
+                });
+
+                // Only create animation if we need to scroll
+                if (scrollDistance <= 0) return;
+
+                // Create the horizontal scroll animation
+                gsap.to(track, {
+                    x: -scrollDistance,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=" + (scrollDistance * 1.2),
+                        pin: true,
+                        scrub: 0.8,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            // Update progress bar
+                            if (progressBar) {
+                                progressBar.style.width = (self.progress * 100) + '%';
+                            }
+                        },
+                        onEnter: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeave: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        },
+                        onEnterBack: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeaveBack: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        }
+                    }
+                });
+            }
+
+            // Initialize on load
+            if (document.readyState === 'complete') {
+                setTimeout(initCapabilitiesHorizontalScroll, 200);
+            } else {
+                window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+            }
+
+            // Reinitialize on resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                    initCapabilitiesHorizontalScroll();
+                }, 250);
+            });
+        })();
 
         // MOUSE PARALLAX
         window.addEventListener("mousemove", (e) => {
@@ -1516,6 +2463,112 @@
             });
         }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
         document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
+
+        // ============================================
+        // UNIFIED MOBILE MENU SYSTEM (OBEX SYNC)
+        // ============================================
+        (function() {
+            let initialized = false;
+            
+            function initMobileMenu() {
+                if (initialized) return;
+                initialized = true;
+                
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (!btn || !overlay) return;
+                
+                // Toggle menu open/close
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    
+                    if (isOpen) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close when clicking overlay background
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        closeMobileMenu();
+                    }
+                });
+                
+                // Close on link click
+                overlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+                
+                // NAV DROPDOWN TOGGLES (only bind once) - CSS ANIMATED
+                overlay.querySelectorAll('.nav-toggle').forEach(toggleBtn => {
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const dropdown = this.nextElementSibling;
+                        const chevron = this.querySelector('.nav-chevron');
+                        const isCurrentlyOpen = dropdown && dropdown.classList.contains('open');
+                        
+                        // Close all dropdowns first (accordion behavior)
+                        overlay.querySelectorAll('.nav-dropdown').forEach(dd => {
+                            dd.classList.remove('open');
+                        });
+                        overlay.querySelectorAll('.nav-toggle').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        overlay.querySelectorAll('.nav-chevron').forEach(ch => {
+                            ch.style.transform = 'rotate(0deg)';
+                        });
+                        
+                        // Toggle this dropdown if it wasn't already open
+                        if (!isCurrentlyOpen && dropdown && dropdown.classList.contains('nav-dropdown')) {
+                            dropdown.classList.add('open');
+                            this.classList.add('active');
+                            if (chevron) chevron.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+            
+            function closeMobileMenu() {
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (btn) {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+                document.body.style.overflow = '';
+            }
+            
+            // Expose globally
+            window.closeMobileMenu = closeMobileMenu;
+            
+            // Initialize on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+
+        // Close mobile menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.style.display !== 'none') {
+                    closeMobileMenu();
+                }
+            }
+        });
     </script>
 </body>
 </html>

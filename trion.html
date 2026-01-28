@@ -61,6 +61,246 @@
         @keyframes border-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .footer-link-hover:hover { color: white; transform: translateX(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
+        /* CAPABILITIES HORIZONTAL SCROLL - TELETRAAN STYLE */
+        .capabilities-horizontal-section {
+            background: linear-gradient(180deg, #050505 0%, #030303 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            width: 100%;
+            padding: 60px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .capabilities-scroll-wrapper {
+            overflow: visible;
+            padding: 0 60px;
+        }
+
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            will-change: transform;
+        }
+
+        /* Text Explainer Cards */
+        .cap-card {
+            flex: 0 0 420px;
+            max-width: 420px;
+            min-height: 520px;
+            background: linear-gradient(165deg, rgba(20,20,20,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 4px;
+            padding: 50px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .cap-card:hover {
+            background: linear-gradient(165deg, rgba(30,30,30,0.95) 0%, rgba(15,15,15,0.98) 100%);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-8px);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 24px 0;
+        }
+
+        .cap-card-description {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+            margin: 0;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Progress Bar */
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        /* CTA Button */
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE DESKTOP */
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 480px;
+                max-width: 480px;
+                min-height: 560px;
+                padding: 60px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .capabilities-scroll-wrapper {
+                padding: 0 100px;
+            }
+        }
+
+
         .social-glass-btn {
             width: 48px;
             height: 48px;
@@ -158,6 +398,55 @@
         .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
             stroke: #000 !important;
         }
+
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
 
         /* NAV ITEMS - SILICON VALLEY STYLE */
         .nav-item {
@@ -926,45 +1215,81 @@
             footer .footer-watermark { font-size: 35vw !important; opacity: 0.03 !important; }
             footer .mt-40 { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-top: 60px !important; gap: 24px !important; }
             footer .mt-40 .flex.gap-12 { flex-direction: column !important; gap: 8px !important; }
-        }
 
-        /* CAPABILITIES GRID STYLES - SYNCED WITH PRIMUS */
-        .cap-card { 
-            flex: 1;
-            background: #080808;
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 2px;
-            min-height: 380px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
-        .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
-        .cap-card.active-node .cap-card-border { width: 100%; }
-        .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
-
-        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
-        @media (max-width: 1024px) {
-            .capabilities-carousel { 
-                display: flex !important; 
-                overflow-x: auto !important; 
-                scroll-snap-type: x mandatory !important;
-                padding: 0 5vw !important;
-                gap: 15px !important;
+            /* 05. CORE CAPABILITIES - MOBILE HORIZONTAL SCROLL (PIXEL-PERFECT STANDARD) */
+            .capabilities-horizontal-section {
+                min-height: 100vh !important;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px !important;
+                min-height: 100vh !important;
+            }
+            .capabilities-header {
+                padding: 0 20px !important;
+                margin-bottom: 40px !important;
+            }
+            .capabilities-logo {
+                height: 20px !important;
+                margin-bottom: 24px !important;
+            }
+            .capabilities-title {
+                font-size: 2.2rem !important;
+                letter-spacing: -0.03em !important;
+            }
+            .capabilities-scroll-wrapper {
+                padding: 0 16px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+            }
+            .capabilities-cards-track {
+                gap: 16px !important;
             }
             .cap-card { 
-                flex: 0 0 85% !important; 
-                min-width: 85% !important; 
-                scroll-snap-align: center !important;
-                opacity: 0.3;
-                transform: scale(0.95);
+                flex: 0 0 calc(100vw - 48px) !important;
+                min-width: calc(100vw - 48px) !important;
+                max-width: calc(100vw - 48px) !important;
+                height: 520px !important;
+                padding: 36px !important;
+                border-radius: 12px !important;
             }
-            .mobile-scroll-hint { display: flex; }
-            .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
-            .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
-            @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+            .cap-card-tag {
+                font-size: 9px !important;
+                letter-spacing: 0.4em !important;
+                margin-bottom: 16px !important;
+            }
+            .cap-card-title {
+                font-size: 2rem !important;
+                margin-bottom: 24px !important;
+                line-height: 0.9 !important;
+            }
+            .cap-card-description {
+                font-size: 14px !important;
+                line-height: 1.7 !important;
+                color: rgba(255,255,255,0.5) !important;
+            }
+            .cap-card-footer {
+                padding-top: 30px !important;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px) !important;
+                margin: 40px 16px 0 !important;
+                height: 3px !important;
+            }
+            .capabilities-cta {
+                padding: 0 16px !important;
+                margin-top: 40px !important;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px) !important;
+                max-width: 360px !important;
+                justify-content: center !important;
+                padding: 18px 32px !important;
+                font-size: 11px !important;
+                letter-spacing: 0.2em !important;
+            }
         }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
 
         /* CINEMATIC ELEMENTS */
         .pinned-stage {
@@ -1744,69 +2069,134 @@
         </div>
 
 
-        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
-        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
-            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
-                <!-- Cap 01 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">REAL-TIME // 8K</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">SURGICAL<br>CLARITY</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Beyond human sight. Forensic-grade visual extraction with zero-latency delivery of situational data.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Locked</span>
+        <!-- CORE CAPABILITIES - HORIZONTAL SCROLL -->
+        <section class="capabilities-horizontal-section" id="capabilities-grid">
+            <!-- Animated Grid Background -->
+            <div class="capabilities-bg-grid"></div>
+
+            <div class="capabilities-container">
+                
+                <!-- Header -->
+                <div class="capabilities-header">
+                    <!-- AVZDAX Logo (shows when nav inverted) -->
+                    <img src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo">
+                    <h2 class="capabilities-title synco">
+                        MULTI-SPECTRUM<br>
+                        <span>EDGE OPTICS</span>
+                    </h2>
+                </div>
+
+                <!-- Horizontal Scroll Wrapper -->
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        <!-- Card: Tri-Lens Architecture -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Tri-Lens Architecture</div>
+                                <h3 class="cap-card-title synco">PANORAMIC<br>DOMINION</h3>
+                                <p class="cap-card-description">
+                                    Three synchronized sensors operating in parallel: two fixed 3MP ultra-wide lenses deliver 180° continuous coverage while a dedicated 5MP PTZ lens provides 355° pan and 90° tilt for precision tracking. One TRION node eliminates the blind spots of entire conventional camera arrays.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Deployed</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Edge AI Processing -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">On-Device Intelligence</div>
+                                <h3 class="cap-card-title synco">EDGE<br>COGNITION</h3>
+                                <p class="cap-card-description">
+                                    All threat analysis executes locally on TRION's embedded processor—no cloud dependency, no latency. Human detection, vehicle classification, intrusion alerts, and line-crossing events are processed at the edge, enabling autonomous decision-making in microseconds rather than minutes.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Multi-Spectrum Vision -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">LWIR Integrated</div>
+                                <h3 class="cap-card-title synco">THERMAL<br>FUSION</h3>
+                                <p class="cap-card-description">
+                                    Long-wave infrared imaging integrated with visible-light capture creates unified situational awareness across all conditions. Color night vision extends to 30 meters, while IR LEDs and white spotlights activate contextually—maintaining forensic-grade clarity through smoke, fog, and absolute darkness.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Synced</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Smart Tracking -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Autonomous Pursuit</div>
+                                <h3 class="cap-card-title synco">INFINITE<br>TRACKING</h3>
+                                <p class="cap-card-description">
+                                    Limitless 360° smart tracking with tap-to-track functionality and multi-lens coordination. While fixed lenses maintain wide-area awareness, the PTZ lens autonomously locks onto subjects of interest, correlating movement patterns across the entire field without operator intervention.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Locked</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Environmental Hardening -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">IP66 Certified</div>
+                                <h3 class="cap-card-title synco">TERRAIN<br>PROOF</h3>
+                                <p class="cap-card-description">
+                                    Engineered for operational persistence across extreme environments. IP66 weather rating ensures complete dust protection and resistance to powerful water jets. Operating range spans -30°C to +50°C—from Lagos high-noon thermal peaks to arctic night surveillance without performance degradation.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Sealed</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Connectivity & Storage -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">WiFi 6 Enabled</div>
+                                <h3 class="cap-card-title synco">SOVEREIGN<br>STORAGE</h3>
+                                <p class="cap-card-description">
+                                    Dual SD card slots support up to 1TB of local storage—weeks of continuous recording with H.265 compression, independent of network connectivity. WiFi 6 (802.11ax) delivers high-bandwidth streaming with WPA2-PSK encryption, while cloud integration enables remote access without compromising on-premise data sovereignty.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Connected</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Cap 02 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">LWIR_INTEGRATED</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">THERMAL<br>OVERLAY</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Multi-spectrum fusion. Cutting through absolute darkness and atmospheric interference with clinical precision.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
-                    </div>
+                <!-- Progress Indicator -->
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
                 </div>
 
-                <!-- Cap 03 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">PANORAMIC</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">180° TOTAL<br>HORIZON</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Elimination of blind spots. Single-node situational hegemony through custom-ground ultra-wide optics.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Synced</span>
-                    </div>
+                <!-- CTA -->
+                <div class="capabilities-cta">
+                    <a href="contact.html" class="cap-cta-btn">
+                        Request Technical Brief
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
-
-                <!-- Cap 04 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">TITANIUM</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">TERRAIN<br>HARDENED</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Civilizational persistence. IP69K-rated integrity through extreme thermal peaks and continental storms.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Sealed</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mobile-scroll-hint">
-                <div class="hint-bar"></div>
-                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
             </div>
         </section>
 
@@ -2196,6 +2586,86 @@
                 }
             }
         });
+
+        // CAPABILITIES HORIZONTAL SCROLL
+        (function() {
+            function initCapabilitiesHorizontalScroll() {
+                const section = document.querySelector('.capabilities-horizontal-section');
+                const track = document.querySelector('.capabilities-cards-track');
+                const progressBar = document.querySelector('.cap-progress-bar');
+                
+                if (!section || !track) return;
+                
+                // Kill existing triggers for this section
+                ScrollTrigger.getAll().forEach(t => {
+                    if (t.trigger === section) t.kill();
+                });
+                
+                const cards = track.querySelectorAll('.cap-card');
+                if (cards.length === 0) return;
+                
+                // Calculate scroll distance
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 32;
+                const totalCardsWidth = (cardWidth * cards.length) + (gap * (cards.length - 1));
+                const viewportWidth = window.innerWidth;
+                const scrollDistance = totalCardsWidth - viewportWidth + 120;
+                
+                if (scrollDistance <= 0) return;
+                
+                gsap.to(track, {
+                    x: -scrollDistance,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=" + (scrollDistance * 1.2),
+                        pin: true,
+                        scrub: 0.8,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (progressBar) {
+                                progressBar.style.width = (self.progress * 100) + '%';
+                            }
+                        },
+                        onEnter: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeave: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        },
+                        onEnterBack: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeaveBack: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        }
+                    }
+                });
+            }
+
+            // Initialize on load
+            if (document.readyState === 'complete') {
+                setTimeout(initCapabilitiesHorizontalScroll, 200);
+            } else {
+                window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+            }
+
+            // Reinitialize on resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                    initCapabilitiesHorizontalScroll();
+                }, 250);
+            });
+        })();
     </script>
 </body>
 

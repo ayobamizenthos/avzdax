@@ -138,6 +138,54 @@
             stroke: #000 !important;
         }
 
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
         /* NAV ITEMS - SILICON VALLEY STYLE */
         .nav-item {
             position: relative;
@@ -450,6 +498,346 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
 
+        /* CAPABILITIES HORIZONTAL SCROLL - TEXT EXPLAINER CARDS (OBEX EXACT) */
+        .capabilities-horizontal-section {
+            background: #030303;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* HORIZONTAL SCROLL WRAPPER */
+        .capabilities-scroll-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            padding: 0 60px;
+            will-change: transform;
+        }
+
+        /* TEXT EXPLAINER CARD STYLES (OBEX EXACT) */
+        .cap-card {
+            flex: 0 0 480px;
+            min-width: 480px;
+            height: 560px;
+            background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            position: relative;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cap-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12,12,12,0.98) 100%);
+            transform: translateY(-12px);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-number {
+            position: absolute;
+            top: 40px;
+            right: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: rgba(255,255,255,0.15);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 30px 0;
+        }
+
+        .cap-card-description {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            max-width: 380px;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Progress Bar */
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        /* CTA Button */
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE DESKTOP */
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 520px;
+                min-width: 520px;
+                height: 600px;
+                padding: 55px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .cap-card-description {
+                font-size: 16px;
+            }
+        }
+
+        /* DESKTOP */
+        @media (min-width: 769px) and (max-width: 1399px) {
+            .capabilities-container {
+                padding: 0;
+            }
+            .capabilities-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* MOBILE - PIXEL-PERFECT TELETRAAN MATCH */
+        @media (max-width: 768px) {
+            .capabilities-horizontal-section {
+                min-height: 100vh;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px;
+                min-height: 100vh;
+            }
+            .capabilities-header {
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+            .capabilities-logo {
+                height: 20px;
+                margin-bottom: 24px;
+            }
+            .capabilities-title {
+                font-size: 2.2rem;
+                letter-spacing: -0.03em;
+            }
+            .capabilities-cards-track {
+                gap: 16px;
+                padding: 0 16px;
+            }
+            .cap-card {
+                flex: 0 0 calc(100vw - 48px);
+                min-width: calc(100vw - 48px);
+                max-width: calc(100vw - 48px);
+                height: 520px;
+                padding: 36px;
+                border-radius: 12px;
+            }
+            .cap-card-tag {
+                font-size: 9px;
+                letter-spacing: 0.4em;
+                margin-bottom: 16px;
+            }
+            .cap-card-title {
+                font-size: 2rem;
+                margin-bottom: 24px;
+                line-height: 0.9;
+            }
+            .cap-card-description {
+                font-size: 14px;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.5);
+            }
+            .cap-card-footer {
+                padding-top: 30px;
+            }
+            .cap-card-number {
+                top: 32px;
+                right: 32px;
+                font-size: 11px;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px);
+                margin: 40px 16px 0;
+                height: 3px;
+            }
+            .capabilities-cta {
+                padding: 0 16px;
+                margin-top: 40px;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px);
+                max-width: 360px;
+                justify-content: center;
+                padding: 18px 32px;
+                font-size: 11px;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+
         /* FOOTER - MOBILE PIXEL PERFECT (2-COLUMN GRID) */
         @media (max-width: 1024px) {
             footer {
@@ -521,7 +909,8 @@
                 opacity: 0.3 !important;
                 letter-spacing: 0.3em !important;
             }
-            .social-glass-btn svg { width: 28px !important; height: 28px !important; }
+
+            #capabilities-grid::after { display: none !important; }
         }
 
         /* AWARD-WINNING NEWS GRID LAYOUT */
@@ -2049,71 +2438,134 @@
         </section>
 
     </div>
+    <!-- CORE CAPABILITIES - HORIZONTAL SCROLL -->
+        <section class="capabilities-horizontal-section" id="capabilities-grid">
+            <!-- Animated Grid Background -->
+            <div class="capabilities-bg-grid"></div>
 
+            <div class="capabilities-container">
+                
+                <!-- Header -->
+                <div class="capabilities-header">
+                    <!-- AVZDAX Logo (shows when nav inverted) -->
+                    <img src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo">
+                    <h2 class="capabilities-title synco">
+                        CIVILIZATIONAL<br>
+                        <span>GUARDIAN</span>
+                    </h2>
+                </div>
 
-        <!-- CORE CAPABILITIES (KINETIC MICRO-GRID) -->
-        <section class="py-16 bg-black border-t border-white/5 relative overflow-hidden" id="capabilities-grid">
-            <div class="max-w-[1700px] mx-auto flex capabilities-carousel scrollbar-hide">
-                <!-- Cap 01 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">LONG_RANGE</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">CITY-SCALE<br>RADIUS</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Surgical awareness exceeding 1,500 meters from a single high-altitude pillar, defining the boundaries of order.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Locked</span>
+                <!-- Horizontal Scroll Wrapper -->
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        <!-- Card: City-Scale Radius -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Long Range Awareness</div>
+                                <h3 class="cap-card-title synco">CITY-SCALE<br>RADIUS</h3>
+                                <p class="cap-card-description">
+                                    A single ARCLIGHT pillar achieves surgical awareness exceeding 1,500 meters. From urban perimeters to remote borders, these towers define the boundaries of order where human observation reaches its physical limits.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Locked</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Off-Grid Persistence -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Energy Sovereignty</div>
+                                <h3 class="cap-card-title synco">OFF-GRID<br>PERSISTENCE</h3>
+                                <p class="cap-card-description">
+                                    The integrated solar energy stack ensures 100% operational hegemony regardless of infrastructure. ARCLIGHT operates in resource-depleted sectors, contested territories, and remote installations without external power dependencies.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Multi-Spectrum Vision -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Dual Lens Stack</div>
+                                <h3 class="cap-card-title synco">MULTI-SPECTRUM<br>VISION</h3>
+                                <p class="cap-card-description">
+                                    8K optical resolution combined with Long-Wave Infrared (LWIR) thermal sensors delivers target identification through smoke, dust, fog, and total darkness. Nothing escapes the gaze of ARCLIGHT.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Scanning</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Edge Neural Processing -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">180 TOPS</div>
+                                <h3 class="cap-card-title synco">NEURAL<br>EDGE TRIAGE</h3>
+                                <p class="cap-card-description">
+                                    Decentralized NPU compute power enables real-time behavioral triage on a national scale. Each tower node performs peer-to-peer intelligence sharing, creating an autonomous fabric that thinks faster than human reaction.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Synced</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Teletraan Integration -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">Command Nexus</div>
+                                <h3 class="cap-card-title synco">TELETRAAN<br>INTEGRATION</h3>
+                                <p class="cap-card-description">
+                                    ARCLIGHT towers connect directly to the TELETRAAN command platform for national-level situational awareness. Unified dashboards, live threat tracking, and centralized protocol enforcement across unlimited geographic nodes.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Linked</span>
+                            </div>
+                        </div>
+
+                        <!-- Card: Environmental Sovereignty -->
+                        <div class="cap-card">
+                            <div>
+                                <div class="cap-card-tag">All-Terrain</div>
+                                <h3 class="cap-card-title synco">ENVIRONMENTAL<br>SOVEREIGNTY</h3>
+                                <p class="cap-card-description">
+                                    Obsidian pillar construction withstands extreme weather, sandstorms, and coastal conditions. IP67-rated sensor housings and military-grade hardening ensure continuous operation in any environment.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                                <span class="cap-card-status">Guarded</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Cap 02 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">SOLAR_FUSION</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">OFF-GRID<br>PERSISTENCE</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Integrated energy stack ensuring 100% operational hegemony in resource-depleted sectors, regardless of infrastructure.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Active</span>
-                    </div>
+                <!-- Progress Indicator -->
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
                 </div>
 
-                <!-- Cap 03 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">180_TOPS</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">TRIAGE<br>NEURAL EDGE</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Instant behavioral triage on a national scale across peer-to-peer tower networks with massive NPU power.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Synced</span>
-                    </div>
+                <!-- CTA -->
+                <div class="capabilities-cta">
+                    <a href="contact.html" class="cap-cta-btn">
+                        Request Technical Brief
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
                 </div>
-
-                <!-- Cap 04 -->
-                <div class="cap-card group">
-                    <div class="cap-card-border"></div>
-                    <div class="mono text-[8px] text-white/20 mb-6 tracking-[0.4em]">CIVILIZATIONAL</div>
-                    <h3 class="synco text-2xl text-white mb-4 tracking-tighter">TEMPORAL<br>LIGHTHOUSE</h3>
-                    <p class="text-silver/40 text-[11px] leading-relaxed mb-8 group-hover:text-white transition-colors">
-                        Architecting the digital boundaries of order where human observation reaches its physical limit.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <span class="w-6 h-[1px] bg-white/20 group-hover:w-10 group-hover:bg-white transition-all"></span>
-                        <span class="mono text-[8px] text-white/30 group-hover:text-white tracking-widest uppercase">Guarded</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mobile-scroll-hint">
-                <div class="hint-bar"></div>
-                <span class="mono text-[8px] text-white/20 tracking-[0.3em] uppercase">Lateral Navigation Active</span>
             </div>
         </section>
 
@@ -2360,6 +2812,92 @@
                 gsap.to("#tower, #lab-core", { rotationY: x, rotationX: -y, x: x * 2, y: y * 2, duration: 3, ease: "power2.out" });
             });
         }
+
+        // CAPABILITIES HORIZONTAL SCROLL (PIXEL-PERFECT OBEX MATCH)
+        (function() {
+            function initCapabilitiesHorizontalScroll() {
+                const section = document.querySelector('#capabilities-grid');
+                const track = document.querySelector('.capabilities-cards-track');
+                const progressBar = document.querySelector('.cap-progress-bar');
+                
+                if (!section || !track || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+                // Calculate scroll distance based on screen size
+                const cards = track.querySelectorAll('.cap-card');
+                const isMobile = window.innerWidth <= 768;
+                const gap = isMobile ? 16 : 32;
+                const padding = isMobile ? 32 : 120;
+                
+                // Get actual card width
+                const cardWidth = cards[0].offsetWidth;
+                const totalWidth = (cardWidth * cards.length) + (gap * (cards.length - 1)) + padding;
+                const viewportWidth = window.innerWidth;
+                const scrollDistance = totalWidth - viewportWidth;
+
+                // Kill any existing ScrollTrigger for this section
+                ScrollTrigger.getAll().forEach(st => {
+                    if (st.trigger === section) st.kill();
+                });
+
+                // Only create animation if we need to scroll
+                if (scrollDistance <= 0) return;
+
+                // Create the horizontal scroll animation
+                gsap.to(track, {
+                    x: -scrollDistance,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=" + (scrollDistance * 1.2),
+                        pin: true,
+                        scrub: 0.8,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            // Update progress bar
+                            if (progressBar) {
+                                progressBar.style.width = (self.progress * 100) + '%';
+                            }
+                        },
+                        onEnter: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeave: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        },
+                        onEnterBack: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeaveBack: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        }
+                    }
+                });
+            }
+
+            // Initialize on load
+            if (document.readyState === 'complete') {
+                setTimeout(initCapabilitiesHorizontalScroll, 200);
+            } else {
+                window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+            }
+
+            // Reinitialize on resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                    initCapabilitiesHorizontalScroll();
+                }, 250);
+            });
+        })();
+
         // KINETIC CAROUSEL OBSERVER
         const capObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
