@@ -114,6 +114,55 @@
         }
         .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
 
+        /* NAV INVERTED - FOR WHITE SECTIONS (Tactical Layer) - LOGO INVERTS TO BLACK */
+        nav.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .brand-logo {
+            filter: invert(1) brightness(0) !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-inverted .schedule-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        nav.nav-inverted .schedule-btn:hover {
+            background: #333 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav inverted */
+        .mobile-nav-bar.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+            filter: invert(1) brightness(0);
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+            stroke: #000 !important;
+        }
+
         /* NAV DARK MINIMAL - FOR DARK SECTIONS (Capabilities) - LOGO STAYS WHITE */
         nav.nav-dark-minimal {
             background: transparent !important;
@@ -2079,6 +2128,40 @@
                 ScrollTrigger.refresh();
                 initCapabilitiesHorizontalScroll();
             }, 250);
+        });
+    })();
+
+    // TACTICAL LAYER ALPHA (PHASE-1) - PIN & NAV INVERSION
+    (function() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        
+        const phase1Section = document.getElementById('phase-1');
+        if (!phase1Section) return;
+        
+        // Create ScrollTrigger for phase-1 section
+        ScrollTrigger.create({
+            trigger: phase1Section,
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.5,
+            onEnter: () => {
+                document.getElementById('main-nav')?.classList.add('nav-inverted');
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+            },
+            onLeave: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+            },
+            onEnterBack: () => {
+                document.getElementById('main-nav')?.classList.add('nav-inverted');
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+            },
+            onLeaveBack: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+            }
         });
     })();
 
