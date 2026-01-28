@@ -2851,15 +2851,18 @@
     })();
     </script>
 
-    <!-- Nav Inversion for PeaceTech Section -->
+    <!-- Nav Inversion + Scroll Pin for PeaceTech Section -->
     <script>
     (function() {
         const neuralSection = document.getElementById('neural-layer');
         if (neuralSection) {
+            // Pin the section and invert nav
             ScrollTrigger.create({
                 trigger: neuralSection,
-                start: "top 80px",
-                end: "bottom 80px",
+                start: "top top",
+                end: "+=100%",
+                pin: true,
+                pinSpacing: true,
                 onEnter: () => {
                     document.getElementById('main-nav')?.classList.add('nav-inverted');
                     document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
