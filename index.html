@@ -69,8 +69,13 @@
             color: #000 !important;
         }
 
-        /* Hide nav links in inverted mode, show logo and CTA */
+        /* Hide nav links AND search button in inverted mode, show logo and CTA */
         nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .tactical-search-btn {
             opacity: 0 !important;
             pointer-events: none !important;
         }
@@ -108,6 +113,59 @@
 
         .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
             stroke: #000 !important;
+        }
+
+        /* NAV DARK MINIMAL - FOR DARK SECTIONS (Product Matrix) - LOGO STAYS WHITE */
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .tactical-search-btn {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Mobile nav dark minimal */
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
         }
         
         /* MEGA MENU SYSTEM */
@@ -168,6 +226,12 @@
             .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
             .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
             .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+            /* HIDE WHITE SECTION ON MOBILE */
+            #neural-layer {
+                display: none !important;
+                visibility: hidden !important;
+            }
         }
         /* =============================================
            PREMIUM HUD TACTICAL SEARCH SYSTEM
@@ -2153,16 +2217,16 @@
             }
         </script>
         <p class="text-white/80 text-xs font-light leading-relaxed uppercase tracking-wider mb-6">AVZDAX <span class="font-bold text-white">PEACETECH</span> is the global standard in predictive surveillance. We build the neural infrastructure that secures civilizations.</p>
-            <div class="flex gap-4">
-                <button onclick="document.getElementById('primus').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-white/10 border border-white/20 text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Explore</button>
-                <a href="whitepaper.html" class="inline-block px-6 py-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/60 hover:text-white transition-all underline decoration-white/30 underline-offset-4">Read Thesis</a>
+            <div class="flex gap-6 items-center">
+                <button onclick="document.getElementById('primus').scrollIntoView({behavior: 'smooth'})" class="explore-btn px-8 py-4 bg-transparent border-2 border-white text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-300">Explore</button>
+                <a href="whitepaper.html" class="text-white text-[10px] font-black uppercase tracking-[0.2em] hover:text-white/60 transition-all duration-300">Read Thesis →</a>
             </div>
         </div>
     </section>
 
 
     <!-- THE PEACETECH MANIFESTO -->
-    <section id="neural-layer" class="bg-white relative overflow-hidden">
+    <section id="neural-layer" class="hidden lg:block bg-white relative overflow-hidden">
         
         <!-- Giant Background Text -->
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
@@ -2171,62 +2235,20 @@
         
         <div class="relative z-10">
             
-            <!-- ZONE 1: The Problem -->
-            <div class="min-h-screen flex items-center px-8 md:px-16 lg:px-24 py-20">
-                <div class="max-w-[1400px] mx-auto w-full">
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                        
-                        <!-- Left: The Problem Statement -->
-                        <div class="lg:col-span-7">
-                            <span class="inline-block px-6 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-[0.5em] mb-10" style="font-family: 'JetBrains Mono', monospace;">THE SECURITY PARADOX</span>
-                            
-                            <h2 class="text-[clamp(2rem,5vw,4.5rem)] font-black text-black leading-[1] tracking-[-0.03em] uppercase mb-8" style="font-family: 'Inter', sans-serif;">
-                                THE INDUSTRY BUILT TO PROTECT HAS BECOME PART OF THE PROBLEM.
-                            </h2>
-                            
-                            <p class="text-lg md:text-xl text-black/60 leading-relaxed max-w-[650px] mb-8" style="font-family: 'Inter', sans-serif;">
-                                Fragmented systems. Reactive protocols. Constant false alarms. The traditional security paradigm fails because it was designed for yesterday's threats—leaving organizations vulnerable, operators overwhelmed, and responses perpetually delayed.
-                            </p>
-                            
-                            <p class="text-lg md:text-xl text-black/60 leading-relaxed max-w-[650px]" style="font-family: 'Inter', sans-serif;">
-                                Meanwhile, the gap between threat sophistication and defensive capability widens daily. Something fundamental had to change.
-                            </p>
-                        </div>
-                        
-                        <!-- Right: The Reality -->
-                        <div class="lg:col-span-5 flex flex-col justify-center">
-                            <div class="space-y-10 lg:pl-12 lg:border-l border-black/10">
-                                <div>
-                                    <div class="text-5xl md:text-6xl font-black text-black tracking-tight" style="font-family: 'Inter', sans-serif;">94%</div>
-                                    <div class="text-sm text-black/40 uppercase tracking-[0.2em] mt-2" style="font-family: 'JetBrains Mono', monospace;">OF ALERTS ARE FALSE POSITIVES</div>
-                                </div>
-                                <div>
-                                    <div class="text-5xl md:text-6xl font-black text-black tracking-tight" style="font-family: 'Inter', sans-serif;">7min</div>
-                                    <div class="text-sm text-black/40 uppercase tracking-[0.2em] mt-2" style="font-family: 'JetBrains Mono', monospace;">AVERAGE RESPONSE DELAY</div>
-                                </div>
-                                <div>
-                                    <div class="text-5xl md:text-6xl font-black text-black tracking-tight" style="font-family: 'Inter', sans-serif;">12+</div>
-                                    <div class="text-sm text-black/40 uppercase tracking-[0.2em] mt-2" style="font-family: 'JetBrains Mono', monospace;">DISCONNECTED SYSTEMS</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <!-- ZONE 2: The Mission -->
-            <div class="border-t border-black/10 py-24 md:py-40 px-8 md:px-16 lg:px-24">
+            <!-- PEACETECH PIONEER - PINNED SCROLL SECTION -->
+            <div id="peacetech-pinned" class="min-h-screen flex items-center px-8 md:px-16 lg:px-24 py-20">
                 <div class="max-w-[1400px] mx-auto">
                     
                     <!-- Section Header -->
-                    <div class="mb-16">
-                        <span class="inline-block px-6 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-[0.5em] mb-8" style="font-family: 'JetBrains Mono', monospace;">PEACETECH PIONEER</span>
-                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-black leading-[1] tracking-tight uppercase" style="font-family: 'Inter', sans-serif;">
+                    <div class="mb-20">
+                        <!-- Premium Typography Tag -->
+                        <div class="flex items-center gap-4 mb-10">
+                            <span class="w-12 h-[2px] bg-black/30"></span>
+                            <span class="text-[11px] font-black uppercase tracking-[0.4em] text-black/60" style="font-family: 'Inter', sans-serif;">PEACETECH PIONEER</span>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-black leading-[0.95] tracking-tight uppercase" style="font-family: 'Inter', sans-serif;">
                             WE DON'T BUILD WEAPONS.<br>
-                            <span class="text-black/20">WE BUILD PROTECTION.</span>
+                            <span class="text-black/15">WE BUILD PROTECTION.</span>
                         </h3>
                     </div>
                     
@@ -2245,8 +2267,14 @@
                             </p>
                             
                             <!-- Product Links -->
-                            <div class="flex flex-wrap gap-3">
-                                <a href="primus.html" class="px-6 py-3 bg-black text-white text-sm font-bold uppercase tracking-wider hover:bg-black/80 transition-all duration-300" style="font-family: 'Inter', sans-serif;">EXPLORE PRODUCTS</a>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button onclick="document.getElementById('main-content').scrollIntoView({behavior: 'smooth'})" class="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-[11px] font-black uppercase tracking-[0.2em] hover:bg-black/90 transition-all duration-500 relative overflow-hidden" style="font-family: 'Inter', sans-serif;">
+                                    <span class="relative z-10">Explore Products</span>
+                                    <svg class="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                    <span class="absolute inset-0 bg-gradient-to-r from-black via-gray-800 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                                </button>
                             </div>
                         </div>
                         
@@ -2268,18 +2296,6 @@
                         
                     </div>
                     
-                </div>
-            </div>
-            
-            <!-- ZONE 3: Closing -->
-            <div class="border-t border-black/10 py-24 md:py-32 px-8 md:px-16 lg:px-24">
-                <div class="max-w-[1200px] mx-auto">
-                    <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-black leading-[1.1] tracking-tight uppercase" style="font-family: 'Inter', sans-serif;">
-                        AI SEES EVERYTHING.
-                    </h3>
-                    <h3 class="text-4xl md:text-5xl lg:text-6xl font-black text-black/20 leading-[1.1] tracking-tight uppercase" style="font-family: 'Inter', sans-serif;">
-                        HUMANS DECIDE EVERYTHING.
-                    </h3>
                 </div>
             </div>
             
@@ -3361,6 +3377,68 @@
         }
         // Restart with optimized draw
         requestAnimationFrame(optimizedDraw);
+
+        // PEACETECH PIONEER - HEADER INVERSION ON WHITE SECTION
+        gsap.registerPlugin(ScrollTrigger);
+
+        (function initPeacetechHeaderInversion() {
+            const peacetechSection = document.getElementById('neural-layer');
+            
+            if (!peacetechSection) return;
+            
+            // Header inversion when entering white section
+            ScrollTrigger.create({
+                trigger: peacetechSection,
+                start: "top 80px", // When section top reaches near viewport top
+                end: "bottom 80px", // When section bottom leaves viewport top
+                onEnter: () => {
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeave: () => {
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                },
+                onEnterBack: () => {
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeaveBack: () => {
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                }
+            });
+        })();
+
+        // PRODUCT MATRIX - DARK MINIMAL HEADER (Only logo + CTA visible)
+        (function initProductMatrixHeaderEffect() {
+            const productMatrix = document.getElementById('main-content');
+            
+            if (!productMatrix) return;
+            
+            // Apply dark minimal header when in product matrix section
+            ScrollTrigger.create({
+                trigger: productMatrix,
+                start: "top 80px",
+                end: "bottom 80px",
+                onEnter: () => {
+                    document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                },
+                onLeave: () => {
+                    document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                },
+                onEnterBack: () => {
+                    document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                },
+                onLeaveBack: () => {
+                    document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                }
+            });
+        })();
 
     </script>
                 <script src="/media/site-utils.js"></script>
