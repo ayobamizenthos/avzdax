@@ -1,0 +1,12 @@
+.vercel
+
+.agent
+
+.claude
+
+smtp-config.php
+sheets-config.php
+google-credentials.json
+vendor/
+submissions/
+composer.phar

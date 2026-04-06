@@ -1,0 +1,986 @@
+<div
+  id="search-overlay"
+  class="fixed inset-0 z-[99999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500"
+>
+  <div
+    class="absolute inset-0 bg-[#050505]/95 backdrop-blur-2xl transition-opacity duration-500"
+  ></div>
+
+  <button
+    type="button"
+    id="search-close-btn"
+    class="absolute top-8 right-8 text-white/40 hover:text-white transition-colors duration-300"
+    onclick="toggleSearch()"
+    aria-label="Close Search"
+  >
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <div
+    class="relative w-full max-w-3xl px-8 search-container transform transition-all duration-500 scale-95"
+  >
+    <div class="relative mb-12">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="TYPE TO SEARCH..."
+        class="w-full bg-transparent text-3xl md:text-5xl font-black uppercase tracking-tighter text-white placeholder:text-white/20 outline-none pb-6 border-b border-white/10 focus:border-white/50 transition-all duration-300"
+        style="font-family: 'Inter', sans-serif"
+        autofocus
+        autocomplete="off"
+      />
+
+      <svg
+        id="search-icon-btn"
+        class="absolute right-0 top-2 text-white/40 hover:text-green-500 cursor-pointer transition-colors duration-300 z-10"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </div>
+
+    <div id="search-results" class="search-results-container hidden mb-8">
+      <div
+        id="search-results-list"
+        class="search-results-list max-h-[50vh] overflow-y-auto space-y-2"
+      ></div>
+    </div>
+
+    <div id="search-default-grid" class="flex flex-wrap gap-8 animate-fade-in-up items-center">
+      <a
+        href="/primus"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+        >PRIMUS</a
+      >
+      <a
+        href="/trion"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+        >TRION</a
+      >
+      <a
+        href="/whitepaper"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+        >INTEL</a
+      >
+      <a
+        href="/news"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+        >NEWS</a
+      >
+      <a
+        href="/careers"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-green-500/50 hover:text-green-500 transition-colors duration-300"
+        >CAREERS</a
+      >
+      <a
+        href="/contact"
+        class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+        >CONTACT</a
+      >
+    </div>
+  </div>
+</div>
+
+<nav id="main-nav" class="fixed top-0 w-full z-[150] transition-all duration-700 px-12 py-2">
+  <div class="max-w-[1920px] mx-auto flex justify-between items-center relative">
+    <a href="/" class="block relative z-[160]"
+      ><img src="/media/avzdax-logo.png" alt="AVZDAX" class="brand-logo h-8 md:h-10 w-auto"
+    /></a>
+
+    <ul class="nav-links-container hidden lg:flex gap-20 items-center">
+      <li class="nav-item group static cursor-pointer">
+        <span
+          role="button"
+          class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-4"
+          >Ecosystem</span
+        >
+        <div class="mega-menu-wrapper">
+          <div class="mega-menu-content text-left">
+            <div class="max-w-[1500px] mx-auto grid grid-cols-5 gap-8 px-10">
+              <div class="space-y-4">
+                <h3
+                  class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
+                >
+                  Platforms
+                </h3>
+                <a
+                  href="/primus"
+                  onmouseover="showPreview('primus')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Primus</span
+                  >
+                </a>
+                <a
+                  href="/teletraan"
+                  onmouseover="showPreview('teletraan')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Teletraan</span
+                  >
+                </a>
+                <a
+                  href="/nest"
+                  onmouseover="showPreview('nest')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Nest</span
+                  >
+                </a>
+              </div>
+
+              <div class="space-y-4">
+                <h3
+                  class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
+                >
+                  Hardware
+                </h3>
+                <a
+                  href="/trion"
+                  onmouseover="showPreview('trion')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Trion</span
+                  >
+                </a>
+                <a
+                  href="/obex"
+                  onmouseover="showPreview('obex')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Obex</span
+                  >
+                </a>
+                <a
+                  href="/arclight"
+                  onmouseover="showPreview('arclight')"
+                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                    style="
+                      background-image:
+                        linear-gradient(#fff 1px, transparent 1px),
+                        linear-gradient(90deg, #fff 1px, transparent 1px);
+                      background-size: 20px 20px;
+                    "
+                  ></div>
+                  <span
+                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                    >Arclight</span
+                  >
+                </a>
+              </div>
+
+              <div class="space-y-4">
+                <h3
+                  class="text-[11px] font-mono font-bold text-white/50 uppercase tracking-[0.3em] leading-normal mb-4 pb-3 border-b border-white/10"
+                >
+                  Strategic<br />Theaters
+                </h3>
+                <a
+                  href="/industries"
+                  class="group block py-4 border-b border-white/5 hover:border-white/20 transition-all"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white transition-colors"
+                    ></div>
+                    <span
+                      class="text-[11px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors"
+                      >National<br />Security</span
+                    >
+                  </div>
+                </a>
+                <a
+                  href="/industries"
+                  class="group block py-4 border-b border-white/5 hover:border-white/20 transition-all"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white transition-colors"
+                    ></div>
+                    <span
+                      class="text-[11px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors"
+                      >Energy<br />Infrastructure</span
+                    >
+                  </div>
+                </a>
+                <a
+                  href="/industries"
+                  class="group block py-4 border-b border-white/5 hover:border-white/20 transition-all"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white transition-colors"
+                    ></div>
+                    <span
+                      class="text-[11px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors"
+                      >Sovereign<br />Borders</span
+                    >
+                  </div>
+                </a>
+              </div>
+
+              <div
+                class="col-span-2 row-span-2 relative flex items-center justify-center overflow-visible min-h-[450px] z-50"
+              >
+                <div id="preview-default" class="text-center transition-opacity duration-500">
+                  <img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale" />
+                </div>
+                <img
+                  id="p-trion"
+                  src="/media/trion-display.webp"
+                  class="menu-preview-img w-full h-full scale-125 object-contain"
+                />
+                <div
+                  id="p-obex"
+                  class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none"
+                >
+                  <div class="relative w-[85%] flex flex-col items-start translate-x-[15%]">
+                    <img
+                      src="media/obexbox.webp"
+                      class="w-[100%] h-auto self-end relative z-0"
+                      style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0, 0, 0, 0.6))"
+                      alt="OBEX"
+                    />
+                    <img
+                      src="media/obex-display.webp"
+                      class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700"
+                      alt="OBEX Sensor"
+                    />
+                  </div>
+                </div>
+                <div
+                  id="p-arclight"
+                  class="menu-preview-img w-full h-full flex items-center justify-center pointer-events-none"
+                >
+                  <img
+                    src="/media/arclight-homepage.webp"
+                    class="w-full h-full scale-125 object-contain"
+                  />
+                </div>
+                <div
+                  id="p-primus"
+                  class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none mt-16"
+                >
+                  <div class="relative w-[110%] flex flex-col items-start translate-x-[5%]">
+                    <img
+                      src="media/primus-core.webp"
+                      class="w-[30%] h-auto relative z-10 mt-[-5%] mb-[-12%] transition-transform duration-700"
+                      alt="PRIMUS Core"
+                    />
+                    <img
+                      src="media/primusbox.webp"
+                      class="w-[100%] h-auto self-end relative z-0"
+                      style="filter: brightness(1.2) drop-shadow(0 40px 80px rgba(0, 0, 0, 0.6))"
+                      alt="PRIMUS"
+                    />
+                  </div>
+                </div>
+                <img
+                  id="p-teletraan"
+                  src="/media/teletraan-display.webp"
+                  class="menu-preview-img w-full h-full scale-125 object-contain"
+                />
+                <img
+                  id="p-nest"
+                  src="/media/nest_display.webp"
+                  class="menu-preview-img w-full h-full scale-125 object-contain"
+                />
+              </div>
+
+              <div class="col-span-2 mt-4 space-y-4">
+                <h3
+                  class="text-[14px] synco font-bold text-white uppercase tracking-[0.6em] pb-4 border-b border-white/20"
+                >
+                  <span class="animate-pulse">Coming Soon</span>
+                </h3>
+
+                <div
+                  class="relative overflow-hidden rounded-xl border border-white/40 bg-black/60 group transition-all duration-500 hover:border-white/60 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.1]"
+                    style="
+                      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+                      background-size: 24px 24px;
+                    "
+                  ></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"
+                  ></div>
+
+                  <div
+                    class="relative flex flex-col items-center justify-center py-4 overflow-hidden"
+                  >
+                    <div class="absolute top-0 right-0 z-20">
+                      <div
+                        class="flex items-center gap-3 px-6 py-2 bg-white/[0.08] backdrop-blur-md border-l border-b border-white/10 rounded-bl-xl"
+                      >
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+                          ></span>
+                          <span
+                            class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 shadow-[0_0_8px_#22c55e]"
+                          ></span>
+                        </span>
+                        <span class="text-[10px] font-bold text-white/90 uppercase tracking-[0.1em]"
+                          >In Development</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="relative z-10 text-center w-full px-4">
+                      <h3
+                        class="text-5xl md:text-6xl font-black uppercase tracking-[0.15em] text-white/40 blur-[7px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
+                      >
+                        SENTINEL
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="relative overflow-hidden rounded-xl border border-white/40 bg-black/60 group transition-all duration-500 hover:border-white/60 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+                >
+                  <div
+                    class="absolute inset-0 opacity-[0.1]"
+                    style="
+                      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+                      background-size: 24px 24px;
+                    "
+                  ></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"
+                  ></div>
+
+                  <div
+                    class="relative flex flex-col items-center justify-center py-4 overflow-hidden"
+                  >
+                    <div class="absolute top-0 right-0 z-20">
+                      <div
+                        class="flex items-center gap-3 px-6 py-2 bg-white/[0.08] backdrop-blur-md border-l border-b border-white/10 rounded-bl-xl"
+                      >
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+                          ></span>
+                          <span
+                            class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 shadow-[0_0_8px_#22c55e]"
+                          ></span>
+                        </span>
+                        <span class="text-[10px] font-bold text-white/90 uppercase tracking-[0.1em]"
+                          >In Development</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="relative z-10 text-center w-full px-4">
+                      <h3
+                        class="text-5xl md:text-6xl font-black uppercase tracking-[0.15em] text-white/40 blur-[7px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
+                      >
+                        XETRON
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item group static cursor-pointer">
+        <span
+          role="button"
+          class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-4"
+          >Intelligence</span
+        >
+        <div class="mega-menu-wrapper">
+          <div class="mega-menu-content text-left">
+            <div class="max-w-[1500px] mx-auto grid grid-cols-3 gap-8 px-10">
+              <a
+                href="/whitepaper"
+                class="group block relative overflow-hidden p-12 bg-white border border-white/20 hover:border-white shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-xl transition-all duration-500 transform hover:-translate-y-1"
+              >
+                
+                <div
+                  class="absolute inset-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#000 1px, transparent 1px),
+                      linear-gradient(90deg, #000 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+
+                <span
+                  class="text-2xl font-black uppercase text-black tracking-wider block mb-3 relative z-10 group-hover:translate-x-1 transition-transform duration-300"
+                  >White Papers</span
+                >
+                <span
+                  class="text-sm text-black/70 font-semibold block relative z-10 group-hover:translate-x-1 transition-transform duration-300 delay-75"
+                  >Research publications and technical documentation</span
+                >
+              </a>
+              <a
+                href="/industries"
+                class="group block relative overflow-hidden p-12 bg-white/[0.015] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+              >
+                <div
+                  class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#fff 1px, transparent 1px),
+                      linear-gradient(90deg, #fff 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+                <span
+                  class="text-2xl font-black uppercase text-white tracking-wider block mb-3 relative z-10"
+                  >Industries</span
+                >
+                <span class="text-sm text-white/40 block relative z-10"
+                  >Sectors and verticals we protect globally</span
+                >
+              </a>
+              <a
+                href="/ethics"
+                class="group block relative overflow-hidden p-12 bg-white/[0.015] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+              >
+                <div
+                  class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#fff 1px, transparent 1px),
+                      linear-gradient(90deg, #fff 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+                <span
+                  class="text-2xl font-black uppercase text-white tracking-wider block mb-3 relative z-10"
+                  >Ethics Policy</span
+                >
+                <span class="text-sm text-white/40 block relative z-10"
+                  >Our principles and responsible AI commitments</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item group static cursor-pointer">
+        <span
+          role="button"
+          class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 group-hover:text-silver transition-colors py-4"
+          >Company</span
+        >
+        <div class="mega-menu-wrapper">
+          <div class="mega-menu-content text-left">
+            <div class="max-w-[1500px] mx-auto grid grid-cols-4 gap-8 px-10">
+              <a
+                href="/about"
+                class="group block relative overflow-hidden p-12 bg-white/[0.015] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+              >
+                <div
+                  class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#fff 1px, transparent 1px),
+                      linear-gradient(90deg, #fff 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+                <span
+                  class="text-2xl font-black uppercase text-white tracking-wider block mb-3 relative z-10"
+                  >About AVZDAX</span
+                >
+                <span class="text-sm text-white/40 block relative z-10"
+                  >Our story, mission, and vision for the future</span
+                >
+              </a>
+              <a
+                href="/careers"
+                class="group block relative overflow-hidden p-12 bg-black/40 border border-green-500/20 hover:border-green-500/50 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
+                style="box-shadow: 0 0 30px rgba(34, 197, 94, 0.05)"
+              >
+                <div class="absolute top-0 right-0 z-20">
+                  <div
+                    class="flex items-center gap-2 px-5 py-1.5 bg-green-500/10 backdrop-blur-md border-l border-b border-green-500/20 rounded-bl-xl"
+                  >
+                    <div
+                      class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]"
+                    ></div>
+                    <span class="text-[10px] font-bold text-green-500 uppercase tracking-widest"
+                      >Hiring</span
+                    >
+                  </div>
+                </div>
+
+                <div
+                  class="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity duration-300"
+                  style="
+                    background-image: radial-gradient(circle, #22c55e 1px, transparent 1px);
+                    background-size: 24px 24px;
+                  "
+                ></div>
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-green-500/[0.02] to-transparent"
+                ></div>
+
+                <div class="relative z-10">
+                  <span
+                    class="text-2xl font-black uppercase text-white group-hover:text-green-400 transition-colors tracking-wider block mb-3"
+                    >Careers</span
+                  >
+                  <span
+                    class="text-sm text-white/50 group-hover:text-white/70 transition-colors block leading-relaxed"
+                    >Join the elite engineering team defining sovereign defense.</span
+                  >
+                </div>
+              </a>
+              <a
+                href="/ethics"
+                class="group block relative overflow-hidden p-12 bg-white/[0.015] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+              >
+                <div
+                  class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#fff 1px, transparent 1px),
+                      linear-gradient(90deg, #fff 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+                <span
+                  class="text-2xl font-black uppercase text-white tracking-wider block mb-3 relative z-10"
+                  >Ethics & Policy</span
+                >
+                <span class="text-sm text-white/40 block relative z-10"
+                  >Our principles and responsible AI commitments</span
+                >
+              </a>
+              <a
+                href="/contact"
+                class="group block relative overflow-hidden p-12 bg-white/[0.015] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+              >
+                <div
+                  class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                  style="
+                    background-image:
+                      linear-gradient(#fff 1px, transparent 1px),
+                      linear-gradient(90deg, #fff 1px, transparent 1px);
+                    background-size: 20px 20px;
+                  "
+                ></div>
+                <span
+                  class="text-2xl font-black uppercase text-white tracking-wider block mb-3 relative z-10"
+                  >Contact</span
+                >
+                <span class="text-sm text-white/40 block relative z-10"
+                  >Get in touch with our team</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a
+          href="/news"
+          class="text-[13px] uppercase tracking-[0.6em] font-black text-silver-400 hover:text-silver transition-colors py-6"
+          >Newsroom</a
+        >
+      </li>
+    </ul>
+
+    <div class="hidden lg:flex items-center gap-6 relative z-[160]">
+      <button
+        onclick="toggleSearch()"
+        class="tactical-search-btn"
+        aria-label="Search"
+        title="Search Intelligence"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <a
+        href="/contact"
+        class="schedule-btn bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block"
+        >Schedule Demonstration</a
+      >
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav-bar fixed top-0 left-0 right-0 z-[10000] lg:hidden">
+  <div class="flex justify-between items-center w-full">
+    <a href="/" class="mobile-nav-logo">
+      <img
+        src="/media/avzdax-logo.png"
+        alt="AVZDAX Logo"
+        title="AVZDAX Official"
+        class="h-8 w-auto"
+        loading="lazy"
+      />
+    </a>
+    <button
+      class="mobile-menu-toggle-modern"
+      aria-label="Open menu"
+      title="Open menu"
+      aria-expanded="false"
+    >
+      <svg
+        class="menu-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        role="img"
+      >
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path class="bar" d="M6 8h12" stroke="white" stroke-width="1.8" />
+          <path class="bar" d="M9 12h9" stroke="white" stroke-width="1.8" opacity="0.8" />
+          <path class="bar" d="M6 16h12" stroke="white" stroke-width="1.8" opacity="0.6" />
+        </g>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[9999] lg:hidden" style="display: none">
+  <div class="mobile-nav-content h-full flex flex-col">
+    <div class="mobile-search-section">
+      <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="rgba(255,255,255,0.4)"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          id="mobile-search-input"
+          placeholder="SEARCH THE ECOSYSTEM..."
+          title="Search"
+          autocomplete="off"
+          class="bg-transparent border-none outline-none text-white text-sm font-black uppercase tracking-widest w-full placeholder:text-white/20"
+        />
+      </div>
+
+      <div id="mobile-search-results" class="search-results-container hidden mt-4">
+        <div class="search-results-header">
+          <span
+            id="mobile-search-results-count"
+            class="text-[10px] font-mono text-white/40 uppercase tracking-widest"
+          ></span>
+        </div>
+        <div
+          id="mobile-search-results-list"
+          class="search-results-list max-h-[40vh] overflow-y-auto"
+        ></div>
+      </div>
+    </div>
+
+    <div class="minimalist-nav space-y-2 flex-1">
+      <div class="nav-section">
+        <button
+          class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between"
+          title="Toggle Ecosystem Menu"
+        >
+          <span>ECOSYSTEM</span>
+          <svg
+            class="nav-chevron w-5 h-5 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div class="nav-dropdown">
+          <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+            <a
+              href="/primus"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >PRIMUS — Behavioral AI</a
+            >
+            <a
+              href="/teletraan"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >TELETRAAN — Command UI</a
+            >
+            <a
+              href="/nest"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >NEST — Oversight Station</a
+            >
+            <a
+              href="/trion"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >TRION — Optical Sensing</a
+            >
+            <a
+              href="/obex"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >OBEX — Architectural Imaging</a
+            >
+            <a
+              href="/arclight"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >ARCLIGHT — Urban Tower</a
+            >
+
+            <div class="mt-6 pt-4 border-t border-white/10">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[10px] font-bold text-white/50 uppercase tracking-[0.3em]"
+                  >Coming Soon</span
+                >
+                <span class="relative flex h-2 w-2">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+                  ></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+              </div>
+
+              <div
+                class="relative py-3 px-4 mb-2 bg-white/[0.02] border border-white/10 rounded-lg overflow-hidden"
+              >
+                <div class="absolute top-1 right-2 flex items-center gap-1.5">
+                  <span class="relative flex h-1.5 w-1.5">
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+                    ></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                  </span>
+                  <span class="text-[8px] font-bold text-white/60 uppercase tracking-wider"
+                    >In Development</span
+                  >
+                </div>
+                <span
+                  class="text-lg font-black uppercase tracking-wider text-white/30 blur-[3px] select-none"
+                  >SENTINEL</span
+                >
+              </div>
+
+              <div
+                class="relative py-3 px-4 bg-white/[0.02] border border-white/10 rounded-lg overflow-hidden"
+              >
+                <div class="absolute top-1 right-2 flex items-center gap-1.5">
+                  <span class="relative flex h-1.5 w-1.5">
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"
+                    ></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                  </span>
+                  <span class="text-[8px] font-bold text-white/60 uppercase tracking-wider"
+                    >In Development</span
+                  >
+                </div>
+                <span
+                  class="text-lg font-black uppercase tracking-wider text-white/30 blur-[3px] select-none"
+                  >XETRON</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <button
+          class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between"
+          title="Toggle Intelligence Menu"
+        >
+          <span>INTELLIGENCE</span>
+          <svg
+            class="nav-chevron w-5 h-5 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div class="nav-dropdown">
+          <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+            <a
+              href="/whitepaper"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >Whitepapers</a
+            >
+            <a
+              href="/industries"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >Industries</a
+            >
+            <a
+              href="/ethics"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >Ethics Policy</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <button
+          class="nav-toggle w-full text-left text-lg font-black uppercase tracking-[0.2em] text-white py-5 border-b border-white/5 flex items-center justify-between"
+          title="Toggle Company Menu"
+        >
+          <span>COMPANY</span>
+          <svg
+            class="nav-chevron w-5 h-5 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div class="nav-dropdown">
+          <div class="flex flex-col py-4 pl-4 border-l border-white/10 ml-2">
+            <a
+              href="/about"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >About AVZDAX</a
+            >
+            <a
+              href="/careers"
+              class="text-green-500 hover:text-green-400 py-3 text-sm uppercase tracking-widest transition-colors flex items-center gap-2"
+              >Careers <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span
+            ></a>
+            <a
+              href="/ethics"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >Ethics & Policy</a
+            >
+            <a
+              href="/contact"
+              class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-section pt-2">
+        <a
+          href="/news"
+          class="block text-lg font-black uppercase tracking-[0.2em] text-white/80 hover:text-white py-5 border-b border-white/5 transition-colors"
+          >NEWSROOM</a
+        >
+      </div>
+    </div>
+
+    <div class="mt-8 space-y-4">
+      <a
+        href="/contact"
+        class="block w-full bg-white text-black text-center py-4 text-xs font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all"
+        >Schedule Demonstration</a
+      >
+    </div>
+  </div>
+</div>
+

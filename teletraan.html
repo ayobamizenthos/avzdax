@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELETRAAN | SOVEREIGN COMMAND OS | AVZDAX</title>
+    <meta name="description" content="TELETRAAN is the digital twin of reality. A command interface that gives operators total situational awareness across all connected systems." />
+    <meta property="og:title" content="TELETRAAN — Command UI | AVZDAX" />
+    <meta property="og:description" content="TELETRAAN is the digital twin of reality. A command interface that gives operators total situational awareness across all connected systems." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avzdax.com/teletraan.html" />
+    <meta property="og:image" content="https://avzdax.com/media/avzdax-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TELETRAAN — Command UI | AVZDAX" />
+    <meta name="twitter:description" content="TELETRAAN is the digital twin of reality. A command interface that gives operators total situational awareness across all connected systems." />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#020202', silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <link href="/components/footer-styles.css" rel="stylesheet">
+    <link href="/components/header-styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="video-optimizer.js" defer></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Syncopate:wght@700;800&display=swap');
+
+        :root {
+            --void: #030303; --white: #ffffff; --silver: #E5E5E7; --alloy: #86868B; --glass: rgba(255, 255, 255, 0.08);
+            --phosphor: #00FF41; --crimson: #FF003C;
+        }
+
+        
+        
+        
+        @media screen and (max-width: 1600px) and (min-width: 1025px) {
+            .cap-card {
+                flex: 0 0 420px !important;
+                min-width: 420px !important;
+                height: 520px !important;
+                padding: 45px !important;
+            }
+            .capabilities-cards-track {
+                padding: 0 40px !important;
+            }
+        }
+
+        @media screen and (max-width: 1400px) and (min-width: 1025px) {
+            .cap-card {
+                flex: 0 0 360px !important;
+                min-width: 360px !important;
+                height: 480px !important;
+                padding: 38px !important;
+            }
+            .cap-card-title {
+                font-size: 1.8rem !important;
+            }
+            .cap-card-description {
+                font-size: 14px !important;
+            }
+            .capabilities-cards-track {
+                padding: 0 30px !important;
+                gap: 24px !important;
+            }
+        }
+
+        @media screen and (max-width: 1280px) and (min-width: 1025px) {
+            .cap-card {
+                flex: 0 0 320px !important;
+                min-width: 320px !important;
+                height: 450px !important;
+                padding: 32px !important;
+            }
+            .cap-card-title {
+                font-size: 1.5rem !important;
+            }
+            .cap-card-description {
+                font-size: 13px !important;
+            }
+            .capabilities-cards-track {
+                padding: 0 20px !important;
+                gap: 20px !important;
+            }
+            .capabilities-header {
+                padding: 0 20px !important;
+                margin-bottom: 40px !important;
+            }
+        }
+
+        
+        @media screen and (max-width: 1024px) and (min-width: 769px) {
+            
+            .pinned-stage { height: auto !important; min-height: 100vh !important; }
+            .console-wrap { width: 70vw !important; max-width: 600px !important; }
+            
+            
+            .synco.text-\[15vw\], .synco.text-\[18vw\] { font-size: 10vw !important; }
+            .synco.text-5xl { font-size: 2.5rem !important; }
+            
+            
+            .cap-card {
+                flex: 0 0 calc(50vw - 40px) !important;
+                min-width: calc(50vw - 40px) !important;
+                max-width: 400px !important;
+                height: 480px !important;
+                padding: 36px !important;
+            }
+            .capabilities-cards-track {
+                gap: 20px !important;
+                padding: 0 24px !important;
+            }
+            .cap-card-title { font-size: 1.8rem !important; }
+            .cap-card-description { font-size: 14px !important; line-height: 1.6 !important; }
+            .cap-card-tag { font-size: 9px !important; }
+            
+            
+            #specs .grid.grid-cols-2 { gap: 40px !important; }
+            #specs .synco.text-6xl { font-size: 2.5rem !important; }
+            #specs .synco.text-2xl { font-size: 1.2rem !important; }
+            
+            
+            .scene-data { font-size: 12px !important; }
+            .act-content { padding: 60px 40px !important; }
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--void); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1); scrollbar-width: none; -ms-overflow-style: none; }
+        ::-webkit-scrollbar { display: none; width: 0 !important; background: transparent; }
+        
+        .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.08em; line-height: 0.85; }
+        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
+        .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        
+        nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.nav-scrolled {
+            background: rgba(0, 0, 0, 0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        
+        nav.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-inverted .nav-item > a {
+            color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        nav.nav-inverted .nav-item:hover > a {
+            color: #000 !important;
+        }
+
+        nav.nav-inverted .nav-item > a::after {
+            background: linear-gradient(90deg, #000, #000) !important;
+        }
+
+        nav.nav-inverted .text-white,
+        nav.nav-inverted [class*="text-white"] {
+            color: #000 !important;
+        }
+
+        
+        nav.nav-inverted .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-inverted .brand-logo {
+            filter: invert(1) brightness(0) !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-inverted .schedule-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        }
+
+        nav.nav-inverted .schedule-btn:hover {
+            background: #333 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        
+        .mobile-nav-bar.nav-inverted {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+            filter: invert(1) brightness(0);
+        }
+
+        .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+            stroke: #000 !important;
+        }
+
+        
+        nav.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        nav.nav-dark-minimal .nav-links-container {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        nav.nav-dark-minimal .brand-logo {
+            filter: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #fff !important;
+        }
+
+        nav.nav-dark-minimal .schedule-btn:hover {
+            background: rgba(255,255,255,0.9) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        
+        .mobile-nav-bar.nav-dark-minimal {
+            background: transparent !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+            filter: none !important;
+        }
+
+        .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+            stroke: #fff !important;
+        }
+
+        
+
+        
+        .mega-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.98);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        
+        html, body { max-width: 100%; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .nav-item:hover .mega-menu-wrapper,
+        .nav-item.is-active .mega-menu-wrapper {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .mega-menu-content {
+            background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .mega-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        
+        .mega-menu-content .max-w-6xl {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 300px;
+            gap: 48px;
+            padding: 0 40px;
+        }
+
+        
+        .menu-section {
+            padding: 24px 0;
+        }
+
+        .menu-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        
+        .grid-item-hover {
+            display: block;
+            padding: 16px 20px;
+            margin: 4px 0;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .grid-item-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item-hover span:first-child {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover span:last-child {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item-hover:hover span:first-child {
+            color: #00ff41;
+        }
+
+        .grid-item-hover:hover span:last-child {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        
+        .menu-preview-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: contain; opacity: 0; 
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
+
+        
+        .strategic-theaters {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategic-theaters h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .strategic-theaters ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .strategic-theaters ul li:last-child {
+            border-bottom: none;
+        }
+
+        .strategic-theaters ul li:hover {
+            color: #00ff41;
+            transform: translateX(4px);
+        }
+
+        .strategic-theaters .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            margin-right: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .strategic-theaters ul li:hover .dot {
+            background: #00ff41;
+        }
+
+        
+        .intelligence-layer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intelligence-layer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .intelligence-layer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .intelligence-layer .status {
+            font-size: 11px;
+            color: #00ff41;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        
+        .hero-video {
+            will-change: transform;
+            transform: translateZ(0); 
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+        }
+
+        
+        .hero-stage { height: 100dvh; min-height: 100vh; }
+        .hero-video-full {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: 0;
+        }
+
+        .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+        .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+        .grid-item-hover:hover span { color: #000000 !important; }
+        .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+        .premium-white-gloss {
+            background: #FBFBFB;
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-white-gloss::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+            opacity: 0.3; pointer-events: none;
+        }
+
+        
+        #search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+        
+        .svg-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+
+        
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        
+        @media (max-width: 1024px) {
+            
+            #main-nav { display: none !important; visibility: hidden !important; }
+            .mobile-nav-bar {
+                background: #000;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 8px 24px;
+            }
+            .mobile-menu-toggle-modern {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+            }
+            .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+            .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+            
+            footer {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            #sovereign-footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
+            }
+            #sovereign-footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            #sovereign-footer img {
+                display: none !important;
+            }
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
+                max-width: 100% !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+            }
+            
+            
+            #sovereign-footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 40px !important;
+                gap: 40px !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            #sovereign-footer .mt-40 .flex.gap-12 {
+                flex-direction: column !important;
+                gap: 12px !important;
+                width: 100%;
+            }
+            #sovereign-footer .mt-40 span {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                opacity: 0.3 !important;
+                letter-spacing: 0.3em !important;
+            }
+            .social-glass-btn {
+                width: 44px !important;
+                height: 44px !important;
+                background: transparent !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            .social-glass-btn svg { width: 28px !important; height: 28px !important; fill: #fff !important; }
+            footer .flex.gap-4 {
+                gap: 20px !important;
+                margin-bottom: 60px;
+            }
+        }
+
+        
+        .minimalist-nav {
+            width: 100%;
+            position: relative;
+        }
+        .minimalist-nav::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            border-radius: 1px;
+        }
+        .nav-section {
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .nav-section::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0.5px;
+        }
+        .nav-section:last-child::after {
+            display: none;
+        }
+        .nav-toggle {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-toggle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-toggle:hover::before {
+            width: 100%;
+        }
+        .nav-toggle::after {
+            display: none;
+        }
+        .nav-toggle.active::after {
+            display: none;
+        }
+        .nav-toggle:hover {
+            color: #E2E2E2;
+            transform: translateX(4px);
+        }
+        .nav-toggle.active {
+            color: #E2E2E2;
+        }
+        .nav-direct-link {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: left;
+            padding: 20px 0;
+            text-decoration: none;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 8px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .nav-direct-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            transition: width 0.4s ease;
+        }
+        .nav-direct-link:hover::before {
+            width: 100%;
+        }
+        .nav-direct-link:hover {
+            color: #E2E2E2;
+            transform: translateX(8px);
+            text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+        }
+        .nav-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 16px;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .nav-dropdown.open {
+            max-height: 800px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .products-list,
+        .intelligence-list,
+        .mission-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .product-link-item,
+        .intelligence-link-item,
+        .mission-link-item {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+            line-height: 1.4;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .product-link-item::before,
+        .intelligence-link-item::before,
+        .mission-link-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+            border-radius: 2px 0 0 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .product-link-item:hover,
+        .intelligence-link-item:hover,
+        .mission-link-item:hover {
+            background: rgba(226, 226, 226, 0.05);
+            border-color: rgba(226, 226, 226, 0.2);
+            color: #ffffff;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+            text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
+        }
+        .product-link-item:hover::before,
+        .intelligence-link-item:hover::before,
+        .mission-link-item:hover::before {
+            opacity: 1;
+        }
+        .product-link-item:active,
+        .intelligence-link-item:active,
+        .mission-link-item:active {
+            transform: translateX(8px) translateY(-2px) scale(0.98);
+        }
+
+        
+        @media (max-width: 768px) {
+            button:not(.mobile-menu-toggle-modern):not(.mobile-close-btn):not(.nav-toggle),
+            .button,
+            a[role="button"],
+            input,
+            textarea,
+            select {
+                min-height: 44px;
+                padding: 12px 16px;
+                font-size: 16px; 
+                border-radius: 8px;
+                transition: all 0.2s ease;
+            }
+            button:active, .button:active, a[role="button"]:active {
+                transform: scale(0.98);
+            }
+            * {
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        
+        .pinned-stage { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .console-wrap { position: absolute; width: 900px; z-index: 50; pointer-events: none; will-change: transform, scale; filter: drop-shadow(0 0 100px rgba(255,255,255,0.05)); opacity: 0; transform: translateY(40px); }
+        
+        .act-content { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; }
+        .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-bg video { width: 100%; height: 100%; object-fit: cover; }
+        .video-overlay { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+
+        
+        .lab-phase { background: var(--white); color: var(--void); }
+        .blueprint-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 50px 50px; z-index: 0; }
+
+        
+        .capabilities-horizontal-section {
+            background: #030303;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .capabilities-bg-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .capabilities-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .capabilities-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        .capabilities-logo {
+            height: 24px;
+            margin-bottom: 30px;
+            filter: invert(1);
+        }
+
+        .capabilities-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .capabilities-title span {
+            color: rgba(255,255,255,0.2);
+        }
+
+        @keyframes cap-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        
+        .capabilities-scroll-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .capabilities-cards-track {
+            display: flex;
+            gap: 32px;
+            padding: 0 60px;
+            will-change: transform;
+        }
+
+        
+        .cap-card {
+            flex: 0 0 480px;
+            min-width: 480px;
+            height: 560px;
+            background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            position: relative;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cap-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12,12,12,0.98) 100%);
+            transform: translateY(-12px);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        .cap-card:hover::before {
+            opacity: 1;
+        }
+
+        .cap-card-number {
+            position: absolute;
+            top: 40px;
+            right: 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: rgba(255,255,255,0.15);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .cap-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            margin-bottom: 20px;
+        }
+
+        .cap-card-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin: 0 0 30px 0;
+        }
+
+        .cap-card-description {
+            font-size: 15px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            max-width: 380px;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-description {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .cap-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .cap-card-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-line {
+            width: 60px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .cap-card-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            transition: color 0.4s ease;
+        }
+
+        .cap-card:hover .cap-card-status {
+            color: rgba(255,255,255,0.6);
+        }
+
+        
+        .cap-progress-container {
+            display: block;
+            width: calc(100% - 120px);
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            margin: 30px 60px 0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cap-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+            border-radius: 2px;
+            transition: width 0.05s ease;
+        }
+
+        
+        .capabilities-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cap-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 48px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .cap-cta-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        
+        @media (min-width: 1400px) {
+            .cap-card {
+                flex: 0 0 520px;
+                min-width: 520px;
+                height: 600px;
+                padding: 55px;
+            }
+            .cap-card-title {
+                font-size: 3.2rem;
+            }
+            .cap-card-description {
+                font-size: 16px;
+            }
+        }
+
+        
+        @media (min-width: 769px) and (max-width: 1399px) {
+            .capabilities-container {
+                padding: 0;
+            }
+            .capabilities-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        
+        @media (max-width: 768px) {
+            
+            .blueprint-grid { background-size: 25px 25px !important; }
+            .capabilities-bg-grid { background-size: 40px 40px !important; }
+
+            .capabilities-horizontal-section {
+                min-height: 100vh;
+            }
+            .capabilities-container {
+                padding: 100px 0 60px;
+                min-height: 100vh;
+            }
+            .capabilities-header {
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+            .capabilities-logo {
+                height: 20px;
+                margin-bottom: 24px;
+            }
+            .capabilities-title {
+                font-size: 2.2rem;
+                letter-spacing: -0.03em;
+            }
+            .capabilities-cards-track {
+                gap: 16px;
+                padding: 0 16px;
+            }
+            .cap-card {
+                flex: 0 0 calc(100vw - 48px);
+                min-width: calc(100vw - 48px);
+                max-width: calc(100vw - 48px);
+                height: 520px;
+                padding: 36px;
+                border-radius: 12px;
+            }
+            .cap-card-tag {
+                font-size: 9px;
+                letter-spacing: 0.4em;
+                margin-bottom: 16px;
+            }
+            .cap-card-title {
+                font-size: 2rem;
+                margin-bottom: 24px;
+                line-height: 0.9;
+            }
+            .cap-card-description {
+                font-size: 14px;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.5);
+            }
+            .cap-card-footer {
+                padding-top: 30px;
+            }
+            .cap-card-number {
+                top: 32px;
+                right: 32px;
+                font-size: 11px;
+            }
+            .cap-progress-container {
+                width: calc(100% - 32px);
+                margin: 40px 16px 0;
+                height: 3px;
+            }
+            .capabilities-cta {
+                padding: 0 16px;
+                margin-top: 40px;
+            }
+            .cap-cta-btn {
+                width: calc(100% - 32px);
+                max-width: 360px;
+                justify-content: center;
+                padding: 18px 32px;
+                font-size: 11px;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        
+        .cap-section { min-height: 100vh; position: relative; }
+        #particles-js { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+        
+        
+        .hud-corner { position: absolute; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); pointer-events: none; z-index: 20; }
+        .hud-corner.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .hud-corner.tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .hud-corner.bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .hud-corner.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        
+        .scan-line { position: absolute; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: scan 4s infinite ease-in-out; z-index: 15; pointer-events: none; }
+        @keyframes scan { 0%, 100% { top: 10%; opacity: 0; } 50% { top: 90%; opacity: 1; } }
+
+        
+        .status-dot { width: 8px; height: 8px; background: #00ff41; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #00ff41; }
+        .status-dot.pulse { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } 50% { opacity: 0.5; box-shadow: 0 0 20px #00ff41; } }
+
+        
+        .metric-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; }
+
+        
+        .data-panel-accent { position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent); }
+
+        
+        @media (max-width: 1024px) {
+            
+            #hero {
+                padding: 100px 20px 40px !important;
+                height: 100vh !important;
+                height: 100svh !important;
+                flex-direction: column !important;
+            }
+            #hero .relative.z-10 {
+                margin-bottom: 30px;
+            }
+            #hero h1 {
+                font-size: 12vw !important;
+                margin-bottom: 12px !important;
+                line-height: 0.9 !important;
+            }
+            .console-wrap {
+                position: relative !important;
+                width: 100% !important;
+                max-width: 85vw !important;
+            }
+            .console-wrap img {
+                width: 100% !important;
+                height: auto !important;
+                max-height: 50vh !important;
+                object-fit: contain !important;
+            }
+
+            
+            #capabilities-track { 
+                overflow: visible !important; 
+                scroll-snap-type: y mandatory !important; 
+                scroll-padding-top: 20px;
+            }
+            .cap-section { 
+                height: auto !important; 
+                min-height: 90vh !important; 
+                scroll-snap-align: center !important;
+                display: flex !important; flex-direction: column !important; 
+                justify-content: center !important; 
+                padding: 20px 16px !important; 
+                margin-bottom: 0px !important; 
+                background: #000 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                position: relative !important;
+                gap: 20px !important; 
+            }
+
+            
+            .scene-1-video-wrapper, .scene-2-video, .scene-3-video, .scene-4-video {
+                position: relative !important; inset: auto !important;
+                width: 100% !important; height: auto !important; 
+                aspect-ratio: 16/9 !important;
+                border: none !important;
+                border-radius: 8px !important;
+                transform: none !important; opacity: 1 !important;
+                margin-bottom: 16px !important;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+                z-index: 10 !important;
+                overflow: hidden;
+            }
+            
+            
+            .scene-1-video-wrapper {
+                order: 2 !important;
+            }
+
+            
+            .scene-1-data-wrapper {
+                position: relative !important;
+                bottom: auto !important;
+                left: auto !important;
+                top: auto !important; 
+                right: auto !important;
+                inset: auto !important; 
+                width: 100% !important;
+                padding: 0 !important;
+                margin-top: 0 !important; 
+                order: 3 !important; 
+                display: flex !important;
+                justify-content: flex-start !important; 
+                transform: none !important;
+                pointer-events: auto !important;
+            }
+            
+            
+            .scene-2-video, .scene-3-video, .scene-4-video {
+                order: 1 !important;
+            }
+            
+            video, img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+
+            
+            .scene-1-text {
+                position: relative !important;
+                order: 1 !important; 
+                margin-bottom: 16px !important;
+                text-align: center !important;
+                opacity: 1 !important;
+            }
+
+            
+            .scene-1-subtext, .scene-2-text, .scene-3-text, .scene-4-text {
+                position: relative !important; inset: auto !important;
+                width: 100% !important; height: auto !important;
+                max-width: 100% !important;
+                
+                
+                background: linear-gradient(160deg, #161616 0%, #050505 100%) !important;
+                border: 1px solid rgba(255,255,255,0.08) !important;
+                border-left: 3px solid #FFF !important; 
+                
+                
+                box-shadow: 
+                    0 20px 50px rgba(0,0,0,0.9),
+                    inset 0 1px 0 rgba(255,255,255,0.15), 
+                    0 0 0 1px rgba(0,0,0,0.5) !important; 
+
+                padding: 32px 24px !important; 
+                border-radius: 0 16px 16px 0 !important; 
+                
+                transform: none !important; opacity: 1 !important;
+                text-align: left !important;
+                align-items: flex-start !important;
+                z-index: 5 !important;
+                order: 3 !important; 
+                flex-direction: column !important;
+                gap: 20px !important;
+                pointer-events: auto !important;
+            }
+
+            
+            .scene-1-subtext .flex.gap-20 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 16px !important;
+                width: 100% !important;
+                margin-top: 8px !important;
+                border-top: 1px solid rgba(255,255,255,0.1) !important;
+                padding-top: 16px !important;
+                justify-content: stretch !important;
+            }
+            .scene-1-subtext .text-center {
+                text-align: left !important;
+            }
+            .scene-1-subtext .synco.text-2xl {
+                font-size: 1.2rem !important; 
+                font-weight: 800 !important;
+                color: #FFF !important;
+                letter-spacing: 0.05em !important;
+            }
+            
+            .scene-1-subtext .text-center::before {
+                content: '';
+                display: block;
+                width: 12px; height: 2px;
+                background: #FFF;
+                margin-bottom: 8px;
+                opacity: 0.5;
+            }
+
+            
+            .cap-section h2 { 
+                font-size: 2rem !important; 
+                line-height: 1 !important;
+                margin-bottom: 16px !important; 
+                letter-spacing: -0.02em !important;
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                text-transform: uppercase;
+                margin-top: 0 !important;
+            }
+            .cap-section p { 
+                font-family: 'Inter', system-ui, -apple-system, sans-serif !important; 
+                font-size: 18px !important; 
+                line-height: 1.5 !important; 
+                margin-bottom: 0 !important;
+                color: #FFFFFF !important; 
+                font-weight: 400 !important;
+                letter-spacing: 0.02em !important; 
+                max-width: 100% !important;
+            }
+            
+            
+            .data-panel-accent {
+                display: none !important;
+            }
+
+            
+            .metric-card { 
+                background: transparent !important; 
+                border: none !important; 
+                border-left: 1px solid rgba(255,255,255,0.15) !important;
+                padding: 0 0 0 16px !important; 
+                border-radius: 0 !important; 
+                width: auto !important; 
+                margin-bottom: 12px;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            
+            .metric-card .synco { font-size: 0.75rem !important; color: rgba(255,255,255,0.5) !important; opacity: 0.8; letter-spacing: 0.1em !important; }
+            .metric-card span, .metric-card .text-white { font-size: 1.15rem !important; color: #fff !important; font-weight: 700 !important; }
+            .metric-card .mono { font-size: 8px !important; color: rgba(255,255,255,0.2) !important; margin: 0 !important; }
+
+            
+            .hud-corner { display: none !important; }
+            .data-panel-accent { display: none !important; }
+            .absolute.top-10, .absolute.bottom-10, .absolute.top-8, .absolute.bottom-8 { 
+                position: relative !important; top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
+                margin-bottom: 8px;
+                font-size: 8px !important; letter-spacing: 0.4em !important; color: rgba(255,255,255,0.2) !important;
+            }
+
+            
+            #specs { 
+                padding: 180px 24px 80px !important; 
+                background: #fff !important; 
+                height: auto !important; 
+                min-height: 100svh !important; 
+                align-items: flex-start !important;
+            }
+            #specs .grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
+            
+            
+            #specs .lg\:col-span-5 { 
+                order: 2; 
+                width: 100% !important; 
+                margin-top: 0 !important;
+            }
+
+            
+            #specs .lg\:col-span-7 { 
+                order: 1; 
+                margin: 0 auto 60px !important; 
+                width: 100% !important; 
+                display: flex; 
+                justify-content: center;
+            }
+            
+            
+            #specs h2 { 
+                font-size: 1.8rem !important; 
+                color: #000 !important; 
+                margin-bottom: 2rem !important;
+                line-height: 1 !important;
+            }
+            #specs .synco.text-2xl { 
+                font-size: 1.1rem !important; 
+                color: #000 !important; 
+                margin-bottom: 8px !important;
+            }
+            #specs p.text-black\/60 {
+                font-size: 13px !important;
+                line-height: 1.5 !important;
+                color: rgba(0,0,0,0.7) !important;
+            }
+            #specs .space-y-12 { gap: 2rem !important; }
+            #specs .space-y-8 { gap: 1.5rem !important; }
+
+            
+            #specs #stack-img { 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                height: auto !important;
+                transform: none !important; 
+                display: block; 
+            }
+            #specs #pop-out-img { 
+                width: 90vw !important; 
+                height: auto !important; 
+                max-height: 50vh !important; 
+                object-fit: contain !important; 
+            }
+            
+            
+            .status-dot { width: 6px !important; height: 6px !important; }
+            
+            
+            .grid.grid-cols-2 { display: flex !important; flex-wrap: wrap !important; gap: 16px !important; }
+            .grid.grid-cols-2 > div { flex: 1 1 45% !important; min-width: 120px !important; }
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div id="header-container"></div>
+<script src="/components/header-loader.js"></script>
+
+    <div id="viewport">
+        
+        <section class="pinned-stage relative" id="hero">
+            
+            <a href="#" onclick="event.preventDefault(); history.back();"  class="absolute top-24 left-4 md:top-32 md:left-12 z-[200] group mix-blend-difference text-white flex items-center gap-4 transition-opacity duration-300 hover:opacity-70" aria-label="Go Back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transform transition-transform duration-500 ease-out group-hover:-translate-x-2">
+                    <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-mono text-[10px] uppercase tracking-[0.2em] hidden md:block">Back</span>
+            </a>
+            
+            <div class="relative z-[100] text-center">
+                <h1 class="synco text-[11vw] font-black mb-8 chrome-text" id="h-title">TELETRAAN</h1>
+            </div>
+            <div class="console-wrap" id="main-console">
+                <img loading="lazy" decoding="async" src="media/teletraan-console.webp" class="w-full" alt="Teletraan Console">
+            </div>
+        </section>
+
+        
+        <div class="relative bg-[#020202] overflow-hidden" id="capabilities-track">
+            
+            
+            <section class="cap-section h-screen flex flex-col items-center justify-center relative" id="scene-1">
+                
+                <div class="scene-1-text text-center mb-12 opacity-0 select-none">
+                    <h2 class="synco text-6xl text-white font-bold tracking-tighter">UNIFIED CAMERA COMMAND</h2>
+                </div>
+
+                
+                <div class="scene-1-video-wrapper relative w-[40vw] aspect-video overflow-hidden z-10 will-change-transform">
+                    <img loading="lazy" decoding="async" src="media/teletraan-first.webp" alt="Unified Camera Command" class="absolute inset-0 w-full h-full object-contain">
+                </div>
+                
+                
+                <div class="scene-1-data-wrapper absolute bottom-16 left-0 w-full flex justify-center z-20 pointer-events-none px-6">
+                     <div class="scene-1-subtext opacity-0 flex flex-col items-center gap-8 p-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl max-w-3xl">
+                        <p class="text-white/90 text-lg text-center leading-relaxed font-light tracking-wide drop-shadow-lg">
+                            An orchestrated visual theater. TELETRAAN ingests streams from any source to deliver absolute, unbiased situational awareness across the entire sovereign network.
+                        </p>
+                     </div>
+                </div>
+            </section>
+
+            
+            <section class="cap-section h-screen flex flex-col relative overflow-hidden mb-32" id="scene-2">
+                
+                <div class="scene-2-video relative w-full h-[75%] bg-[#020202] overflow-hidden border-b border-white/5">
+                    <img loading="lazy" decoding="async" src="media/teletraan-second.webp" alt="Real-Time Threat Alerts" class="w-full h-full object-cover opacity-90">
+                </div>
+
+                
+                <div class="scene-2-text relative w-full h-[25%] bg-[#080808] flex items-center px-12 z-20 border-t border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+                    <div class="max-w-[1800px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                        <div class="lg:col-span-5 text-left">
+                            <h2 class="synco text-4xl md:text-5xl lg:text-6xl text-white font-bold leading-none tracking-tighter uppercase">REAL-TIME<br>THREAT ALERTS</h2>
+                        </div>
+                        <div class="lg:col-span-7 text-left border-white/10 lg:border-l lg:pl-16 border-l-0 pl-0 pt-8 lg:pt-0">
+                            <p class="text-silver/80 text-lg md:text-xl leading-relaxed font-light tracking-wide">
+                                The system utilizes autonomous neural processing to identify high-velocity security breaches instantly. By correlating kinetic patterns with historical threat data, Teletraan distinguishes between routine anomalies and imminent danger, empowering command units to neutralize risks before escalation occurs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="cap-section h-screen flex flex-col relative overflow-hidden mb-32" id="scene-3">
+                
+                <div class="scene-3-video relative w-full h-[75%] bg-[#020202] overflow-hidden border-b border-white/5">
+                    <img loading="lazy" decoding="async" src="media/teletraan-third.webp" alt="Intelligent Retrieval" class="w-full h-full object-cover opacity-90">
+                </div>
+
+                
+                <div class="scene-3-text relative w-full h-[25%] bg-[#080808] flex items-center px-12 z-20 border-t border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+                    <div class="max-w-[1800px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                        <div class="lg:col-span-5 text-left">
+                            <h2 class="synco text-4xl md:text-5xl lg:text-6xl text-white font-bold leading-none tracking-tighter uppercase">INTELLIGENT<br>RETRIEVAL</h2>
+                        </div>
+                        <div class="lg:col-span-7 text-left border-white/10 lg:border-l lg:pl-16 border-l-0 pl-0 pt-8 lg:pt-0">
+                            <p class="text-silver/80 text-lg md:text-xl leading-relaxed font-light tracking-wide">
+                                Eliminate hours of forensic manual review with semantic search capabilities. Operators can query the network for specific physical attributes, vehicle signatures, or behavioral markers, collapsing weeks of raw footage into a precise, actionable evidence timeline in seconds.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="cap-section h-screen flex flex-col relative overflow-hidden mb-32" id="scene-4">
+                
+                <div class="scene-4-video relative w-full h-[75%] bg-[#020202] overflow-hidden border-b border-white/5">
+                    <div class="scan-line" style="animation-duration: 6s;"></div>
+                    <img loading="lazy" decoding="async" src="media/teletraan-fourth.webp" alt="Total Access Control" class="w-full h-full object-cover opacity-90">
+                </div>
+
+                
+                <div class="scene-4-text relative w-full h-[25%] bg-[#080808] flex items-center px-12 z-20 border-t border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+                    <div class="max-w-[1800px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                        <div class="lg:col-span-5 text-left">
+                            <h2 class="synco text-4xl md:text-5xl lg:text-6xl text-white font-bold leading-none tracking-tighter uppercase">TOTAL ACCESS<br>CONTROL</h2>
+                        </div>
+                        <div class="lg:col-span-7 text-left border-white/10 lg:border-l lg:pl-16 border-l-0 pl-0 pt-8 lg:pt-0">
+                            <p class="text-silver/80 text-lg md:text-xl leading-relaxed font-light tracking-wide">
+                                Orchestrate the physical security of your entire estate from a single sovereign interface. Teletraan unifies disparate access protocols into one command logic, enabling instant site-wide lockdowns, granular zone authorization, and automated kinetic barriers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        
+        <div id="spec-trigger">
+            <section class="pinned-stage lab-phase h-screen" id="specs">
+                <div class="blueprint-grid"></div>
+                <div class="max-w-[1400px] w-full px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10" id="spec-ui">
+                    <div class="lg:col-span-5 space-y-16">
+                        <div><h2 class="synco text-6xl font-black">SOVEREIGN<br>ARCHITECTURE.</h2></div>
+                        <div class="space-y-8">
+                            <div class="border-b border-black/5 pb-6">
+                                <div class="synco text-2xl mb-2">INFINITE SCALE</div>
+                                <p class="text-black/60 font-medium leading-relaxed">Built to handle city-wide surveillance networks without performance degradation. Whether managing ten cameras or ten thousand, the system remains fluid and responsive.</p>
+                            </div>
+                            <div class="border-b border-black/5 pb-6">
+                                <div class="synco text-2xl mb-2">UNIVERSAL LANGUAGE</div>
+                                <p class="text-black/60 font-medium leading-relaxed">Hardware agnostic by design. Teletraan speaks the language of every major sensor manufacturer, allowing you to unify diverse legacy systems into one coherent command structure.</p>
+                            </div>
+                            <div class="border-b border-black/5 pb-6">
+                                <div class="synco text-2xl mb-2">AUTONOMOUS UPTIME</div>
+                                <p class="text-black/60 font-medium leading-relaxed">Engineered for mission-critical continuity. The architecture creates redundancy at every level, ensuring that your eyes on the ground never blink, even during network stress.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 relative flex items-center justify-center">
+                        
+                        <img loading="lazy" decoding="async" src="media/teletraan-stack.webp" class="w-[90%] relative z-10" id="stack-img" alt="OS Architecture">
+                    </div>
+                </div>
+
+                
+                <div class="absolute inset-0 z-[100] flex items-center justify-center opacity-0 scale-[0.8] pointer-events-none" id="pop-out-container">
+                    <img loading="lazy" decoding="async" src="media/teletraan-stack.webp" class="w-screen h-screen object-contain" id="pop-out-img" alt="TELETRAAN Command Interface">
+                </div>
+            </section>
+        </div>
+
+
+        
+        <section id="capabilities-grid" class="capabilities-horizontal-section">
+            
+            
+            <div class="capabilities-bg-grid"></div>
+
+            <div class="capabilities-container">
+                
+                
+                <div class="capabilities-header">
+                    
+                    <img loading="lazy" decoding="async" src="media/avzdax-logo.png" alt="AVZDAX" class="capabilities-logo hidden md:block">
+                    <h2 class="capabilities-title synco">
+                        UNIFIED COMMAND<br>
+                        <span>ARCHITECTURE</span>
+                    </h2>
+                </div>
+
+                
+                <div class="capabilities-scroll-wrapper">
+                    <div class="capabilities-cards-track">
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">MULTI-SITE<br>COMMAND</h3>
+                                <p class="cap-card-description">
+                                    Manage multiple locations from a single sovereign workstation. Teletraan's geo-distributed architecture enables security operators to monitor global facilities with zero-latency response.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">HARDWARE<br>AGNOSTIC</h3>
+                                <p class="cap-card-description">
+                                    Native integration with major global camera manufacturers. Teletraan eliminates vendor lock-in by supporting universal protocols, protecting your existing infrastructure investment.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">AI VIDEO<br>ANALYTICS</h3>
+                                <p class="cap-card-description">
+                                    Neural networks continuously trained on security events. Detect loitering, perimeter breaches, and crowd density anomalies, significantly reducing false positives.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">FORENSIC<br>TIMELINE</h3>
+                                <p class="cap-card-description">
+                                    Reconstruct incidents with legal-grade evidence chains. Teletraan automatically correlates footage from multiple cameras, applying precise timestamps for complete case files.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">GRANULAR<br>PERMISSIONS</h3>
+                                <p class="cap-card-description">
+                                    Define operator access at camera, zone, and action levels. Complete audit trails track every view, export, and system modification for total administrative oversight.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="cap-card">
+                            <div>
+                                <h3 class="cap-card-title synco">EDGE-TO-<br>CLOUD</h3>
+                                <p class="cap-card-description">
+                                    Deploy on-premise for sovereignty, or via cloud for scalability. Teletraan adapts to your compliance requirements without compromising operational capability.
+                                </p>
+                            </div>
+                            <div class="cap-card-footer">
+                                <span class="cap-card-line"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                
+                <div class="cap-progress-container">
+                    <div class="cap-progress-bar"></div>
+                </div>
+
+                
+                <div class="capabilities-cta" style="margin-bottom: 150px;">
+                    <a href="/contact" class="cap-cta-btn">
+                        Request Information
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    
+    <style>
+        
+        .social-glass-btn {
+            border: none !important;
+            background: transparent !important;
+            width: auto !important;
+            height: auto !important;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .social-glass-btn svg { width: 24px; height: 24px; }
+        .social-glass-btn:hover {
+            opacity: 0.7;
+            background: transparent !important;
+            border-radius: 0;
+            box-shadow: none !important;
+        }
+
+        
+        
+        @media (max-width: 1024px) {
+            footer {
+                padding-top: 60px !important;
+                padding-bottom: 60px !important;
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            #sovereign-footer .grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 40px 20px !important;
+            }
+            #sovereign-footer .lg\:col-span-2 {
+                grid-column: span 2 !important;
+                text-align: left !important;
+                margin-bottom: 20px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            #sovereign-footer img {
+                display: none !important;
+            }
+            #sovereign-footer p {
+                font-size: 14px !important;
+                font-weight: 800 !important;
+                line-height: 1.4 !important;
+                color: #ffffff !important;
+                max-width: 100% !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+                margin-bottom: 20px !important;
+            }
+            #sovereign-footer h4 {
+                font-size: 10px !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                margin-bottom: 20px !important;
+                color: rgba(255, 255, 255, 0.4) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-bottom: none !important;
+                padding-top: 16px !important;
+                letter-spacing: 0.4em !important;
+                text-transform: uppercase !important;
+            }
+            #sovereign-footer .flex-col {
+                gap: 12px !important;
+            }
+            #sovereign-footer a.footer-link-hover {
+                font-size: 14px !important;
+                font-weight: 900 !important;
+                padding: 0 !important;
+                background: transparent !important;
+                letter-spacing: 0.05em !important;
+                text-transform: uppercase !important;
+                color: #ffffff !important;
+                transform: none !important;
+            }
+            
+            #sovereign-footer a.footer-link-hover.text-green-500 {
+                color: #22c55e !important;
+            }
+            #sovereign-footer .footer-watermark {
+                font-size: clamp(15vw, 25vw, 400px) !important;
+                color: rgba(255,255,255,0.18) !important;
+                opacity: 1 !important;
+            }
+            
+            
+            #sovereign-footer .mt-40 {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                margin-top: 60px !important;
+                padding-top: 90px !important;
+            }
+        }
+    </style>
+
+    <div style="background-color: #030303;">
+    <footer class="relative pt-40 pb-[24rem] px-12 overflow-hidden" id="sovereign-footer" style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a;">
+
+        <div class="footer-watermark" style="position: absolute; bottom: -0.15em; left: 50%; transform: translateX(-50%); font-size: clamp(15vw, 25vw, 400px); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -0.05em; color: rgba(255,255,255,0.18); pointer-events: none; white-space: nowrap; z-index: 0; line-height: 1;">AVZDAX</div>
+
+
+        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
+            <div class="lg:col-span-2 space-y-12 text-left">
+                <a href="/" aria-label="Home" class="hidden md:block"><img loading="lazy" decoding="async" src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
+                <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">We build the world's most advanced defense and security systems. Protecting nations, critical infrastructure, and global security interests.</p>
+                <div class="flex gap-4">
+                    <a href="https://linkedin.com/company/avzdax" class="social-glass-btn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="https://medium.com/@AVZDAXtechnologies" class="social-glass-btn" aria-label="Medium">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="/primus" class="footer-link-hover">PRIMUS</a>
+                    <a href="/nest" class="footer-link-hover">NEST</a>
+                    <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
+                    <a href="/trion" class="footer-link-hover">TRION</a>
+                    <a href="/obex" class="footer-link-hover">OBEX</a>
+                    <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
+                    <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
+                    <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
+                    <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
+                    <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
+                    <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
+                </div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">COMPANY</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="/about" class="footer-link-hover">ABOUT US</a><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="/news" class="footer-link-hover">NEWSROOM</a><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a><a href="/contact" class="footer-link-hover">CONTACT</a></div>
+            </div>
+            <div class="text-left">
+                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
+                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="/contact" class="footer-link-hover">HELP CENTER</a><a href="/ethics" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a><a href="/ethics" class="footer-link-hover">TERMS</a></div>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        
+      window.lenis = lenis;function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+
+        gsap.to("#main-console", { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            duration: 1.2, 
+            ease: "power2.out",
+            delay: 0.5
+        });
+
+
+        ScrollTrigger.matchMedia({
+
+            "(min-width: 1025px)": function() {
+
+                ScrollTrigger.create({
+                    trigger: "#capabilities-track", start: "top 20%", endTrigger: "#spec-trigger", end: "top top",
+                    onEnter: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeave: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 }),
+                    onEnterBack: () => gsap.to("#main-nav", { opacity: 0, pointerEvents: "none", duration: 0.4 }),
+                    onLeaveBack: () => gsap.to("#main-nav", { opacity: 1, pointerEvents: "auto", duration: 0.4 })
+                });
+
+
+                const s1 = document.querySelector('#scene-1');
+                if(s1) {
+                    const tl = gsap.timeline({ scrollTrigger: { trigger: s1, start: "top top", end: "+=100%", scrub: true, pin: true } });
+                    tl.to(s1.querySelector('.scene-1-video-wrapper'), { width: "95vw", height: "80vh", duration: 1.5, ease: "power2.inOut" })
+                      .to(s1.querySelector('.scene-1-text'), { opacity: 1, y: -20, duration: 0.5 }, "<")
+                      .to(s1.querySelector('.scene-1-subtext'), { opacity: 1, duration: 0.5 }, "-=0.5");
+                }
+
+
+                [2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const img = sn.querySelector('img');
+                        if (img) {
+                             gsap.fromTo(img, { scale: 1.1, opacity: 0.2 }, { 
+                                scale: 1, opacity: 0.6, 
+                                duration: 1.5,
+                                ease: "power2.out",
+                                scrollTrigger: { trigger: sn, start: "top 60%", end: "center center", scrub: 1 } 
+                            });
+                        }
+                    }
+                });
+            },
+
+
+            "(max-width: 1024px)": function() {
+
+                [1, 2, 3, 4].forEach(num => {
+                    const sn = document.querySelector(`#scene-${num}`);
+                    if(sn) {
+                        const vwrap = sn.querySelector(`.scene-${num}-video`) || sn.querySelector('.scene-1-video-wrapper');
+                        const twrap = sn.querySelector(`.scene-${num}-text`) || sn.querySelector('.scene-1-subtext');
+                        const titleWrap = sn.querySelector('.scene-1-text');
+                        if(vwrap) gsap.fromTo(vwrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 60%" } });
+                        if(twrap) gsap.fromTo(twrap, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: sn, start: "top 40%" } });
+                        if(titleWrap) gsap.fromTo(titleWrap, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: sn, start: "top 70%" } });
+                    }
+                });
+
+
+                const specs = document.getElementById('specs');
+                if(specs) {
+                    ScrollTrigger.create({
+                        trigger: specs, start: "top 20%",
+                        onEnter: () => { 
+                            document.getElementById('main-nav').classList.add('nav-inverted'); 
+                            const mobileNav = document.querySelector('.mobile-nav-bar');
+                            if (mobileNav) mobileNav.classList.add('nav-inverted');
+                        },
+                        onLeaveBack: () => { 
+                            document.getElementById('main-nav').classList.remove('nav-inverted'); 
+                            const mobileNav = document.querySelector('.mobile-nav-bar');
+                            if (mobileNav) mobileNav.classList.remove('nav-inverted');
+                        }
+                    });
+                }
+            }
+        });
+
+
+        const specsTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#spec-trigger", 
+                start: "top top", 
+                end: "+=150%", 
+                pin: true, 
+                scrub: true,
+                onEnter: () => {
+                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeave: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                },
+                onEnterBack: () => {
+                    gsap.to("body", { backgroundColor: "#ffffff", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.add('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted');
+                },
+                onLeaveBack: () => {
+                    gsap.to("body", { backgroundColor: "#030303", duration: 0.5 });
+                    document.getElementById('main-nav')?.classList.remove('nav-inverted');
+                    document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted');
+                }
+            }
+        });
+
+
+        specsTl.to("#spec-ui", { opacity: 0, scale: 0.9, duration: 0.3 }, 0.3)
+               .to("#pop-out-container", { opacity: 1, scale: 1, duration: 0.5 }, 0.4);
+
+
+
+        (function() {
+            function initCapabilitiesHorizontalScroll() {
+                const section = document.querySelector('.capabilities-horizontal-section');
+                const track = document.querySelector('.capabilities-cards-track');
+                const progressBar = document.querySelector('.cap-progress-bar');
+                
+                if (!section || !track) return;
+                
+
+                ScrollTrigger.getAll().forEach(t => {
+                    if (t.trigger === section) t.kill();
+                });
+                
+                const cards = track.querySelectorAll('.cap-card');
+                if (cards.length === 0) return;
+                
+
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 32;
+                const totalCardsWidth = (cardWidth * cards.length) + (gap * (cards.length - 1));
+                const viewportWidth = window.innerWidth;
+                const scrollDistance = totalCardsWidth - viewportWidth + 120;
+                
+                if (scrollDistance <= 0) return;
+                
+                gsap.to(track, {
+                    x: -scrollDistance,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=" + (scrollDistance * 1.2),
+                        pin: true,
+                        scrub: 0.8,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (progressBar) {
+                                progressBar.style.width = (self.progress * 100) + '%';
+                            }
+                        },
+                        onEnter: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeave: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        },
+                        onEnterBack: () => {
+                            document.getElementById('main-nav')?.classList.add('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal');
+                        },
+                        onLeaveBack: () => {
+                            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal');
+                            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal');
+                        }
+                    }
+                });
+            }
+
+
+            if (document.readyState === 'complete') {
+                setTimeout(initCapabilitiesHorizontalScroll, 200);
+            } else {
+                window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200));
+            }
+
+
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                    initCapabilitiesHorizontalScroll();
+                }, 250);
+            });
+        })();
+
+
+        window.addEventListener("mousemove", (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            gsap.to("#pop-out-img", { rotationY: x, rotationX: -y, duration: 2, ease: "power2.out" });
+        });
+
+
+        function initMobileMenu() {
+            const btns = document.querySelectorAll('.mobile-menu-toggle-modern');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            if (!btns.length || !overlay) return;
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopImmediatePropagation();
+                    const opened = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                    
+
+                    btns.forEach(b => {
+                        if (b !== this) {
+                            if (opened) b.classList.add('open');
+                            else b.classList.remove('open');
+                            b.setAttribute('aria-expanded', opened ? 'true' : 'false');
+                        }
+                    });
+
+                    if (opened) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+
+            overlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    btns.forEach(btn => {
+                        btn.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+
+
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.nav-toggle').forEach(btn => {
+                btn.addEventListener('click', function(){
+                    btn.classList.toggle('active');
+                    const dd = btn.nextElementSibling;
+                    if(dd && dd.classList.contains('nav-dropdown')) dd.classList.toggle('open');
+                });
+            });
+        });
+
+
+        function setHeroHeight(){
+            const hero = document.getElementById('hero');
+            if(!hero) return;
+            hero.style.height = window.innerHeight + 'px';
+        }
+        window.addEventListener('resize', setHeroHeight);
+        window.addEventListener('orientationchange', setHeroHeight);
+        setHeroHeight();
+
+
+        function showPreview(id) {
+            document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+            document.getElementById('preview-default').style.opacity = '0';
+            const target = document.getElementById('p-' + id);
+            if(target) { target.style.opacity = '1'; target.style.transform = 'scale(1.25) translateY(0)'; }
+        }
+
+
+        function changeMissionImage(src) {
+            document.getElementById('mission-image').src = '/media/' + src;
+        }
+
+
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.menu-preview-img').forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.8) translateY(20px)'; });
+                const previewDefault = document.getElementById('preview-default');
+                if(previewDefault) previewDefault.style.opacity = '1';
+                const missionImage = document.getElementById('mission-image');
+                if(missionImage) missionImage.src = '/media/avzdax-logo.png';
+            });
+        });
+
+
+        gsap.registerPlugin(ScrollTrigger);
+
+
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('is-open');
+            if(overlay.classList.contains('is-open')) {
+                overlay.querySelector('input').focus();
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        const capObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-node');
+                } else {
+                    entry.target.classList.remove('active-node');
+                }
+            });
+        }, { threshold: 0.6, root: document.querySelector('.capabilities-carousel') });
+        document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card));
+
+
+        (function() {
+            let initialized = false;
+            
+            function initMobileMenu() {
+                if (initialized) return;
+                initialized = true;
+                
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (!btn || !overlay) return;
+                
+
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = this.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    
+                    if (isOpen) {
+                        overlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        overlay.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        closeMobileMenu();
+                    }
+                });
+                
+
+                overlay.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+                
+
+                overlay.querySelectorAll('.nav-toggle').forEach(toggleBtn => {
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const dropdown = this.nextElementSibling;
+                        const chevron = this.querySelector('.nav-chevron');
+                        const isCurrentlyOpen = dropdown && dropdown.classList.contains('open');
+                        
+
+                        overlay.querySelectorAll('.nav-dropdown').forEach(dd => {
+                            dd.classList.remove('open');
+                        });
+                        overlay.querySelectorAll('.nav-toggle').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        overlay.querySelectorAll('.nav-chevron').forEach(ch => {
+                            ch.style.transform = 'rotate(0deg)';
+                        });
+                        
+
+                        if (!isCurrentlyOpen && dropdown && dropdown.classList.contains('nav-dropdown')) {
+                            dropdown.classList.add('open');
+                            this.classList.add('active');
+                            if (chevron) chevron.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+            
+            function closeMobileMenu() {
+                const btn = document.querySelector('.mobile-menu-toggle-modern');
+                const overlay = document.getElementById('mobile-menu-overlay');
+                
+                if (btn) {
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+                document.body.style.overflow = '';
+            }
+            
+
+            window.closeMobileMenu = closeMobileMenu;
+            
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobile-menu-overlay');
+                if (mobileMenu && mobileMenu.style.display !== 'none') {
+                    closeMobileMenu();
+                }
+            }
+        });
+    </script>
+    <script src="/media/site-utils.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,2724 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>AVZDAX | NEST | SOVEREIGN OVERSIGHT</title>
+    <meta
+      name="description"
+      content="NEST is AVZDAX's sovereign oversight protocol. Centralized monitoring that restores human authority to the loop of automated response."
+    />
+    <meta property="og:title" content="NEST — Oversight Station | AVZDAX" />
+    <meta
+      property="og:description"
+      content="NEST is AVZDAX's sovereign oversight protocol. Centralized monitoring that restores human authority to the loop of automated response."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avzdax.com/nest.html" />
+    <meta property="og:image" content="https://avzdax.com/media/avzdax-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NEST — Oversight Station | AVZDAX" />
+    <meta
+      name="twitter:description"
+      content="NEST is AVZDAX's sovereign oversight protocol. Centralized monitoring that restores human authority to the loop of automated response."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/components/footer-styles.css" rel="stylesheet" />
+    <link href="/components/header-styles.css" rel="stylesheet" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: '#020202',
+              void: '#000000',
+              silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' },
+              phosphor: '#E2E2E2',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+          },
+        },
+      }
+    </script>
+
+    <style>
+      :root {
+        --void: #020202;
+        --white: #e2e2e2;
+      }
+
+      @media screen and (max-width: 1600px) and (min-width: 1025px) {
+        .cap-card {
+          flex: 0 0 420px !important;
+          min-width: 420px !important;
+          height: 520px !important;
+          padding: 45px !important;
+        }
+        .capabilities-cards-track {
+          padding: 0 40px !important;
+        }
+      }
+
+      @media screen and (max-width: 1400px) and (min-width: 1025px) {
+        .cap-card {
+          flex: 0 0 360px !important;
+          min-width: 360px !important;
+          height: 480px !important;
+          padding: 38px !important;
+        }
+        .cap-card-title {
+          font-size: 1.8rem !important;
+        }
+        .cap-card-description {
+          font-size: 14px !important;
+        }
+        .capabilities-cards-track {
+          padding: 0 30px !important;
+          gap: 24px !important;
+        }
+      }
+
+      @media screen and (max-width: 1280px) and (min-width: 1025px) {
+        .cap-card {
+          flex: 0 0 320px !important;
+          min-width: 320px !important;
+          height: 450px !important;
+          padding: 32px !important;
+        }
+        .cap-card-title {
+          font-size: 1.5rem !important;
+        }
+        .cap-card-description {
+          font-size: 13px !important;
+        }
+        .capabilities-cards-track {
+          padding: 0 20px !important;
+          gap: 20px !important;
+        }
+        .capabilities-header {
+          padding: 0 20px !important;
+          margin-bottom: 40px !important;
+        }
+      }
+
+      @media screen and (max-width: 1024px) and (min-width: 769px) {
+        .cap-card {
+          flex: 0 0 calc(50vw - 40px) !important;
+          min-width: calc(50vw - 40px) !important;
+          max-width: 400px !important;
+          height: 480px !important;
+          padding: 36px !important;
+        }
+        .capabilities-cards-track {
+          gap: 20px !important;
+          padding: 0 24px !important;
+        }
+        .cap-card-title {
+          font-size: 1.8rem !important;
+        }
+        .cap-card-description {
+          font-size: 14px !important;
+          line-height: 1.6 !important;
+        }
+        .cap-card-tag {
+          font-size: 9px !important;
+        }
+
+        .hero-title {
+          font-size: 12vw !important;
+        }
+
+        .max-w-7xl,
+        .max-w-6xl {
+          padding-left: 40px !important;
+          padding-right: 40px !important;
+        }
+      }
+
+      body {
+        background-color: var(--void);
+        color: var(--white);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      html {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      .synco {
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.04em;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .chrome-text {
+        background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+      }
+
+      nav {
+        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .nav-scrolled {
+        background: rgba(0, 0, 0, 0.8);
+        -webkit-backdrop-filter: blur(40px);
+        backdrop-filter: blur(40px);
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-item {
+        position: static;
+      }
+      .mega-menu-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding-top: 32px;
+        background: transparent;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 100;
+      }
+      .mega-menu-content {
+        background: rgba(3, 3, 3, 0.98);
+        -webkit-backdrop-filter: blur(50px);
+        backdrop-filter: blur(50px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 60px 40px;
+      }
+      .nav-item:hover .mega-menu-wrapper {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-item > a {
+        position: relative;
+      }
+      .nav-item > a::after {
+        content: '';
+        position: absolute;
+        bottom: 12px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.5));
+        transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .nav-item:hover > a::after {
+        width: 100%;
+      }
+
+      .grid-item-hover {
+        display: block;
+        padding: 16px 20px;
+        border-radius: 12px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid transparent;
+        text-decoration: none;
+      }
+      .grid-item-hover:hover {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+      .grid-item-hover span:first-child {
+        display: block;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+      }
+
+      .menu-preview-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+      .menu-preview-img.active {
+        opacity: 1;
+        transform: scale(1.25) translateY(0);
+      }
+
+      .tactical-search-btn {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+        clip-path: polygon(
+          12px 0,
+          100% 0,
+          100% calc(100% - 12px),
+          calc(100% - 12px) 100%,
+          0 100%,
+          0 12px
+        );
+      }
+
+      .tactical-search-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: linear-gradient(to bottom, transparent 40%, rgba(255, 255, 255, 0.02) 100%);
+      }
+
+      .tactical-search-btn::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 3px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .tactical-search-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .tactical-search-btn:hover::after {
+        background: #22c55e;
+        box-shadow: 0 0 8px #22c55e;
+      }
+
+      .tactical-search-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: rgba(255, 255, 255, 0.7);
+        stroke-width: 1.5;
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+
+      .tactical-search-btn:hover svg {
+        stroke: #fff;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+        transform: scale(1.1);
+      }
+
+      nav.nav-inverted .tactical-search-btn {
+        background: rgba(0, 0, 0, 0.03) !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
+      }
+      nav.nav-inverted .tactical-search-btn svg {
+        stroke: rgba(0, 0, 0, 0.7) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover {
+        background: rgba(0, 0, 0, 0.08) !important;
+        border-color: rgba(0, 0, 0, 0.3) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover svg {
+        stroke: #000 !important;
+      }
+
+      nav.nav-inverted .tactical-search-btn {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.8) !important;
+      }
+
+      #search-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.98);
+        -webkit-backdrop-filter: blur(60px);
+        backdrop-filter: blur(60px);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #search-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+      .search-input-tactical {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: clamp(1.5rem, 4vw, 3rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        width: 100%;
+        padding: 20px 0;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      .search-input-tactical:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      .search-input-tactical::placeholder {
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      .menu-preview-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+      .menu-preview-img.active {
+        opacity: 1;
+        transform: scale(1.25) translateY(0);
+      }
+
+      nav.nav-inverted {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      nav.nav-inverted .nav-links-container {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      nav.nav-inverted .brand-logo {
+        filter: invert(1) brightness(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      nav.nav-inverted .schedule-btn {
+        background: #000 !important;
+        color: #fff !important;
+        border-color: #000 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      nav.nav-inverted .schedule-btn:hover {
+        background: #333 !important;
+        transform: translateY(-2px) !important;
+      }
+
+      .mobile-nav-bar.nav-inverted {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+        filter: invert(1) brightness(0);
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+        stroke: #000 !important;
+      }
+
+      nav.nav-dark-minimal {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      nav.nav-dark-minimal .nav-links-container {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      nav.nav-dark-minimal .brand-logo {
+        filter: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      nav.nav-dark-minimal .schedule-btn {
+        background: #fff !important;
+        color: #000 !important;
+        border-color: #fff !important;
+      }
+
+      nav.nav-dark-minimal .schedule-btn:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        transform: translateY(-2px) !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+        filter: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+        stroke: #fff !important;
+      }
+
+      .capabilities-horizontal-section {
+        background: #030303;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .capabilities-bg-grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.08;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+
+      .capabilities-container {
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .capabilities-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 0 40px;
+      }
+
+      .capabilities-logo {
+        height: 24px;
+        margin-bottom: 30px;
+        filter: invert(1);
+      }
+
+      .capabilities-title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .capabilities-title span {
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      .capabilities-scroll-wrapper {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .capabilities-cards-track {
+        display: flex;
+        gap: 32px;
+        padding: 0 60px;
+        will-change: transform;
+      }
+
+      .cap-card {
+        flex: 0 0 480px;
+        min-width: 480px;
+        height: 560px;
+        background: linear-gradient(165deg, rgba(18, 18, 18, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        position: relative;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+      }
+
+      .cap-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .cap-card:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+        background: linear-gradient(165deg, rgba(25, 25, 25, 0.98) 0%, rgba(12, 12, 12, 0.98) 100%);
+        transform: translateY(-12px);
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+      }
+
+      .cap-card:hover::before {
+        opacity: 1;
+      }
+
+      .cap-card-number {
+        position: absolute;
+        top: 40px;
+        right: 45px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.15);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+      }
+
+      .cap-card-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.35);
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        margin-bottom: 20px;
+      }
+
+      .cap-card-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        line-height: 0.95;
+        margin: 0 0 30px 0;
+      }
+
+      .cap-card-description {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.45);
+        line-height: 1.8;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        max-width: 380px;
+        transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-description {
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      .cap-card-footer {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: auto;
+        padding-top: 40px;
+      }
+
+      .cap-card-line {
+        width: 40px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.15);
+        transition: all 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-line {
+        width: 60px;
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .cap-card-status {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-status {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .cap-progress-container {
+        display: block;
+        width: calc(100% - 120px);
+        height: 2px;
+        background: rgba(255, 255, 255, 0.06);
+        margin: 30px 60px 0;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .cap-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8));
+        border-radius: 2px;
+        transition: width 0.05s ease;
+      }
+
+      .capabilities-cta {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .cap-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 20px 48px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        text-decoration: none;
+        border-radius: 2px;
+        transition: all 0.4s ease;
+      }
+
+      .cap-cta-btn:hover {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+        transform: translateY(-2px);
+      }
+
+      @media (min-width: 1400px) {
+        .cap-card {
+          flex: 0 0 520px;
+          min-width: 520px;
+          height: 600px;
+          padding: 55px;
+        }
+        .cap-card-title {
+          font-size: 3.2rem;
+        }
+        .cap-card-description {
+          font-size: 16px;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1399px) {
+        .capabilities-container {
+          padding: 0;
+        }
+        .capabilities-header {
+          margin-bottom: 50px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .capabilities-horizontal-section {
+          height: auto !important;
+          min-height: auto !important;
+        }
+        .capabilities-container {
+          padding: 80px 0 20px 0 !important;
+          justify-content: flex-start !important;
+          min-height: auto !important;
+        }
+        .capabilities-header {
+          margin-bottom: 20px !important;
+          margin-top: 0 !important;
+          padding: 0 24px !important;
+        }
+        .capabilities-logo {
+          height: 16px !important;
+          margin-bottom: 15px !important;
+        }
+        .capabilities-title {
+          font-size: 2rem !important;
+          letter-spacing: normal !important;
+        }
+
+        .capabilities-scroll-wrapper {
+          padding: 0 !important;
+          overflow: hidden !important;
+          width: 100% !important;
+        }
+        .capabilities-scroll-wrapper::-webkit-scrollbar {
+          display: none !important;
+        }
+
+        .capabilities-cards-track {
+          gap: 16px !important;
+          padding: 0 24px !important;
+          margin-left: 0 !important;
+          display: flex !important;
+        }
+
+        .cap-card {
+          flex: 0 0 calc(100vw - 48px) !important;
+          max-width: calc(100vw - 48px) !important;
+          min-width: calc(100vw - 48px) !important;
+          min-height: 480px !important;
+          height: auto !important;
+          padding: 40px !important;
+          border-radius: 12px !important;
+          background: rgba(255, 255, 255, 0.03) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          backdrop-filter: blur(10px) !important;
+          scroll-snap-align: center !important;
+        }
+        .cap-card-title {
+          font-family: 'Inter', system-ui, sans-serif !important;
+          font-size: 1.6rem !important;
+          margin-bottom: 24px !important;
+          line-height: 1 !important;
+          text-transform: uppercase !important;
+          letter-spacing: -0.02em !important;
+          text-align: left !important;
+          word-break: break-word !important;
+          hyphens: auto !important;
+        }
+        .cap-card-description {
+          font-family: 'Inter', system-ui, sans-serif !important;
+          font-size: 16px !important;
+          line-height: 1.6 !important;
+          color: rgba(255, 255, 255, 0.7) !important;
+          text-align: left !important;
+        }
+        .cap-card-tag {
+          display: none !important;
+        }
+        .cap-card-number {
+          display: none !important;
+        }
+
+        .cap-progress-container {
+          display: none !important;
+        }
+
+        .capabilities-cta {
+          margin-bottom: 40px !important;
+          margin-top: 30px !important;
+          position: relative !important;
+          z-index: 50 !important;
+          padding: 0 24px !important;
+          text-align: center !important;
+        }
+        .cap-cta-btn {
+          padding: 14px 32px !important;
+          font-size: 11px !important;
+          width: auto !important;
+          min-width: 0 !important;
+          display: inline-flex !important;
+          background: rgba(255, 255, 255, 0.08) !important;
+          backdrop-filter: blur(10px) !important;
+          border-radius: 4px !important;
+          justify-content: center !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+          text-decoration: none !important;
+        }
+      }
+
+      .mobile-scroll-hint {
+        display: none;
+        margin-top: 24px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      @media (max-width: 1024px) {
+        #main-nav {
+          display: none !important;
+          visibility: hidden !important;
+        }
+
+        footer {
+          padding-top: 60px !important;
+          padding-bottom: 60px !important;
+          padding-left: 24px !important;
+          padding-right: 24px !important;
+        }
+        #sovereign-footer .grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 40px 20px !important;
+        }
+        #sovereign-footer .lg\:col-span-2 {
+          grid-column: span 2 !important;
+          margin-bottom: 20px;
+          padding-bottom: 40px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        #sovereign-footer img {
+          display: none !important;
+        }
+        #sovereign-footer p {
+          font-size: 14px !important;
+          font-weight: 800 !important;
+          line-height: 1.4 !important;
+          color: #ffffff !important;
+          max-width: 100% !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+        }
+        #sovereign-footer h4 {
+          font-size: 10px !important;
+          font-weight: 900 !important;
+          font-style: italic !important;
+          margin-bottom: 20px !important;
+          color: rgba(255, 255, 255, 0.4) !important;
+          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+          padding-top: 16px !important;
+          letter-spacing: 0.4em !important;
+          text-transform: uppercase !important;
+        }
+        #sovereign-footer a.footer-link-hover {
+          font-size: 14px !important;
+          font-weight: 900 !important;
+          letter-spacing: 0.05em !important;
+          text-transform: uppercase !important;
+          color: #ffffff !important;
+        }
+
+        #sovereign-footer .mt-40 {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          margin-top: 60px !important;
+          padding-top: 40px !important;
+          gap: 40px !important;
+          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        #sovereign-footer .mt-40 .flex.gap-12 {
+          flex-direction: column !important;
+          gap: 12px !important;
+          width: 100%;
+        }
+        #sovereign-footer .mt-40 span {
+          font-size: 10px !important;
+          font-weight: 900 !important;
+          opacity: 0.3 !important;
+          letter-spacing: 0.3em !important;
+        }
+
+        #capabilities-grid::after {
+          display: none !important;
+        }
+      }
+
+      @keyframes scan {
+        0% {
+          left: -30%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .panel {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .panel-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .panel-content {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 1600px;
+        padding: 0 40px;
+      }
+
+      .txt-reveal {
+        overflow: hidden;
+        display: block;
+      }
+      .txt-reveal span {
+        display: block;
+        transform: translateY(120%);
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .is-inview .txt-reveal span {
+        transform: translateY(0);
+      }
+
+      .hud-line {
+        height: 1px;
+        width: 0;
+        background: rgba(255, 255, 255, 0.2);
+        transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .is-inview .hud-line {
+        width: 100%;
+      }
+
+      .media-c {
+        overflow: hidden;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .is-inview .media-c {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .media-c img,
+      .media-c video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .grid-premium {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 24px;
+      }
+
+      .blueprint-grid {
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+      .vertical-text {
+        writing-mode: vertical-rl;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      @keyframes float-delayed {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      .animate-float-delayed {
+        animation: float-delayed 8s ease-in-out infinite;
+      }
+
+      @keyframes spin-slow {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes reverse-spin {
+        from {
+          transform: rotate(360deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+      }
+      .animate-reverse-spin {
+        animation: reverse-spin 15s linear infinite;
+      }
+
+      .hud-bracket {
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(0, 0, 0, 0.4);
+        -webkit-backdrop-filter: blur(40px);
+        backdrop-filter: blur(40px);
+      }
+      .hud-bracket::before,
+      .hud-bracket::after,
+      .hud-bracket span::before,
+      .hud-bracket span::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid;
+        pointer-events: none;
+      }
+      .hud-bracket::before {
+        top: -2px;
+        left: -2px;
+        border-right: 0;
+        border-bottom: 0;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .hud-bracket::after {
+        top: -2px;
+        right: -2px;
+        border-left: 0;
+        border-bottom: 0;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .hud-bracket-bottom::before {
+        bottom: -2px;
+        left: -2px;
+        border-right: 0;
+        border-top: 0;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .hud-bracket-bottom::after {
+        bottom: -2px;
+        right: -2px;
+        border-left: 0;
+        border-top: 0;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .telemetry-ticker {
+        font-size: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        opacity: 0.4;
+      }
+      .glow-phosphor {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      }
+
+      .glitch-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .glitch-btn::before,
+      .glitch-btn::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        pointer-events: none;
+        opacity: 0;
+      }
+      .glitch-btn:hover::before {
+        opacity: 1;
+        left: 2px;
+        text-shadow: -2px 0 #ff00c1;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim-1 1s infinite linear alternate-reverse;
+      }
+      .glitch-btn:hover::after {
+        opacity: 1;
+        left: -2px;
+        text-shadow: -2px 0 #00fff9;
+        clip: rect(100px, 450px, 120px, 0);
+        animation: glitch-anim-2 1s infinite linear alternate-reverse;
+      }
+      @keyframes glitch-anim-1 {
+        0% {
+          clip: rect(10px, 9999px, 20px, 0);
+        }
+        20% {
+          clip: rect(40px, 9999px, 50px, 0);
+        }
+        40% {
+          clip: rect(70px, 9999px, 80px, 0);
+        }
+        60% {
+          clip: rect(20px, 9999px, 30px, 0);
+        }
+        80% {
+          clip: rect(90px, 9999px, 100px, 0);
+        }
+        100% {
+          clip: rect(50px, 9999px, 60px, 0);
+        }
+      }
+      @keyframes glitch-anim-2 {
+        0% {
+          clip: rect(30px, 9999px, 40px, 0);
+        }
+        30% {
+          clip: rect(60px, 9999px, 70px, 0);
+        }
+        50% {
+          clip: rect(10px, 9999px, 20px, 0);
+        }
+        70% {
+          clip: rect(80px, 9999px, 90px, 0);
+        }
+        100% {
+          clip: rect(40px, 9999px, 50px, 0);
+        }
+      }
+
+      .nest-lens {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, transparent 0%, #020202 90%);
+        z-index: 5;
+        pointer-events: none;
+      }
+      .scan-line {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        z-index: 20;
+        opacity: 0;
+      }
+
+      .cap-card {
+        flex: 1;
+        background: #080808;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 2px;
+        min-height: 380px;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cap-card:hover {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: #0c0c0c;
+      }
+      .cap-card-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #fff;
+        transition: width 0.6s ease;
+      }
+      .cap-card.active-node .cap-card-border {
+        width: 100%;
+      }
+      .cap-card.active-node {
+        opacity: 1 !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+      }
+
+      .mobile-scroll-hint {
+        display: none;
+        margin-top: 24px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      @media (max-width: 1024px) {
+        .capabilities-carousel {
+          display: flex !important;
+          overflow-x: auto !important;
+          scroll-snap-type: x mandatory !important;
+          padding: 0 5vw !important;
+          gap: 15px !important;
+        }
+        .cap-card {
+          flex: 0 0 85% !important;
+          min-width: 85% !important;
+          scroll-snap-align: center !important;
+          opacity: 0.3;
+          transform: scale(0.95);
+        }
+        .mobile-scroll-hint {
+          display: flex;
+        }
+        .hint-bar {
+          width: 30px;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+        .hint-bar::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 50%;
+          background: #fff;
+          animation: hint-slide 2s infinite ease-in-out;
+        }
+        @keyframes hint-slide {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(200%);
+          }
+        }
+
+        #phase-3 {
+          height: auto !important;
+          min-height: 100vh !important;
+          padding-top: 120px !important;
+          padding-bottom: 60px !important;
+        }
+        #phase-3 .grid {
+          gap: 40px !important;
+        }
+        #phase-3 h2.synco {
+          font-size: 2.8rem !important;
+          line-height: 0.9 !important;
+          letter-spacing: -0.02em !important;
+        }
+        #phase-3 h2.synco span {
+          padding: 4px 12px !important;
+          display: inline-block !important;
+        }
+        #phase-3 .space-y-10 {
+          padding-top: 20px !important;
+        }
+        #phase-3 .border-l-4 p {
+          font-size: 1rem !important;
+        }
+        #phase-3 .border-l-4 .text-xl {
+          font-size: 1.1rem !important;
+        }
+        #phase-3 > div {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        #phase-3 .max-w-xl,
+        #phase-3 [class*='max-w-xl'] {
+          max-width: 100% !important;
+        }
+        #phase-3 .pl-8,
+        #phase-3 [class*='pl-8'] {
+          padding-left: 16px !important;
+        }
+        #phase-3 .space-y-10 {
+          width: 100% !important;
+        }
+
+        #intel-cover {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        #intel-cover > div[class*='max-w'],
+        #phase-2 > div[class*='max-w'],
+        #phase-3 > div[class*='max-w'],
+        section > div[class*='max-w'] {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        .max-w-xl {
+          max-width: 100% !important;
+        }
+        footer#sovereign-footer {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+
+        #phase-2 h2 {
+          font-size: 2.4rem !important;
+          line-height: 0.9 !important;
+        }
+        #phase-2 .max-w-4xl {
+          max-width: 100% !important;
+        }
+        #phase-2 p.text-2xl {
+          font-size: 1rem !important;
+        }
+        #phase-2 .grid {
+          gap: 24px !important;
+        }
+        #phase-2 .p-12 {
+          padding: 24px !important;
+        }
+        #phase-2 h4 {
+          font-size: 1.4rem !important;
+        }
+        #phase-2 {
+          padding-top: 80px !important;
+          padding-bottom: 80px !important;
+        }
+
+        #phase-1 {
+          height: 100vh !important;
+          min-height: 100vh !important;
+          max-height: 100vh !important;
+          padding-top: 70px !important;
+          padding-bottom: 20px !important;
+          overflow: hidden !important;
+        }
+        #phase-1 > div {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+          height: 100% !important;
+        }
+        #phase-1 .grid {
+          gap: 10px !important;
+          height: 100% !important;
+        }
+        #phase-1 .lg\\:col-span-5 {
+          padding-top: 0 !important;
+        }
+        #phase-1 .lg\\:col-span-5 .space-y-12 {
+          gap: 8px !important;
+        }
+        #phase-1 .lg\\:col-span-5 .space-y-6 {
+          gap: 4px !important;
+        }
+        #phase-1 .flex.items-center.gap-4 {
+          display: none !important;
+        }
+        #phase-1 h2.synco {
+          font-size: 2rem !important;
+          line-height: 0.85 !important;
+          margin-bottom: 8px !important;
+        }
+        #phase-1 h2.synco span {
+          padding: 3px 8px !important;
+        }
+        #phase-1 .border-l-4 {
+          padding-left: 12px !important;
+          padding-top: 8px !important;
+          padding-bottom: 8px !important;
+          border-width: 2px !important;
+          margin-top: 0 !important;
+        }
+        #phase-1 .border-l-4 .space-y-8 {
+          gap: 6px !important;
+        }
+        #phase-1 .border-l-4 p.text-2xl {
+          font-size: 0.85rem !important;
+          line-height: 1.2 !important;
+          margin-bottom: 4px !important;
+        }
+        #phase-1 .border-l-4 p.text-lg {
+          font-size: 0.8rem !important;
+          line-height: 1.4 !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 {
+          height: 280px !important;
+          min-height: 280px !important;
+          max-height: 280px !important;
+          margin-top: 0 !important;
+          flex-shrink: 0 !important;
+        }
+        #phase-1 .lg\\:col-span-7 > div {
+          position: relative !important;
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 > div > div:nth-child(1),
+        #phase-1 .lg\\:col-span-7 > div > div:nth-child(2) {
+          display: none !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 > div > div:nth-child(3) {
+          left: 0% !important;
+          top: 0% !important;
+          width: 32% !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 > div > div:nth-child(4) {
+          left: 50% !important;
+          top: 45% !important;
+          width: 50% !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 > div > div:nth-child(5) {
+          position: absolute !important;
+          left: auto !important;
+          right: -5% !important;
+          top: 50% !important;
+          bottom: auto !important;
+          width: 60% !important;
+          z-index: 50 !important;
+          transform: none !important;
+        }
+
+        #phase-1 .lg\\:col-span-7 .animate-spin-slow,
+        #phase-1 .lg\\:col-span-7 .animate-reverse-spin {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="is-loading">
+    <a
+      href="#"
+      onclick="
+        event.preventDefault()
+        history.back()
+      "
+      class="absolute top-24 left-4 md:top-32 md:left-12 z-[200] group mix-blend-difference text-white flex items-center gap-4 transition-opacity duration-300 hover:opacity-70"
+      aria-label="Go Back"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transform transition-transform duration-500 ease-out group-hover:-translate-x-2"
+      >
+        <path
+          d="M20 12H4M4 12L10 18M4 12L10 6"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="font-mono text-[10px] uppercase tracking-[0.2em] hidden md:block">Back</span>
+    </a>
+
+    <div
+      id="search-overlay"
+      class="fixed inset-0 z-[99999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500"
+    >
+      <div
+        class="absolute inset-0 bg-[#050505]/95 backdrop-blur-2xl transition-opacity duration-500"
+      ></div>
+
+      <button
+        type="button"
+        id="search-close-btn"
+        class="absolute top-8 right-8 text-white/40 hover:text-white transition-colors duration-300"
+        onclick="toggleSearch()"
+        aria-label="Close Search"
+      >
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div
+        class="relative w-full max-w-3xl px-8 search-container transform transition-all duration-500 scale-95"
+      >
+        <div class="relative mb-12">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="TYPE TO SEARCH..."
+            class="w-full bg-transparent text-3xl md:text-5xl font-black uppercase tracking-tighter text-white placeholder:text-white/20 outline-none pb-6 border-b border-white/10 focus:border-white/50 transition-all duration-300"
+            style="font-family: 'Inter', sans-serif"
+            autofocus
+            autocomplete="off"
+          />
+
+          <svg
+            id="search-icon-btn"
+            class="absolute right-0 top-2 text-white/40 hover:text-green-500 cursor-pointer transition-colors duration-300 z-10"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        <div id="search-results" class="search-results-container hidden mb-8">
+          <div
+            id="search-results-list"
+            class="search-results-list max-h-[50vh] overflow-y-auto space-y-2"
+          ></div>
+        </div>
+
+        <div id="search-default-grid" class="flex flex-wrap gap-8 animate-fade-in-up items-center">
+          <a
+            href="/primus"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+            >PRIMUS</a
+          >
+          <a
+            href="/trion"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+            >TRION</a
+          >
+          <a
+            href="/whitepaper"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+            >INTEL</a
+          >
+          <a
+            href="/news"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+            >NEWS</a
+          >
+          <a
+            href="/careers"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-green-500/50 hover:text-green-500 transition-colors duration-300"
+            >CAREERS</a
+          >
+          <a
+            href="/contact"
+            class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white/30 hover:text-white transition-colors duration-300"
+            >CONTACT</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div id="header-container"></div>
+    <script src="/components/header-loader.js"></script>
+    <script>
+      ;(function waitForHeader() {
+        const check = setInterval(() => {
+          const mobileNav = document.querySelector('.mobile-nav-bar')
+          const desktopNav = document.getElementById('main-nav')
+          if (mobileNav) {
+            mobileNav.classList.add('nav-inverted')
+            if (desktopNav) desktopNav.classList.add('nav-inverted')
+            clearInterval(check)
+          }
+        }, 50)
+
+        setTimeout(() => clearInterval(check), 5000)
+      })()
+    </script>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <section
+          class="min-h-screen flex items-end justify-start px-12 md:px-24 pb-32 relative overflow-hidden"
+          id="intel-cover"
+        >
+          <div class="absolute inset-0 z-0 bg-[#020202]">
+            <div
+              class="absolute inset-0 transition-transform duration-[20s] ease-linear scale-110 group-hover:scale-100 animate-slow-zoom"
+            >
+              <img
+                loading="lazy"
+                decoding="async"
+                src="media/nest-hero.webp"
+                alt="NEST Command Center"
+                title="NEST Sovereign Oversight Station"
+                class="w-full h-full object-cover opacity-60 grayscale-[0.3] contrast-110 brightness-75"
+              />
+            </div>
+
+            <div class="absolute inset-0 blueprint-grid opacity-[0.08]"></div>
+            <div
+              class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.8)_100%)]"
+            ></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"
+            ></div>
+
+            <div class="scan-line !opacity-20 animate-scan"></div>
+            <div
+              class="absolute inset-0 pointer-events-none opacity-[0.03] animate-flicker bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"
+            ></div>
+            <div
+              class="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-phosphor/[0.03] to-transparent pointer-events-none"
+            ></div>
+          </div>
+
+          <div class="relative z-10 max-w-5xl">
+            <h1
+              class="synco text-[10vw] font-black leading-[0.8] chrome-text mb-12 drop-shadow-[0_20px_50px_rgba(255,255,255,0.1)]"
+            >
+              NEST.
+            </h1>
+            <p class="text-3xl md:text-5xl font-light text-silver/80 leading-tight max-w-4xl">
+              The
+              <span class="text-white font-bold italic underline decoration-phosphor decoration-2"
+                >Sovereign Oversight Protocol.</span
+              ><br />
+              <span class="text-silver/40"
+                >Restoring human authority to the loop of automated response.</span
+              >
+            </p>
+          </div>
+
+          <div class="absolute top-1/2 right-24 -translate-y-1/2 hidden lg:block">
+            <div class="hud-bracket p-10 w-96 space-y-10 group overflow-hidden opacity-0"></div>
+          </div>
+
+          <div
+            class="absolute bottom-12 left-1/2 -translateX-1/2 flex flex-col items-center gap-4 opacity-30"
+          >
+            <div class="w-[1px] h-12 bg-gradient-to-t from-white to-transparent"></div>
+          </div>
+        </section>
+
+        <section
+          class="py-40 bg-black min-h-screen relative border-y border-white/5"
+          id="intel-philosophy"
+        >
+          <div class="max-w-[1400px] mx-auto px-12 md:px-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-32">
+              <div class="lg:col-span-4 sticky top-40 h-fit space-y-20">
+                <div class="space-y-6">
+                  <div class="synco text-4xl text-white font-black italic">
+                    STRATEGIC<br />BRIEF.
+                  </div>
+                  <div class="hud-line !bg-phosphor/40"></div>
+                </div>
+              </div>
+
+              <div class="lg:col-span-8 space-y-40">
+                <div class="space-y-12 intel-text-reveal">
+                  <h2
+                    class="synco text-6xl md:text-8xl text-white font-bold leading-none tracking-tighter"
+                  >
+                    THE AUTHORITY<br /><span
+                      class="italic text-white underline decoration-phosphor decoration-2"
+                      >PARADOX.</span
+                    >
+                  </h2>
+                  <div
+                    class="space-y-10 text-xl md:text-2xl text-silver/60 leading-relaxed font-light first-letter:text-7xl first-letter:font-black first-letter:text-white first-letter:mr-3 first-letter:float-left"
+                  >
+                    <p>
+                      Modern defense infrastructure faces a critical inversion: as automated systems
+                      accelerate, control often deteriorates. In the millisecond gap between
+                      algorithmic detection and kinetic response, context is lost. Algorithms
+                      process raw data, but only sovereign operators understand
+                      <strong>consequence</strong>.
+                    </p>
+                    <p>
+                      NEST serves as the infrastructure of accountability. It is not merely a
+                      control panel; it is an institutional check-and-balance designed to restore
+                      the "Human-in-the-Loop" without sacrificing the velocity of machine
+                      intelligence. It ensures that every high-stakes intervention is not just
+                      calculatedâ€”but authorized.
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  class="p-16 border-l-2 border-phosphor bg-white/[0.02] space-y-8 relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-phosphor/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  ></div>
+                  <p
+                    class="text-3xl md:text-4xl text-white font-bold leading-tight italic max-w-3xl relative z-10"
+                  >
+                    "We do not delegate lethal authority to software. NEST validates the machine's
+                    finding with human judgment before history is written."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="h-screen bg-white text-black relative overflow-hidden flex items-center"
+          id="phase-1"
+        >
+          <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 blueprint-grid opacity-[0.03]"></div>
+            <div
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-black pointer-events-none opacity-[0.02] synco italic whitespace-nowrap"
+            >
+              AGGREGATION
+            </div>
+          </div>
+
+          <div class="max-w-[1800px] mx-auto px-12 md:px-24 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+              <div class="lg:col-span-5 space-y-12">
+                <div class="space-y-6">
+                  <div class="flex items-center gap-4">
+                    <span class="w-12 h-[2px] bg-black"></span>
+                  </div>
+                  <h2
+                    class="synco text-7xl md:text-9xl font-black italic leading-[0.8] tracking-tighter"
+                  >
+                    TOTAL<br /><span class="text-white bg-black px-4 py-2">MESH.</span>
+                  </h2>
+                </div>
+
+                <div class="space-y-8 max-w-lg border-l-4 border-black pl-10 py-4 text-left">
+                  <p
+                    class="text-2xl md:text-3xl font-black italic uppercase leading-none text-black/90"
+                  >
+                    NEST connects every sensor to a central command.
+                  </p>
+                  <p class="text-lg text-black/50 font-medium leading-relaxed">
+                    By bringing together data from every active camera and sensor, NEST creates a
+                    single, clear view that connects machine speed with human authority.
+                  </p>
+                </div>
+              </div>
+
+              <div class="lg:col-span-7 relative h-[80vh] flex items-center justify-center">
+                <div class="relative w-full h-full group">
+                  <div
+                    class="absolute top-[10%] left-[5%] p-4 border border-black/10 bg-white/40 backdrop-blur-xl z-50 animate-float opacity-0"
+                  ></div>
+
+                  <div
+                    class="absolute bottom-[20%] right-[0%] p-4 border border-black/10 bg-white/40 backdrop-blur-xl z-50 animate-float-delayed opacity-0"
+                  ></div>
+
+                  <div
+                    class="absolute left-0 top-[15%] w-[45%] z-10 scale-90 group-hover:scale-100 group-hover:-translate-x-10 transition-all duration-[1.5s] ease-out opacity-40 group-hover:opacity-100 grayscale hover:grayscale-0"
+                  >
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="media/arclight-hero.webp"
+                      alt="ARCLIGHT Sentinel Tower"
+                      title="ARCLIGHT Sentinel Tower"
+                      class="w-full h-auto drop-shadow-2xl"
+                    />
+                  </div>
+
+                  <div
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] z-30 transition-transform duration-1000 group-hover:scale-110"
+                  >
+                    <div class="relative">
+                      <div
+                        class="absolute inset-0 bg-black/5 blur-3xl rounded-full group-hover:bg-black/10 transition-colors"
+                      ></div>
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src="media/primusbox.webp"
+                        alt="PRIMUS Predictive Engine"
+                        title="PRIMUS Predictive Engine"
+                        class="relative w-full h-auto drop-shadow-[0_40px_100px_rgba(0,0,0,0.4)]"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    class="absolute right-0 bottom-12 w-[40%] z-40 group-hover:translate-x-12 group-hover:-translate-y-8 transition-all duration-[1s] ease-out"
+                  >
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="media/trion-display.webp"
+                      alt="TRION Sensing Hardware"
+                      title="TRION Sensing Hardware"
+                      class="w-full h-auto drop-shadow-[20px_40px_80px_rgba(0,0,0,0.5)] contrast-125 filter grayscale hover:grayscale-0 transition-all"
+                    />
+                  </div>
+
+                  <div
+                    class="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none"
+                  >
+                    <div
+                      class="w-[80%] h-[80%] border-2 border-black/[0.03] rounded-full animate-spin-slow"
+                    ></div>
+                    <div
+                      class="w-[60%] h-[60%] border border-black/[0.05] rounded-full border-dashed animate-reverse-spin"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-40 bg-black overflow-hidden" id="nest-product-shot">
+          <div class="max-w-[1700px] mx-auto px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+              <div class="lg:col-span-8 relative group">
+                <div
+                  class="absolute inset-0 bg-phosphor/5 blur-[150px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                ></div>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/media/nest_display.webp"
+                  alt="NEST Platform Interface"
+                  class="w-full h-auto drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] relative z-10 media-c will-change-transform group-hover:scale-[1.02] transition-transform duration-1000"
+                />
+              </div>
+
+              <div class="lg:col-span-4 space-y-12 text-left">
+                <div class="space-y-4">
+                  <h3 class="synco text-4xl text-white font-black italic">
+                    COMMAND<br />CENTRICITY.
+                  </h3>
+                </div>
+                <p class="text-silver/60 text-lg leading-relaxed font-light">
+                  This is where the Taskforce resides. Every alert generated by the hardware mesh is
+                  routed here for manual validation. The interface provides a tactical overlay,
+                  combining real-time video, predictive models, and legal compliance checkpoints.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-60 bg-black relative" id="phase-2">
+          <div class="max-w-[1200px] mx-auto px-12 md:px-24">
+            <div class="space-y-40">
+              <div class="max-w-4xl space-y-12 text-left">
+                <h2 class="synco text-6xl md:text-8xl text-white font-black leading-[0.9]">
+                  ELIMINATING THE<br /><span class="chrome-text italic">UNKNOWN.</span>
+                </h2>
+                <p class="text-2xl text-silver/40 leading-relaxed">
+                  Automated systems can struggle with unusual situations. A piece of debris near a
+                  fence might trigger a full alarm. NEST prevents this through
+                  <strong>Human-Centric Validation.</strong>
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-24 intel-list">
+                <div
+                  class="space-y-8 p-12 border border-white/5 bg-white/[0.01] rounded-3xl text-left"
+                >
+                  <h4 class="synco text-3xl text-white font-bold italic">Human Insight.</h4>
+                  <p class="text-silver/60 text-lg leading-relaxed">
+                    Software sees pixels; people understand context. A NEST Operator can instantly
+                    tell the difference between a planned intrusion and a harmless event. False
+                    alarms are virtually eliminated.
+                  </p>
+                </div>
+                <div
+                  class="space-y-8 p-12 border border-white/5 bg-white/[0.01] rounded-3xl text-left"
+                >
+                  <h4 class="synco text-3xl text-white font-bold italic">Accountability.</h4>
+                  <p class="text-silver/60 text-lg leading-relaxed">
+                    In the event of an incident, NEST records exactly who authorized a response, why
+                    they did so, and what information they used to make that choice.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="h-screen bg-white text-black relative overflow-hidden flex items-center"
+          id="phase-3"
+        >
+          <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 blueprint-grid opacity-[0.02]"></div>
+            <div
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-black pointer-events-none opacity-[0.015] synco italic whitespace-nowrap"
+            >
+              AUTHORITY
+            </div>
+          </div>
+
+          <div class="max-w-[1800px] mx-auto px-12 md:px-24 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div class="space-y-10 text-left">
+                <div class="space-y-6">
+                  <h2
+                    class="synco text-6xl md:text-8xl font-black italic leading-[0.85] tracking-tighter"
+                  >
+                    SOVEREIGN<br /><span class="text-white bg-black px-4 py-2">AUTHORITY.</span>
+                  </h2>
+                </div>
+
+                <div class="space-y-6 max-w-xl border-l-4 border-black pl-8 py-4">
+                  <p
+                    class="text-xl md:text-2xl font-black italic uppercase leading-tight text-black/90"
+                  >
+                    AI detects. Humans decide.
+                  </p>
+                  <p class="text-base md:text-lg text-black/60 font-medium leading-relaxed">
+                    NEST closes the gap between detection and decision. Our platform reduces delay
+                    while keeping trained professionals in absolute control of every significant
+                    action.
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative h-[60vh] flex items-center justify-center">
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <div class="relative">
+                    <div
+                      class="w-64 h-64 md:w-80 md:h-80 border-2 border-black/10 rounded-full flex items-center justify-center"
+                    >
+                      <div
+                        class="w-48 h-48 md:w-60 md:h-60 border border-black/5 rounded-full flex items-center justify-center"
+                      >
+                        <div
+                          class="w-32 h-32 md:w-40 md:h-40 bg-black rounded-full flex items-center justify-center"
+                        >
+                          <div class="text-white synco text-3xl md:text-4xl font-black italic">
+                            NEST
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute -top-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-white border border-black/10 shadow-lg"
+                    >
+                      <div class="text-xs font-black">AI DETECTION</div>
+                    </div>
+                    <div
+                      class="absolute -bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-black text-white shadow-lg"
+                    >
+                      <div class="text-xs font-black">HUMAN DECISION</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="capabilities-horizontal-section" id="capabilities-grid">
+          <div class="capabilities-bg-grid"></div>
+
+          <div class="capabilities-container">
+            <div class="capabilities-header">
+              <img
+                loading="lazy"
+                decoding="async"
+                src="media/avzdax-logo.png"
+                alt="AVZDAX"
+                class="capabilities-logo"
+              />
+              <h2 class="capabilities-title synco">
+                HYBRID<br />
+                <span>INTELLIGENCE</span>
+              </h2>
+            </div>
+
+            <div class="capabilities-scroll-wrapper">
+              <div class="capabilities-cards-track">
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">HUMAN-IN<br />THE-HUB</h3>
+                    <p class="cap-card-description">
+                      NEST places trained Operators at the core of every critical decision. Software
+                      processes the data, but human experts check high-priority alerts, ensuring
+                      every action is correct, safe, and verified.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">BEHAVIORAL<br />AI</h3>
+                    <p class="cap-card-description">
+                      Smart algorithms identify suspicious activity beyond simple motion. NEST
+                      recognizes unusual patterns like loitering or unauthorized framing and sends
+                      flagged events for immediate human review.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">THREAT<br />PREDICTION</h3>
+                    <p class="cap-card-description">
+                      NEST identifies warning signs early: hesitation, scouting, or repeated
+                      approaches. The system detects intent before it becomes action, allowing for
+                      proactive safety measures.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">FALSE ALARM<br />REDUCTION</h3>
+                    <p class="cap-card-description">
+                      Telling the difference between routine activity and real threats stops alert
+                      fatigue. NEST's analysis filters out distractions shadows, weather, animals,
+                      so your team responds only to what matters.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">24/7 REMOTE<br />MONITORING</h3>
+                    <p class="cap-card-description">
+                      NEST combines technology with round-the-clock remote security monitoring. Your
+                      property is never unattended, every alert is assessed, verified, and handled
+                      according to your protocols.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+
+                <div class="cap-card">
+                  <div>
+                    <h3 class="cap-card-title synco">INFRASTRUCTURE<br />FUSION</h3>
+                    <p class="cap-card-description">
+                      NEST works with your existing cameras and security systems. Upgrade to
+                      AI-enhanced monitoring without replacing all your hardware,maximizing the
+                      value of your current investment.
+                    </p>
+                  </div>
+                  <div class="cap-card-footer">
+                    <span class="cap-card-line"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cap-progress-container">
+              <div class="cap-progress-bar"></div>
+            </div>
+
+            <div class="capabilities-cta" style="margin-bottom: 150px">
+              <a href="/contact" class="cap-cta-btn">
+                Request Information
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <style>
+      .social-glass-btn {
+        border: none !important;
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .social-glass-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+      .social-glass-btn:hover {
+        opacity: 0.7;
+        background: transparent !important;
+        border-radius: 0;
+        box-shadow: none !important;
+      }
+
+      @media (max-width: 1024px) {
+        footer {
+          padding-top: 60px !important;
+          padding-bottom: 60px !important;
+          padding-left: 24px !important;
+          padding-right: 24px !important;
+        }
+        #sovereign-footer .grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 40px 20px !important;
+        }
+        #sovereign-footer .lg\:col-span-2 {
+          grid-column: span 2 !important;
+          text-align: left !important;
+          margin-bottom: 20px;
+          padding-bottom: 40px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        #sovereign-footer img {
+          display: none !important;
+        }
+        #sovereign-footer p {
+          font-size: 14px !important;
+          font-weight: 800 !important;
+          line-height: 1.4 !important;
+          color: #ffffff !important;
+          max-width: 100% !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+          margin-bottom: 20px !important;
+        }
+        #sovereign-footer h4 {
+          font-size: 10px !important;
+          font-weight: 900 !important;
+          font-style: italic !important;
+          margin-bottom: 20px !important;
+          color: rgba(255, 255, 255, 0.4) !important;
+          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-bottom: none !important;
+          padding-top: 16px !important;
+          letter-spacing: 0.4em !important;
+          text-transform: uppercase !important;
+        }
+        #sovereign-footer .flex-col {
+          gap: 12px !important;
+        }
+        #sovereign-footer a.footer-link-hover {
+          font-size: 14px !important;
+          font-weight: 900 !important;
+          padding: 0 !important;
+          background: transparent !important;
+          letter-spacing: 0.05em !important;
+          text-transform: uppercase !important;
+          color: #ffffff !important;
+          transform: none !important;
+        }
+
+        #sovereign-footer a.footer-link-hover.text-green-500 {
+          color: #22c55e !important;
+        }
+        #sovereign-footer .footer-watermark {
+          font-size: clamp(15vw, 25vw, 400px) !important;
+          color: rgba(255, 255, 255, 0.18) !important;
+          opacity: 1 !important;
+        }
+
+        #sovereign-footer .mt-40 {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          margin-top: 60px !important;
+          padding-top: 90px !important;
+        }
+      }
+    </style>
+
+    <footer
+      class="relative pt-40 pb-[24rem] px-12 overflow-hidden"
+      id="sovereign-footer"
+      style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a"
+    >
+      <div
+        class="footer-watermark"
+        style="
+          position: absolute;
+          bottom: -0.15em;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: clamp(15vw, 25vw, 400px);
+          font-weight: 900;
+          font-style: italic;
+          text-transform: uppercase;
+          letter-spacing: -0.05em;
+          color: rgba(255, 255, 255, 0.18);
+          pointer-events: none;
+          white-space: nowrap;
+          z-index: 0;
+          line-height: 1;
+        "
+      >
+        AVZDAX
+      </div>
+
+      <div
+        class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left"
+      >
+        <div class="lg:col-span-2 space-y-12 text-left">
+          <a href="/" aria-label="Home" class="hidden md:block"
+            ><img
+              loading="lazy"
+              decoding="async"
+              src="/media/avzdax-logo.png"
+              alt="AVZDAX Logo"
+              class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"
+          /></a>
+          <p
+            class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left"
+          >
+            We build the world's most advanced defense and security systems. Protecting nations,
+            critical infrastructure, and global security interests.
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="https://linkedin.com/company/avzdax"
+              class="social-glass-btn"
+              aria-label="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                />
+              </svg>
+            </a>
+            <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                />
+              </svg>
+            </a>
+            <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://medium.com/@AVZDAXtechnologies"
+              class="social-glass-btn"
+              aria-label="Medium"
+            >
+              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                <path
+                  d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4
+            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+          >
+            SOLUTIONS
+          </h4>
+          <div
+            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+          >
+            <a href="/primus" class="footer-link-hover">PRIMUS</a>
+            <a href="/nest" class="footer-link-hover">NEST</a>
+            <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
+            <a href="/trion" class="footer-link-hover">TRION</a>
+            <a href="/obex" class="footer-link-hover">OBEX</a>
+            <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4
+            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+          >
+            INDUSTRIES
+          </h4>
+          <div
+            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+          >
+            <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
+            <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
+            <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
+            <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
+            <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4
+            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+          >
+            COMPANY
+          </h4>
+          <div
+            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+          >
+            <a href="/about" class="footer-link-hover">ABOUT US</a
+            ><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a
+            ><a href="/news" class="footer-link-hover">NEWSROOM</a
+            ><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a
+            ><a href="/contact" class="footer-link-hover">CONTACT</a>
+          </div>
+        </div>
+        <div class="text-left">
+          <h4
+            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+          >
+            SUPPORT
+          </h4>
+          <div
+            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+          >
+            <a href="/contact" class="footer-link-hover">HELP CENTER</a
+            ><a href="/ethics" class="footer-link-hover flex items-center gap-3"
+              >STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a
+            ><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a
+            ><a href="/ethics" class="footer-link-hover">TERMS</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger)
+      const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
+
+      window.lenis = lenis
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+
+      function showPreview(id) {
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+        })
+        const target = document.getElementById('p-' + id)
+        if (target) target.classList.add('active')
+      }
+
+      document.querySelectorAll('.nav-item').forEach(navItem => {
+        navItem.addEventListener('mouseleave', () => {
+          document
+            .querySelectorAll('.menu-preview-img')
+            .forEach(img => img.classList.remove('active'))
+        })
+      })
+
+      function toggleSearch() {
+        const overlay = document.getElementById('search-overlay')
+        if (!overlay) return
+        if (overlay.classList.contains('active')) {
+          overlay.classList.remove('active')
+          overlay.classList.add('hidden')
+          overlay.classList.remove('flex')
+          document.body.style.overflow = ''
+        } else {
+          overlay.classList.remove('hidden')
+          overlay.classList.add('flex')
+          overlay.classList.add('active')
+          document.body.style.overflow = 'hidden'
+          setTimeout(() => document.getElementById('search-input')?.focus(), 100)
+        }
+      }
+      window.toggleSearch = toggleSearch
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          const overlay = document.getElementById('search-overlay')
+          if (overlay?.classList.contains('active')) toggleSearch()
+          const mobileMenu = document.getElementById('mobile-menu-overlay')
+          if (mobileMenu?.style.display !== 'none') closeMobileMenu()
+        }
+      })
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const v = entry.target
+              if (v.dataset.lazyVideo !== undefined && !v.dataset.loaded) {
+                v.load()
+                v.play()
+                v.dataset.loaded = 'true'
+              }
+            } else {
+              const v = entry.target
+              if (v.dataset.loaded === 'true') v.pause()
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+      document.querySelectorAll('video[data-lazy-video]').forEach(v => observer.observe(v))
+
+      gsap.utils.toArray('.intel-text-reveal').forEach(section => {
+        gsap.from(section.querySelectorAll('h2, p'), {
+          scrollTrigger: { trigger: section, start: 'top 80%' },
+          y: 40,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.2,
+          ease: 'power3.out',
+        })
+      })
+
+      gsap.utils.toArray('.media-c').forEach(el => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 85%' },
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power3.out',
+        })
+      })
+
+      const sections = ['#intel-philosophy', '#phase-1', '#phase-2', '#phase-3']
+      sections.forEach((id, i) => {
+        ScrollTrigger.create({
+          trigger: id,
+          start: 'top 50%',
+          end: 'bottom 50%',
+          onEnter: () => updateSidebar(i),
+          onEnterBack: () => updateSidebar(i),
+        })
+      })
+
+      function updateSidebar(index) {
+        const links = document.querySelectorAll('#intel-philosophy .mono.text-xs')
+        const lines = document.querySelectorAll('#intel-philosophy span.h-[1px]')
+        links.forEach((l, i) => (l.style.opacity = i === index ? '1' : '0.4'))
+        lines.forEach(
+          (l, i) => (l.style.backgroundColor = i === index ? '#00ff41' : 'rgba(255,255,255,0.1)')
+        )
+      }
+
+      ;(function () {
+        function initCapabilitiesHorizontalScroll() {
+          if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return
+
+          const section = document.querySelector('#capabilities-grid')
+          const track = document.querySelector('.capabilities-cards-track')
+          const progressBar = document.querySelector('.cap-progress-bar')
+
+          if (!section || !track) return
+
+          ScrollTrigger.getAll().forEach(t => {
+            if (t.trigger === section) t.kill()
+          })
+
+          const cards = track.querySelectorAll('.cap-card')
+          if (cards.length === 0) return
+
+          const isMobile = window.innerWidth <= 768
+          const cardWidth = cards[0].offsetWidth
+          const gap = isMobile ? 16 : 32
+          const padding = isMobile ? 32 : 120
+          const totalCardsWidth = cardWidth * cards.length + gap * (cards.length - 1)
+          const viewportWidth = window.innerWidth
+          const scrollDistance = totalCardsWidth - viewportWidth + padding
+
+          if (scrollDistance <= 0) return
+
+          gsap.to(track, {
+            x: -scrollDistance,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: '+=' + scrollDistance * 1.2,
+              pin: true,
+              scrub: 0.8,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: self => {
+                if (progressBar) {
+                  progressBar.style.width = self.progress * 100 + '%'
+                }
+              },
+              onEnter: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeave: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+              onEnterBack: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeaveBack: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+            },
+          })
+        }
+
+        if (document.readyState === 'complete') {
+          setTimeout(initCapabilitiesHorizontalScroll, 200)
+        } else {
+          window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200))
+        }
+
+        let resizeTimeout
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout)
+          resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh()
+            initCapabilitiesHorizontalScroll()
+          }, 250)
+        })
+      })()
+      ;(function () {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return
+
+        const phase1Section = document.getElementById('phase-1')
+        if (!phase1Section) return
+
+        ScrollTrigger.create({
+          trigger: phase1Section,
+          start: 'top top',
+          end: '+=100%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.5,
+          onEnter: () => {
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeave: () => {
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+          onEnterBack: () => {
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeaveBack: () => {
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+        })
+      })()
+      ;(function () {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return
+
+        const phase3Section = document.getElementById('phase-3')
+        if (!phase3Section) return
+
+        ScrollTrigger.create({
+          trigger: phase3Section,
+          start: 'top top',
+          end: '+=100%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.5,
+          onEnter: () => {
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeave: () => {
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+          onEnterBack: () => {
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeaveBack: () => {
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+        })
+      })()
+
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav')
+        if (!nav) return
+        if (window.scrollY > 0) nav.classList.add('nav-scrolled')
+        else nav.classList.remove('nav-scrolled')
+      })
+
+      const capObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active-node')
+            } else {
+              entry.target.classList.remove('active-node')
+            }
+          })
+        },
+        { threshold: 0.6, root: document.querySelector('.capabilities-carousel') }
+      )
+      document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card))
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          const mobileMenu = document.getElementById('mobile-menu-overlay')
+          if (mobileMenu && mobileMenu.style.display !== 'none') {
+            if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu()
+          }
+        }
+      })
+    </script>
+    <script src="/media/site-utils.js"></script>
+  </body>
+</html>
+

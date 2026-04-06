@@ -1,0 +1,3202 @@
+<!doctype html>
+<html lang="en" class="bg-black">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARCLIGHT | THE SOVEREIGN SHIELD | AVZDAX</title>
+    <meta
+      name="description"
+      content="ARCLIGHT is a city-wide monitoring tower for smart city deployments. Urban intelligence at scale with real-time threat detection."
+    />
+    <meta property="og:title" content="ARCLIGHT — Urban Tower | AVZDAX" />
+    <meta
+      property="og:description"
+      content="ARCLIGHT is a city-wide monitoring tower for smart city deployments. Urban intelligence at scale with real-time threat detection."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avzdax.com/arclight.html" />
+    <meta property="og:image" content="https://avzdax.com/media/avzdax-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ARCLIGHT — Urban Tower | AVZDAX" />
+    <meta
+      name="twitter:description"
+      content="ARCLIGHT is a city-wide monitoring tower for smart city deployments. Urban intelligence at scale with real-time threat detection."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="video-optimizer.js" defer></script>
+    <link href="/components/footer-styles.css" rel="stylesheet" />
+    <link href="/components/header-styles.css" rel="stylesheet" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Syncopate:wght@700;800&display=swap');
+
+      :root {
+          --void: #030303; --white: #ffffff; --alloy: #86868B;
+          --phosphor: #00FF41; --cyan: #00F3FF; --glass: rgba(255, 255, 255, 0.03);
+      }
+
+
+
+
+      @media screen and (max-width: 1600px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 420px !important;
+              min-width: 420px !important;
+              height: 520px !important;
+              padding: 45px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 40px !important;
+          }
+          .brief-card {
+              padding: 60px !important;
+          }
+      }
+
+      @media screen and (max-width: 1400px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 360px !important;
+              min-width: 360px !important;
+              height: 480px !important;
+              padding: 38px !important;
+          }
+          .cap-card-title {
+              font-size: 1.8rem !important;
+          }
+          .cap-card-description {
+              font-size: 14px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 30px !important;
+              gap: 24px !important;
+          }
+          .brief-card {
+              padding: 50px !important;
+          }
+      }
+
+      @media screen and (max-width: 1280px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 320px !important;
+              min-width: 320px !important;
+              height: 450px !important;
+              padding: 32px !important;
+          }
+          .cap-card-title {
+              font-size: 1.5rem !important;
+          }
+          .cap-card-description {
+              font-size: 13px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 20px !important;
+              gap: 20px !important;
+          }
+          .capabilities-header {
+              padding: 0 20px !important;
+              margin-bottom: 40px !important;
+          }
+          .brief-card {
+              padding: 40px !important;
+          }
+          .hardware-core {
+              width: 450px !important;
+          }
+      }
+
+
+      @media screen and (max-width: 1024px) and (min-width: 769px) {
+
+          .cap-card {
+              flex: 0 0 calc(50vw - 40px) !important;
+              min-width: calc(50vw - 40px) !important;
+              max-width: 400px !important;
+              height: 480px !important;
+              padding: 36px !important;
+          }
+          .capabilities-cards-track {
+              gap: 20px !important;
+              padding: 0 24px !important;
+          }
+          .cap-card-title { font-size: 1.8rem !important; }
+          .cap-card-description { font-size: 14px !important; line-height: 1.6 !important; }
+          .cap-card-tag { font-size: 9px !important; }
+
+
+          .brief-card { padding: 40px !important; }
+
+
+          .hardware-core { width: 350px !important; }
+
+
+          .max-w-7xl, .max-w-6xl { padding-left: 40px !important; padding-right: 40px !important; }
+      }
+
+      body { font-family: 'Inter', sans-serif; background: var(--void); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
+      .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
+      .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+
+      .hud-border { position: fixed; inset: 30px; border: 1px solid rgba(255,255,255,0.05); pointer-events: none; z-index: 100; }
+      .hud-data { position: absolute; font-family: 'JetBrains Mono'; font-size: 8px; color: var(--cyan); font-weight: 500; }
+
+
+      .main-container { position: relative; width: 100%; }
+      .pinned-stage { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+
+      .tower-wrap { position: absolute; height: 90vh; z-index: 5; will-change: transform, opacity; }
+      .tower-core { height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 0 100px rgba(0,243,255,0.05)); }
+
+
+      .layer { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; justify-content: center; z-index: 10; }
+      .brief-card { background: var(--glass); backdrop-filter: blur(40px); border: 1px solid rgba(255,255,255,0.1); padding: 80px; position: absolute; box-shadow: 0 100px 200px rgba(0,0,0,0.8); }
+      .evidence-vid { width: 100%; height: 450px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+
+
+      .lab-phase { background: var(--white); color: var(--void); }
+      .blueprint-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+
+
+      .hardware-core {
+          position: absolute; width: 550px; z-index: 50; pointer-events: none;
+          filter: drop-shadow(0 0 80px rgba(255,255,255,0.05));
+          will-change: transform;
+      }
+
+
+      .reveal-on-scroll,
+      .scroll-reveal {
+          opacity: 0;
+          transform: translateY(60px);
+          transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-on-scroll.revealed,
+      .scroll-reveal.revealed {
+          opacity: 1;
+          transform: translateY(0);
+      }
+
+
+      .reveal-delay-100 { transition-delay: 0.1s; }
+      .reveal-delay-200 { transition-delay: 0.2s; }
+      .reveal-delay-300 { transition-delay: 0.3s; }
+      .reveal-delay-500 { transition-delay: 0.5s; }
+
+      ::-webkit-scrollbar { display: none; }
+
+
+      nav {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      nav.nav-scrolled {
+          background: rgba(0, 0, 0, 0.9);
+          -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+      }
+
+
+      nav.nav-inverted {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      nav.nav-inverted .nav-item > a {
+          color: rgba(0, 0, 0, 0.7) !important;
+      }
+
+      nav.nav-inverted .nav-item:hover > a {
+          color: #000 !important;
+      }
+
+      nav.nav-inverted .nav-item > a::after {
+          background: linear-gradient(90deg, #000, #000) !important;
+      }
+
+      nav.nav-inverted .text-white,
+      nav.nav-inverted [class*="text-white"] {
+          color: #000 !important;
+      }
+
+
+      nav.nav-inverted .nav-links-container {
+          opacity: 0 !important;
+          pointer-events: none !important;
+      }
+
+      nav.nav-inverted .brand-logo {
+          filter: invert(1) brightness(0) !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+      }
+
+      nav.nav-inverted .schedule-btn {
+          background: #000 !important;
+          color: #fff !important;
+          border-color: #000 !important;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+      }
+
+      nav.nav-inverted .schedule-btn:hover {
+          background: #333 !important;
+          transform: translateY(-2px) !important;
+      }
+
+
+      .mobile-nav-bar.nav-inverted {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+          filter: invert(1) brightness(0);
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+          stroke: #000 !important;
+      }
+
+
+      nav.nav-dark-minimal {
+          background: transparent !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      nav.nav-dark-minimal .nav-links-container {
+          opacity: 0 !important;
+          pointer-events: none !important;
+      }
+
+      nav.nav-dark-minimal .brand-logo {
+          filter: none !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+      }
+
+      nav.nav-dark-minimal .schedule-btn {
+          background: #fff !important;
+          color: #000 !important;
+          border-color: #fff !important;
+      }
+
+      nav.nav-dark-minimal .schedule-btn:hover {
+          background: rgba(255,255,255,0.9) !important;
+          transform: translateY(-2px) !important;
+      }
+
+
+      .mobile-nav-bar.nav-dark-minimal {
+          background: transparent !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+          filter: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+          stroke: #fff !important;
+      }
+
+
+
+
+      .tactical-search-btn {
+          width: 52px; height: 52px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.1);
+          cursor: pointer;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+          clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      }
+
+      .tactical-search-btn::before,
+      .tactical-search-btn::after {
+          content: '';
+          position: absolute;
+          width: 12px; height: 12px;
+          border: 1.5px solid rgba(255,255,255,0.3);
+          transition: all 0.4s ease;
+      }
+      .tactical-search-btn::before {
+          top: 3px; left: 3px;
+          border-right: none; border-bottom: none;
+      }
+      .tactical-search-btn::after {
+          bottom: 3px; right: 3px;
+          border-left: none; border-top: none;
+      }
+
+      .tactical-search-btn .scan-line {
+          position: absolute;
+          width: 100%; height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+          top: -100%;
+          left: 0;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      .tactical-search-btn:hover .scan-line {
+          opacity: 1;
+          animation: hud-scan 1.2s ease-in-out infinite;
+      }
+      @keyframes hud-scan {
+          0% { top: -2px; }
+          100% { top: calc(100% + 2px); }
+      }
+
+      .tactical-search-btn:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.25);
+          box-shadow:
+              0 0 30px rgba(255,255,255,0.08),
+              inset 0 0 15px rgba(255,255,255,0.03),
+              0 0 60px rgba(255,255,255,0.03);
+          transform: scale(1.08);
+      }
+      .tactical-search-btn:hover::before,
+      .tactical-search-btn:hover::after {
+          border-color: rgba(255,255,255,0.6);
+          width: 14px; height: 14px;
+      }
+
+      .tactical-search-btn svg {
+          width: 22px; height: 22px;
+          stroke: rgba(255,255,255,0.5);
+          stroke-width: 1.5;
+          transition: all 0.4s ease;
+          position: relative;
+          z-index: 2;
+      }
+      .tactical-search-btn:hover svg {
+          stroke: #fff;
+          filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
+          transform: scale(1.1);
+      }
+
+      .tactical-search-btn:active {
+          transform: scale(0.95);
+          background: rgba(255,255,255,0.1);
+      }
+
+
+      nav.nav-inverted .tactical-search-btn {
+          background: rgba(0,0,0,0.02) !important;
+          border-color: rgba(0,0,0,0.15) !important;
+      }
+      nav.nav-inverted .tactical-search-btn::before,
+      nav.nav-inverted .tactical-search-btn::after {
+          border-color: rgba(0,0,0,0.3) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover {
+          background: rgba(0,0,0,0.05) !important;
+          border-color: rgba(0,0,0,0.3) !important;
+          box-shadow: 0 0 30px rgba(0,0,0,0.1) !important;
+      }
+      nav.nav-inverted .tactical-search-btn svg {
+          stroke: rgba(0,0,0,0.5) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover svg {
+          stroke: #000 !important;
+      }
+      nav.nav-inverted .tactical-search-btn .scan-line {
+          background: linear-gradient(90deg, transparent, rgba(0,0,0,0.5), transparent) !important;
+      }
+
+
+      nav.nav-inverted .tactical-search-btn {
+          opacity: 0 !important;
+          pointer-events: none !important;
+          transform: scale(0.8) !important;
+      }
+
+
+      .mega-menu-wrapper {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          opacity: 0;
+          pointer-events: none;
+          visibility: hidden;
+          transform: translateY(-10px) scale(0.98);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1000;
+      }
+
+
+      html, body { max-width: 100%; overflow-x: hidden; }
+      *, *::before, *::after { box-sizing: border-box; }
+
+      .nav-item:hover .mega-menu-wrapper,
+      .nav-item.is-active .mega-menu-wrapper {
+          opacity: 1;
+          pointer-events: auto;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+      }
+
+      .mega-menu-content {
+          background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow:
+              0 20px 40px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          padding: 60px 0;
+          position: relative;
+      }
+
+      .mega-menu-content::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      }
+
+
+      .mega-menu-content .max-w-6xl {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 300px;
+          gap: 48px;
+          padding: 0 40px;
+      }
+
+
+      .menu-section {
+          padding: 24px 0;
+      }
+
+      .menu-section h4 {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          color: rgba(255, 255, 255, 0.5);
+          text-transform: uppercase;
+          margin-bottom: 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding-bottom: 12px;
+      }
+
+
+      .grid-item-hover {
+          display: block;
+          padding: 16px 20px;
+          margin: 4px 0;
+          border-radius: 12px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          border: 1px solid transparent;
+      }
+
+      .grid-item-hover:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.1);
+          transform: translateX(4px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid-item-hover span:first-child {
+          display: block;
+          font-size: 15px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 4px;
+          transition: color 0.3s ease;
+      }
+
+      .grid-item-hover span:last-child {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 400;
+          transition: color 0.3s ease;
+      }
+
+      .grid-item-hover:hover span:first-child {
+          color: #00ff41;
+      }
+
+      .grid-item-hover:hover span:last-child {
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+
+      .menu-preview-img {
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+          object-fit: contain; opacity: 0;
+          transform: scale(0.8) translateY(20px);
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+      }
+      .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
+
+
+      .strategic-theaters {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 24px;
+      }
+
+      .strategic-theaters h3 {
+          font-size: 12px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+      .strategic-theaters ul li {
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.3s ease;
+      }
+
+      .strategic-theaters ul li:last-child {
+          border-bottom: none;
+      }
+
+      .strategic-theaters ul li:hover {
+          color: #00ff41;
+          transform: translateX(4px);
+      }
+
+      .strategic-theaters .dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          margin-right: 12px;
+          transition: background 0.3s ease;
+      }
+
+      .strategic-theaters ul li:hover .dot {
+          background: #00ff41;
+      }
+
+
+      .intelligence-layer {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 24px;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+      }
+
+      .intelligence-layer h4 {
+          font-size: 14px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 12px;
+      }
+
+      .intelligence-layer p {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.5;
+          margin-bottom: 16px;
+      }
+
+      .intelligence-layer .status {
+          font-size: 11px;
+          color: #00ff41;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+
+      .hero-video {
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          -webkit-transform: translateZ(0);
+          -moz-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          -o-transform: translateZ(0);
+      }
+
+
+      .hero-stage { height: 100dvh; min-height: 100vh; }
+      .hero-video-full {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          min-width: 100%;
+          min-height: 100%;
+          z-index: 0;
+      }
+
+      .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+      .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+      .grid-item-hover:hover span { color: #000000 !important; }
+      .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+      .premium-white-gloss {
+          background: #FBFBFB;
+          position: relative;
+          overflow: hidden;
+      }
+      .premium-white-gloss::after {
+          content: ''; position: absolute; inset: 0;
+          background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+          opacity: 0.3; pointer-events: none;
+      }
+
+
+      #search-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 500;
+          background: rgba(0,0,0,0.95);
+          backdrop-filter: blur(30px);
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+
+      .svg-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+
+
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+
+      .capabilities-horizontal-section {
+          background: #030303;
+          position: relative;
+          overflow: hidden;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .capabilities-bg-grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.08;
+          background-image:
+              linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+          background-size: 80px 80px;
+          pointer-events: none;
+      }
+
+      .capabilities-container {
+          max-width: 100%;
+          margin: 0 auto;
+          position: relative;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 100vh;
+      }
+
+      .capabilities-header {
+          text-align: center;
+          margin-bottom: 60px;
+          padding: 0 40px;
+      }
+
+      .capabilities-logo {
+          height: 24px;
+          margin-bottom: 30px;
+          filter: invert(1);
+      }
+
+      .capabilities-title {
+          font-size: clamp(2.5rem, 6vw, 4.5rem);
+          font-weight: 900;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          margin: 0;
+      }
+
+      .capabilities-title span {
+          color: rgba(255,255,255,0.2);
+      }
+
+
+      .capabilities-scroll-wrapper {
+          overflow: hidden;
+          width: 100%;
+      }
+
+      .capabilities-cards-track {
+          display: flex;
+          gap: 32px;
+          padding: 0 60px;
+          will-change: transform;
+      }
+
+
+      .cap-card {
+          flex: 0 0 480px;
+          min-width: 480px;
+          height: 560px;
+          background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 8px;
+          position: relative;
+          padding: 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow: hidden;
+      }
+
+      .cap-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+      }
+
+      .cap-card:hover {
+          border-color: rgba(255,255,255,0.12);
+          background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12,12,12,0.98) 100%);
+          transform: translateY(-12px);
+          box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+      }
+
+      .cap-card:hover::before {
+          opacity: 1;
+      }
+
+      .cap-card-number {
+          position: absolute;
+          top: 40px;
+          right: 45px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 13px;
+          color: rgba(255,255,255,0.15);
+          font-weight: 600;
+          letter-spacing: 0.1em;
+      }
+
+      .cap-card-tag {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          color: rgba(255,255,255,0.35);
+          text-transform: uppercase;
+          letter-spacing: 0.5em;
+          margin-bottom: 20px;
+      }
+
+      .cap-card-title {
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 900;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: -0.03em;
+          line-height: 0.95;
+          margin: 0 0 30px 0;
+      }
+
+      .cap-card-description {
+          font-size: 15px;
+          color: rgba(255,255,255,0.45);
+          line-height: 1.8;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+          max-width: 380px;
+          transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-description {
+          color: rgba(255,255,255,0.65);
+      }
+
+      .cap-card-footer {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-top: auto;
+          padding-top: 40px;
+      }
+
+      .cap-card-line {
+          width: 40px;
+          height: 1px;
+          background: rgba(255,255,255,0.15);
+          transition: all 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-line {
+          width: 60px;
+          background: rgba(255,255,255,0.4);
+      }
+
+      .cap-card-status {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          color: rgba(255,255,255,0.25);
+          text-transform: uppercase;
+          letter-spacing: 0.3em;
+          transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-status {
+          color: rgba(255,255,255,0.6);
+      }
+
+
+      .cap-progress-container {
+          display: block;
+          width: calc(100% - 120px);
+          height: 2px;
+          background: rgba(255,255,255,0.06);
+          margin: 30px 60px 0;
+          border-radius: 2px;
+          overflow: hidden;
+      }
+      .cap-progress-bar {
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+          border-radius: 2px;
+          transition: width 0.05s ease;
+      }
+
+
+      .capabilities-cta {
+          text-align: center;
+          margin-top: 20px;
+      }
+
+      .cap-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          padding: 20px 48px;
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.15);
+          color: white;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.3em;
+          text-decoration: none;
+          border-radius: 2px;
+          transition: all 0.4s ease;
+      }
+
+      .cap-cta-btn:hover {
+          background: #fff;
+          color: #000;
+          border-color: #fff;
+          transform: translateY(-2px);
+      }
+
+
+      @media (min-width: 1400px) {
+          .cap-card {
+              flex: 0 0 520px;
+              min-width: 520px;
+              height: 600px;
+              padding: 55px;
+          }
+          .cap-card-title {
+              font-size: 3.2rem;
+          }
+          .cap-card-description {
+              font-size: 16px;
+          }
+      }
+
+
+      @media (min-width: 769px) and (max-width: 1399px) {
+          .capabilities-container {
+              padding: 0;
+          }
+          .capabilities-header {
+              margin-bottom: 50px;
+          }
+      }
+
+
+      @media (max-width: 768px) {
+          .capabilities-horizontal-section {
+              min-height: 100vh;
+          }
+          .capabilities-container {
+              padding: 100px 0 60px;
+              min-height: 100vh;
+          }
+          .capabilities-header {
+              padding: 0 20px;
+              margin-bottom: 40px;
+          }
+          .capabilities-logo {
+              height: 20px;
+              margin-bottom: 24px;
+          }
+          .capabilities-title {
+              font-size: 2.2rem;
+              letter-spacing: -0.03em;
+          }
+          .capabilities-cards-track {
+              gap: 16px;
+              padding: 0 16px;
+          }
+          .cap-card {
+              flex: 0 0 calc(100vw - 48px);
+              min-width: calc(100vw - 48px);
+              max-width: calc(100vw - 48px);
+              height: 520px;
+              padding: 36px;
+              border-radius: 12px;
+          }
+          .cap-card-tag {
+              font-size: 9px;
+              letter-spacing: 0.4em;
+              margin-bottom: 16px;
+          }
+          .cap-card-title {
+              font-size: 2rem;
+              margin-bottom: 24px;
+              line-height: 0.9;
+          }
+          .cap-card-description {
+              font-size: 14px;
+              line-height: 1.7;
+              color: rgba(255,255,255,0.5);
+          }
+          .cap-card-footer {
+              padding-top: 30px;
+          }
+          .cap-card-number {
+              top: 32px;
+              right: 32px;
+              font-size: 11px;
+          }
+          .cap-progress-container {
+              width: calc(100% - 32px);
+              margin: 40px 16px 0;
+              height: 3px;
+          }
+          .capabilities-cta {
+              padding: 0 16px;
+              margin-top: 40px;
+          }
+          .cap-cta-btn {
+              width: calc(100% - 32px);
+              max-width: 360px;
+              justify-content: center;
+              padding: 18px 32px;
+              font-size: 11px;
+              letter-spacing: 0.2em;
+          }
+      }
+
+      .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+
+          #capabilities-grid::after { display: none !important; }
+      }
+
+
+      .news-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 2rem;
+          max-width: 1400px;
+          margin: 0 auto;
+      }
+
+      .featured {
+          background: white;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 1rem;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          color: black;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .featured:hover {
+          border-color: rgba(0, 0, 0, 0.2);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .featured img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+
+      @media (max-width: 1024px) {
+
+          #main-nav { display: none !important; visibility: hidden !important; }
+          .mobile-nav-bar {
+              background: #000;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+              padding: 8px 24px;
+          }
+          .mobile-menu-toggle-modern {
+              display: flex !important;
+              align-items: center;
+              justify-content: center;
+              width: 48px;
+              height: 48px;
+              background: transparent;
+              border: none;
+              cursor: pointer;
+          }
+          .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+          .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+          .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+          .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+          #sovereign-footer .grid {
+              display: grid !important;
+              grid-template-columns: repeat(2, 1fr) !important;
+              gap: 40px 20px !important;
+          }
+          #sovereign-footer .lg\:col-span-2 {
+              grid-column: span 2 !important;
+              margin-bottom: 20px;
+              padding-bottom: 40px;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          }
+          #sovereign-footer img {
+              display: none !important;
+          }
+          #sovereign-footer p {
+              font-size: 14px !important;
+              font-weight: 800 !important;
+              line-height: 1.4 !important;
+              color: #ffffff !important;
+              max-width: 100% !important;
+              letter-spacing: 0.1em !important;
+              text-transform: uppercase !important;
+          }
+      }
+
+
+      @media (max-width: 1024px) {
+
+          .nav-dropdown {
+              max-height: 0;
+              overflow: hidden;
+              opacity: 0;
+              transform: translateY(-10px);
+              transition:
+                  max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.4s ease,
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .nav-dropdown.open {
+              max-height: 500px;
+              opacity: 1;
+              transform: translateY(0);
+          }
+
+
+          .nav-dropdown a {
+              opacity: 0;
+              transform: translateX(-15px);
+              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .nav-dropdown.open a {
+              opacity: 1;
+              transform: translateX(0);
+          }
+          .nav-dropdown.open a:nth-child(1) { transition-delay: 0.05s; }
+          .nav-dropdown.open a:nth-child(2) { transition-delay: 0.1s; }
+          .nav-dropdown.open a:nth-child(3) { transition-delay: 0.15s; }
+          .nav-dropdown.open a:nth-child(4) { transition-delay: 0.2s; }
+          .nav-dropdown.open a:nth-child(5) { transition-delay: 0.25s; }
+          .nav-dropdown.open a:nth-child(6) { transition-delay: 0.3s; }
+
+
+          .nav-dropdown a:hover {
+              color: #fff !important;
+              text-shadow: 0 0 20px rgba(255,255,255,0.3);
+              transform: translateX(8px) !important;
+          }
+
+
+          .nav-toggle {
+              position: relative;
+          }
+          .nav-toggle::after {
+              display: none !important;
+          }
+          .nav-toggle.active::after {
+              display: none !important;
+              width: 40%;
+          }
+
+
+          .nav-chevron {
+              transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+          }
+
+
+          #mobile-menu-overlay {
+              position: fixed !important;
+              inset: 0 !important;
+              z-index: 9999 !important;
+              background: linear-gradient(180deg,
+                  rgba(0, 0, 0, 0.99) 0%,
+                  rgba(5, 5, 8, 0.99) 50%,
+                  rgba(0, 0, 0, 0.99) 100%) !important;
+              -webkit-backdrop-filter: blur(80px) !important;
+              backdrop-filter: blur(80px) !important;
+              display: none;
+              flex-direction: column !important;
+              overflow: hidden !important;
+          }
+
+
+          .mobile-nav-content {
+              display: flex !important;
+              flex-direction: column !important;
+              height: 100% !important;
+              width: 100% !important;
+              padding-top: 70px !important;
+              padding-bottom: 40px !important;
+              padding-left: 28px !important;
+              padding-right: 28px !important;
+              overflow-y: auto !important;
+              overflow-x: hidden !important;
+              -webkit-overflow-scrolling: touch;
+              scrollbar-width: none;
+              position: relative;
+          }
+
+
+          #mobile-menu-overlay::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+              background-size: 24px 24px;
+              pointer-events: none;
+              z-index: -1;
+          }
+
+          .mobile-nav-content::-webkit-scrollbar {
+              display: none;
+          }
+
+
+          .mobile-close-btn {
+              position: fixed !important;
+              top: 20px !important;
+              right: 20px !important;
+              width: 44px !important;
+              height: 44px !important;
+              background: rgba(255,255,255,0.03) !important;
+              border: 1px solid rgba(255,255,255,0.08) !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+          }
+          .mobile-close-btn:hover {
+              background: rgba(255,255,255,0.1) !important;
+              border-color: rgba(255,255,255,0.2) !important;
+              transform: scale(1.05);
+          }
+
+
+          .mobile-search-section {
+              margin-bottom: 24px !important;
+              margin-top: 0 !important;
+              opacity: 0;
+              transform: translateY(10px);
+              animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+              animation-delay: 0.1s;
+          }
+          .mobile-search-section .flex.items-center {
+              padding: 16px 0 !important;
+              border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+              position: relative;
+          }
+          .mobile-search-section .flex.items-center::before {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              right: 0;
+              width: 4px;
+              height: 4px;
+              border-right: 1px solid rgba(255,255,255,0.5);
+              border-bottom: 1px solid rgba(255,255,255,0.5);
+          }
+          .mobile-search-section .flex.items-center::after {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              left: 0;
+              width: 20px;
+              height: 1px;
+              background: white;
+              opacity: 0.3;
+          }
+          .mobile-nav-content input[placeholder*="SEARCH"] {
+              font-size: 11px !important;
+              letter-spacing: 0.25em !important;
+              font-weight: 900 !important;
+              text-transform: uppercase !important;
+          }
+
+
+          .nav-section {
+              opacity: 0;
+              transform: translateY(10px);
+              animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+          }
+          .nav-section:nth-child(1) { animation-delay: 0.15s; }
+          .nav-section:nth-child(2) { animation-delay: 0.2s; }
+          .nav-section:nth-child(3) { animation-delay: 0.25s; }
+          .nav-section:nth-child(4) { animation-delay: 0.3s; }
+
+          @keyframes mobileFadeUp {
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+
+
+          .mobile-nav-content > .mt-8 {
+              margin-top: auto !important;
+              padding-top: 32px !important;
+              border-top: 1px solid rgba(255,255,255,0.05);
+              opacity: 0;
+              animation: finaleFade 0.8s ease forwards 0.4s;
+          }
+          .mobile-nav-content > .mt-8 a {
+              font-size: 10px !important;
+              letter-spacing: 0.35em !important;
+              padding: 16px 24px !important;
+          }
+          @keyframes finaleFade {
+              to { opacity: 1; }
+          }
+      }
+
+
+      @media (max-width: 375px) {
+          .mobile-nav-content {
+              padding-left: 20px !important;
+              padding-right: 20px !important;
+              padding-top: 40px !important;
+          }
+          .nav-toggle {
+              font-size: 13px !important;
+          }
+      }
+
+
+      @supports (padding-top: env(safe-area-inset-top)) {
+          @media (max-width: 1024px) {
+              .mobile-nav-content {
+                  padding-top: max(100px, calc(80px + env(safe-area-inset-top))) !important;
+                  padding-bottom: max(40px, env(safe-area-inset-bottom)) !important;
+              }
+          }
+      }
+
+
+      .minimalist-nav {
+          width: 100%;
+          position: relative;
+      }
+      .minimalist-nav::before {
+          content: '';
+          position: absolute;
+          top: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ffffff, transparent);
+          border-radius: 1px;
+      }
+      .nav-section {
+          margin-bottom: 32px;
+          position: relative;
+      }
+      .nav-section::after {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 0;
+          width: 40px;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 0.5px;
+      }
+      .nav-section:last-child::after {
+          display: none;
+      }
+      .nav-toggle {
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          font-size: 22px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          text-align: left;
+          padding: 20px 0;
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: 'Inter', sans-serif;
+          text-transform: uppercase;
+      }
+      .nav-toggle::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 1px;
+          background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          transition: width 0.4s ease;
+      }
+      .nav-toggle:hover::before {
+          width: 100%;
+      }
+      .nav-toggle::after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+          background-size: contain;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          opacity: 0.6;
+          transform: rotate(0deg);
+      }
+      .nav-toggle.active::after {
+          transform: rotate(180deg);
+          opacity: 1;
+      }
+      .nav-toggle:hover {
+          color: #E2E2E2;
+          transform: translateX(4px);
+      }
+      .nav-toggle.active {
+          color: #E2E2E2;
+      }
+      .nav-direct-link {
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          font-size: 22px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          text-align: left;
+          padding: 20px 0;
+          text-decoration: none;
+          display: block;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          border-radius: 8px;
+          position: relative;
+          font-family: 'Inter', sans-serif;
+          text-transform: uppercase;
+      }
+      .nav-direct-link::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 1px;
+          background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          transition: width 0.4s ease;
+      }
+      .nav-direct-link:hover::before {
+          width: 100%;
+      }
+      .nav-direct-link:hover {
+          color: #E2E2E2;
+          transform: translateX(8px);
+          text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+      }
+      .nav-dropdown {
+          max-height: 0;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          margin-top: 16px;
+          opacity: 0;
+          transform: translateY(-10px);
+      }
+      .nav-dropdown.open {
+          max-height: 800px;
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .products-list,
+      .intelligence-list,
+      .mission-list {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+          margin-top: 20px;
+      }
+      .product-link-item,
+      .intelligence-link-item,
+      .mission-link-item {
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 400;
+          padding: 16px 20px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          display: block;
+          line-height: 1.4;
+          position: relative;
+          font-family: 'Inter', sans-serif;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+      }
+      .product-link-item::before,
+      .intelligence-link-item::before,
+      .mission-link-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          border-radius: 2px 0 0 2px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      .product-link-item:hover,
+      .intelligence-link-item:hover,
+      .mission-link-item:hover {
+          background: rgba(226, 226, 226, 0.05);
+          border-color: rgba(226, 226, 226, 0.2);
+          color: #ffffff;
+          transform: translateX(8px) translateY(-2px);
+          box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+          text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
+      }
+      .product-link-item:hover::before,
+      .intelligence-link-item:hover::before,
+      .mission-link-item:hover::before {
+          opacity: 1;
+      }
+
+      .cap-card {
+          flex: 1;
+          background: #080808;
+          border: 1px solid rgba(255,255,255,0.05);
+          padding: 40px;
+          border-radius: 2px;
+          min-height: 380px;
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
+      .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+      .cap-card.active-node .cap-card-border { width: 100%; }
+      .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+      .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+      @media (max-width: 1024px) {
+          .capabilities-carousel {
+              display: flex !important;
+              overflow-x: auto !important;
+              scroll-snap-type: x mandatory !important;
+              padding: 0 5vw !important;
+              gap: 15px !important;
+          }
+          .cap-card {
+              flex: 0 0 85% !important;
+              min-width: 85% !important;
+              scroll-snap-align: center !important;
+              opacity: 0.3;
+              transform: scale(0.95);
+          }
+          .mobile-scroll-hint { display: flex; }
+          .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+          .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+          @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+      }
+
+
+
+      @media (max-width: 1024px) {
+
+          .hud-border {
+              inset: 12px !important;
+              border-color: rgba(255, 255, 255, 0.03) !important;
+          }
+          .hud-data {
+              font-size: 6px !important;
+              letter-spacing: 0.15em !important;
+              opacity: 0.6 !important;
+          }
+          .hud-data.top-10 { top: 16px !important; }
+          .hud-data.bottom-10 { bottom: 16px !important; }
+          .hud-data.left-10 { left: 16px !important; }
+          .hud-data.right-10 { right: 16px !important; }
+
+
+          .pinned-stage {
+              height: 100svh !important;
+              min-height: 100vh !important;
+          }
+
+          .tower-wrap {
+              height: 60vh !important;
+              max-height: 450px !important;
+          }
+
+          .tower-core {
+              height: 100% !important;
+              width: auto !important;
+              max-width: 85vw !important;
+              filter: drop-shadow(0 0 60px rgba(0, 243, 255, 0.08)) !important;
+          }
+
+
+          #act-hero .text-center {
+              padding: 0 20px !important;
+          }
+
+          #act-hero .mono.text-\[10px\] {
+              font-size: 7px !important;
+              letter-spacing: 0.5em !important;
+              margin-bottom: 16px !important;
+          }
+
+
+          #act-hero h1.synco {
+              font-size: 20vw !important;
+              line-height: 0.9 !important;
+              letter-spacing: -0.02em !important;
+          }
+
+          #act-hero p.mono {
+              font-size: 7px !important;
+              letter-spacing: 0.3em !important;
+              margin-top: 24px !important;
+              padding: 0 16px !important;
+              line-height: 1.5 !important;
+          }
+
+
+          #act-sentinel {
+              padding: 0 20px !important;
+          }
+
+          #act-sentinel .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0 !important;
+          }
+
+          #act-sentinel .col-span-7 {
+              width: 100% !important;
+              transform: none !important;
+              perspective: none !important;
+          }
+
+          #act-sentinel .space-y-16 {
+              gap: 16px !important;
+          }
+
+          #act-sentinel .mono.text-cyan {
+              font-size: 8px !important;
+              letter-spacing: 0.3em !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-sentinel h2.synco {
+              font-size: 2.5rem !important;
+              line-height: 0.9 !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-sentinel .h-\[1px\] {
+              margin: 16px 0 !important;
+          }
+
+          #act-sentinel p {
+              font-size: 12px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+          }
+
+
+          .brief-card {
+              padding: 20px !important;
+              margin: 16px !important;
+              max-width: calc(100vw - 32px) !important;
+              max-height: 92svh !important;
+              overflow-y: auto !important;
+              -webkit-overflow-scrolling: touch !important;
+          }
+
+          .brief-card .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 16px !important;
+          }
+
+          .brief-card .col-span-5,
+          .brief-card .col-span-7,
+          .brief-card .col-span-12 {
+              width: 100% !important;
+          }
+
+
+          #act-energy .brief-card {
+              display: flex !important;
+              flex-direction: column !important;
+              padding: 16px !important;
+              gap: 0 !important;
+          }
+
+          #act-energy .brief-card > .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0 !important;
+              height: 100% !important;
+          }
+
+
+          #act-energy .col-span-5 {
+              order: 1 !important;
+              width: 100% !important;
+              flex: 0 0 auto !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-energy .evidence-vid {
+              width: 100% !important;
+              height: 35vh !important;
+              min-height: 180px !important;
+              max-height: 280px !important;
+              border-radius: 8px !important;
+              object-fit: cover !important;
+              margin-top: 0 !important;
+              margin-bottom: 8px !important;
+          }
+
+          #act-energy .mono.text-\[8px\] {
+              font-size: 6px !important;
+              margin-top: 4px !important;
+              margin-bottom: 0 !important;
+              opacity: 0.5 !important;
+          }
+
+
+          #act-energy .col-span-7,
+          #act-energy .data-column {
+              order: 2 !important;
+              width: 100% !important;
+              flex: 1 1 auto !important;
+              border-left: 0 !important;
+              border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+              padding-left: 0 !important;
+              padding-top: 16px !important;
+          }
+
+          #act-energy h3.synco {
+              font-size: 1.4rem !important;
+              line-height: 0.95 !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-energy p {
+              font-size: 10px !important;
+              line-height: 1.5 !important;
+              letter-spacing: 0.08em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-energy .flex.gap-16 {
+              flex-direction: row !important;
+              gap: 10px !important;
+              flex-wrap: nowrap !important;
+          }
+
+          #act-energy .bg-white\/5 {
+              padding: 12px !important;
+              flex: 1 1 50% !important;
+              min-width: 0 !important;
+          }
+
+          #act-energy .bg-white\/5 .mono {
+              font-size: 6px !important;
+          }
+
+          #act-energy .bg-white\/5 .synco {
+              font-size: 0.9rem !important;
+          }
+
+
+          #act-optics {
+              padding: 0 20px !important;
+              justify-content: center !important;
+          }
+
+          #act-optics .max-w-4xl {
+              max-width: 100% !important;
+              text-align: center !important;
+          }
+
+          #act-optics .mono.text-white\/20 {
+              font-size: 7px !important;
+              letter-spacing: 0.5em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-optics h2.synco {
+              font-size: 12vw !important;
+              line-height: 0.9 !important;
+              margin-bottom: 24px !important;
+          }
+
+          #act-optics .space-y-20 {
+              border-right: 0 !important;
+              border-left: 2px solid rgba(0, 243, 255, 0.2) !important;
+              padding-right: 0 !important;
+              padding-left: 16px !important;
+              text-align: left !important;
+          }
+
+          #act-optics .synco.text-3xl {
+              font-size: 1.25rem !important;
+              margin-bottom: 8px !important;
+          }
+
+          #act-optics .text-xs {
+              font-size: 10px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+          }
+
+          #act-optics .bg-white\/5 {
+              padding: 16px !important;
+              display: block !important;
+              margin-top: 20px !important;
+          }
+
+          #act-optics .bg-white\/5 .synco {
+              font-size: 0.9rem !important;
+          }
+
+
+          #act-brain .brief-card {
+              padding: 24px !important;
+          }
+
+          #act-brain .grid {
+              display: flex !important;
+              flex-direction: column-reverse !important;
+              gap: 20px !important;
+          }
+
+          #act-brain .col-span-7,
+          #act-brain .col-span-5 {
+              width: 100% !important;
+          }
+
+          #act-brain .mono.text-cyan {
+              font-size: 7px !important;
+              letter-spacing: 0.3em !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-brain h2.synco {
+              font-size: 1.75rem !important;
+              line-height: 0.9 !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-brain p {
+              font-size: 11px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-brain .flex.gap-10 {
+              flex-direction: row !important;
+              gap: 20px !important;
+          }
+
+          #act-brain .flex.gap-10 .text-left {
+              flex: 1 !important;
+          }
+
+          #act-brain .flex.gap-10 .mono {
+              font-size: 7px !important;
+          }
+
+          #act-brain .flex.gap-10 .synco {
+              font-size: 1rem !important;
+          }
+
+          #act-brain .evidence-vid {
+              width: 100% !important;
+              height: 200px !important;
+              border-radius: 8px !important;
+          }
+
+
+          #act-hegemony > div {
+              padding: 30px 20px !important;
+              margin: 20px !important;
+              max-width: calc(100vw - 40px) !important;
+          }
+
+          #act-hegemony .synco.text-\[12vw\] {
+              font-size: 20vw !important;
+              opacity: 0.03 !important;
+          }
+
+          #act-hegemony .mono.text-white\/30 {
+              font-size: 7px !important;
+              letter-spacing: 0.8em !important;
+              margin-bottom: 20px !important;
+          }
+
+          #act-hegemony h2.synco {
+              font-size: 2rem !important;
+              line-height: 0.9 !important;
+          }
+
+          #act-hegemony p {
+              font-size: 10px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.2em !important;
+              margin-top: 24px !important;
+          }
+
+
+          #specs {
+              padding: 0 !important;
+              height: auto !important;
+              min-height: 100svh !important;
+              overflow: visible !important;
+          }
+
+          #specs .max-w-\[1500px\] {
+              padding: 180px 16px 40px 16px !important;
+              grid-template-columns: 1fr !important;
+              gap: 16px !important;
+              height: 100% !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: flex-start !important;
+          }
+
+          #specs .col-span-5,
+          #specs .col-span-7 {
+              width: 100% !important;
+          }
+
+
+          #specs .col-span-5 {
+              order: 2 !important;
+              flex: 0 0 auto !important;
+          }
+
+          #specs .space-y-16 {
+              gap: 8px !important;
+          }
+
+
+          #specs .col-span-7 {
+              order: 1 !important;
+              display: flex !important;
+              justify-content: center !important;
+              align-items: center !important;
+              flex: 1 1 auto !important;
+          }
+
+          #specs .mono.text-\[10px\] {
+              font-size: 6px !important;
+              letter-spacing: 0.4em !important;
+              color: rgba(0, 0, 0, 0.4) !important;
+              margin-bottom: 4px !important;
+          }
+
+          #specs h2.synco {
+              font-size: 1.5rem !important;
+              line-height: 0.9 !important;
+              color: var(--void) !important;
+          }
+
+          #specs .space-y-8 {
+              gap: 6px !important;
+              display: flex !important;
+              flex-direction: column !important;
+          }
+
+          #specs .border-b {
+              padding-bottom: 6px !important;
+          }
+
+          #specs .mono.text-\[8px\] {
+              font-size: 5px !important;
+              color: rgba(0, 0, 0, 0.4) !important;
+              margin-bottom: 0 !important;
+          }
+
+          #specs .synco.text-3xl {
+              font-size: 0.95rem !important;
+              color: var(--void) !important;
+          }
+
+
+          #specs #lab-core {
+              height: auto !important;
+              max-height: 50vh !important;
+              width: auto !important;
+              max-width: 90% !important;
+              transform: none !important;
+              scale: 1 !important;
+          }
+
+          #specs .blueprint-grid {
+              background-size: 25px 25px !important;
+              opacity: 0.3 !important;
+          }
+
+
+          .layer {
+              padding: 80px 16px !important;
+          }
+
+          .layer.px-24 {
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+          }
+
+
+          .synco.text-7xl { font-size: 2.25rem !important; }
+          .synco.text-6xl { font-size: 2rem !important; }
+          .synco.text-5xl { font-size: 1.75rem !important; }
+          .synco.text-4xl { font-size: 1.5rem !important; }
+          .synco.text-3xl { font-size: 1.25rem !important; }
+          .synco.text-2xl { font-size: 1.1rem !important; }
+          .synco.text-xl { font-size: 1rem !important; }
+
+          .mono.tracking-\[2em\] { letter-spacing: 0.5em !important; }
+          .mono.tracking-\[1em\] { letter-spacing: 0.4em !important; }
+          .mono.tracking-\[0\.5em\] { letter-spacing: 0.25em !important; }
+
+
+          .brief-card,
+          .cap-card,
+          .layer > div {
+              -webkit-tap-highlight-color: transparent;
+          }
+
+
+          .main-container {
+              -webkit-overflow-scrolling: touch;
+          }
+
+
+          .evidence-vid {
+              height: auto !important;
+              min-height: 150px !important;
+              max-height: 200px !important;
+              border-radius: 8px !important;
+              object-fit: cover !important;
+          }
+
+
+
+          @supports (-webkit-touch-callout: none) {
+              .tower-wrap,
+              #tower {
+                  transform: none !important;
+              }
+          }
+      }
+
+
+      @media (max-width: 375px) {
+          #act-hero h1.synco {
+              font-size: 20vw !important;
+          }
+
+          #act-sentinel h2.synco,
+          #act-energy h3.synco,
+          #act-brain h2.synco {
+              font-size: 1.5rem !important;
+          }
+
+          #act-optics h2.synco {
+              font-size: 14vw !important;
+          }
+
+          #act-hegemony h2.synco {
+              font-size: 1.75rem !important;
+          }
+
+          .brief-card {
+              padding: 16px !important;
+          }
+
+          #specs h2.synco {
+              font-size: 1.6rem !important;
+          }
+
+          #specs .synco.text-4xl {
+              font-size: 1.2rem !important;
+          }
+
+          .cap-card {
+              padding: 24px !important;
+              min-height: 300px !important;
+          }
+
+          .cap-card h3.synco {
+              font-size: 1.15rem !important;
+          }
+      }
+
+
+      @media (max-width: 1024px) and (orientation: landscape) {
+          .pinned-stage {
+              height: 100vw !important;
+              min-height: 100vh !important;
+          }
+
+          .tower-wrap {
+              height: 80vh !important;
+              max-height: none !important;
+          }
+
+          .brief-card {
+              max-height: 85vh !important;
+              flex-direction: row !important;
+          }
+
+          .brief-card .grid {
+              flex-direction: row !important;
+              flex-wrap: wrap !important;
+          }
+
+          .brief-card .col-span-5 {
+              flex: 1 1 45% !important;
+          }
+
+          .brief-card .col-span-7 {
+              flex: 1 1 50% !important;
+          }
+
+          #specs .max-w-\[1500px\] {
+              flex-direction: row !important;
+              align-items: center !important;
+          }
+
+          #specs .col-span-5 {
+              order: 1 !important;
+              flex: 1 1 40% !important;
+          }
+
+          #specs .col-span-7 {
+              order: 2 !important;
+              flex: 1 1 50% !important;
+          }
+
+          #specs #lab-core {
+              max-height: 60vh !important;
+          }
+      }
+
+
+      @media (max-width: 1024px) {
+          footer {
+              padding-top: 60px !important;
+              padding-bottom: 60px !important;
+              padding-left: 24px !important;
+              padding-right: 24px !important;
+          }
+          #sovereign-footer .grid {
+              display: grid !important;
+              grid-template-columns: repeat(2, 1fr) !important;
+              gap: 40px 20px !important;
+          }
+          #sovereign-footer .lg\:col-span-2 {
+              grid-column: span 2 !important;
+              text-align: left !important;
+              margin-bottom: 20px;
+              padding-bottom: 40px;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          }
+          #sovereign-footer img {
+              display: none !important;
+          }
+          #sovereign-footer p {
+              font-size: 14px !important;
+              font-weight: 800 !important;
+              line-height: 1.4 !important;
+              color: #ffffff !important;
+              max-width: 100% !important;
+              letter-spacing: 0.1em !important;
+              text-transform: uppercase !important;
+              margin-bottom: 20px !important;
+          }
+          #sovereign-footer h4 {
+              font-size: 10px !important;
+              font-weight: 900 !important;
+              font-style: italic !important;
+              margin-bottom: 20px !important;
+              color: rgba(255, 255, 255, 0.4) !important;
+              border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+              border-bottom: none !important;
+              padding-top: 16px !important;
+              letter-spacing: 0.4em !important;
+              text-transform: uppercase !important;
+          }
+          #sovereign-footer .flex-col {
+              gap: 12px !important;
+          }
+          #sovereign-footer a.footer-link-hover {
+              font-size: 14px !important;
+              font-weight: 900 !important;
+              padding: 0 !important;
+              background: transparent !important;
+              letter-spacing: 0.05em !important;
+              text-transform: uppercase !important;
+              color: #ffffff !important;
+              transform: none !important;
+          }
+          #sovereign-footer a.footer-link-hover.text-green-500 {
+              color: #22c55e !important;
+          }
+          #sovereign-footer .footer-watermark {
+              font-size: clamp(15vw, 25vw, 400px) !important;
+              color: rgba(255,255,255,0.18) !important;
+              opacity: 1 !important;
+          }
+          #sovereign-footer .flex.gap-4 {
+              gap: 24px !important;
+              margin-top: 20px !important;
+          }
+          .social-glass-btn {
+              width: auto !important;
+              height: auto !important;
+              background: transparent !important;
+              border: none !important;
+          }
+          .social-glass-btn svg {
+              width: 28px !important;
+              height: 28px !important;
+          }
+      }
+
+
+      @media screen and (max-width: 1024px) {
+          header,
+          .header,
+          #header,
+          .desktop-header,
+          .nav-desktop,
+          nav:not(.mobile-nav-bar) {
+              display: none !important;
+              visibility: hidden !important;
+              height: 0 !important;
+              overflow: hidden !important;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="#"
+      onclick="
+        event.preventDefault()
+        history.back()
+      "
+      class="absolute top-24 left-4 md:top-32 md:left-12 z-[200] group mix-blend-difference text-white flex items-center gap-4 transition-opacity duration-300 hover:opacity-70"
+      aria-label="Go Back"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transform transition-transform duration-500 ease-out group-hover:-translate-x-2"
+      >
+        <path
+          d="M20 12H4M4 12L10 18M4 12L10 6"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+    <div id="header-container"></div>
+    <script src="/components/header-loader.js"></script>
+
+    <div class="main-container">
+      <section class="pinned-stage" id="arclight-hero">
+        <div class="relative z-[100] text-center">
+          <h1 class="synco text-[11vw] font-black leading-[0.8] mb-8 chrome-text" id="h-title">
+            ARCLIGHT
+          </h1>
+        </div>
+        <div
+          id="main-core"
+          class="hardware-core opacity-0 translate-y-40 flex flex-col items-center justify-center pointer-events-none"
+        >
+          <div
+            class="relative w-full h-full flex flex-col items-center justify-center translate-x-0"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              src="media/arclight-hero.webp"
+              class="h-[90vh] w-auto max-w-none relative z-10 transition-transform duration-700"
+              alt="ARCLIGHT Tower"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="min-h-screen flex items-end relative bg-[#030303] py-20 border-b border-white/5"
+        id="chapter-crisis"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"
+        ></div>
+        <div
+          class="w-full max-w-[1800px] mx-auto px-8 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-16 items-end pb-24"
+        >
+          <div class="lg:col-span-7 relative z-10">
+            <div class="scroll-reveal reveal-delay-100">
+              <h2
+                class="synco text-[8vw] lg:text-[7vw] font-black leading-[0.8] tracking-tighter text-white mb-12"
+              >
+                THE GAP IN<br />DEFENSE<span class="text-white/20">.</span>
+              </h2>
+              <p
+                class="text-xl md:text-2xl text-white/80 leading-relaxed font-light max-w-4xl border-l border-white/20 pl-8"
+              >
+                Most security systems fail for a simple reason: they rely on something else to work.
+                They need a plug, a cable, or a local network. When you are operating in remote
+                desert fields or vast borders, those things don't exist.
+                <br /><br />
+                We built Arclight to fix this. It doesn't need the grid. It doesn't need a building.
+                It is its own infrastructure. It allows you to place advanced protection exactly
+                where you need it, not just where the power lines end.
+              </p>
+            </div>
+          </div>
+          <div class="lg:col-span-5 hidden lg:block"></div>
+        </div>
+      </section>
+
+      <section
+        class="min-h-screen flex items-center relative bg-black py-32 overflow-hidden"
+        id="chapter-answer"
+      >
+        <div class="absolute right-0 top-0 w-2/3 h-full opacity-10">
+          <div
+            class="w-full h-full bg-[url('media/arclight-hero.webp')] bg-no-repeat bg-right bg-contain mix-blend-screen"
+          ></div>
+        </div>
+
+        <div class="w-full max-w-[1800px] mx-auto px-8 md:px-16 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+            <div class="lg:col-span-10 lg:col-start-3 text-right relative z-10">
+              <div class="scroll-reveal reveal-delay-100">
+                <h2
+                  class="synco text-[8vw] lg:text-[7vw] font-black leading-[0.8] tracking-tighter text-white mb-12"
+                >
+                  A PERMANENT<br />ANCHOR<span class="text-white/20">.</span>
+                </h2>
+                <p
+                  class="text-xl md:text-2xl text-white/80 leading-relaxed font-light border-r border-white/20 pr-8 inline-block text-left md:text-right"
+                >
+                  Think of Arclight not as a camera tower, but as a sovereign outpost. It is a
+                  physical foundation that establishes your presence in the field.
+                  <br /><br />
+                  Once deployed, it enables everything else. It powers our behavioral AI (PRIMUS),
+                  supports our 360-degree sensors (TRION), and connects your entire perimeter to
+                  headquarters. It turns a vulnerable patch of sand or coastline into a secure,
+                  monitored operational zone. It is the backbone that makes modern security possible
+                  in impossible places.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="min-h-screen flex relative bg-[#050505] overflow-hidden" id="chapter-power">
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12">
+          <div
+            class="relative h-[60vh] lg:h-auto border-r border-white/5 order-2 lg:order-1 lg:col-span-5"
+          >
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="/media/general-poster.webp"
+              src="media/archlight-highlight-1.mp4"
+              class="absolute inset-0 w-full h-full object-cover opacity-80"
+            ></video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent lg:bg-gradient-to-r"
+            ></div>
+          </div>
+
+          <div
+            class="relative flex flex-col justify-center px-12 lg:px-32 py-24 order-1 lg:order-2 lg:col-span-7"
+          >
+            <div class="scroll-reveal reveal-delay-100">
+              <h2
+                class="synco text-5xl lg:text-[4.5vw] font-black leading-[0.8] tracking-tighter text-white mb-12"
+              >
+                POWER<br />INDEPENDENCE<span class="text-white/20">.</span>
+              </h2>
+            </div>
+
+            <div class="space-y-12 scroll-reveal reveal-delay-200">
+              <p
+                class="text-xl md:text-2xl text-white/80 leading-relaxed font-light border-l border-white/20 pl-8"
+              >
+                Security stops when the power cuts. We refused to accept that risk.
+                <br /><br />
+                Arclight utilizes a proprietary Hybrid Power Architecture that eliminates dependence
+                on the grid. By integrating intelligent solar capture with industrial-grade storage,
+                it ensures continuous operation through all environmental conditions. It doesn't
+                rely on a single source. It adapts. Uninterrupted vigilance, regardless of external
+                failure. This is true autonomy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="min-h-screen flex relative bg-black overflow-hidden" id="chapter-platform">
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12">
+          <div
+            class="relative flex flex-col justify-center px-12 lg:px-32 py-24 z-10 lg:col-span-7"
+          >
+            <div class="scroll-reveal reveal-delay-100">
+              <h2
+                class="synco text-4xl lg:text-[6.5vw] font-black leading-[0.8] tracking-tighter text-white mb-16"
+              >
+                BUILT TO<br />EVOLVE<span class="text-white/20">.</span>
+              </h2>
+            </div>
+
+            <div class="space-y-4 scroll-reveal reveal-delay-200">
+              <p
+                class="text-xl md:text-2xl text-white/80 leading-relaxed font-light border-l border-white/20 pl-8"
+              >
+                Technology moves faster than infrastructure. Arclight bridges that gap by
+                functioning as a modular backbone rather than a fixed unit.
+                <br /><br />
+                It is not just a tower. It is an adaptive platform designed to host the full AVZDAX
+                stack. Whether you need to deploy TRION cameras, PRIMUS edge compute, or future
+                sensing arrays, Arclight provides the physical elevation and power stability
+                required to keep them running. You can upgrade sensors, swap communication modules,
+                or expand your network without replacing the foundation. It protects your investment
+                by ensuring your security architecture can grow with new threats instead of becoming
+                obsolete.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative h-[60vh] lg:h-auto border-l border-white/5 lg:col-span-5">
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="/media/general-poster.webp"
+              src="media/archlight-highlight-2.mp4"
+              class="absolute inset-0 w-full h-full object-cover opacity-80"
+            ></video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent lg:bg-gradient-to-l"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="min-h-screen flex items-center relative bg-[#030303] py-20 border-t border-white/5"
+        id="chapter-eternity"
+      >
+        <div class="w-full max-w-[1800px] mx-auto px-8 md:px-16">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 h-full items-center">
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-16">
+              <div class="scroll-reveal reveal-delay-100">
+                <h2
+                  class="synco text-[7vw] lg:text-[6vw] font-black leading-[0.85] tracking-tighter text-white"
+                >
+                  THE<br />STANDARD<span class="text-white/20">.</span>
+                </h2>
+              </div>
+
+              <div class="scroll-reveal reveal-delay-200">
+                <p
+                  class="text-xl md:text-3xl text-white/90 leading-relaxed font-light font-sans text-justify"
+                >
+                  We prioritize longevity over convenience. Every component of Arclight is
+                  engineered to survive environments that destroy standard equipment.
+                  <br /><br />
+                  By choosing Arclight, you are not just installing a tower. You are establishing a
+                  permanent sovereign footprint that will protect your critical assets for decades.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="lg:col-span-5 flex flex-col justify-end lg:justify-center text-right lg:border-l lg:border-white/10 lg:pl-16 h-full"
+            >
+              <div class="scroll-reveal reveal-delay-300 space-y-2">
+                <div
+                  class="synco text-4xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter"
+                >
+                  SOVEREIGN
+                </div>
+                <div
+                  class="synco text-4xl md:text-7xl font-black text-white/60 leading-[0.85] tracking-tighter"
+                >
+                  FIELD
+                </div>
+                <div
+                  class="synco text-4xl md:text-7xl font-black text-white/40 leading-[0.85] tracking-tighter"
+                >
+                  CONTROL.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="pinned-stage lab-phase" id="specs">
+      <div class="blueprint-grid absolute inset-0"></div>
+      <div
+        class="max-w-[1400px] w-full px-6 md:px-12 flex flex-col justify-between lg:grid lg:grid-cols-12 gap-4 lg:gap-20 items-center relative z-10 pt-24 lg:pt-0 h-[100dvh] lg:h-auto pb-0"
+      >
+        <div class="lg:col-span-5 space-y-6 lg:space-y-16 mt-8 lg:mt-0">
+          <div>
+            <h2 class="synco text-5xl lg:text-6xl font-black leading-none text-black">
+              PLATFORM<br />ARCHITECTURE.
+            </h2>
+          </div>
+          <div class="space-y-3 lg:space-y-8">
+            <div class="border-b border-black/10 pb-2 lg:pb-6">
+              <div class="synco text-sm lg:text-3xl text-black">HYBRID POWER SYSTEM</div>
+            </div>
+            <div class="border-b border-black/10 pb-2 lg:pb-6">
+              <div class="synco text-sm lg:text-3xl text-black">OMNI OPTICAL HOUSING</div>
+            </div>
+            <div class="border-b border-black/10 pb-2 lg:pb-6">
+              <div class="synco text-sm lg:text-3xl text-black">INDUSTRIAL BATTERY RACK</div>
+            </div>
+            <div class="border-b border-black/10 pb-2 lg:pb-6">
+              <div class="synco text-sm lg:text-3xl text-black">REINFORCED STEEL CHASSIS</div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 flex justify-center items-end lg:items-center w-full">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="media/archlight-anatomy.webp"
+            alt="ARCLIGHT Tower Anatomy"
+            class="h-[45vh] lg:h-[75vh] w-auto object-contain grayscale brightness-110 mb-0"
+            id="lab-core"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities-horizontal-section" id="capabilities-grid">
+      <div class="capabilities-bg-grid"></div>
+
+      <div class="capabilities-container">
+        <div class="capabilities-header">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="media/avzdax-logo.png"
+            alt="AVZDAX"
+            class="capabilities-logo"
+          />
+          <h2 class="capabilities-title synco">
+            INFRASTRUCTURE<br />
+            <span>BACKBONE</span>
+          </h2>
+        </div>
+
+        <div class="capabilities-scroll-wrapper">
+          <div class="capabilities-cards-track">
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">HYBRID POWER<br />FOUNDATION</h3>
+                <p class="cap-card-description">
+                  A proprietary hybrid energy architecture that intelligently integrates solar
+                  generation, industrial battery storage, and grid inputs. This multi-source
+                  redundancy ensures 100% operational uptime, automatically adapting to power
+                  instability without service interruption.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">SYSTEM<br />ENABLEMENT</h3>
+                <p class="cap-card-description">
+                  A centralized infrastructure hub engineered to host the complete AVZDAX
+                  technological stack. It provides the structural capacity, power conditioning, and
+                  thermal regulation required to sustain TRION sensors and PRIMUS compute modules in
+                  the field.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">ASSET<br />CORRIDORS</h3>
+                <p class="cap-card-description">
+                  Designed to extend critical security perimeters into complex geographies. Arclight
+                  overcomes logistical constraints to secure pipelines, borders, and remote
+                  facilities, delivering sophisticated surveillance where traditional cabling
+                  strategies fail.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">LOCALIZED<br />EDGE CAPABILITY</h3>
+                <p class="cap-card-description">
+                  Facilitates autonomous, low-latency processing at the network edge. By localizing
+                  compute functions on the tower, Arclight preserves decision-making velocity and
+                  maintains situational awareness regardless of satellite or cellular bandwidth
+                  fluctuations.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">REMOTE<br />LONGEVITY</h3>
+                <p class="cap-card-description">
+                  Constructed from industrial-grade composites to withstand extreme environmental
+                  stress. The system minimizes operational overhead by requiring negligible
+                  maintenance, ensuring sustained performance across multi-year deployment cycles in
+                  hostile climates.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">OPERATIONAL<br />ANCHOR</h3>
+                <p class="cap-card-description">
+                  Establishes a hardened point of presence in non-permissive environments. Arclight
+                  creates a sovereign operational footprint, transforming unregulated territory into
+                  a controlled, monitored, and secure asset protection zone.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cap-progress-container">
+          <div class="cap-progress-bar"></div>
+        </div>
+
+        <div class="capabilities-cta">
+          <a href="/contact" class="cap-cta-btn">
+            Request Information
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      window.addEventListener('scroll', function () {
+        const nav = document.getElementById('main-nav')
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled')
+        } else {
+          nav.classList.remove('nav-scrolled')
+        }
+      })
+
+      function showPreview(product) {
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+        })
+
+        document.getElementById('preview-default').style.opacity = '1'
+
+        const preview = document.getElementById('p-' + product)
+        if (preview) {
+          preview.classList.add('active')
+          document.getElementById('preview-default').style.opacity = '0'
+        }
+      }
+
+      function initMobileMenu() {
+        const btns = document.querySelectorAll('.mobile-menu-toggle-modern')
+        const overlay = document.getElementById('mobile-menu-overlay')
+
+        if (!btns.length || !overlay) return
+
+        btns.forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            e.stopImmediatePropagation()
+            const opened = this.classList.toggle('open')
+            this.setAttribute('aria-expanded', opened ? 'true' : 'false')
+
+            btns.forEach(b => {
+              if (b !== this) {
+                if (opened) b.classList.add('open')
+                else b.classList.remove('open')
+                b.setAttribute('aria-expanded', opened ? 'true' : 'false')
+              }
+            })
+
+            if (opened) {
+              overlay.style.display = 'flex'
+              document.body.style.overflow = 'hidden'
+            } else {
+              overlay.style.display = 'none'
+              document.body.style.overflow = ''
+            }
+          })
+        })
+
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) {
+            btns.forEach(btn => {
+              btn.classList.remove('open')
+              btn.setAttribute('aria-expanded', 'false')
+            })
+            overlay.style.display = 'none'
+            document.body.style.overflow = ''
+          }
+        })
+      }
+
+      initMobileMenu()
+
+      document.querySelectorAll('.nav-toggle').forEach(button => {
+        button.addEventListener('click', function () {
+          const dropdown = this.nextElementSibling
+          dropdown.classList.toggle('open')
+          this.classList.toggle('active')
+        })
+      })
+
+      document
+        .querySelectorAll(
+          '.product-link-item, .intelligence-link-item, .mission-link-item, .nav-direct-link'
+        )
+        .forEach(link => {
+          link.addEventListener('click', function () {
+            document.getElementById('mobile-menu-overlay').style.display = 'none'
+          })
+        })
+
+      gsap.registerPlugin(ScrollTrigger, TextPlugin)
+
+      const isMobile = window.innerWidth <= 1024
+      const lenis = new Lenis({
+        lerp: isMobile ? 0.12 : 0.05,
+        smoothWheel: true,
+        touchMultiplier: isMobile ? 2.5 : 1,
+      })
+
+      window.lenis = lenis
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+
+      gsap.to('#main-core', {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        delay: 0.5,
+      })
+
+      gsap.to('#specs', {
+        scrollTrigger: {
+          trigger: '#specs',
+          start: 'top top',
+          end: '+=150%',
+          pin: true,
+          scrub: true,
+          onEnter: () => {
+            gsap.to('body', { backgroundColor: '#ffffff', duration: 0.5 })
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeave: () => {
+            gsap.to('body', { backgroundColor: '#030303', duration: 0.5 })
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+          onEnterBack: () => {
+            gsap.to('body', { backgroundColor: '#ffffff', duration: 0.5 })
+            document.getElementById('main-nav')?.classList.add('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.add('nav-inverted')
+          },
+          onLeaveBack: () => {
+            gsap.to('body', { backgroundColor: '#030303', duration: 0.5 })
+            document.getElementById('main-nav')?.classList.remove('nav-inverted')
+            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-inverted')
+          },
+        },
+      })
+
+      if (!isMobile) {
+        window.addEventListener('mousemove', e => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 60
+          const y = (e.clientY / window.innerHeight - 0.5) * 60
+          gsap.to('#tower, #lab-core', {
+            rotationY: x,
+            rotationX: -y,
+            x: x * 2,
+            y: y * 2,
+            duration: 3,
+            ease: 'power2.out',
+          })
+        })
+      }
+
+      ;(function () {
+        function initCapabilitiesHorizontalScroll() {
+          const section = document.querySelector('#capabilities-grid')
+          const track = document.querySelector('.capabilities-cards-track')
+          const progressBar = document.querySelector('.cap-progress-bar')
+
+          if (
+            !section ||
+            !track ||
+            typeof gsap === 'undefined' ||
+            typeof ScrollTrigger === 'undefined'
+          )
+            return
+
+          const cards = track.querySelectorAll('.cap-card')
+          const isMobile = window.innerWidth <= 768
+          const gap = isMobile ? 16 : 32
+          const padding = isMobile ? 32 : 120
+
+          const cardWidth = cards[0].offsetWidth
+          const totalWidth = cardWidth * cards.length + gap * (cards.length - 1) + padding
+          const viewportWidth = window.innerWidth
+          const scrollDistance = totalWidth - viewportWidth
+
+          ScrollTrigger.getAll().forEach(st => {
+            if (st.trigger === section) st.kill()
+          })
+
+          if (scrollDistance <= 0) return
+
+          gsap.to(track, {
+            x: -scrollDistance,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: '+=' + scrollDistance * 1.2,
+              pin: true,
+              scrub: 0.8,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: self => {
+                if (progressBar) {
+                  progressBar.style.width = self.progress * 100 + '%'
+                }
+              },
+              onEnter: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeave: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+              onEnterBack: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeaveBack: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+            },
+          })
+        }
+
+        if (document.readyState === 'complete') {
+          setTimeout(initCapabilitiesHorizontalScroll, 200)
+        } else {
+          window.addEventListener('load', () => setTimeout(initCapabilitiesHorizontalScroll, 200))
+        }
+
+        let resizeTimeout
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout)
+          resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh()
+            initCapabilitiesHorizontalScroll()
+          }, 250)
+        })
+      })()
+
+      const capObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active-node')
+            } else {
+              entry.target.classList.remove('active-node')
+            }
+          })
+        },
+        { threshold: 0.6, root: document.querySelector('.capabilities-carousel') }
+      )
+      document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card))
+    </script>
+
+    <div style="height: 100px; background: #030303"></div>
+    <div style="background: #030303">
+      <footer
+        class="relative pt-40 pb-[24rem] px-12 overflow-hidden"
+        id="sovereign-footer"
+        style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a"
+      >
+        <div
+          class="footer-watermark"
+          style="
+            position: absolute;
+            bottom: -0.15em;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(15vw, 25vw, 400px);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            color: rgba(255, 255, 255, 0.18);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 0;
+            line-height: 1;
+          "
+        >
+          AVZDAX
+        </div>
+
+        <div
+          class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left"
+        >
+          <div class="lg:col-span-2 space-y-12 text-left">
+            <a href="/" aria-label="Home" class="hidden md:block"
+              ><img
+                loading="lazy"
+                decoding="async"
+                src="/media/avzdax-logo.png"
+                alt="AVZDAX Logo"
+                class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"
+            /></a>
+            <p
+              class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left"
+            >
+              We build the world's most advanced defense and security systems. Protecting nations,
+              critical infrastructure, and global security interests.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="https://linkedin.com/company/avzdax"
+                class="social-glass-btn"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+              <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </svg>
+              </a>
+              <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://medium.com/@AVZDAXtechnologies"
+                class="social-glass-btn"
+                aria-label="Medium"
+              >
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              SOLUTIONS
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/primus" class="footer-link-hover">PRIMUS</a>
+              <a href="/nest" class="footer-link-hover">NEST</a>
+              <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
+              <a href="/trion" class="footer-link-hover">TRION</a>
+              <a href="/obex" class="footer-link-hover">OBEX</a>
+              <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              INDUSTRIES
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
+              <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
+              <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
+              <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
+              <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              COMPANY
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/about" class="footer-link-hover">ABOUT US</a
+              ><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a
+              ><a href="/news" class="footer-link-hover">NEWSROOM</a
+              ><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a
+              ><a href="/contact" class="footer-link-hover">CONTACT</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              SUPPORT
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/contact" class="footer-link-hover">HELP CENTER</a
+              ><a href="/ethics" class="footer-link-hover flex items-center gap-3"
+                >STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a
+              ><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a
+              ><a href="/ethics" class="footer-link-hover">TERMS</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const revealElements = document.querySelectorAll('.reveal-on-scroll, .scroll-reveal')
+      const revealObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed')
+            }
+          })
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -80px 0px' }
+      )
+      revealElements.forEach(el => revealObserver.observe(el))
+    </script>
+
+    <script>
+      function toggleSearch() {
+        const overlay = document.getElementById('search-overlay')
+        if (overlay) {
+          overlay.classList.toggle('is-open')
+          if (overlay.classList.contains('is-open')) {
+            document.body.style.overflow = 'hidden'
+            const input = overlay.querySelector('input')
+            if (input) setTimeout(() => input.focus(), 100)
+          } else {
+            document.body.style.overflow = ''
+          }
+        }
+      }
+
+      function showPreview(id) {
+        const defaultPreview = document.getElementById('preview-default')
+        if (defaultPreview) defaultPreview.style.opacity = '0'
+
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+          img.style.opacity = '0'
+          img.style.transform = 'scale(0.8) translateY(20px)'
+        })
+
+        const target = document.getElementById('p-' + id)
+        if (target) {
+          target.classList.add('active')
+
+          void target.offsetWidth
+          target.style.opacity = '1'
+          target.style.transform = 'scale(1.25) translateY(0)'
+        }
+      }
+
+      document.querySelector('.mega-menu-content')?.addEventListener('mouseleave', () => {})
+
+      const mobileToggle = document.querySelector('.mobile-menu-toggle-modern')
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+          const menu = document.getElementById('mobile-menu-overlay')
+          if (menu) {
+            menu.style.display = 'block'
+            document.body.style.overflow = 'hidden'
+          }
+        })
+      }
+
+      function closeMobileMenu() {
+        const menu = document.getElementById('mobile-menu-overlay')
+        if (menu) {
+          menu.style.display = 'none'
+          document.body.style.overflow = ''
+        }
+      }
+    </script>
+    <script src="/media/site-utils.js"></script>
+  </body>
+</html>
+

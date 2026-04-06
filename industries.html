@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en" class="bg-white">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>INDUSTRIES | GLOBAL INFRASTRUCTURE | AVZDAX</title>
+    <meta
+      name="description"
+      content="Real-world implementations of AVZDAX defense systems across government, energy, aviation, banking, and urban security sectors."
+    />
+    <meta property="og:title" content="Case Studies — Industry Solutions | AVZDAX" />
+    <meta
+      property="og:description"
+      content="Real-world implementations of AVZDAX defense systems across government, energy, aviation, banking, and urban security sectors."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avzdax.com/industries.html" />
+    <meta property="og:image" content="https://avzdax.com/media/avzdax-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Case Studies — Industry Solutions | AVZDAX" />
+    <meta
+      name="twitter:description"
+      content="Real-world implementations of AVZDAX defense systems across government, energy, aviation, banking, and urban security sectors."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: '#020202',
+              silver: { DEFAULT: '#E2E2E2', 400: '#A1A1A1', 700: '#202020' },
+            },
+            fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+          },
+        },
+      }
+    </script>
+    <link href="/components/footer-styles.css" rel="stylesheet" />
+    <link href="/components/header-styles.css" rel="stylesheet" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Syncopate:wght@700;800&display=swap');
+
+      :root {
+        --void: #030303;
+        --white: #ffffff;
+        --silver: #e5e5e7;
+        --alloy: #86868b;
+        --phosphor: #00ff41;
+        --cyan: #00f3ff;
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+
+      @media screen and (max-width: 1600px) and (min-width: 1025px) {
+        .max-w-\[1600px\] {
+          padding-left: 4vw !important;
+          padding-right: 4vw !important;
+        }
+        h1.synco {
+          font-size: clamp(4rem, 8vw, 6rem) !important;
+        }
+      }
+      @media screen and (max-width: 1400px) and (min-width: 1025px) {
+        .max-w-\[1600px\] {
+          padding-left: 3vw !important;
+          padding-right: 3vw !important;
+        }
+        h1.synco {
+          font-size: clamp(3.5rem, 7vw, 5rem) !important;
+        }
+        h2.synco {
+          font-size: clamp(2rem, 4vw, 3.5rem) !important;
+        }
+        .lg\:p-24 {
+          padding: 4rem !important;
+        }
+      }
+      @media screen and (max-width: 1280px) and (min-width: 1025px) {
+        .max-w-\[1600px\] {
+          padding-left: 2.5vw !important;
+          padding-right: 2.5vw !important;
+        }
+        h1.synco {
+          font-size: clamp(3rem, 6vw, 4.5rem) !important;
+        }
+        h2.synco {
+          font-size: clamp(1.8rem, 3.5vw, 3rem) !important;
+        }
+        .lg\:p-24 {
+          padding: 3rem !important;
+        }
+        .min-h-\[600px\] {
+          min-height: 500px !important;
+        }
+      }
+
+      @media screen and (max-width: 1024px) and (min-width: 769px) {
+        .max-w-\[1600px\] {
+          padding-left: 40px !important;
+          padding-right: 40px !important;
+        }
+        h1.synco {
+          font-size: 2.5rem !important;
+        }
+        h2.synco {
+          font-size: 1.8rem !important;
+        }
+        .lg\:p-24 {
+          padding: 2rem !important;
+        }
+        .min-h-\[600px\] {
+          min-height: 400px !important;
+        }
+        .lg\:grid-cols-2 {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--white);
+        color: var(--void);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        width: 100%;
+        transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .synco {
+        font-family: 'Syncopate', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+        line-height: 0.8;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.4em;
+      }
+
+      nav {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      nav.nav-scrolled {
+        background: rgba(0, 0, 0, 0.9);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+      }
+
+      nav.nav-inverted {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+      nav.nav-inverted .nav-item > a {
+        color: rgba(0, 0, 0, 0.7) !important;
+      }
+      nav.nav-inverted .nav-item:hover > a {
+        color: #000 !important;
+      }
+      nav.nav-inverted .nav-item > a::after {
+        background: linear-gradient(90deg, #000, #000) !important;
+      }
+      nav.nav-inverted .schedule-btn {
+        background: #000 !important;
+        color: #fff !important;
+        border-color: #000 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+      }
+      nav.nav-inverted .schedule-btn:hover {
+        background: #333 !important;
+        transform: translateY(-2px) !important;
+      }
+      nav.nav-inverted .brand-logo {
+        filter: invert(1) brightness(0) !important;
+      }
+
+      nav.nav-inverted .tactical-search-btn {
+        background: rgba(0, 0, 0, 0.02) !important;
+        border-color: rgba(0, 0, 0, 0.15) !important;
+      }
+      nav.nav-inverted .tactical-search-btn::before,
+      nav.nav-inverted .tactical-search-btn::after {
+        border-color: rgba(0, 0, 0, 0.3) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover {
+        background: rgba(0, 0, 0, 0.05) !important;
+        border-color: rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1) !important;
+      }
+      nav.nav-inverted .tactical-search-btn svg {
+        stroke: rgba(0, 0, 0, 0.5) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover svg {
+        stroke: #000 !important;
+      }
+      nav.nav-inverted .tactical-search-btn .scan-line {
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5), transparent) !important;
+      }
+
+      .mobile-nav-bar {
+        background: transparent !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+      }
+      .mobile-nav-bar .mobile-nav-logo img {
+        filter: invert(1) brightness(0) !important;
+      }
+      .mobile-nav-bar .mobile-menu-toggle-modern .bar {
+        stroke: #000 !important;
+      }
+
+      .mobile-nav-bar .mobile-menu-toggle-modern.open .bar {
+        stroke: #fff !important;
+      }
+
+      .mega-menu-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.98);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+      }
+      .nav-item:hover .mega-menu-wrapper {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+      }
+      .mega-menu-content {
+        background: linear-gradient(135deg, #0a0a0b 0%, #0d0d0d 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        padding: 60px 0;
+      }
+
+      .grid-item-hover {
+        display: block;
+        padding: 16px 20px;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid transparent;
+      }
+      .grid-item-hover:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(4px);
+      }
+
+      .menu-preview-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+      }
+      .menu-preview-img.active {
+        opacity: 1;
+        transform: scale(1.25) translateY(0);
+      }
+
+      .tactical-search-btn {
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        clip-path: polygon(
+          0 0,
+          calc(100% - 8px) 0,
+          100% 8px,
+          100% 100%,
+          8px 100%,
+          0 calc(100% - 8px)
+        );
+      }
+      .tactical-search-btn::before,
+      .tactical-search-btn::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.4s ease;
+      }
+      .tactical-search-btn::before {
+        top: 3px;
+        left: 3px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .tactical-search-btn::after {
+        bottom: 3px;
+        right: 3px;
+        border-left: none;
+        border-top: none;
+      }
+      .tactical-search-btn:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: scale(1.08);
+      }
+      .tactical-search-btn svg {
+        width: 22px;
+        height: 22px;
+        stroke: rgba(255, 255, 255, 0.5);
+        stroke-width: 1.5;
+        transition: all 0.4s ease;
+        position: relative;
+        z-index: 2;
+      }
+      .tactical-search-btn:hover svg {
+        stroke: #fff;
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+        transform: scale(1.1);
+      }
+      .tactical-search-btn:active {
+        transform: scale(0.95);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      #search-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(60px);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #search-overlay.is-open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      @media (max-width: 768px) {
+        body > section:first-of-type {
+          padding-top: 120px !important;
+          padding-bottom: 40px !important;
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+
+        h1.synco {
+          font-size: 10.5vw !important;
+          line-height: 0.85 !important;
+          margin-bottom: 20px !important;
+          white-space: nowrap !important;
+        }
+
+        .max-w-2xl p.text-xl,
+        .max-w-2xl p.text-2xl,
+        .max-w-2xl p:first-of-type {
+          font-size: 16px !important;
+          line-height: 1.5 !important;
+          margin-bottom: 12px !important;
+        }
+        .max-w-2xl p.text-lg,
+        .max-w-2xl p:last-of-type {
+          font-size: 14px !important;
+          line-height: 1.6 !important;
+        }
+
+        section.bg-white > div[class*='flex'] {
+          min-height: auto !important;
+          flex-direction: column !important;
+        }
+
+        section.bg-white > div[class*='flex'] > div:first-child {
+          width: 100% !important;
+          height: 280px !important;
+          position: relative !important;
+        }
+
+        section.bg-white .group img {
+          filter: none !important;
+          -webkit-filter: none !important;
+        }
+
+        section.bg-white > div[class*='flex'] > div:last-child {
+          width: 100% !important;
+          padding: 24px 20px !important;
+          margin-top: -1px !important;
+          background: #fff !important;
+          position: relative !important;
+        }
+
+        section.bg-white h2.synco {
+          font-size: 6.5vw !important;
+          line-height: 0.9 !important;
+          letter-spacing: -0.03em !important;
+          word-break: break-word !important;
+        }
+
+        section.bg-white > div.w-full.py-24 {
+          padding: 40px 20px !important;
+        }
+        section.bg-white > div.w-full.py-24 a {
+          display: block !important;
+          width: 100% !important;
+          text-align: center !important;
+          padding: 18px 20px !important;
+          font-size: 10px !important;
+          letter-spacing: 0.25em !important;
+        }
+
+        .h-32 {
+          height: 40px !important;
+        }
+      }
+
+      @media (max-width: 380px) {
+        h1.synco {
+          font-size: 11vw !important;
+        }
+        section.bg-white h2.synco {
+          font-size: 7vw !important;
+        }
+        section.bg-white > div[class*='flex'] > div:first-child {
+          height: 220px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="#"
+      onclick="
+        event.preventDefault()
+        history.back()
+      "
+      class="absolute top-24 left-4 md:top-32 md:left-12 z-[200] group mix-blend-difference text-white flex items-center gap-4 transition-opacity duration-300 hover:opacity-70"
+      aria-label="Go Back"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transform transition-transform duration-500 ease-out group-hover:-translate-x-2"
+      >
+        <path
+          d="M20 12H4M4 12L10 18M4 12L10 6"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+    <div id="header-container"></div>
+    <script src="/components/header-loader.js"></script>
+    <script>
+      ;(function waitForHeader() {
+        const check = setInterval(() => {
+          const desktopNav = document.getElementById('main-nav')
+          if (desktopNav) {
+            desktopNav.classList.add('nav-inverted')
+            clearInterval(check)
+          }
+        }, 50)
+        setTimeout(() => clearInterval(check), 5000)
+      })()
+    </script>
+
+    <section class="pt-40 pb-20 border-b border-black/5 bg-white relative">
+      <div class="max-w-[1600px] mx-auto px-6 md:px-12">
+        <h1
+          class="synco text-6xl md:text-8xl text-black leading-none tracking-tighter uppercase mb-16"
+        >
+          Industries.
+        </h1>
+        <div class="max-w-2xl">
+          <p class="font-sans text-xl md:text-2xl text-black font-medium leading-relaxed mb-6">
+            Securing the systems that power modern society.
+          </p>
+          <p class="font-sans text-lg text-black/60 leading-relaxed">
+            AVZDAX delivers advanced intelligence infrastructure for the world's most critical
+            sectors. From national energy grids to global financial networks, we ensure operational
+            continuity and resilience at scale.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white text-black w-full">
+      <div class="flex flex-col lg:flex-row min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-aviation.webp"
+            alt="Banking & Financial Institutions"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Banking & Financial Institutions
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row-reverse min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-government.webp"
+            alt="Government & Public Sector"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Government & Public Sector
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-energy.webp"
+            alt="Energy And Oil & Gas"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Energy And<br />Oil & Gas
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row-reverse min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-banking.webp"
+            alt="Transportation & Mobility"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Transportation & Mobility
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-realestate.webp"
+            alt="Critical Infrastructure"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Critical Infrastructure
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row-reverse min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/nest-hero.webp"
+            alt="Healthcare"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Healthcare
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-urban.webp"
+            alt="Education & Campuses"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Education & Campuses
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row-reverse min-h-[600px] border-t border-black/10">
+        <div class="lg:w-1/2 relative h-[400px] lg:h-auto overflow-hidden group">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/media/industry-maritime.webp"
+            alt="Commercial & Industrial Facilities"
+            class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-105"
+          />
+        </div>
+        <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-white">
+          <h2 class="synco text-4xl lg:text-6xl uppercase leading-none tracking-tighter">
+            Commercial & Industrial Facilities
+          </h2>
+        </div>
+      </div>
+
+      <div class="w-full py-24 flex justify-center bg-white border-t border-black/10">
+        <a
+          href="/contact"
+          class="inline-block px-12 py-5 border-2 border-black bg-black text-white text-[11px] font-black uppercase tracking-[0.3em] hover:bg-transparent hover:text-black transition-all duration-300"
+        >
+          SCHEDULE A CONSULTATION →
+        </a>
+      </div>
+    </section>
+
+    <div class="h-32 bg-white w-full"></div>
+
+    <style>
+      .social-glass-btn {
+        border: none !important;
+        background: transparent !important;
+        width: auto !important;
+        height: auto !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .social-glass-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+      .social-glass-btn:hover {
+        opacity: 0.7;
+        background: transparent !important;
+        border-radius: 0;
+        box-shadow: none !important;
+      }
+
+      @media (max-width: 1024px) {
+        footer {
+          padding-top: 60px !important;
+          padding-bottom: 60px !important;
+          padding-left: 24px !important;
+          padding-right: 24px !important;
+        }
+        #sovereign-footer .grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 40px 20px !important;
+        }
+        #sovereign-footer .lg\:col-span-2 {
+          grid-column: span 2 !important;
+          text-align: left !important;
+          margin-bottom: 20px;
+          padding-bottom: 40px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        #sovereign-footer img {
+          display: none !important;
+        }
+        #sovereign-footer p {
+          font-size: 14px !important;
+          font-weight: 800 !important;
+          line-height: 1.4 !important;
+          color: #ffffff !important;
+          max-width: 100% !important;
+          letter-spacing: 0.1em !important;
+          text-transform: uppercase !important;
+          margin-bottom: 20px !important;
+        }
+        #sovereign-footer h4 {
+          font-size: 10px !important;
+          font-weight: 900 !important;
+          font-style: italic !important;
+          margin-bottom: 20px !important;
+          color: rgba(255, 255, 255, 0.4) !important;
+          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-bottom: none !important;
+          padding-top: 16px !important;
+          letter-spacing: 0.4em !important;
+          text-transform: uppercase !important;
+        }
+        #sovereign-footer .flex-col {
+          gap: 12px !important;
+        }
+        #sovereign-footer a.footer-link-hover {
+          font-size: 14px !important;
+          font-weight: 900 !important;
+          padding: 0 !important;
+          background: transparent !important;
+          letter-spacing: 0.05em !important;
+          text-transform: uppercase !important;
+          color: #ffffff !important;
+          transform: none !important;
+        }
+
+        #sovereign-footer a.footer-link-hover.text-green-500 {
+          color: #22c55e !important;
+        }
+        #sovereign-footer .footer-watermark {
+          font-size: clamp(15vw, 25vw, 400px) !important;
+          color: rgba(255, 255, 255, 0.18) !important;
+          opacity: 1 !important;
+        }
+
+        #sovereign-footer .mt-40 {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          margin-top: 60px !important;
+          padding-top: 90px !important;
+        }
+      }
+    </style>
+
+    <div style="background-color: #ffffff">
+      <footer
+        class="relative pt-40 pb-[24rem] px-12 overflow-hidden"
+        id="sovereign-footer"
+        style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a"
+      >
+        <div
+          class="footer-watermark"
+          style="
+            position: absolute;
+            bottom: -0.15em;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(15vw, 25vw, 400px);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            color: rgba(255, 255, 255, 0.18);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 0;
+            line-height: 1;
+          "
+        >
+          AVZDAX
+        </div>
+
+        <div
+          class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left"
+        >
+          <div class="lg:col-span-2 space-y-12 text-left">
+            <a href="/" aria-label="Home" class="hidden md:block"
+              ><img
+                loading="lazy"
+                decoding="async"
+                src="/media/avzdax-logo.png"
+                alt="AVZDAX Logo"
+                class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"
+            /></a>
+            <p
+              class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left"
+            >
+              We build the world's most advanced defense and security systems. Protecting nations,
+              critical infrastructure, and global security interests.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="https://linkedin.com/company/avzdax"
+                class="social-glass-btn"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+              <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </svg>
+              </a>
+              <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://medium.com/@AVZDAXtechnologies"
+                class="social-glass-btn"
+                aria-label="Medium"
+              >
+                <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
+                  <path
+                    d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              SOLUTIONS
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/primus" class="footer-link-hover">PRIMUS</a>
+              <a href="/nest" class="footer-link-hover">NEST</a>
+              <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
+              <a href="/trion" class="footer-link-hover">TRION</a>
+              <a href="/obex" class="footer-link-hover">OBEX</a>
+              <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              INDUSTRIES
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
+              <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
+              <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
+              <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
+              <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              COMPANY
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/about" class="footer-link-hover">ABOUT US</a
+              ><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a
+              ><a href="/news" class="footer-link-hover">NEWSROOM</a
+              ><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a
+              ><a href="/contact" class="footer-link-hover">CONTACT</a>
+            </div>
+          </div>
+          <div class="text-left">
+            <h4
+              class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
+            >
+              SUPPORT
+            </h4>
+            <div
+              class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
+            >
+              <a href="/contact" class="footer-link-hover">HELP CENTER</a
+              ><a href="/ethics" class="footer-link-hover flex items-center gap-3"
+                >STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a
+              ><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a
+              ><a href="/ethics" class="footer-link-hover">TERMS</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      })
+      window.lenis = lenis
+
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+    </script>
+
+    <script>
+      function toggleSearch() {
+        const overlay = document.getElementById('search-overlay')
+        if (overlay) {
+          overlay.classList.toggle('is-open')
+          if (overlay.classList.contains('is-open')) {
+            document.body.style.overflow = 'hidden'
+            const input = overlay.querySelector('input')
+            if (input) setTimeout(() => input.focus(), 100)
+          } else {
+            document.body.style.overflow = ''
+          }
+        }
+      }
+
+      function showPreview(id) {
+        const defaultPreview = document.getElementById('preview-default')
+        if (defaultPreview) defaultPreview.style.opacity = '0'
+
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+          img.style.opacity = '0'
+          img.style.transform = 'scale(0.8) translateY(20px)'
+        })
+
+        const target = document.getElementById('p-' + id)
+        if (target) {
+          target.classList.add('active')
+          void target.offsetWidth
+          target.style.opacity = '1'
+          target.style.transform = 'scale(1.25) translateY(0)'
+        }
+      }
+
+      ;(function () {
+        const nav = document.getElementById('main-nav')
+        const mobileNav = document.querySelector('.mobile-nav-bar')
+        const backBtn = document.querySelector('a[aria-label="Go Back"]')
+        let lastScroll = 0
+
+        function showHeader() {
+          if (nav) {
+            nav.style.opacity = '1'
+            nav.style.transform = 'translateY(0)'
+            nav.style.pointerEvents = 'auto'
+          }
+          if (mobileNav) {
+            mobileNav.style.opacity = '1'
+            mobileNav.style.transform = 'translateY(0)'
+            mobileNav.style.pointerEvents = 'auto'
+          }
+          if (backBtn) {
+            backBtn.style.opacity = '1'
+            backBtn.style.pointerEvents = 'auto'
+          }
+        }
+
+        function hideHeader() {
+          if (nav) {
+            nav.style.opacity = '0'
+            nav.style.transform = 'translateY(-100%)'
+            nav.style.pointerEvents = 'none'
+          }
+          if (mobileNav) {
+            mobileNav.style.opacity = '0'
+            mobileNav.style.transform = 'translateY(-100%)'
+            mobileNav.style.pointerEvents = 'none'
+          }
+          if (backBtn) {
+            backBtn.style.opacity = '0'
+            backBtn.style.pointerEvents = 'none'
+          }
+        }
+
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset
+
+          if (currentScroll <= 50) {
+            showHeader()
+          } else if (currentScroll < lastScroll) {
+            showHeader()
+          } else if (currentScroll > lastScroll) {
+            hideHeader()
+          }
+
+          lastScroll = currentScroll
+        })
+      })()
+    </script>
+    <script src="/media/site-utils.js"></script>
+  </body>
+</html>
+

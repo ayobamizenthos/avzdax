@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Page Not Found | AVZDAX</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #030303;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .error-code {
+        font-family: 'Syncopate', sans-serif;
+        font-size: clamp(6rem, 20vw, 14rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .error-label {
+        font-size: 0.7rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        color: rgba(255, 255, 255, 0.3);
+        margin-bottom: 3rem;
+      }
+
+      .error-message {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 400px;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+      }
+
+      .return-btn {
+        display: inline-block;
+        padding: 1rem 3rem;
+        font-size: 0.7rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: black;
+        background: white;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .return-btn:hover {
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-code">404</div>
+    <div class="error-label">Signal Not Found</div>
+    <p class="error-message">The resource you requested does not exist or has been relocated.</p>
+    <a href="/" class="return-btn">Return to Base</a>
+  </body>
+</html>
+
