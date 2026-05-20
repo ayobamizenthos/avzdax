@@ -47,6 +47,9 @@
             .product-title {
                 font-size: clamp(4rem, 7vw, 8rem) !important;
             }
+            #obex-fleet .obex-fleet-logo, #obex .obex-edge-logo {
+                font-size: clamp(3rem, 5vw, 6rem) !important;
+            }
         }
         
         
@@ -62,6 +65,7 @@
             
             .product-section { padding-left: 40px !important; padding-right: 40px !important; }
             .product-title { font-size: 3.5rem !important; }
+            #obex-fleet .obex-fleet-logo, #obex .obex-edge-logo { font-size: 8vw !important; }
             
             
             .hero-title { font-size: 12vw !important; }
@@ -72,6 +76,10 @@
             
             .lg\:grid-cols-3 { grid-template-columns: 1fr 1fr !important; }
             .lg\:grid-cols-2 { grid-template-columns: 1fr !important; }
+        }
+
+        @media screen and (max-width: 768px) {
+            #obex-fleet .obex-fleet-logo, #obex .obex-edge-logo { font-size: 11vw !important; }
         }
 
         
@@ -1817,120 +1825,7 @@
         
         
         
-        @media (max-width: 1024px) {
-            footer {
-                padding-top: 60px !important;
-                padding-bottom: 60px !important;
-                padding-left: 24px !important;
-                padding-right: 24px !important;
-            }
-            #sovereign-footer .grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 40px 20px !important;
-            }
-            #sovereign-footer .lg\:col-span-2 {
-                grid-column: span 2 !important;
-                text-align: left !important;
-                margin-bottom: 20px;
-                padding-bottom: 40px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            #sovereign-footer img {
-                display: none !important;
-            }
-            #sovereign-footer p {
-                font-size: 14px !important;
-                font-weight: 800 !important;
-                line-height: 1.4 !important;
-                color: #ffffff !important;
-                max-width: 100% !important;
-                letter-spacing: 0.1em !important;
-                text-transform: uppercase !important;
-                margin-bottom: 20px !important;
-            }
-            #sovereign-footer h4 {
-                font-size: 10px !important;
-                font-weight: 900 !important;
-                font-style: italic !important;
-                margin-bottom: 20px !important;
-                color: rgba(255, 255, 255, 0.4) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-                border-bottom: none !important;
-                padding-top: 16px !important;
-                letter-spacing: 0.4em !important;
-                text-transform: uppercase !important;
-            }
-            #sovereign-footer .flex-col {
-                gap: 12px !important;
-            }
-            #sovereign-footer a.footer-link-hover {
-                font-size: 14px !important;
-                font-weight: 900 !important;
-                padding: 0 !important;
-                background: transparent !important;
-                letter-spacing: 0.05em !important;
-                text-transform: uppercase !important;
-                color: #ffffff !important;
-                transform: none !important;
-            }
-            
-            #sovereign-footer a.footer-link-hover.text-green-500 {
-                color: #22c55e !important;
-            }
-            #sovereign-footer .footer-watermark {
-                font-size: clamp(15vw, 25vw, 400px) !important;
-                color: rgba(255,255,255,0.18) !important;
-                opacity: 1 !important;
-            }
-            
-            
-            #sovereign-footer .mt-40 {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                margin-top: 60px !important;
-                padding-top: 90px !important;
-                gap: 40px !important;
-                text-align: left !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-            }
-            #sovereign-footer .mt-40 .flex.gap-12 {
-                flex-direction: column !important;
-                gap: 12px !important;
-                width: 100%;
-            }
-            #sovereign-footer .mt-40 span {
-                font-size: 10px !important;
-                font-weight: 900 !important;
-                opacity: 0.3 !important;
-                letter-spacing: 0.3em !important;
-            }
-            #sovereign-footer .text-\[11px\].text-green-500 {
-                font-size: 11px !important;
-                letter-spacing: 0.2em !important;
-                color: #00ff41 !important;
-            }
-            #sovereign-footer .text-\[10px\].text-white\/20 {
-                font-size: 10px !important;
-                letter-spacing: 0.15em !important;
-                opacity: 0.2 !important;
-            }
-            #sovereign-footer .flex.gap-4 {
-                gap: 24px !important;
-                margin-top: 20px !important;
-            }
-            .social-glass-btn {
-                width: auto !important;
-                height: auto !important;
-                background: transparent !important;
-                border: none !important;
-            }
-            .social-glass-btn svg {
-                width: 28px !important;
-                height: 28px !important;
-            }
-        }
+
 
         
         @media (max-width: 768px) {
@@ -2455,17 +2350,37 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
                 <div class="text-content space-y-10 lg:order-1 order-2 text-right" style="will-change: transform, opacity;">
 
-                    <h2 class="product-title text-7xl md:text-9xl font-black uppercase tracking-wide text-white leading-none text-right pr-4" style="font-family: 'Inter', sans-serif;">OBEX</h2>
+                    <h2 class="product-title text-7xl md:text-9xl leading-none text-right pr-4">
+                        <span class="obex-edge-logo whitespace-nowrap">OBEX EDGE</span>
+                    </h2>
                     <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl text-right ml-auto uppercase tracking-widest">Discreet protection for elite spaces. Invisible security technology that <span class="text-white font-black">safeguards properties</span> with absolute visual discretion.</p>
                     <div class="flex justify-end"><a href="/obex" class="inline-block px-12 py-5 border-2 border-white bg-white text-black text-[11px] font-bold uppercase tracking-[0.4em] hover:bg-transparent hover:text-white transition-all duration-500">ENTER →</a></div>
                 </div>
                 <div class="image-wrapper opacity-0 lg:order-2 order-1 group flex items-center justify-center" style="will-change: transform, opacity;">
                     <div class="relative w-full max-w-[800px] flex flex-col items-start translate-x-12 lg:translate-x-20">
                         
-                        <img src="media/obexbox.webp" class="w-[110%] h-auto self-end relative z-0 transition-all duration-1000 group-hover:scale-[1.03]" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="OBEX Sovereign Hardware" loading="lazy" decoding="async">
+                        <img src="media/obexbox.webp" class="w-[110%] h-auto self-end relative z-0 transition-all duration-1000 group-hover:scale-[1.03]" style="filter: brightness(1.2) drop-shadow(0 60px 120px rgba(0,0,0,0.8));" alt="OBEX EDGE Sovereign Hardware" loading="lazy" decoding="async">
                         
-                        <img src="media/obex-display.webp" alt="OBEX" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-18%] transition-all duration-1000 group-hover:scale-110 group-hover:-translate-x-4 group-hover:translate-y-4" loading="lazy" decoding="async">
+                        <img src="media/obex-display.webp" alt="OBEX EDGE" class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-18%] transition-all duration-1000 group-hover:scale-110 group-hover:-translate-x-4 group-hover:translate-y-4" loading="lazy" decoding="async">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="obex-fleet" class="product-section min-h-screen flex items-center px-12 md:px-24 py-32 border-b border-white/5" data-align="left" style="will-change: transform, opacity;">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center w-full">
+                <div class="image-wrapper opacity-0 group flex items-center justify-center" style="will-change: transform, opacity;">
+                    <div class="relative w-full max-w-[800px] flex flex-col items-center">
+                        <img src="media/obex_fleet_back_nobg.png" class="w-[80%] h-auto relative z-10 transition-all duration-1000 group-hover:scale-110 group-hover:-translate-y-4" alt="OBEX EDGE Fleet Hardware" loading="lazy" decoding="async">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                    </div>
+                </div>
+                <div class="text-content space-y-10 text-left" style="will-change: transform, opacity;">
+                    <h2 class="product-title text-7xl md:text-9xl leading-none">
+                        <span class="obex-fleet-logo whitespace-nowrap">OBEX FLEET</span>
+                    </h2>
+                    <p class="text-lg md:text-xl text-silver-400 font-light leading-relaxed max-w-xl uppercase tracking-widest text-left">The definitive forensic authority for commercial fleets. Real-time neural monitoring that protects drivers and eliminates liability with <span class="text-white font-black">absolute evidentiary certainty.</span></p>
+                    <a href="/obex-fleet" class="inline-block px-12 py-5 border-2 border-white bg-white text-black text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-transparent hover:text-white transition-all duration-500">ENTER →</a>
                 </div>
             </div>
         </section>
@@ -2602,21 +2517,56 @@
                 flex-direction: column;
                 justify-content: center;
                 min-height: 100vh;
+                zoom: 0.8; /* Reduced zoom from 0.85 to 0.8 to ensure progress bar visibility */
             }
 
             .industries-header {
                 text-align: center;
-                margin-bottom: 60px;
+                margin-bottom: 25px; /* Reduced from 30px */
                 padding: 0 40px;
+            }
+
+            .obex-fleet-logo {
+                font-family: 'Syncopate', sans-serif !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
+                letter-spacing: -0.05em !important;
+                text-transform: uppercase !important;
+                background: linear-gradient(135deg, #007aff 0%, #ffffff 100%);
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                display: inline-block !important;
+                position: relative !important;
+                filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.3));
+            }
+            .obex-fleet-logo::after {
+                content: '';
+                position: absolute;
+                bottom: 0.05em;
+                right: -0.1em;
+                width: 40%;
+                height: 0.03em;
+                background: #007aff;
+                transform: skewX(-20deg);
+                opacity: 0.8;
+            }
+
+            .obex-gradient-text {
+                background: linear-gradient(135deg, #007aff 0%, #ffffff 100%);
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                display: inline-block !important;
+                font-weight: 900 !important;
+                font-style: italic !important;
             }
 
             .industries-title {
                 font-family: 'Syncopate', sans-serif;
                 font-size: clamp(2.5rem, 6vw, 4.2rem);
                 font-weight: 800;
-                color: #000;
+                color: #000; /* Fixed: was white on white background */
                 text-transform: uppercase;
-                letter-spacing: -0.05em;
+                letter-spacing: -0.08em; /* Synced with trion gold standard */
                 line-height: 0.85;
                 margin: 0;
             }
@@ -2640,9 +2590,9 @@
 
             
             .industry-card {
-                flex: 0 0 480px;
-                min-width: 480px;
-                height: 560px;
+                flex: 0 0 420px; /* Reduced from 480px */
+                min-width: 420px;
+                height: 520px; /* Reduced from 560px */
                 background: #111;
                 border-radius: 8px;
                 position: relative;
@@ -2678,7 +2628,7 @@
             .card-content {
                 position: absolute;
                 bottom: 0; left: 0; right: 0;
-                padding: 40px;
+                padding: 32px;
                 z-index: 2;
             }
 
@@ -2694,12 +2644,12 @@
 
             .industry-card h3 {
                 font-family: 'Syncopate', sans-serif;
-                font-size: 2.2rem;
+                font-size: 1.8rem;
                 font-weight: 800;
                 color: #fff;
                 text-transform: uppercase;
                 letter-spacing: -0.04em;
-                line-height: 0.95;
+                line-height: 1.05;
                 margin: 0 0 16px 0;
             }
 
@@ -2729,7 +2679,7 @@
                 width: calc(100% - 120px);
                 height: 2px;
                 background: rgba(0,0,0,0.05);
-                margin: 40px 60px 0;
+                margin: 20px 60px 0; /* Reduced from 30px */
                 border-radius: 2px;
                 overflow: hidden;
             }
@@ -2744,7 +2694,7 @@
             
             .industries-cta {
                 text-align: center;
-                margin-top: 40px;
+                margin-top: 30px; /* Reduced from 40px */
             }
 
             .industries-cta .cta-btn {
@@ -2786,6 +2736,7 @@
                     display: flex;
                     flex-direction: column;
                     height: auto;
+                    zoom: 1; /* Reset zoom for mobile */
                 }
                 .industries-header {
                     padding: 0 24px;
@@ -2890,9 +2841,13 @@
             
 
             const cardWidth = cards[0].offsetWidth;
-            const totalWidth = (cardWidth * cards.length) + (gap * (cards.length - 1)) + padding;
-            const viewportWidth = window.innerWidth;
-            const scrollDistance = totalWidth - viewportWidth;
+            const contentWidth = (cardWidth * cards.length) + (gap * (cards.length - 1)) + padding;
+            // .industries-container applies `zoom`; offsetWidth math is pre-zoom CSS px.
+            // Convert overflow to rendered px (pin length) and local px (track transform).
+            const zoomHost = section.querySelector('.industries-container');
+            const zoom = parseFloat(getComputedStyle(zoomHost).zoom) || 1;
+            const visualOverflow = (contentWidth * zoom) - window.innerWidth;
+            const scrollDistance = visualOverflow / zoom;
 
 
             ScrollTrigger.getAll().forEach(st => {
@@ -2900,7 +2855,7 @@
             });
 
 
-            if (scrollDistance <= 0) return;
+            if (visualOverflow <= 0) return;
 
 
             const scrollTween = gsap.to(track, {
@@ -2909,7 +2864,7 @@
                 scrollTrigger: {
                     trigger: section,
                     start: "top top",
-                    end: "+=" + (scrollDistance * 1.2),
+                    end: "+=" + (visualOverflow * 1.2),
                     pin: true,
                     scrub: 0.8,
                     anticipatePin: 1,
@@ -2944,7 +2899,7 @@
                         scrollTrigger: {
                             trigger: section,
                             start: "top top",
-                            end: "+=" + (scrollDistance * 1.2),
+                            end: "+=" + (visualOverflow * 1.2),
                             scrub: 1,
                         }
                     }
@@ -3063,61 +3018,8 @@
         </div>
     </section>
 
-    <footer class="relative pt-40 pb-[24rem] px-12 overflow-hidden" id="sovereign-footer" style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a;">
-
-        <div class="footer-watermark" style="position: absolute; bottom: -0.15em; left: 50%; transform: translateX(-50%); font-size: clamp(15vw, 25vw, 400px); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -0.05em; color: rgba(255,255,255,0.18); pointer-events: none; white-space: nowrap; z-index: 0; line-height: 1;">AVZDAX</div>
-
-
-        <div class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left">
-            <div class="lg:col-span-2 space-y-12 text-left">
-                <a href="/" aria-label="Home" class="hidden md:block"><img loading="lazy" decoding="async" src="/media/avzdax-logo.png" alt="AVZDAX Logo" class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"></a>
-                <p class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left">We build the world's most advanced defense and security systems. Protecting nations, critical infrastructure, and global security interests.</p>
-                <div class="flex gap-4">
-                    <a href="https://linkedin.com/company/avzdax" class="social-glass-btn" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </a>
-                    <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
-                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
-                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    </a>
-                    <a href="https://medium.com/@AVZDAXtechnologies" class="social-glass-btn" aria-label="Medium">
-                        <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="text-left">
-                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SOLUTIONS</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="/primus" class="footer-link-hover">PRIMUS</a>
-                    <a href="/nest" class="footer-link-hover">NEST</a>
-                    <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
-                    <a href="/trion" class="footer-link-hover">TRION</a>
-                    <a href="/obex" class="footer-link-hover">OBEX</a>
-                    <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
-                </div>
-            </div>
-            <div class="text-left">
-                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">INDUSTRIES</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left">
-                    <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
-                    <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
-                    <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
-                    <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
-                    <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
-                </div>
-            </div>
-            <div class="text-left">
-                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">COMPANY</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="/about" class="footer-link-hover">ABOUT US</a><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a><a href="/news" class="footer-link-hover">NEWSROOM</a><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a><a href="/contact" class="footer-link-hover">CONTACT</a></div>
-            </div>
-            <div class="text-left">
-                <h4 class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left">SUPPORT</h4>
-                <div class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"><a href="/contact" class="footer-link-hover">HELP CENTER</a><a href="/ethics" class="footer-link-hover flex items-center gap-3">STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a><a href="/ethics" class="footer-link-hover">TERMS</a></div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
+    <script src="/components/footer-loader.js"></script>
 </div> 
 
     <script>
@@ -3318,7 +3220,13 @@
         const canvas = document.getElementById('footer-neural-canvas');
         const ctx = canvas.getContext('2d');
         let pts = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = document.getElementById('sovereign-footer').offsetHeight; pts = []; for(let i=0; i<30; i++) pts.push(new P()); }
+        function resize() { 
+            const f = document.getElementById('footer-container');
+            canvas.width = window.innerWidth; 
+            canvas.height = f ? f.offsetHeight : 0; 
+            pts = []; 
+            for(let i=0; i<30; i++) pts.push(new P()); 
+        }
         class P { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.fill(); } }
         let lastTime = 0;
         function draw(currentTime){
@@ -3398,7 +3306,7 @@
             
 
             { title: 'TRION', description: 'Optical Sensing — Advanced surveillance hardware', url: 'trion.html', category: 'Hardware' },
-            { title: 'OBEX', description: 'Architectural Imaging — 3D spatial capture', url: 'obex.html', category: 'Hardware' },
+            { title: 'OBEX EDGE', description: 'Architectural Imaging — 3D spatial capture', url: 'obex.html', category: 'Hardware' },
             { title: 'ARCLIGHT', description: 'Urban Tower — City-wide monitoring', url: 'arclight.html', category: 'Hardware' },
             
 
@@ -3638,7 +3546,7 @@
             });
         }, { rootMargin: '100px' });
         
-        const footerEl = document.getElementById('sovereign-footer');
+        const footerEl = document.getElementById('footer-container');
         if (footerEl) canvasObserver.observe(footerEl);
 
 
@@ -3774,7 +3682,7 @@
 
         (function initNewsAndFooterHeaderEffect() {
             const newsSection = document.getElementById('news-highlights');
-            const footer = document.getElementById('sovereign-footer');
+            const footer = document.getElementById('footer-container');
             const mobileNav = document.querySelector('.mobile-nav-bar');
             
 

@@ -1,6 +1,6 @@
 <div
   id="search-overlay"
-  class="fixed inset-0 z-[99999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500"
+  class="fixed inset-0 z-[99999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 overflow-hidden"
 >
   <div
     class="absolute inset-0 bg-[#050505]/95 backdrop-blur-2xl transition-opacity duration-500"
@@ -62,7 +62,7 @@
     <div id="search-results" class="search-results-container hidden mb-8">
       <div
         id="search-results-list"
-        class="search-results-list max-h-[50vh] overflow-y-auto space-y-2"
+        class="search-results-list max-h-[50vh] overflow-y-auto space-y-2 scrollbar-hide"
       ></div>
     </div>
 
@@ -117,140 +117,161 @@
         <div class="mega-menu-wrapper">
           <div class="mega-menu-content text-left">
             <div class="max-w-[1500px] mx-auto grid grid-cols-5 gap-8 px-10">
-              <div class="space-y-4">
-                <h3
-                  class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
-                >
-                  Platforms
-                </h3>
-                <a
-                  href="/primus"
-                  onmouseover="showPreview('primus')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Primus</span
+              <!-- Wrapped Platforms and Hardware in a sub-grid to allow for a centered Arclight -->
+              <div class="col-span-2 grid grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                  <h3
+                    class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
                   >
-                </a>
-                <a
-                  href="/teletraan"
-                  onmouseover="showPreview('teletraan')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Teletraan</span
+                    Platforms
+                  </h3>
+                  <a
+                    href="/primus"
+                    onmouseover="showPreview('primus')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
                   >
-                </a>
-                <a
-                  href="/nest"
-                  onmouseover="showPreview('nest')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Nest</span
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span
+                      class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                      >Primus</span
+                    >
+                  </a>
+                  <a
+                    href="/teletraan"
+                    onmouseover="showPreview('teletraan')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
                   >
-                </a>
-              </div>
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span
+                      class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                      >Teletraan</span
+                    >
+                  </a>
+                  <a
+                    href="/nest"
+                    onmouseover="showPreview('nest')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                  >
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span
+                      class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                      >Nest</span
+                    >
+                  </a>
+                </div>
 
-              <div class="space-y-4">
-                <h3
-                  class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
-                >
-                  Hardware
-                </h3>
-                <a
-                  href="/trion"
-                  onmouseover="showPreview('trion')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Trion</span
+                <div class="space-y-4">
+                  <h3
+                    class="text-[11px] font-mono font-bold text-white/60 uppercase tracking-[0.5em] mb-4 pb-3 border-b border-white/10"
                   >
-                </a>
-                <a
-                  href="/obex"
-                  onmouseover="showPreview('obex')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Obex</span
+                    Hardware
+                  </h3>
+                  <a
+                    href="/trion"
+                    onmouseover="showPreview('trion')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
                   >
-                </a>
-                <a
-                  href="/arclight"
-                  onmouseover="showPreview('arclight')"
-                  class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
-                  style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
-                >
-                  <div
-                    class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
-                    style="
-                      background-image:
-                        linear-gradient(#fff 1px, transparent 1px),
-                        linear-gradient(90deg, #fff 1px, transparent 1px);
-                      background-size: 20px 20px;
-                    "
-                  ></div>
-                  <span
-                    class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
-                    >Arclight</span
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span
+                      class="text-xl font-black uppercase text-white tracking-wider block relative z-10"
+                      >Trion</span
+                    >
+                  </a>
+                  <a
+                    href="/obex"
+                    onmouseover="showPreview('obex')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
                   >
-                </a>
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span class="obex-edge-logo text-xl block relative z-10">Obex Edge</span>
+                  </a>
+                  <a
+                    href="/obex-fleet"
+                    onmouseover="showPreview('obex-fleet')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-blue-500/10 hover:border-blue-500/40 rounded-xl transition-all duration-300"
+                    style="box-shadow: 0 0 20px rgba(59, 130, 246, 0.15)"
+                  >
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#3b82f6 1px, transparent 1px),
+                          linear-gradient(90deg, #3b82f6 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span class="obex-fleet-logo text-xl block relative z-10">OBEX FLEET</span>
+                  </a>
+                </div>
+
+                <!-- Arclight Centered Span -->
+                <div class="col-span-2 pt-2 flex justify-center">
+                  <a
+                    href="/arclight"
+                    onmouseover="showPreview('arclight')"
+                    class="group block relative overflow-hidden p-6 bg-white/[0.01] border border-white/5 hover:border-white/20 rounded-xl transition-all duration-300 w-full"
+                    style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)"
+                  >
+                    <div
+                      class="absolute inset-0 opacity-[0.015] group-hover:opacity-[0.03] transition-opacity duration-300"
+                      style="
+                        background-image:
+                          linear-gradient(#fff 1px, transparent 1px),
+                          linear-gradient(90deg, #fff 1px, transparent 1px);
+                        background-size: 20px 20px;
+                      "
+                    ></div>
+                    <span
+                      class="text-xl font-black uppercase text-white tracking-wider block relative z-10 text-center"
+                      >Arclight</span
+                    >
+                  </a>
+                </div>
               </div>
 
               <div class="space-y-4">
@@ -304,7 +325,7 @@
               </div>
 
               <div
-                class="col-span-2 row-span-2 relative flex items-center justify-center overflow-visible min-h-[450px] z-50"
+                class="col-span-2 row-span-2 relative flex items-center justify-center overflow-visible min-h-[350px] z-50"
               >
                 <div id="preview-default" class="text-center transition-opacity duration-500">
                   <img src="/media/avzdax-logo.png" class="h-12 mx-auto opacity-10 grayscale" />
@@ -329,6 +350,19 @@
                       src="media/obex-display.webp"
                       class="w-[32%] h-auto relative z-10 mt-[-25%] ml-[-15%] transition-transform duration-700"
                       alt="OBEX Sensor"
+                    />
+                  </div>
+                </div>
+                <div
+                  id="p-obex-fleet"
+                  class="menu-preview-img w-full h-full flex flex-col items-center justify-center pointer-events-none"
+                >
+                  <div class="relative w-[90%] flex flex-col items-center">
+                    <img
+                      src="media/obex_fleet_back_nobg.png"
+                      class="w-[85%] h-auto relative z-10 transition-transform duration-700"
+                      style="filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5))"
+                      alt="OBEX Fleet"
                     />
                   </div>
                 </div>
@@ -415,7 +449,7 @@
 
                     <div class="relative z-10 text-center w-full px-4">
                       <h3
-                        class="text-5xl md:text-6xl font-black uppercase tracking-[0.15em] text-white/40 blur-[7px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
+                        class="text-3xl md:text-4xl font-black uppercase tracking-[0.15em] text-white/40 blur-[5px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
                       >
                         SENTINEL
                       </h3>
@@ -460,7 +494,7 @@
 
                     <div class="relative z-10 text-center w-full px-4">
                       <h3
-                        class="text-5xl md:text-6xl font-black uppercase tracking-[0.15em] text-white/40 blur-[7px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
+                        class="text-3xl md:text-4xl font-black uppercase tracking-[0.15em] text-white/40 blur-[5px] select-none scale-y-110 transform transition-all duration-1000 relative z-10"
                       >
                         XETRON
                       </h3>
@@ -486,7 +520,6 @@
                 href="/whitepaper"
                 class="group block relative overflow-hidden p-12 bg-white border border-white/20 hover:border-white shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-xl transition-all duration-500 transform hover:-translate-y-1"
               >
-                
                 <div
                   class="absolute inset-0 opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-300"
                   style="
@@ -697,7 +730,7 @@
       </button>
       <a
         href="/contact"
-        class="schedule-btn bg-white text-black px-10 py-4 text-[11px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300 inline-block"
+        class="schedule-btn bg-white text-black px-8 h-[36px] flex items-center justify-center text-[10px] font-black uppercase tracking-[0.3em] hover:bg-silver transition-all duration-300"
         >Schedule Demonstration</a
       >
     </div>
@@ -774,7 +807,7 @@
         </div>
         <div
           id="mobile-search-results-list"
-          class="search-results-list max-h-[40vh] overflow-y-auto"
+          class="search-results-list max-h-[40vh] overflow-y-auto scrollbar-hide"
         ></div>
       </div>
     </div>
@@ -822,6 +855,11 @@
               href="/obex"
               class="text-white/60 hover:text-white py-3 text-sm uppercase tracking-widest transition-colors"
               >OBEX — Architectural Imaging</a
+            >
+            <a
+              href="/obex-fleet"
+              class="text-blue-400/80 hover:text-blue-400 py-3 text-sm uppercase tracking-widest transition-colors font-bold"
+              >OBEX FLEET — Mobility Intel</a
             >
             <a
               href="/arclight"
@@ -983,4 +1021,3 @@
     </div>
   </div>
 </div>
-

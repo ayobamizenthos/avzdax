@@ -224,3 +224,31 @@
   }
 }
 
+.obex-fleet-logo,
+.obex-edge-logo {
+  font-family: 'Syncopate', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  letter-spacing: -0.05em !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(135deg, #007aff 0%, #ffffff 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block !important;
+  position: relative !important;
+  filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.3));
+  padding-right: 0.15em !important;
+  margin-right: -0.15em !important;
+}
+.obex-fleet-logo::after,
+.obex-edge-logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  right: -0.05em;
+  width: 40%;
+  height: 0.04em;
+  background: #007aff;
+  transform: skewX(-20deg);
+  opacity: 0.8;
+}

@@ -52,9 +52,15 @@
       category: 'Hardware',
     },
     {
-      title: 'OBEX',
+      title: 'OBEX EDGE',
       description: 'Architectural Imaging — 3D spatial capture',
       url: 'obex.html',
+      category: 'Hardware',
+    },
+    {
+      title: 'OBEX FLEET',
+      description: 'Predictive Mobility Intelligence — Fleet surveillance',
+      url: 'obex-fleet.html',
       category: 'Hardware',
     },
     {

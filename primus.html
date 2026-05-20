@@ -67,58 +67,55 @@
 
       @media screen and (max-width: 1600px) and (min-width: 1025px) {
         .cap-card {
-          flex: 0 0 380px !important;
-          max-width: 380px !important;
-          min-height: 480px !important;
-          padding: 40px !important;
+          flex: 0 0 420px !important;
+          min-width: 420px !important;
+          height: 520px !important;
+          padding: 45px !important;
         }
-        .ov-left,
-        .ov-right {
-          padding: 60px 50px !important;
-        }
-        .capabilities-scroll-wrapper {
+        .capabilities-cards-track {
           padding: 0 40px !important;
         }
       }
 
       @media screen and (max-width: 1400px) and (min-width: 1025px) {
         .cap-card {
-          flex: 0 0 340px !important;
-          max-width: 340px !important;
-          min-height: 450px !important;
-          padding: 35px !important;
+          flex: 0 0 360px !important;
+          min-width: 360px !important;
+          height: 480px !important;
+          padding: 38px !important;
         }
         .cap-card-title {
-          font-size: 1.6rem !important;
+          font-size: 1.8rem !important;
         }
-        .ov-left,
-        .ov-right {
-          padding: 50px 40px !important;
+        .cap-card-description {
+          font-size: 14px !important;
         }
-        .capabilities-scroll-wrapper {
+        .capabilities-cards-track {
           padding: 0 30px !important;
+          gap: 24px !important;
         }
       }
 
       @media screen and (max-width: 1280px) and (min-width: 1025px) {
         .cap-card {
-          flex: 0 0 300px !important;
-          max-width: 300px !important;
-          min-height: 420px !important;
-          padding: 30px !important;
+          flex: 0 0 320px !important;
+          min-width: 320px !important;
+          height: 450px !important;
+          padding: 32px !important;
         }
         .cap-card-title {
-          font-size: 1.4rem !important;
+          font-size: 1.5rem !important;
         }
         .cap-card-description {
           font-size: 13px !important;
         }
-        .ov-left,
-        .ov-right {
-          padding: 40px 30px !important;
-        }
-        .capabilities-scroll-wrapper {
+        .capabilities-cards-track {
           padding: 0 20px !important;
+          gap: 20px !important;
+        }
+        .capabilities-header {
+          padding: 0 20px !important;
+          margin-bottom: 40px !important;
         }
       }
 
@@ -157,6 +154,13 @@
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
         transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      ::-webkit-scrollbar {
+        display: none;
       }
 
       nav {
@@ -1067,17 +1071,20 @@
       }
 
       .capabilities-container {
-        width: 100%;
-        padding: 60px 0;
-        min-height: 100vh;
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        min-height: 100vh;
+        zoom: 0.8; /* Reduced zoom from 0.85 to 0.8 to ensure progress bar visibility */
       }
 
       .capabilities-header {
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
         padding: 0 40px;
       }
 
@@ -1092,48 +1099,40 @@
         font-weight: 900;
         color: #fff;
         text-transform: uppercase;
-        letter-spacing: -0.04em;
-        line-height: 1;
+        letter-spacing: -0.08em; /* Synced with trion gold standard */
+        line-height: 0.85; /* Synced with trion gold standard */
         margin: 0;
       }
 
       .capabilities-title span {
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.8) 0%,
-          rgba(255, 255, 255, 0.4) 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: rgba(255, 255, 255, 0.2);
       }
 
       .capabilities-scroll-wrapper {
-        overflow: visible;
-        padding: 0 60px;
+        overflow: hidden;
+        width: 100%;
       }
 
       .capabilities-cards-track {
         display: flex;
         gap: 32px;
+        padding: 0 60px;
         will-change: transform;
       }
 
       .cap-card {
-        flex: 0 0 420px;
-        max-width: 420px;
-        min-height: 520px;
-        background: linear-gradient(165deg, rgba(20, 20, 20, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
+        flex: 0 0 460px;
+        min-width: 460px;
+        height: 420px;
+        background: linear-gradient(165deg, rgba(18, 18, 18, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
         border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 4px;
-        padding: 50px;
+        border-radius: 8px;
         position: relative;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
+        padding: 48px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
       }
 
@@ -1144,50 +1143,36 @@
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         opacity: 0;
-        transition: opacity 0.5s ease;
+        transition: opacity 0.4s ease;
       }
 
       .cap-card:hover {
-        background: linear-gradient(165deg, rgba(30, 30, 30, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
-        border-color: rgba(255, 255, 255, 0.1);
-        transform: translateY(-8px);
-      }
-
-      .cap-card:hover::before {
-        opacity: 1;
-      }
-
-      .cap-card-tag {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.35);
-        text-transform: uppercase;
-        letter-spacing: 0.4em;
-        margin-bottom: 20px;
+        border-color: rgba(255, 255, 255, 0.12);
+        background: linear-gradient(165deg, rgba(25, 25, 25, 0.98) 0%, rgba(12, 12, 12, 0.98) 100%);
+        transform: translateY(-12px);
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
       }
 
       .cap-card-title {
-        font-size: 2rem;
+        font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 900;
         color: #fff;
         text-transform: uppercase;
         letter-spacing: -0.03em;
         line-height: 0.95;
-        margin: 0 0 24px 0;
+        margin: 0 0 30px 0;
       }
 
       .cap-card-description {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.4);
-        line-height: 1.7;
-        margin: 0;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.45);
+        line-height: 1.8;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        max-width: 380px;
         transition: color 0.4s ease;
-      }
-
-      .cap-card:hover .cap-card-description {
-        color: rgba(255, 255, 255, 0.6);
       }
 
       .cap-card-footer {
@@ -1201,26 +1186,13 @@
       .cap-card-line {
         width: 40px;
         height: 1px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
         transition: all 0.4s ease;
       }
 
       .cap-card:hover .cap-card-line {
         width: 60px;
         background: rgba(255, 255, 255, 0.4);
-      }
-
-      .cap-card-status {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.25);
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        transition: color 0.4s ease;
-      }
-
-      .cap-card:hover .cap-card-status {
-        color: rgba(255, 255, 255, 0.6);
       }
 
       .cap-progress-container {
@@ -1232,6 +1204,7 @@
         border-radius: 2px;
         overflow: hidden;
       }
+
       .cap-progress-bar {
         height: 100%;
         width: 0%;
@@ -1241,15 +1214,19 @@
       }
 
       .capabilities-cta {
-        text-align: center;
-        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+        width: 100%;
+        position: relative;
+        z-index: 100;
       }
 
       .cap-cta-btn {
         display: inline-flex;
         align-items: center;
         gap: 14px;
-        padding: 20px 48px;
+        padding: 16px 40px;
         background: transparent;
         border: 1px solid rgba(255, 255, 255, 0.15);
         color: white;
@@ -1271,80 +1248,81 @@
 
       @media (min-width: 1400px) {
         .cap-card {
-          flex: 0 0 480px;
-          max-width: 480px;
-          min-height: 560px;
-          padding: 60px;
+          flex: 0 0 460px;
+          min-width: 460px;
+          height: 420px;
+          padding: 48px;
+          border-radius: 4px;
         }
         .cap-card-title {
           font-size: 2.4rem;
         }
-        .capabilities-scroll-wrapper {
-          padding: 0 100px;
+        .cap-card-description {
+          font-size: 16px;
         }
       }
 
-      @media (max-width: 1024px) {
+      @media (max-width: 768px) {
+        .capabilities-horizontal-section {
+          min-height: 100vh;
+        }
         .capabilities-container {
-          padding: 40px 0 60px 0 !important;
-          justify-content: flex-start !important;
+          padding: 100px 0 60px;
+          min-height: 100vh;
+          zoom: 1; /* Reset zoom for mobile */
         }
         .capabilities-header {
-          margin-bottom: 20px !important;
-          margin-top: 0 !important;
+          padding: 0 20px;
+          margin-bottom: 40px;
         }
         .capabilities-logo {
-          height: 16px !important;
-          margin-bottom: 15px !important;
+          height: 20px;
+          margin-bottom: 24px;
         }
         .capabilities-title {
-          font-size: 2rem !important;
-        }
-
-        .capabilities-scroll-wrapper {
-          padding: 0 24px !important;
+          font-size: 2.2rem;
+          letter-spacing: -0.03em;
         }
         .capabilities-cards-track {
-          gap: 16px !important;
-          padding-right: 24px !important;
+          gap: 16px;
+          padding: 0 16px;
         }
-
         .cap-card {
-          flex: 0 0 300px !important;
-          max-width: 300px !important;
-          min-height: 400px !important;
-          padding: 30px !important;
+          flex: 0 0 calc(100vw - 48px);
+          min-width: calc(100vw - 48px);
+          max-width: calc(100vw - 48px);
+          height: 520px;
+          padding: 36px;
+          border-radius: 12px;
         }
         .cap-card-title {
-          font-size: 2.2rem !important;
-          margin-bottom: 24px !important;
-          line-height: 0.9 !important;
+          font-size: 2rem;
+          margin-bottom: 24px;
+          line-height: 0.9;
         }
         .cap-card-description {
-          font-size: 16px !important;
-          line-height: 1.6 !important;
+          font-size: 14px;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.5);
         }
-
+        .cap-card-footer {
+          padding-top: 30px;
+        }
         .cap-progress-container {
-          margin: 20px 24px 0 !important;
-          width: calc(100% - 48px) !important;
+          width: calc(100% - 32px);
+          margin: 40px 16px 0;
+          height: 3px;
         }
-
         .capabilities-cta {
-          margin-bottom: 30px !important;
-          margin-top: 20px !important;
-          position: relative !important;
-          z-index: 50 !important;
+          padding: 0 16px;
+          margin-top: 40px;
         }
         .cap-cta-btn {
-          padding: 12px 24px !important;
-          font-size: 11px !important;
-          width: auto !important;
-          min-width: 0 !important;
-          display: inline-flex !important;
-          background: rgba(255, 255, 255, 0.08) !important;
-          backdrop-filter: blur(10px) !important;
-          border-radius: 4px !important;
+          width: auto;
+          justify-content: center;
+          padding: 18px 32px;
+          font-size: 11px;
+          letter-spacing: 0.2em;
         }
       }
 
@@ -1846,36 +1824,6 @@
         #capabilities-grid::after {
           display: none !important;
         }
-
-        #sovereign-footer {
-          padding: 80px 20px 40px 20px !important;
-        }
-        #sovereign-footer .grid {
-          display: grid !important;
-          grid-template-columns: 1fr !important;
-          gap: 40px !important;
-        }
-
-        #sovereign-footer .lg\:col-span-2 {
-          grid-column: span 1 !important;
-          text-align: left !important;
-        }
-        #sovereign-footer .footer-watermark {
-          font-size: 35vw !important;
-          opacity: 0.03 !important;
-        }
-
-        #sovereign-footer .mt-40 {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important;
-          gap: 24px !important;
-        }
-        #sovereign-footer .mt-40 .flex.gap-12 {
-          flex-direction: column !important;
-          gap: 8px !important;
-          width: 100%;
-        }
       }
 
       @media (max-width: 1024px) {
@@ -2002,12 +1950,6 @@
         #capabilities-grid .lg\:grid-cols-4 {
           grid-template-columns: repeat(2, 1fr) !important;
         }
-        #sovereign-footer .grid {
-          grid-template-columns: repeat(2, 1fr) !important;
-        }
-        #sovereign-footer .lg\:col-span-2 {
-          grid-column: span 2 !important;
-        }
       }
 
       @media screen and (max-width: 1024px) {
@@ -2021,115 +1963,6 @@
           visibility: hidden !important;
           height: 0 !important;
           overflow: hidden !important;
-        }
-      }
-
-      @media (max-width: 1024px) {
-        footer {
-          padding-top: 60px !important;
-          padding-bottom: 60px !important;
-          padding-left: 24px !important;
-          padding-right: 24px !important;
-        }
-        #sovereign-footer .grid {
-          display: grid !important;
-          grid-template-columns: repeat(2, 1fr) !important;
-          gap: 40px 20px !important;
-        }
-        #sovereign-footer .lg\:col-span-2 {
-          grid-column: span 2 !important;
-          text-align: left !important;
-          margin-bottom: 20px;
-          padding-bottom: 40px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        #sovereign-footer img {
-          display: none !important;
-        }
-        #sovereign-footer p {
-          font-size: 14px !important;
-          font-weight: 800 !important;
-          line-height: 1.4 !important;
-          color: #ffffff !important;
-          max-width: 100% !important;
-          letter-spacing: 0.1em !important;
-          text-transform: uppercase !important;
-          margin-bottom: 20px !important;
-        }
-        #sovereign-footer h4 {
-          font-size: 10px !important;
-          font-weight: 900 !important;
-          font-style: italic !important;
-          margin-bottom: 20px !important;
-          color: rgba(255, 255, 255, 0.4) !important;
-          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-          border-bottom: none !important;
-          padding-top: 16px !important;
-          letter-spacing: 0.4em !important;
-          text-transform: uppercase !important;
-        }
-        #sovereign-footer .flex-col {
-          gap: 12px !important;
-        }
-        #sovereign-footer a.footer-link-hover {
-          font-size: 14px !important;
-          font-weight: 900 !important;
-          padding: 0 !important;
-          background: transparent !important;
-          letter-spacing: 0.05em !important;
-          text-transform: uppercase !important;
-          color: #ffffff !important;
-          transform: none !important;
-        }
-        #sovereign-footer .footer-watermark {
-          font-size: 40vw !important;
-          opacity: 0.02 !important;
-        }
-
-        #sovereign-footer .mt-40 {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important;
-          margin-top: 60px !important;
-          padding-top: 40px !important;
-          gap: 40px !important;
-          text-align: left !important;
-          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-        }
-        #sovereign-footer .mt-40 .flex.gap-12 {
-          flex-direction: column !important;
-          gap: 12px !important;
-          width: 100%;
-        }
-        #sovereign-footer .mt-40 span {
-          font-size: 10px !important;
-          font-weight: 900 !important;
-          opacity: 0.3 !important;
-          letter-spacing: 0.3em !important;
-        }
-        #sovereign-footer .text-\[11px\].text-green-500 {
-          font-size: 11px !important;
-          letter-spacing: 0.2em !important;
-          color: #00ff41 !important;
-        }
-        #sovereign-footer .text-\[10px\].text-white\/20 {
-          font-size: 10px !important;
-          letter-spacing: 0.15em !important;
-          opacity: 0.2 !important;
-        }
-        #sovereign-footer .flex.gap-4 {
-          gap: 24px !important;
-          margin-top: 20px !important;
-        }
-        .social-glass-btn {
-          width: auto !important;
-          height: auto !important;
-          background: transparent !important;
-          border: none !important;
-        }
-        .social-glass-btn svg {
-          width: 28px !important;
-          height: 28px !important;
         }
       }
     </style>
@@ -2589,33 +2422,7 @@
     </style>
   </head>
   <body>
-    <a
-      href="#"
-      onclick="
-        event.preventDefault()
-        history.back()
-      "
-      class="absolute top-24 left-4 md:top-32 md:left-12 z-[200] group mix-blend-difference text-white flex items-center gap-4 transition-opacity duration-300 hover:opacity-70"
-      aria-label="Go Back"
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="transform transition-transform duration-500 ease-out group-hover:-translate-x-2"
-      >
-        <path
-          d="M20 12H4M4 12L10 18M4 12L10 6"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span class="font-mono text-[10px] uppercase tracking-[0.2em] hidden md:block">Back</span>
-    </a>
+    
 
     <div id="header-container"></div>
     <script src="/components/header-loader.js"></script>
@@ -3227,7 +3034,7 @@
             <div class="capabilities-cards-track">
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">PREDICTIVE<br />ANALYTICS</h3>
+                  <h3 class="cap-card-title synco">PREDICTIVE<br />SIGHT</h3>
                   <p class="cap-card-description">
                     Forecasts security incidents by analyzing movement data in real time. PRIMUS
                     shifts your posture from reactive investigation to preventative action, stopping
@@ -3241,7 +3048,7 @@
 
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">BEHAVIORAL<br />ANOMALY</h3>
+                  <h3 class="cap-card-title synco">BEHAVIORAL<br />PULSE</h3>
                   <p class="cap-card-description">
                     Deploys unsupervised learning to map the baseline activity of your environment.
                     The system automatically detects kinematic irregularities like unexpected
@@ -3255,7 +3062,7 @@
 
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">THREAT<br />CLASSIFICATION</h3>
+                  <h3 class="cap-card-title synco">THREAT<br />LOGIC</h3>
                   <p class="cap-card-description">
                     Executes sub-second identification of high-risk targets. PRIMUS analyzes posture
                     and interaction patterns to prioritize genuine security threats while filtering
@@ -3269,7 +3076,7 @@
 
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">ZONE<br />ENFORCEMENT</h3>
+                  <h3 class="cap-card-title synco">ZONE<br />GUARD</h3>
                   <p class="cap-card-description">
                     Constructs impermeable digital perimeters with granular permission logic. The
                     system triggers immediate alerts upon unauthorized entry into secure zones,
@@ -3283,7 +3090,7 @@
 
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">AUTONOMOUS<br />LEARNING</h3>
+                  <h3 class="cap-card-title synco">NEURAL<br />ADAPT</h3>
                   <p class="cap-card-description">
                     Features self-evolving neural networks that adapt to site-specific variables
                     dynamically. The model refines detection parameters daily to reduce false
@@ -3297,7 +3104,7 @@
 
               <div class="cap-card">
                 <div>
-                  <h3 class="cap-card-title synco">LEGACY<br />INTEGRATION</h3>
+                  <h3 class="cap-card-title synco">LEGACY<br />SYNC</h3>
                   <p class="cap-card-description">
                     Provides hardware interoperability for your current infrastructure. PRIMUS
                     integrates with standard IP and analog networks to elevate passive cameras into
@@ -3315,7 +3122,7 @@
             <div class="cap-progress-bar"></div>
           </div>
 
-          <div class="capabilities-cta" style="margin-bottom: 150px">
+          <div class="capabilities-cta">
             <a href="/contact" class="cap-cta-btn">
               Request Information
               <svg
@@ -3356,235 +3163,10 @@
         border-radius: 0;
         box-shadow: none !important;
       }
-
-      @media (max-width: 1024px) {
-        footer {
-          padding-top: 60px !important;
-          padding-bottom: 60px !important;
-          padding-left: 24px !important;
-          padding-right: 24px !important;
-        }
-        #sovereign-footer .grid {
-          display: grid !important;
-          grid-template-columns: repeat(2, 1fr) !important;
-          gap: 40px 20px !important;
-        }
-        #sovereign-footer .lg\:col-span-2 {
-          grid-column: span 2 !important;
-          text-align: left !important;
-          margin-bottom: 20px;
-          padding-bottom: 40px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        #sovereign-footer img {
-          display: none !important;
-        }
-        #sovereign-footer p {
-          font-size: 14px !important;
-          font-weight: 800 !important;
-          line-height: 1.4 !important;
-          color: #ffffff !important;
-          max-width: 100% !important;
-          letter-spacing: 0.1em !important;
-          text-transform: uppercase !important;
-          margin-bottom: 20px !important;
-        }
-        #sovereign-footer h4 {
-          font-size: 10px !important;
-          font-weight: 900 !important;
-          font-style: italic !important;
-          margin-bottom: 20px !important;
-          color: rgba(255, 255, 255, 0.4) !important;
-          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-          border-bottom: none !important;
-          padding-top: 16px !important;
-          letter-spacing: 0.4em !important;
-          text-transform: uppercase !important;
-        }
-        #sovereign-footer .flex-col {
-          gap: 12px !important;
-        }
-        #sovereign-footer a.footer-link-hover {
-          font-size: 14px !important;
-          font-weight: 900 !important;
-          padding: 0 !important;
-          background: transparent !important;
-          letter-spacing: 0.05em !important;
-          text-transform: uppercase !important;
-          color: #ffffff !important;
-          transform: none !important;
-        }
-
-        #sovereign-footer a.footer-link-hover.text-green-500 {
-          color: #22c55e !important;
-        }
-        #sovereign-footer .footer-watermark {
-          font-size: clamp(15vw, 25vw, 400px) !important;
-          color: rgba(255, 255, 255, 0.18) !important;
-          opacity: 1 !important;
-        }
-
-        #sovereign-footer .mt-40 {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important;
-          margin-top: 60px !important;
-          padding-top: 90px !important;
-        }
-      }
     </style>
 
-    <footer
-      class="relative pt-40 pb-[24rem] px-12 overflow-hidden"
-      id="sovereign-footer"
-      style="border-top-left-radius: 80px; border-top-right-radius: 80px; background: #1a1a1a"
-    >
-      <div
-        class="footer-watermark"
-        style="
-          position: absolute;
-          bottom: -0.15em;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: clamp(15vw, 25vw, 400px);
-          font-weight: 900;
-          font-style: italic;
-          text-transform: uppercase;
-          letter-spacing: -0.05em;
-          color: rgba(255, 255, 255, 0.18);
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 0;
-          line-height: 1;
-        "
-      >
-        AVZDAX
-      </div>
-
-      <div
-        class="max-w-[1800px] mx-auto relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 text-left"
-      >
-        <div class="lg:col-span-2 space-y-12 text-left">
-          <a href="/" aria-label="Home" class="hidden md:block"
-            ><img
-              loading="lazy"
-              decoding="async"
-              src="/media/avzdax-logo.png"
-              alt="AVZDAX Logo"
-              class="h-12 mb-8 hover:opacity-70 transition-all cursor-pointer"
-          /></a>
-          <p
-            class="text-[13px] text-white uppercase tracking-[0.4em] leading-loose max-w-sm text-left"
-          >
-            We build the world's most advanced defense and security systems. Protecting nations,
-            critical infrastructure, and global security interests.
-          </p>
-          <div class="flex gap-4">
-            <a
-              href="https://linkedin.com/company/avzdax"
-              class="social-glass-btn"
-              aria-label="LinkedIn"
-            >
-              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
-                <path
-                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                />
-              </svg>
-            </a>
-            <a href="https://x.com/avzdax" class="social-glass-btn" aria-label="X (Twitter)">
-              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                />
-              </svg>
-            </a>
-            <a href="https://youtube.com/@avzdax" class="social-glass-btn" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
-                <path
-                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://medium.com/@AVZDAXtechnologies"
-              class="social-glass-btn"
-              aria-label="Medium"
-            >
-              <svg viewBox="0 0 24 24" fill="white" class="w-6 h-6">
-                <path
-                  d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="text-left">
-          <h4
-            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
-          >
-            SOLUTIONS
-          </h4>
-          <div
-            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
-          >
-            <a href="/primus" class="footer-link-hover">PRIMUS</a>
-            <a href="/nest" class="footer-link-hover">NEST</a>
-            <a href="/teletraan" class="footer-link-hover">TELETRAAN</a>
-            <a href="/trion" class="footer-link-hover">TRION</a>
-            <a href="/obex" class="footer-link-hover">OBEX</a>
-            <a href="/arclight" class="footer-link-hover">ARCLIGHT</a>
-          </div>
-        </div>
-        <div class="text-left">
-          <h4
-            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
-          >
-            INDUSTRIES
-          </h4>
-          <div
-            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
-          >
-            <a href="/industries" class="footer-link-hover">BANKING & FINANCIAL INSTITUTIONS</a>
-            <a href="/industries" class="footer-link-hover">GOVERNMENT & PUBLIC SECTOR</a>
-            <a href="/industries" class="footer-link-hover">ENERGY AND OIL & GAS</a>
-            <a href="/industries" class="footer-link-hover">TRANSPORTATION & MOBILITY</a>
-            <a href="/industries" class="footer-link-hover">CRITICAL INFRASTRUCTURE</a>
-          </div>
-        </div>
-        <div class="text-left">
-          <h4
-            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
-          >
-            COMPANY
-          </h4>
-          <div
-            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
-          >
-            <a href="/about" class="footer-link-hover">ABOUT US</a
-            ><a href="/careers" class="footer-link-hover text-green-500 font-black">CAREERS</a
-            ><a href="/news" class="footer-link-hover">NEWSROOM</a
-            ><a href="/ethics" class="footer-link-hover">ETHICS POLICY</a
-            ><a href="/contact" class="footer-link-hover">CONTACT</a>
-          </div>
-        </div>
-        <div class="text-left">
-          <h4
-            class="text-white/50 text-[10px] font-mono font-black uppercase tracking-[0.7em] border-b border-white/5 pb-4 italic text-left"
-          >
-            SUPPORT
-          </h4>
-          <div
-            class="flex flex-col gap-6 text-[14px] font-black uppercase tracking-widest text-white text-left"
-          >
-            <a href="/contact" class="footer-link-hover">HELP CENTER</a
-            ><a href="/ethics" class="footer-link-hover flex items-center gap-3"
-              >STATUS <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span></a
-            ><a href="/ethics" class="footer-link-hover">PRIVACY POLICY</a
-            ><a href="/ethics" class="footer-link-hover">TERMS</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <div id="footer-container"></div>
+    <script src="/components/footer-loader.js"></script>
     <script>
       function toggleSearch() {
         const overlay = document.getElementById('search-overlay')
@@ -3857,7 +3439,7 @@
           if (!section || !track) return
 
           ScrollTrigger.getAll().forEach(t => {
-            if (t.trigger === section) t.kill()
+            if (t.trigger === section || t.trigger === '#capabilities-grid') t.kill()
           })
 
           const cards = track.querySelectorAll('.cap-card')
@@ -3865,11 +3447,15 @@
 
           const cardWidth = cards[0].offsetWidth
           const gap = 32
-          const totalCardsWidth = cardWidth * cards.length + gap * (cards.length - 1)
-          const viewportWidth = window.innerWidth
-          const scrollDistance = totalCardsWidth - viewportWidth + 120
+          const contentWidth = cardWidth * cards.length + gap * (cards.length - 1) + 120
+          // .capabilities-container applies `zoom`; offsetWidth math is pre-zoom CSS
+          // px. Convert overflow to rendered px (pin length) and local px (transform).
+          const zoomHost = section.querySelector('.capabilities-container')
+          const zoom = zoomHost ? parseFloat(getComputedStyle(zoomHost).zoom) || 1 : 1
+          const visualOverflow = contentWidth * zoom - window.innerWidth
+          const scrollDistance = visualOverflow / zoom
 
-          if (scrollDistance <= 0) return
+          if (visualOverflow <= 0) return
 
           gsap.to(track, {
             x: -scrollDistance,
@@ -3877,7 +3463,7 @@
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end: '+=' + scrollDistance * 1.2,
+              end: '+=' + visualOverflow * 1.5,
               pin: true,
               scrub: 0.8,
               anticipatePin: 1,
@@ -3968,35 +3554,9 @@
           onLeaveBack: () => mobileNav.classList.remove('nav-hero-dark'),
         })
       })()
-      ;(function initCapabilitiesHeaderEffect() {
-        const capSection = document.getElementById('capabilities-grid')
-        if (!capSection) return
-
-        ScrollTrigger.create({
-          trigger: capSection,
-          start: 'top 80px',
-          end: 'bottom 80px',
-          onEnter: () => {
-            document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
-            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
-          },
-          onLeave: () => {
-            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
-            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
-          },
-          onEnterBack: () => {
-            document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
-            document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
-          },
-          onLeaveBack: () => {
-            document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
-            document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
-          },
-        })
-      })()
 
       ScrollTrigger.create({
-        trigger: '#sovereign-footer',
+        trigger: '#footer-container',
         start: 'top bottom',
         onEnter: () => {
           gsap.to(['#main-nav', '.mobile-nav-bar'], {
@@ -4057,4 +3617,3 @@
     <script src="/media/site-utils.js"></script>
   </body>
 </html>
-

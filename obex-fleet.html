@@ -1,0 +1,3977 @@
+<!doctype html>
+<html lang="en" class="bg-black">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OBEX FLEET | PREDICTIVE MOBILITY INTELLIGENCE | AVZDAX</title>
+    <meta
+      name="description"
+      content="OBEX Fleet is a predictive mobility intelligence layer. It understands driving behavior and predicts risk before it becomes an incident."
+    />
+    <meta property="og:title" content="OBEX Fleet | Predictive Mobility Intelligence | AVZDAX" />
+    <meta
+      property="og:description"
+      content="OBEX Fleet is a predictive mobility intelligence layer. It understands driving behavior and predicts risk before it becomes an incident."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://avzdax.com/obex-fleet.html" />
+    <meta property="og:image" content="https://avzdax.com/media/avzdax-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OBEX Fleet | Predictive Mobility Intelligence | AVZDAX" />
+    <meta
+      name="twitter:description"
+      content="OBEX Fleet is a predictive mobility intelligence layer. It understands driving behavior and predicts risk before it becomes an incident."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="video-optimizer.js" defer></script>
+    <link href="/components/footer-styles.css" rel="stylesheet" />
+    <link href="/components/header-styles.css?v=2" rel="stylesheet" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Syncopate:wght@700;800&display=swap');
+
+      :root {
+          --void: #030303; --white: #ffffff; --alloy: #86868B;
+          --phosphor: #007AFF; --cyan: #007AFF; --glass: rgba(255, 255, 255, 0.03);
+      }
+
+
+
+
+      @media screen and (max-width: 1600px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 420px !important;
+              min-width: 420px !important;
+              height: 520px !important;
+              padding: 45px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 40px !important;
+          }
+          .brief-card {
+              padding: 60px !important;
+          }
+      }
+
+      @media screen and (max-width: 1400px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 360px !important;
+              min-width: 360px !important;
+              height: 480px !important;
+              padding: 38px !important;
+          }
+          .cap-card-title {
+              font-size: 1.5rem !important;
+          }
+          .cap-card-description {
+              font-size: 14px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 30px !important;
+              gap: 24px !important;
+          }
+          .brief-card {
+              padding: 50px !important;
+          }
+      }
+
+      @media screen and (max-width: 1280px) and (min-width: 1025px) {
+          .cap-card {
+              flex: 0 0 320px !important;
+              min-width: 320px !important;
+              height: 450px !important;
+              padding: 32px !important;
+          }
+          .cap-card-title {
+              font-size: 1.3rem !important;
+          }
+          .cap-card-description {
+              font-size: 13px !important;
+          }
+          .capabilities-cards-track {
+              padding: 0 20px !important;
+              gap: 20px !important;
+          }
+          .capabilities-header {
+              padding: 0 20px !important;
+              margin-bottom: 40px !important;
+          }
+          .brief-card {
+              padding: 40px !important;
+          }
+          .hardware-core {
+              width: 450px !important;
+          }
+      }
+
+
+      @media screen and (max-width: 1024px) and (min-width: 769px) {
+
+          .cap-card {
+              flex: 0 0 calc(50vw - 40px) !important;
+              min-width: calc(50vw - 40px) !important;
+              max-width: 400px !important;
+              height: 480px !important;
+              padding: 36px !important;
+          }
+          .capabilities-cards-track {
+              gap: 20px !important;
+              padding: 0 24px !important;
+          }
+          .cap-card-title { font-size: 1.4rem !important; }
+          .cap-card-description { font-size: 14px !important; line-height: 1.6 !important; }
+          .cap-card-tag { font-size: 9px !important; }
+
+
+          .brief-card { padding: 40px !important; }
+
+
+          .hardware-core { width: 350px !important; }
+
+
+          .max-w-7xl, .max-w-6xl { padding-left: 40px !important; padding-right: 40px !important; }
+      }
+
+      body { font-family: 'Inter', sans-serif; background: var(--void); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1); scrollbar-width: none; -ms-overflow-style: none; }
+      ::-webkit-scrollbar { display: none; }
+      .synco { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.8; }
+      .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.4em; }
+      .chrome-text { background: linear-gradient(to bottom, #fff 20%, var(--alloy) 80%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+
+      .hud-border { position: fixed; inset: 30px; border: 1px solid rgba(255,255,255,0.05); pointer-events: none; z-index: 100; }
+      .hud-data { position: absolute; font-family: 'JetBrains Mono'; font-size: 8px; color: var(--cyan); font-weight: 500; }
+
+
+      .main-container { position: relative; width: 100%; }
+      .pinned-stage { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+
+      .tower-wrap { position: absolute; height: 90vh; z-index: 5; will-change: transform, opacity; }
+      .tower-core { height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 0 100px rgba(0,243,255,0.05)); }
+
+
+      .layer { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; display: flex; align-items: center; justify-content: center; z-index: 10; }
+      .brief-card { background: var(--glass); backdrop-filter: blur(40px); border: 1px solid rgba(255,255,255,0.1); padding: 80px; position: absolute; box-shadow: 0 100px 200px rgba(0,0,0,0.8); }
+      .evidence-vid { width: 100%; height: 450px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+
+
+      .lab-phase { background: var(--white); color: var(--void); }
+      .blueprint-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+
+
+      .hardware-core {
+          position: absolute; width: 550px; z-index: 50; pointer-events: none;
+          filter: drop-shadow(0 0 80px rgba(255,255,255,0.05));
+          will-change: transform;
+      }
+
+
+      .reveal-on-scroll,
+      .scroll-reveal {
+          opacity: 0;
+          transform: translateY(60px);
+          transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-on-scroll.revealed,
+      .scroll-reveal.revealed {
+          opacity: 1;
+          transform: translateY(0);
+      }
+
+
+      .reveal-delay-100 { transition-delay: 0.1s; }
+      .reveal-delay-200 { transition-delay: 0.2s; }
+      .reveal-delay-300 { transition-delay: 0.3s; }
+      .reveal-delay-500 { transition-delay: 0.5s; }
+
+      ::-webkit-scrollbar { display: none; }
+
+
+      nav {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      nav.nav-scrolled {
+          background: rgba(0, 0, 0, 0.9);
+          -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+      }
+
+
+      nav.nav-inverted {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      nav.nav-inverted .nav-item > a {
+          color: rgba(0, 0, 0, 0.7) !important;
+      }
+
+      nav.nav-inverted .nav-item:hover > a {
+          color: #000 !important;
+      }
+
+      nav.nav-inverted .nav-item > a::after {
+          background: linear-gradient(90deg, #000, #000) !important;
+      }
+
+      nav.nav-inverted .text-white,
+      nav.nav-inverted [class*="text-white"] {
+          color: #000 !important;
+      }
+
+
+      nav.nav-inverted .nav-links-container {
+          opacity: 0 !important;
+          pointer-events: none !important;
+      }
+
+      nav.nav-inverted .brand-logo {
+          filter: invert(1) brightness(0) !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+      }
+
+      nav.nav-inverted .schedule-btn {
+          background: #000 !important;
+          color: #fff !important;
+          border-color: #000 !important;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+      }
+
+      /* Event Alert Buttons - Professional Minimal Style */
+      #event-buttons .event-btn {
+          color: rgba(0, 0, 0, 0.4) !important;
+          font-weight: 500 !important;
+          background: transparent !important;
+          border: none !important;
+          margin-bottom: 0 !important;
+          padding: 8px 0 !important;
+          border-radius: 0 !important;
+          transition: all 0.3s ease;
+          white-space: nowrap !important;
+          text-align: left !important;
+          font-size: 14px !important;
+          letter-spacing: 0.02em !important;
+          position: relative !important;
+          opacity: 1;
+      }
+      #event-buttons .event-btn.active {
+          color: #000000 !important;
+          font-weight: 700 !important;
+          opacity: 1;
+          transform: none !important;
+          box-shadow: none !important;
+      }
+      /* Clean Vertical Indicator */
+      #event-buttons .event-btn::before {
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: 50%;
+          transform: translateY(-50%) scaleY(0);
+          width: 2px;
+          height: 16px;
+          background: #007AFF;
+          transition: transform 0.3s ease;
+      }
+      #event-buttons .event-btn.active::before {
+          transform: translateY(-50%) scaleY(1);
+      }
+      #event-buttons .event-btn:hover:not(.active) {
+          color: rgba(0, 0, 0, 0.8) !important;
+      }
+      @media (max-width: 1023px) {
+          #event-buttons .event-btn {
+              margin-right: 24px !important;
+              padding: 12px 0 !important;
+          }
+          #event-buttons .event-btn::before {
+              left: 0;
+              top: auto;
+              bottom: 0;
+              width: 100%;
+              height: 2px;
+              transform: scaleX(0);
+          }
+          #event-buttons .event-btn.active::before {
+              transform: scaleX(1);
+          }
+      }
+
+
+
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+
+      nav.nav-inverted .schedule-btn:hover {
+          background: #333 !important;
+          transform: translateY(-2px) !important;
+      }
+
+
+      .mobile-nav-bar.nav-inverted {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-nav-logo img {
+          filter: invert(1) brightness(0);
+      }
+
+      .mobile-nav-bar.nav-inverted .mobile-menu-toggle-modern .bar {
+          stroke: #000 !important;
+      }
+
+
+      nav.nav-dark-minimal {
+          background: transparent !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      nav.nav-dark-minimal .nav-links-container {
+          opacity: 0 !important;
+          pointer-events: none !important;
+      }
+
+      nav.nav-dark-minimal .brand-logo {
+          filter: none !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+      }
+
+      #main-nav.nav-dark-minimal .schedule-btn {
+          background: #fff !important;
+          color: #000 !important;
+          border-color: #fff !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+          visibility: visible !important;
+          display: inline-block !important;
+      }
+
+      nav.nav-dark-minimal .schedule-btn:hover {
+          background: rgba(255,255,255,0.9) !important;
+          transform: translateY(-2px) !important;
+      }
+
+
+      .mobile-nav-bar.nav-dark-minimal {
+          background: transparent !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-nav-logo img {
+          filter: none !important;
+      }
+
+      .mobile-nav-bar.nav-dark-minimal .mobile-menu-toggle-modern .bar {
+          stroke: #fff !important;
+      }
+
+
+
+
+      .tactical-search-btn {
+          width: 52px; height: 52px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.1);
+          cursor: pointer;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+          clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      }
+
+      .tactical-search-btn::before,
+      .tactical-search-btn::after {
+          content: '';
+          position: absolute;
+          width: 12px; height: 12px;
+          border: 1.5px solid rgba(255,255,255,0.3);
+          transition: all 0.4s ease;
+      }
+      .tactical-search-btn::before {
+          top: 3px; left: 3px;
+          border-right: none; border-bottom: none;
+      }
+      .tactical-search-btn::after {
+          bottom: 3px; right: 3px;
+          border-left: none; border-top: none;
+      }
+
+      .tactical-search-btn .scan-line {
+          position: absolute;
+          width: 100%; height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+          top: -100%;
+          left: 0;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      .tactical-search-btn:hover .scan-line {
+          opacity: 1;
+          animation: hud-scan 1.2s ease-in-out infinite;
+      }
+      @keyframes hud-scan {
+          0% { top: -2px; }
+          100% { top: calc(100% + 2px); }
+      }
+
+      .tactical-search-btn:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.25);
+          box-shadow:
+              0 0 30px rgba(255,255,255,0.08),
+              inset 0 0 15px rgba(255,255,255,0.03),
+              0 0 60px rgba(255,255,255,0.03);
+          transform: scale(1.08);
+      }
+      .tactical-search-btn:hover::before,
+      .tactical-search-btn:hover::after {
+          border-color: rgba(255,255,255,0.6);
+          width: 14px; height: 14px;
+      }
+
+      .tactical-search-btn svg {
+          width: 22px; height: 22px;
+          stroke: rgba(255,255,255,0.5);
+          stroke-width: 1.5;
+          transition: all 0.4s ease;
+          position: relative;
+          z-index: 2;
+      }
+      .tactical-search-btn:hover svg {
+          stroke: #fff;
+          filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
+          transform: scale(1.1);
+      }
+
+      .tactical-search-btn:active {
+          transform: scale(0.95);
+          background: rgba(255,255,255,0.1);
+      }
+
+
+      nav.nav-inverted .tactical-search-btn {
+          background: rgba(0,0,0,0.02) !important;
+          border-color: rgba(0,0,0,0.15) !important;
+      }
+      nav.nav-inverted .tactical-search-btn::before,
+      nav.nav-inverted .tactical-search-btn::after {
+          border-color: rgba(0,0,0,0.3) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover {
+          background: rgba(0,0,0,0.05) !important;
+          border-color: rgba(0,0,0,0.3) !important;
+          box-shadow: 0 0 30px rgba(0,0,0,0.1) !important;
+      }
+      nav.nav-inverted .tactical-search-btn svg {
+          stroke: rgba(0,0,0,0.5) !important;
+      }
+      nav.nav-inverted .tactical-search-btn:hover svg {
+          stroke: #000 !important;
+      }
+      nav.nav-inverted .tactical-search-btn .scan-line {
+          background: linear-gradient(90deg, transparent, rgba(0,0,0,0.5), transparent) !important;
+      }
+
+
+      nav.nav-inverted .tactical-search-btn {
+          opacity: 0 !important;
+          pointer-events: none !important;
+          transform: scale(0.8) !important;
+      }
+
+
+      .mega-menu-wrapper {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          opacity: 0;
+          pointer-events: none;
+          visibility: hidden;
+          transform: translateY(-10px) scale(0.98);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1000;
+      }
+
+
+      html, body { max-width: 100%; overflow-x: hidden; }
+      *, *::before, *::after { box-sizing: border-box; }
+
+      .nav-item:hover .mega-menu-wrapper,
+      .nav-item.is-active .mega-menu-wrapper {
+          opacity: 1;
+          pointer-events: auto;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+      }
+
+      .mega-menu-content {
+          background: linear-gradient(135deg, #0A0A0B 0%, #0D0D0D 100%);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow:
+              0 20px 40px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          padding: 60px 0;
+          position: relative;
+      }
+
+      .mega-menu-content::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      }
+
+
+      .mega-menu-content .max-w-6xl {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 300px;
+          gap: 48px;
+          padding: 0 40px;
+      }
+
+
+      .menu-section {
+          padding: 24px 0;
+      }
+
+      .menu-section h4 {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          color: rgba(255, 255, 255, 0.5);
+          text-transform: uppercase;
+          margin-bottom: 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding-bottom: 12px;
+      }
+
+
+      .grid-item-hover {
+          display: block;
+          padding: 16px 20px;
+          margin: 4px 0;
+          border-radius: 12px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          border: 1px solid transparent;
+      }
+
+      .grid-item-hover:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.1);
+          transform: translateX(4px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid-item-hover span:first-child {
+          display: block;
+          font-size: 15px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 4px;
+          transition: color 0.3s ease;
+      }
+
+      .grid-item-hover span:last-child {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 400;
+          transition: color 0.3s ease;
+      }
+
+      .grid-item-hover:hover span:first-child {
+          color: #007AFF;
+      }
+
+      .grid-item-hover:hover span:last-child {
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+
+      .menu-preview-img {
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+          object-fit: contain; opacity: 0;
+          transform: scale(0.8) translateY(20px);
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+      }
+      .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
+
+
+      .strategic-theaters {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 24px;
+      }
+
+      .strategic-theaters h3 {
+          font-size: 12px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+      .strategic-theaters ul li {
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.3s ease;
+      }
+
+      .strategic-theaters ul li:last-child {
+          border-bottom: none;
+      }
+
+      .strategic-theaters ul li:hover {
+          color: #007AFF;
+          transform: translateX(4px);
+      }
+
+      .strategic-theaters .dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          margin-right: 12px;
+          transition: background 0.3s ease;
+      }
+
+      .strategic-theaters ul li:hover .dot {
+          background: #007AFF;
+      }
+
+
+      .intelligence-layer {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 24px;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+      }
+
+      .intelligence-layer h4 {
+          font-size: 14px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 12px;
+      }
+
+      .intelligence-layer p {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.5;
+          margin-bottom: 16px;
+      }
+
+      .intelligence-layer .status {
+          font-size: 11px;
+          color: #007AFF;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+      }
+
+
+      .hero-video {
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          -webkit-transform: translateZ(0);
+          -moz-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          -o-transform: translateZ(0);
+      }
+
+
+      .hero-stage { height: 100dvh; min-height: 100vh; }
+      .hero-video-full {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          min-width: 100%;
+          min-height: 100%;
+          z-index: 0;
+      }
+
+      .menu-preview-img { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: scale(0.8) translateY(20px); position: absolute; filter: drop-shadow(0 20px 50px rgba(255,255,255,0.05)); }
+
+      .grid-item-hover:hover { background: #FFFFFF; color: #000000 !important; border-color: #FFFFFF; }
+      .grid-item-hover:hover span { color: #000000 !important; }
+      .grid-item-hover:hover .text-gray-500 { color: #444 !important; }
+
+      .premium-white-gloss {
+          background: #FBFBFB;
+          position: relative;
+          overflow: hidden;
+      }
+      .premium-white-gloss::after {
+          content: ''; position: absolute; inset: 0;
+          background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+          opacity: 0.3; pointer-events: none;
+      }
+
+
+      #search-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 500;
+          background: rgba(0,0,0,0.95);
+          backdrop-filter: blur(30px);
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      #search-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+
+      .svg-grid-line { stroke: rgba(255,255,255,0.05); stroke-width: 0.5; }
+
+
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+
+      .capabilities-horizontal-section {
+          background: #030303;
+          position: relative;
+          overflow: hidden;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .capabilities-bg-grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.08;
+          background-image:
+              linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+          background-size: 80px 80px;
+          pointer-events: none;
+      }
+
+      .capabilities-container {
+          max-width: 100%;
+          margin: 0 auto;
+          position: relative;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 100vh;
+          zoom: 0.8; /* matched to nest so the in-flow progress bar + CTA stay visible */
+      }
+
+      .capabilities-header {
+          text-align: center;
+          margin-bottom: 30px;
+          padding: 0 40px;
+      }
+
+      .capabilities-logo {
+          height: 24px;
+          margin-bottom: 30px;
+          filter: invert(1);
+      }
+
+      .capabilities-title {
+          font-size: clamp(2.5rem, 6vw, 4.5rem);
+          font-weight: 900;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: -0.08em; /* Synced with trion gold standard */
+          line-height: 0.85; /* Synced with trion gold standard */
+          margin: 0;
+      }
+
+      .capabilities-title span {
+          color: rgba(255,255,255,0.2);
+      }
+
+      .capabilities-scroll-wrapper {
+          overflow: hidden;
+          width: 100%;
+      }
+
+      .capabilities-cards-track {
+          display: flex;
+          gap: 32px;
+          padding: 0 60px;
+          will-change: transform;
+      }
+
+      .cap-card {
+          flex: 0 0 460px;
+          min-width: 460px;
+          height: 420px;
+          background: linear-gradient(165deg, rgba(18,18,18,0.95) 0%, rgba(8,8,8,0.98) 100%);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 2px;
+          position: relative;
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow: hidden;
+      }
+
+      .cap-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+      }
+
+      .cap-card:hover {
+          border-color: rgba(255,255,255,0.12);
+          background: linear-gradient(165deg, rgba(25,25,25,0.98) 0%, rgba(12, 12, 12, 0.98) 100%);
+          transform: translateY(-12px);
+          box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+      }
+
+      .cap-card-title {
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 900;
+          color: #fff;
+          text-transform: uppercase;
+          letter-spacing: -0.03em;
+          line-height: 0.95;
+          margin: 0 0 30px 0;
+      }
+
+      .cap-card-description {
+          font-size: 15px;
+          color: rgba(255,255,255,0.45);
+          line-height: 1.8;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+          max-width: 380px;
+          transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-description {
+          color: rgba(255,255,255,0.65);
+      }
+
+      .cap-card-footer {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-top: auto;
+          padding-top: 40px;
+      }
+
+      .cap-card-line {
+          width: 40px;
+          height: 1px;
+          background: rgba(255,255,255,0.15);
+          transition: all 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-line {
+          width: 60px;
+          background: rgba(255,255,255,0.4);
+      }
+
+      .cap-card-status {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          color: rgba(255,255,255,0.25);
+          text-transform: uppercase;
+          letter-spacing: 0.3em;
+          transition: color 0.4s ease;
+      }
+
+      .cap-card:hover .cap-card-status {
+          color: rgba(255,255,255,0.6);
+      }
+
+
+      .cap-progress-container {
+          display: block;
+          width: calc(100% - 120px);
+          height: 2px;
+          background: rgba(255,255,255,0.06);
+          margin: 30px 60px 0;
+          border-radius: 2px;
+          overflow: hidden;
+      }
+      .cap-progress-bar {
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8));
+          border-radius: 2px;
+          transition: width 0.05s ease;
+      }
+
+      .capabilities-cta {
+          display: flex;
+          justify-content: center;
+          margin-top: 60px;
+          width: 100%;
+          position: relative;
+          z-index: 100;
+      }
+
+      .cap-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          padding: 16px 40px;
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.15);
+          color: white;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.3em;
+          text-decoration: none;
+          border-radius: 2px;
+          transition: all 0.4s ease;
+      }
+
+      .cap-cta-btn:hover {
+          background: #fff;
+          color: #000;
+          border-color: #fff;
+          transform: translateY(-2px);
+      }
+
+      @media (min-width: 1400px) {
+        .cap-card {
+          flex: 0 0 460px;
+          min-width: 460px;
+          height: 420px;
+          padding: 48px;
+          border-radius: 4px;
+        }
+        .cap-card-title {
+          font-size: 2.4rem;
+        }
+        .cap-card-description {
+          font-size: 16px;
+        }
+      }
+
+
+      @media (min-width: 769px) and (max-width: 1399px) {
+          .capabilities-container {
+              padding: 0;
+          }
+          .capabilities-header {
+              margin-bottom: 50px;
+          }
+      }
+
+
+      @media (max-width: 768px) {
+          .capabilities-horizontal-section {
+              min-height: 100vh;
+          }
+          .capabilities-container {
+              padding: 100px 0 60px;
+              min-height: 100vh;
+              zoom: 1; /* Reset zoom for mobile */
+          }
+          .capabilities-header {
+              padding: 0 20px;
+              margin-bottom: 40px;
+          }
+          .capabilities-logo {
+              height: 20px;
+              margin-bottom: 24px;
+          }
+          .capabilities-title {
+              font-size: 2.2rem;
+              letter-spacing: -0.03em;
+          }
+          .capabilities-cards-track {
+              gap: 16px;
+              padding: 0 16px;
+          }
+          .cap-card {
+              flex: 0 0 calc(100vw - 48px);
+              min-width: calc(100vw - 48px);
+              max-width: calc(100vw - 48px);
+              height: 520px;
+              padding: 36px;
+              border-radius: 12px;
+          }
+          .cap-card-tag {
+              font-size: 9px;
+              letter-spacing: 0.4em;
+              margin-bottom: 16px;
+          }
+          .cap-card-title {
+              font-size: 1.4rem;
+              margin-bottom: 20px;
+              line-height: 0.9;
+          }
+          .cap-card-description {
+              font-size: 14px;
+              line-height: 1.7;
+              color: rgba(255,255,255,0.5);
+          }
+          .cap-card-footer {
+              padding-top: 30px;
+          }
+          .cap-card-number {
+              top: 32px;
+              right: 32px;
+              font-size: 11px;
+          }
+          .cap-progress-container {
+              width: calc(100% - 32px);
+              margin: 40px 16px 0;
+              height: 3px;
+          }
+          .capabilities-cta {
+              padding: 0 16px;
+              margin-top: 40px;
+          }
+          .cap-cta-btn {
+              width: auto;
+              justify-content: center;
+              padding: 18px 32px;
+              font-size: 11px;
+              letter-spacing: 0.2em;
+          }
+      }
+
+      .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+
+          #capabilities-grid::after { display: none !important; }
+      }
+
+
+      .news-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 2rem;
+          max-width: 1400px;
+          margin: 0 auto;
+      }
+
+      .featured {
+          background: white;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 1rem;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          color: black;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .featured:hover {
+          border-color: rgba(0, 0, 0, 0.2);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .featured img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+
+      @media (max-width: 1024px) {
+
+          #main-nav { display: none !important; visibility: hidden !important; }
+          .mobile-nav-bar {
+              background: #000;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+              padding: 8px 24px;
+          }
+          .mobile-menu-toggle-modern {
+              display: flex !important;
+              align-items: center;
+              justify-content: center;
+              width: 48px;
+              height: 48px;
+              background: transparent;
+              border: none;
+              cursor: pointer;
+          }
+          .mobile-menu-toggle-modern .bar { stroke: #fff; stroke-width: 2; }
+          .mobile-menu-toggle-modern.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+          .mobile-menu-toggle-modern.open .bar:nth-child(2) { opacity: 0; }
+          .mobile-menu-toggle-modern.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+      }
+
+
+      @media (max-width: 1024px) {
+
+          .nav-dropdown {
+              max-height: 0;
+              overflow: hidden;
+              opacity: 0;
+              transform: translateY(-10px);
+              transition:
+                  max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.4s ease,
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .nav-dropdown.open {
+              max-height: 500px;
+              opacity: 1;
+              transform: translateY(0);
+          }
+
+
+          .nav-dropdown a {
+              opacity: 0;
+              transform: translateX(-15px);
+              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .nav-dropdown.open a {
+              opacity: 1;
+              transform: translateX(0);
+          }
+          .nav-dropdown.open a:nth-child(1) { transition-delay: 0.05s; }
+          .nav-dropdown.open a:nth-child(2) { transition-delay: 0.1s; }
+          .nav-dropdown.open a:nth-child(3) { transition-delay: 0.15s; }
+          .nav-dropdown.open a:nth-child(4) { transition-delay: 0.2s; }
+          .nav-dropdown.open a:nth-child(5) { transition-delay: 0.25s; }
+          .nav-dropdown.open a:nth-child(6) { transition-delay: 0.3s; }
+
+
+          .nav-dropdown a:hover {
+              color: #fff !important;
+              text-shadow: 0 0 20px rgba(255,255,255,0.3);
+              transform: translateX(8px) !important;
+          }
+
+
+          .nav-toggle {
+              position: relative;
+          }
+          .nav-toggle::after {
+              display: none !important;
+          }
+          .nav-toggle.active::after {
+              display: none !important;
+              width: 40%;
+          }
+
+
+          .nav-chevron {
+              transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+          }
+
+
+          #mobile-menu-overlay {
+              position: fixed !important;
+              inset: 0 !important;
+              z-index: 9999 !important;
+              background: linear-gradient(180deg,
+                  rgba(0, 0, 0, 0.99) 0%,
+                  rgba(5, 5, 8, 0.99) 50%,
+                  rgba(0, 0, 0, 0.99) 100%) !important;
+              -webkit-backdrop-filter: blur(80px) !important;
+              backdrop-filter: blur(80px) !important;
+              display: none;
+              flex-direction: column !important;
+              overflow: hidden !important;
+          }
+
+
+          .mobile-nav-content {
+              display: flex !important;
+              flex-direction: column !important;
+              height: 100% !important;
+              width: 100% !important;
+              padding-top: 70px !important;
+              padding-bottom: 40px !important;
+              padding-left: 28px !important;
+              padding-right: 28px !important;
+              overflow-y: auto !important;
+              overflow-x: hidden !important;
+              -webkit-overflow-scrolling: touch;
+              scrollbar-width: none;
+              position: relative;
+          }
+
+
+          #mobile-menu-overlay::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+              background-size: 24px 24px;
+              pointer-events: none;
+              z-index: -1;
+          }
+
+          .mobile-nav-content::-webkit-scrollbar {
+              display: none;
+          }
+
+
+          .mobile-close-btn {
+              position: fixed !important;
+              top: 20px !important;
+              right: 20px !important;
+              width: 44px !important;
+              height: 44px !important;
+              background: rgba(255,255,255,0.03) !important;
+              border: 1px solid rgba(255,255,255,0.08) !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+          }
+          .mobile-close-btn:hover {
+              background: rgba(255,255,255,0.1) !important;
+              border-color: rgba(255,255,255,0.2) !important;
+              transform: scale(1.05);
+          }
+
+
+          .mobile-search-section {
+              margin-bottom: 24px !important;
+              margin-top: 0 !important;
+              opacity: 0;
+              transform: translateY(10px);
+              animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+              animation-delay: 0.1s;
+          }
+          .mobile-search-section .flex.items-center {
+              padding: 16px 0 !important;
+              border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+              position: relative;
+          }
+          .mobile-search-section .flex.items-center::before {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              right: 0;
+              width: 4px;
+              height: 4px;
+              border-right: 1px solid rgba(255,255,255,0.5);
+              border-bottom: 1px solid rgba(255,255,255,0.5);
+          }
+          .mobile-search-section .flex.items-center::after {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              left: 0;
+              width: 20px;
+              height: 1px;
+              background: white;
+              opacity: 0.3;
+          }
+          .mobile-nav-content input[placeholder*="SEARCH"] {
+              font-size: 11px !important;
+              letter-spacing: 0.25em !important;
+              font-weight: 900 !important;
+              text-transform: uppercase !important;
+          }
+
+
+          .nav-section {
+              opacity: 0;
+              transform: translateY(10px);
+              animation: mobileFadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+          }
+          .nav-section:nth-child(1) { animation-delay: 0.15s; }
+          .nav-section:nth-child(2) { animation-delay: 0.2s; }
+          .nav-section:nth-child(3) { animation-delay: 0.25s; }
+          .nav-section:nth-child(4) { animation-delay: 0.3s; }
+
+          @keyframes mobileFadeUp {
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+
+
+          .mobile-nav-content > .mt-8 {
+              margin-top: auto !important;
+              padding-top: 32px !important;
+              border-top: 1px solid rgba(255,255,255,0.05);
+              opacity: 0;
+              animation: finaleFade 0.8s ease forwards 0.4s;
+          }
+          .mobile-nav-content > .mt-8 a {
+              font-size: 10px !important;
+              letter-spacing: 0.35em !important;
+              padding: 16px 24px !important;
+          }
+          @keyframes finaleFade {
+              to { opacity: 1; }
+          }
+      }
+
+
+      @media (max-width: 375px) {
+          .mobile-nav-content {
+              padding-left: 20px !important;
+              padding-right: 20px !important;
+              padding-top: 40px !important;
+          }
+          .nav-toggle {
+              font-size: 13px !important;
+          }
+      }
+
+
+      @supports (padding-top: env(safe-area-inset-top)) {
+          @media (max-width: 1024px) {
+              .mobile-nav-content {
+                  padding-top: max(100px, calc(80px + env(safe-area-inset-top))) !important;
+                  padding-bottom: max(40px, env(safe-area-inset-bottom)) !important;
+              }
+          }
+      }
+
+
+      .minimalist-nav {
+          width: 100%;
+          position: relative;
+      }
+      .minimalist-nav::before {
+          content: '';
+          position: absolute;
+          top: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ffffff, transparent);
+          border-radius: 1px;
+      }
+      .nav-section {
+          margin-bottom: 32px;
+          position: relative;
+      }
+      .nav-section::after {
+          content: '';
+          position: absolute;
+          bottom: -16px;
+          left: 0;
+          width: 40px;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 0.5px;
+      }
+      .nav-section:last-child::after {
+          display: none;
+      }
+      .nav-toggle {
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          font-size: 22px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          text-align: left;
+          padding: 20px 0;
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: 'Inter', sans-serif;
+          text-transform: uppercase;
+      }
+      .nav-toggle::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 1px;
+          background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          transition: width 0.4s ease;
+      }
+      .nav-toggle:hover::before {
+          width: 100%;
+      }
+      .nav-toggle::after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23E2E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>') no-repeat center;
+          background-size: contain;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          opacity: 0.6;
+          transform: rotate(0deg);
+      }
+      .nav-toggle.active::after {
+          transform: rotate(180deg);
+          opacity: 1;
+      }
+      .nav-toggle:hover {
+          color: #E2E2E2;
+          transform: translateX(4px);
+      }
+      .nav-toggle.active {
+          color: #E2E2E2;
+      }
+      .nav-direct-link {
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #ffffff;
+          font-size: 22px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          text-align: left;
+          padding: 20px 0;
+          text-decoration: none;
+          display: block;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          border-radius: 8px;
+          position: relative;
+          font-family: 'Inter', sans-serif;
+          text-transform: uppercase;
+      }
+      .nav-direct-link::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 1px;
+          background: linear-gradient(90deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          transition: width 0.4s ease;
+      }
+      .nav-direct-link:hover::before {
+          width: 100%;
+      }
+      .nav-direct-link:hover {
+          color: #E2E2E2;
+          transform: translateX(8px);
+          text-shadow: 0 0 20px rgba(226, 226, 226, 0.3);
+      }
+      .nav-dropdown {
+          max-height: 0;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          margin-top: 16px;
+          opacity: 0;
+          transform: translateY(-10px);
+      }
+      .nav-dropdown.open {
+          max-height: 800px;
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .products-list,
+      .intelligence-list,
+      .mission-list {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+          margin-top: 20px;
+      }
+      .product-link-item,
+      .intelligence-link-item,
+      .mission-link-item {
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 400;
+          padding: 16px 20px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          display: block;
+          line-height: 1.4;
+          position: relative;
+          font-family: 'Inter', sans-serif;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+      }
+      .product-link-item::before,
+      .intelligence-link-item::before,
+      .mission-link-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, #E2E2E2, rgba(226, 226, 226, 0.3));
+          border-radius: 2px 0 0 2px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+      .product-link-item:hover,
+      .intelligence-link-item:hover,
+      .mission-link-item:hover {
+          background: rgba(226, 226, 226, 0.05);
+          border-color: rgba(226, 226, 226, 0.2);
+          color: #ffffff;
+          transform: translateX(8px) translateY(-2px);
+          box-shadow: 0 8px 32px rgba(226, 226, 226, 0.15);
+          text-shadow: 0 0 10px rgba(226, 226, 226, 0.2);
+      }
+      .product-link-item:hover::before,
+      .intelligence-link-item:hover::before,
+      .mission-link-item:hover::before {
+          opacity: 1;
+      }
+
+      .cap-card {
+          flex: 1;
+          background: #080808;
+          border: 1px solid rgba(255,255,255,0.05);
+          padding: 40px;
+          border-radius: 2px;
+          min-height: 380px;
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cap-card:hover { border-color: rgba(255,255,255,0.1); background: #0c0c0c; }
+      .cap-card-border { position: absolute; top: 0; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.6s ease; }
+      .cap-card.active-node .cap-card-border { width: 100%; }
+      .cap-card.active-node { opacity: 1 !important; border-color: rgba(255,255,255,0.15) !important; }
+
+      #specs { background: var(--void) !important; }
+      #specs, #specs * { color: #ffffff !important; }
+      .parallax-spec { transition: transform 0.1s ease-out; }
+
+      .mobile-scroll-hint { display: none; margin-top: 24px; text-align: center; flex-direction: column; align-items: center; gap: 8px; }
+      @media (max-width: 1024px) {
+          .capabilities-carousel {
+              display: flex !important;
+              overflow-x: auto !important;
+              scroll-snap-type: x mandatory !important;
+              padding: 0 5vw !important;
+              gap: 15px !important;
+          }
+          .cap-card {
+              flex: 0 0 85% !important;
+              min-width: 85% !important;
+              scroll-snap-align: center !important;
+              opacity: 0.3;
+              transform: scale(0.95);
+          }
+          .mobile-scroll-hint { display: flex; }
+          .hint-bar { width: 30px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+          .hint-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #fff; animation: hint-slide 2s infinite ease-in-out; }
+          @keyframes hint-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+      }
+
+
+
+      @media (max-width: 1024px) {
+
+          .hud-border {
+              inset: 12px !important;
+              border-color: rgba(255, 255, 255, 0.03) !important;
+          }
+          .hud-data {
+              font-size: 6px !important;
+              letter-spacing: 0.15em !important;
+              opacity: 0.6 !important;
+          }
+          .hud-data.top-10 { top: 16px !important; }
+          .hud-data.bottom-10 { bottom: 16px !important; }
+          .hud-data.left-10 { left: 16px !important; }
+          .hud-data.right-10 { right: 16px !important; }
+
+
+          .pinned-stage {
+              height: 100svh !important;
+              min-height: 100vh !important;
+          }
+
+          .tower-wrap {
+              height: 60vh !important;
+              max-height: 450px !important;
+          }
+
+          .tower-core {
+              height: 100% !important;
+              width: auto !important;
+              max-width: 85vw !important;
+              filter: drop-shadow(0 0 60px rgba(0, 243, 255, 0.08)) !important;
+          }
+
+
+          #act-hero .text-center {
+              padding: 0 20px !important;
+          }
+
+          #act-hero .mono.text-\[10px\] {
+              font-size: 7px !important;
+              letter-spacing: 0.5em !important;
+              margin-bottom: 16px !important;
+          }
+
+
+          #act-hero h1.synco {
+              font-size: 20vw !important;
+              line-height: 0.9 !important;
+              letter-spacing: -0.02em !important;
+          }
+
+          #act-hero p.mono {
+              font-size: 7px !important;
+              letter-spacing: 0.3em !important;
+              margin-top: 24px !important;
+              padding: 0 16px !important;
+              line-height: 1.5 !important;
+          }
+
+
+          #act-sentinel {
+              padding: 0 20px !important;
+          }
+
+          #act-sentinel .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0 !important;
+          }
+
+          #act-sentinel .col-span-7 {
+              width: 100% !important;
+              transform: none !important;
+              perspective: none !important;
+          }
+
+          #act-sentinel .space-y-16 {
+              gap: 16px !important;
+          }
+
+          #act-sentinel .mono.text-cyan {
+              font-size: 8px !important;
+              letter-spacing: 0.3em !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-sentinel h2.synco {
+              font-size: 2.5rem !important;
+              line-height: 0.9 !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-sentinel .h-\[1px\] {
+              margin: 16px 0 !important;
+          }
+
+          #act-sentinel p {
+              font-size: 12px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+          }
+
+
+          .brief-card {
+              padding: 20px !important;
+              margin: 16px !important;
+              max-width: calc(100vw - 32px) !important;
+              max-height: 92svh !important;
+              overflow-y: auto !important;
+              -webkit-overflow-scrolling: touch !important;
+          }
+
+          .brief-card .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 16px !important;
+          }
+
+          .brief-card .col-span-5,
+          .brief-card .col-span-7,
+          .brief-card .col-span-12 {
+              width: 100% !important;
+          }
+
+
+          #act-energy .brief-card {
+              display: flex !important;
+              flex-direction: column !important;
+              padding: 16px !important;
+              gap: 0 !important;
+          }
+
+          #act-energy .brief-card > .grid {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0 !important;
+              height: 100% !important;
+          }
+
+
+          #act-energy .col-span-5 {
+              order: 1 !important;
+              width: 100% !important;
+              flex: 0 0 auto !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-energy .evidence-vid {
+              width: 100% !important;
+              height: 35vh !important;
+              min-height: 180px !important;
+              max-height: 280px !important;
+              border-radius: 8px !important;
+              object-fit: cover !important;
+              margin-top: 0 !important;
+              margin-bottom: 8px !important;
+          }
+
+          #act-energy .mono.text-\[8px\] {
+              font-size: 6px !important;
+              margin-top: 4px !important;
+              margin-bottom: 0 !important;
+              opacity: 0.5 !important;
+          }
+
+
+          #act-energy .col-span-7,
+          #act-energy .data-column {
+              order: 2 !important;
+              width: 100% !important;
+              flex: 1 1 auto !important;
+              border-left: 0 !important;
+              border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+              padding-left: 0 !important;
+              padding-top: 16px !important;
+          }
+
+          #act-energy h3.synco {
+              font-size: 1.4rem !important;
+              line-height: 0.95 !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-energy p {
+              font-size: 10px !important;
+              line-height: 1.5 !important;
+              letter-spacing: 0.08em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-energy .flex.gap-16 {
+              flex-direction: row !important;
+              gap: 10px !important;
+              flex-wrap: nowrap !important;
+          }
+
+          #act-energy .bg-white\/5 {
+              padding: 12px !important;
+              flex: 1 1 50% !important;
+              min-width: 0 !important;
+          }
+
+          #act-energy .bg-white\/5 .mono {
+              font-size: 6px !important;
+          }
+
+          #act-energy .bg-white\/5 .synco {
+              font-size: 0.9rem !important;
+          }
+
+
+          #act-optics {
+              padding: 0 20px !important;
+              justify-content: center !important;
+          }
+
+          #act-optics .max-w-4xl {
+              max-width: 100% !important;
+              text-align: center !important;
+          }
+
+          #act-optics .mono.text-white\/20 {
+              font-size: 7px !important;
+              letter-spacing: 0.5em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-optics h2.synco {
+              font-size: 12vw !important;
+              line-height: 0.9 !important;
+              margin-bottom: 24px !important;
+          }
+
+          #act-optics .space-y-20 {
+              border-right: 0 !important;
+              border-left: 2px solid rgba(0, 243, 255, 0.2) !important;
+              padding-right: 0 !important;
+              padding-left: 16px !important;
+              text-align: left !important;
+          }
+
+          #act-optics .synco.text-3xl {
+              font-size: 1.25rem !important;
+              margin-bottom: 8px !important;
+          }
+
+          #act-optics .text-xs {
+              font-size: 10px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+          }
+
+          #act-optics .bg-white\/5 {
+              padding: 16px !important;
+              display: block !important;
+              margin-top: 20px !important;
+          }
+
+          #act-optics .bg-white\/5 .synco {
+              font-size: 0.9rem !important;
+          }
+
+
+          #act-brain .brief-card {
+              padding: 24px !important;
+          }
+
+          #act-brain .grid {
+              display: flex !important;
+              flex-direction: column-reverse !important;
+              gap: 20px !important;
+          }
+
+          #act-brain .col-span-7,
+          #act-brain .col-span-5 {
+              width: 100% !important;
+          }
+
+          #act-brain .mono.text-cyan {
+              font-size: 7px !important;
+              letter-spacing: 0.3em !important;
+              margin-bottom: 12px !important;
+          }
+
+          #act-brain h2.synco {
+              font-size: 1.75rem !important;
+              line-height: 0.9 !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-brain p {
+              font-size: 11px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.1em !important;
+              margin-bottom: 16px !important;
+          }
+
+          #act-brain .flex.gap-10 {
+              flex-direction: row !important;
+              gap: 20px !important;
+          }
+
+          #act-brain .flex.gap-10 .text-left {
+              flex: 1 !important;
+          }
+
+          #act-brain .flex.gap-10 .mono {
+              font-size: 7px !important;
+          }
+
+          #act-brain .flex.gap-10 .synco {
+              font-size: 1rem !important;
+          }
+
+          #act-brain .evidence-vid {
+              width: 100% !important;
+              height: 200px !important;
+              border-radius: 8px !important;
+          }
+
+
+          #act-hegemony > div {
+              padding: 30px 20px !important;
+              margin: 20px !important;
+              max-width: calc(100vw - 40px) !important;
+          }
+
+          #act-hegemony .synco.text-\[12vw\] {
+              font-size: 20vw !important;
+              opacity: 0.03 !important;
+          }
+
+          #act-hegemony .mono.text-white\/30 {
+              font-size: 7px !important;
+              letter-spacing: 0.8em !important;
+              margin-bottom: 20px !important;
+          }
+
+          #act-hegemony h2.synco {
+              font-size: 2rem !important;
+              line-height: 0.9 !important;
+          }
+
+          #act-hegemony p {
+              font-size: 10px !important;
+              line-height: 1.6 !important;
+              letter-spacing: 0.2em !important;
+              margin-top: 24px !important;
+          }
+
+
+          #specs {
+              padding: 0 !important;
+              min-height: 100svh !important;
+              overflow: visible !important;
+          }
+
+          #specs .max-w-\[1500px\] {
+              padding: 180px 16px 40px 16px !important;
+              grid-template-columns: 1fr !important;
+              gap: 16px !important;
+              height: 100% !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: flex-start !important;
+          }
+
+          #specs .col-span-5,
+          #specs .col-span-7 {
+              width: 100% !important;
+          }
+
+
+          #specs .col-span-5 {
+              order: 2 !important;
+              flex: 0 0 auto !important;
+          }
+
+          #specs .space-y-16 {
+              gap: 8px !important;
+          }
+
+
+          #specs .col-span-7 {
+              order: 1 !important;
+              display: flex !important;
+              justify-content: center !important;
+              align-items: center !important;
+              flex: 1 1 auto !important;
+          }
+
+          #specs .mono.text-\[10px\] {
+              font-size: 6px !important;
+              letter-spacing: 0.4em !important;
+              color: rgba(0, 0, 0, 0.4) !important;
+              margin-bottom: 4px !important;
+          }
+
+          #specs h2.synco {
+              font-size: 1.5rem !important;
+              line-height: 0.9 !important;
+              color: var(--void) !important;
+          }
+
+          #specs .space-y-8 {
+              gap: 6px !important;
+              display: flex !important;
+              flex-direction: column !important;
+          }
+
+          #specs .border-b {
+              padding-bottom: 6px !important;
+          }
+
+          #specs .mono.text-\[8px\] {
+              font-size: 5px !important;
+              color: rgba(0, 0, 0, 0.4) !important;
+              margin-bottom: 0 !important;
+          }
+
+          #specs .synco.text-3xl {
+              font-size: 0.95rem !important;
+              color: var(--void) !important;
+          }
+
+
+          #specs #lab-core {
+              height: auto !important;
+              max-height: 50vh !important;
+              width: auto !important;
+              max-width: 90% !important;
+              transform: none !important;
+              scale: 1 !important;
+          }
+
+          #specs .blueprint-grid {
+              background-size: 25px 25px !important;
+              opacity: 0.3 !important;
+          }
+
+
+          .layer {
+              padding: 80px 16px !important;
+          }
+
+          .layer.px-24 {
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+          }
+
+
+          .synco.text-7xl { font-size: 1.8rem !important; }
+          .synco.text-6xl { font-size: 1.6rem !important; }
+          .synco.text-5xl { font-size: 1.4rem !important; }
+          .synco.text-4xl { font-size: 1.3rem !important; }
+          .synco.text-3xl { font-size: 1.15rem !important; }
+          .synco.text-2xl { font-size: 1.05rem !important; }
+          .synco.text-xl { font-size: 0.95rem !important; }
+
+          .mono.tracking-\[2em\] { letter-spacing: 0.3em !important; }
+          .mono.tracking-\[1em\] { letter-spacing: 0.25em !important; }
+          .mono.tracking-\[0\.5em\] { letter-spacing: 0.15em !important; }
+
+
+          .brief-card,
+          .cap-card,
+          .layer > div {
+              -webkit-tap-highlight-color: transparent;
+          }
+
+
+          /* Senior UI/UX Mobile Overhaul: Zero Centering, Full Width, Reduced Scroll */
+
+          .main-container {
+              -webkit-overflow-scrolling: touch;
+          }
+
+          #hero-new, #video-grid, #visuals-grid, #specs, #chapter-benefits {
+              padding-top: 60px !important;
+              padding-bottom: 40px !important;
+          }
+
+          /* Full Width Layouts */
+          .w-full.max-w-\[1400px\],
+          .w-full.max-w-\[1600px\],
+          .w-full.max-w-\[1800px\] {
+              padding-left: 16px !important;
+              padding-right: 16px !important;
+              max-width: none !important;
+          }
+
+          #hero-new .lg\:col-span-5 {
+              width: 100% !important;
+              margin: 40px 0 0 0 !important;
+          }
+
+          #hero-new .bg-\[\#1a1a1c\]\/80 {
+              border-radius: 20px !important;
+              padding: 20px 12px !important;
+          }
+
+          /* Restored 'Two-Tab Visibility' Navigation */
+          #event-buttons {
+              flex-direction: row !important;
+              overflow-x: auto !important;
+              padding: 4px 16px 16px 16px !important;
+              margin: 0 -16px 20px -16px !important;
+              gap: 8px !important;
+              scrollbar-width: none;
+              -ms-overflow-style: none;
+          }
+
+          .event-btn {
+              border-left: none !important;
+              border-bottom: 2px solid transparent !important;
+              padding: 8px 10px !important; /* Tight padding to show two tabs */
+              flex: 0 0 auto !important;
+              font-size: 11px !important; /* Smaller for visibility */
+              font-weight: 500 !important;
+              color: rgba(0,0,0,0.4) !important;
+              transition: all 0.3s ease !important;
+              max-width: 150px !important; /* Prevent single tab takeover */
+              white-space: normal !important; /* Allow wrapping if needed */
+              text-align: center !important;
+              line-height: 1.2 !important;
+          }
+
+          .event-btn.active {
+              border-bottom-color: black !important;
+              color: black !important;
+              font-weight: 800 !important;
+          }
+
+          /* VISUALS GRID - Horizontal Scroll to reduce vertical height */
+          #visuals-grid .grid {
+              display: flex !important;
+              flex-direction: row !important;
+              overflow-x: auto !important;
+              overflow-y: hidden !important;
+              gap: 16px !important;
+              margin: 0 -16px !important;
+              padding: 0 16px 20px 16px !important;
+              scrollbar-width: none;
+          }
+          #visuals-grid .grid::-webkit-scrollbar { display: none; }
+          #visuals-grid .grid > div {
+              flex: 0 0 85% !important; /* Partial visibility of next card */
+              min-width: 280px !important;
+          }
+
+          /* Benefits Section Compact */
+          #chapter-benefits .grid {
+              gap: 20px !important;
+          }
+          #chapter-benefits .bg-white,
+          #chapter-benefits .bg-\[\#0a0a0a\] {
+              padding: 24px 20px !important;
+              border-radius: 24px !important;
+          }
+
+          /*
+             HIGH-PRIORITY MOBILE RESET: HARDWARE SPECS
+             Consolidating all scattered overrides to fix order & visibility
+          */
+          #spec-trigger { height: 100vh !important; }
+          #specs {
+              padding: 80px 0 60px 0 !important; /* Push everything down more to avoid nav */
+              background: #030303 !important;
+          }
+
+          #specs .max-w-\[1400px\],
+          #specs .max-w-\[1500px\] {
+              padding: 0 16px !important;
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 0 !important;
+              max-width: none !important;
+              height: auto !important;
+          }
+
+          /* IMAGE CONTAINER (was col-span-7) */
+          #specs .lg\:col-span-7 {
+              order: 1 !important;
+              width: 100% !important;
+              display: flex !important;
+              justify-content: center !important;
+              margin-bottom: 20px !important;
+              padding: 0 !important;
+              margin-top: 0 !important; /* Neutralized negative margin */
+          }
+
+          /* TEXT CONTAINER (was col-span-5) */
+          #specs .lg\:col-span-5 {
+              order: 2 !important;
+              width: 100% !important;
+              margin-top: 0 !important;
+              padding: 0 !important;
+              display: flex !important;
+              flex-direction: column !important;
+          }
+
+          #specs #lab-core {
+              max-height: 65vh !important;
+              height: auto !important;
+              width: 100% !important;
+              transform: scale(1.2) !important; /* Scale up the whole asset */
+          }
+
+          /* TITLE VISIBILITY FIX */
+          #specs h2.synco {
+              display: block !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+              font-size: 0.95rem !important;
+              color: white !important;
+              text-align: left !important;
+              margin-bottom: 4px !important; /* Tighten gap to first item */
+              line-height: 1.1 !important;
+          }
+
+          /* SPEC LIST TYPOGRAPHY */
+          #specs .text-lg,
+          #specs .text-xl,
+          #specs .synco.font-bold {
+              font-size: 9px !important;
+              color: white !important;
+              letter-spacing: 0.1em !important;
+              text-transform: uppercase !important;
+          }
+
+          #specs .border-b {
+              border-color: rgba(255,255,255,0.1) !important;
+              padding: 8px 0 !important;
+          }
+
+          .synco.text-7xl { font-size: 1.7rem !important; }
+          .synco.text-6xl { font-size: 1.5rem !important; }
+          .synco.text-5xl { font-size: 1.3rem !important; }
+          .synco.text-4xl { font-size: 1.2rem !important; }
+          .synco.text-3xl { font-size: 1.1rem !important; }
+
+
+      @media (max-width: 1024px) and (orientation: landscape) {
+          .pinned-stage {
+              height: 100vw !important;
+              min-height: 100vh !important;
+          }
+
+          .tower-wrap {
+              height: 80vh !important;
+              max-height: none !important;
+          }
+
+          .brief-card {
+              max-height: 85vh !important;
+              flex-direction: row !important;
+          }
+
+          .brief-card .grid {
+              flex-direction: row !important;
+              flex-wrap: wrap !important;
+          }
+
+          .brief-card .col-span-5 {
+              flex: 1 1 45% !important;
+          }
+
+          .brief-card .col-span-7 {
+              flex: 1 1 50% !important;
+          }
+
+          #specs .max-w-\[1500px\] {
+              flex-direction: row !important;
+              align-items: center !important;
+          }
+
+          #specs .col-span-5 {
+              order: 1 !important;
+              flex: 1 1 40% !important;
+          }
+
+          #specs .col-span-7 {
+              order: 2 !important;
+              flex: 1 1 50% !important;
+          }
+
+          #specs #lab-core {
+              max-height: 60vh !important;
+          }
+      }
+
+
+
+          .social-glass-btn {
+              width: auto !important;
+              height: auto !important;
+              background: transparent !important;
+              border: none !important;
+          }
+          .social-glass-btn svg {
+              width: 28px !important;
+              height: 28px !important;
+          }
+      }
+
+
+      @media screen and (max-width: 1024px) {
+          header,
+          .header,
+          #header,
+          .desktop-header,
+          .nav-desktop,
+          nav:not(.mobile-nav-bar) {
+              display: none !important;
+              visibility: hidden !important;
+              height: 0 !important;
+              overflow: hidden !important;
+          }
+      }
+
+      /* SPEC FREEZE — ported from trion (overrides legacy mobile spec rules) */
+      @media (max-width: 1024px) {
+          #spec-trigger { height: 100vh !important; }
+          #specs {
+              padding: 0 !important;
+              padding-top: 130px !important;
+              background: var(--void) !important;
+              color: #ffffff !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: center !important;
+              overflow: hidden !important;
+              min-height: 100vh !important;
+          }
+          #spec-ui {
+              padding: 80px 24px 40px 24px !important;
+              grid-template-columns: 1fr !important;
+              gap: 0 !important;
+              height: 100% !important;
+              display: flex !important;
+              flex-direction: column !important;
+              justify-content: space-between !important;
+          }
+          #spec-text {
+              order: 2 !important;
+              width: 100% !important;
+              padding-top: 20px !important;
+              opacity: 1;
+          }
+          #specs .col-span-8,
+          #specs .lg\:col-span-8 {
+              order: 1 !important;
+              width: 100% !important;
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+          }
+          #anatomy-img {
+              width: 100% !important;
+              max-width: 320px !important;
+              object-fit: contain;
+              transform: none !important;
+              scale: 1 !important;
+          }
+          #specs .synco.text-6xl { font-size: 2.2rem !important; }
+          #specs .space-y-10 { display: flex !important; flex-direction: column !important; gap: 1.5rem !important; }
+          .callout { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    
+
+    <div id="header-container"></div>
+    <script src="/components/header-loader.js"></script>
+
+    <div class="main-container">
+      <section
+        class="min-h-screen min-h-[100svh] relative flex items-center py-20 lg:py-0 overflow-hidden"
+        id="hero-new"
+      >
+        <!-- Background Video/Image -->
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          class="absolute inset-0 w-full h-full object-cover z-0 opacity-70 filter brightness-[0.85] contrast-[1.1]"
+        >
+          <source src="media/Obexfleethero.mp4" type="video/mp4" />
+        </video>
+
+        <!-- Multi-Layer Premium Dark HUD Overlay -->
+        <!-- Layer 1: Radial vignette to focus eyes on central elements and dim outer frame -->
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.05)_20%,rgba(3,3,3,0.75)_100%)] z-0 pointer-events-none"
+        ></div>
+
+        <!-- Layer 2: Deep side/bottom gradients to ensure perfect text legibility and smooth transitional flow -->
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/30 to-transparent z-0 pointer-events-none"
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#030303]/90 via-transparent to-black/20 z-0 pointer-events-none"
+        ></div>
+
+        <div
+          class="w-full max-w-[1400px] mx-auto px-8 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10"
+        >
+          <!-- Left Text Column -->
+          <div class="lg:col-span-6 space-y-6">
+            <h1 class="leading-tight tracking-tight">
+              <span class="synco text-2xl md:text-3xl lg:text-4xl font-black text-[#007AFF]"
+                >Always there.</span
+              ><br />
+              <span class="text-lg md:text-xl lg:text-2xl font-medium text-white/80"
+                >In crisis. In conflict. In calm.</span
+              >
+            </h1>
+            <p class="text-base lg:text-lg text-white/80 leading-relaxed font-normal max-w-lg">
+              <span class="obex-fleet-logo text-sm mr-2">OBEX FLEET</span> is more than a dashcam.
+              It predicts, protects, and proves, so your operation is never left vulnerable.
+            </p>
+            <div class="pt-2">
+              <p class="text-[#007AFF] text-xs font-bold tracking-widest uppercase">
+                TRUSTED BY AVZDAX NEST OPERATIONS
+              </p>
+            </div>
+            <div class="pt-6">
+              <a
+                href="#video-grid"
+                class="text-white text-sm font-semibold underline underline-offset-8 hover:text-white/80 transition-colors"
+              >
+                See How It Works
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 lg:col-start-8 flex items-center mt-12 lg:mt-20">
+            <div
+              class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col h-[500px] sm:h-[600px] lg:h-[720px] w-full max-w-[500px] mx-auto lg:mx-0"
+            >
+              <!-- Toggle -->
+              <div class="bg-white/10 rounded-full p-1.5 flex mb-6 shrink-0 relative">
+                <button
+                  id="btn-dual"
+                  class="flex-1 bg-white text-black font-semibold text-xs py-3 rounded-full shadow-sm transition-all z-10"
+                  onclick="toggleHeroGrid('dual')"
+                >
+                  Dual-View (Cabin + Road)
+                </button>
+                <button
+                  id="btn-single"
+                  class="flex-1 text-white/60 hover:text-white font-semibold text-xs py-3 rounded-full transition-all z-10"
+                  onclick="toggleHeroGrid('single')"
+                >
+                  Single-View (Road)
+                </button>
+              </div>
+
+              <!-- DUAL VIEW CONTENT -->
+              <div id="content-dual" class="flex flex-col flex-grow w-full">
+                <!-- Aqueous Image Box -->
+                <div
+                  class="bg-black border border-white/5 rounded-3xl p-8 relative flex flex-col items-center flex-grow w-full overflow-hidden shadow-2xl"
+                >
+                  <div class="absolute top-4 right-4 flex gap-2 z-10">
+                    <span
+                      class="border border-white/20 text-white/60 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider"
+                      >4G LTE</span
+                    >
+                    <span
+                      class="border border-white/20 text-white/60 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider"
+                      >2K VIDEO</span
+                    >
+                  </div>
+
+                  <!-- Hardware Carousel -->
+                  <div class="relative w-full my-auto py-4 flex justify-center items-center">
+                    <img
+                      id="hero-dual-front"
+                      src="/media/obex_fleet_front_nobg.png"
+                      alt="OBEX Fleet Dual-View Front"
+                      class="relative w-72 md:w-[320px] object-contain drop-shadow-2xl scale-[1.3] transition-opacity duration-1000 opacity-100"
+                    />
+                    <img
+                      id="hero-dual-back"
+                      src="/media/obex_fleet_back_nobg.png"
+                      alt="OBEX Fleet Dual-View Back"
+                      class="absolute w-72 md:w-[320px] object-contain drop-shadow-2xl scale-[1.3] transition-opacity duration-1000 opacity-0"
+                    />
+                  </div>
+
+                  <!-- 5 Icons Row -->
+                  <div class="grid grid-cols-5 w-full mt-auto pt-6 border-t border-white/10 px-2">
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <circle cx="12" cy="12" r="2" />
+                        <path
+                          d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"
+                        />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Live<br />Streaming</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <rect x="5" y="2" width="14" height="20" rx="3" />
+                        <path d="M10 2h4v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z" />
+                        <circle cx="12" cy="19" r="0.5" fill="rgba(255,255,255,0.6)" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Fleet<br />Command</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Live GPS<br />Tracking</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >In-Cab<br />Alerts</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 text-center">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Cloud<br />Backups</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Product Details (Fixed Position) -->
+                <div class="mt-6 h-20 pl-2">
+                  <h3 class="text-white font-bold text-base">OBEX Fleet Dual-View</h3>
+                  <p class="text-white/60 text-[13px] leading-snug">
+                    Dual-lens situational awareness for road and cabin monitoring. Engineered for
+                    high-scale enterprise logistics.
+                  </p>
+                </div>
+              </div>
+
+              <!-- SINGLE VIEW CONTENT (Hidden by default) -->
+              <div id="content-single" class="hidden flex-col flex-grow w-full">
+                <!-- Dark Hardware Card -->
+                <div
+                  class="bg-black border border-white/5 rounded-3xl p-8 relative flex flex-col items-center flex-grow w-full overflow-hidden shadow-2xl"
+                >
+                  <div class="absolute top-4 right-4 flex gap-2 z-10">
+                    <span
+                      class="border border-white/20 text-white/60 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider"
+                      >4G LTE</span
+                    >
+                    <span
+                      class="border border-white/20 text-white/60 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider"
+                      >2K VIDEO</span
+                    >
+                  </div>
+
+                  <!-- Hardware Carousel (Single) -->
+                  <div class="relative w-full my-auto py-4 flex justify-center items-center">
+                    <img
+                      src="/media/obex_fleet_back_nobg.png"
+                      alt="OBEX Fleet Single-View Road"
+                      class="relative w-72 md:w-[320px] object-contain drop-shadow-2xl scale-[1.3]"
+                    />
+                  </div>
+
+                  <!-- Feature Icons Row -->
+                  <div class="grid grid-cols-5 w-full mt-auto pt-6 border-t border-white/10 px-2">
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <circle cx="12" cy="12" r="2" />
+                        <path
+                          d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"
+                        />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Live<br />Streaming</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <rect x="5" y="2" width="14" height="20" rx="3" />
+                        <path d="M10 2h4v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z" />
+                        <circle cx="12" cy="19" r="0.5" fill="rgba(255,255,255,0.6)" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Fleet<br />Command</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Live GPS<br />Tracking</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >In-Cab<br />Alerts</span
+                      >
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 text-center">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.5"
+                      >
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                      </svg>
+                      <span class="text-[9px] text-white/60 font-medium text-center leading-tight"
+                        >Cloud<br />Backups</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Product Details (Fixed Position) -->
+                <div class="mt-6 h-20 pl-2">
+                  <h3 class="text-white font-bold text-base">OBEX Fleet Single-View</h3>
+                  <p class="text-white/60 text-[13px] leading-snug">
+                    Forward-facing risk detection. Perfect for logistics.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            function toggleHeroGrid(type) {
+              const dualBtn = document.getElementById('btn-dual')
+              const singleBtn = document.getElementById('btn-single')
+              const dualContent = document.getElementById('content-dual')
+              const singleContent = document.getElementById('content-single')
+
+              if (type === 'dual') {
+                dualBtn.className =
+                  'flex-1 bg-white text-black font-semibold text-xs py-3 rounded-full shadow-sm transition-all z-10'
+                singleBtn.className =
+                  'flex-1 text-white/60 hover:text-white font-semibold text-xs py-3 rounded-full transition-all z-10'
+                dualContent.classList.remove('hidden')
+                dualContent.classList.add('flex')
+                singleContent.classList.add('hidden')
+                singleContent.classList.remove('flex')
+              } else {
+                singleBtn.className =
+                  'flex-1 bg-white text-black font-semibold text-xs py-3 rounded-full shadow-sm transition-all z-10'
+                dualBtn.className =
+                  'flex-1 text-white/60 hover:text-white font-semibold text-xs py-3 rounded-full transition-all z-10'
+                singleContent.classList.remove('hidden')
+                singleContent.classList.add('flex')
+                dualContent.classList.add('hidden')
+                dualContent.classList.remove('flex')
+              }
+            }
+
+            // Dual-View Fade Loop
+            let dualState = 'front'
+            setInterval(() => {
+              const front = document.getElementById('hero-dual-front')
+              const back = document.getElementById('hero-dual-back')
+              if (!front || !back) return
+
+              if (dualState === 'front') {
+                front.style.opacity = '0'
+                back.style.opacity = '1'
+                dualState = 'back'
+              } else {
+                front.style.opacity = '1'
+                back.style.opacity = '0'
+                dualState = 'front'
+              }
+            }, 3000)
+          </script>
+        </div>
+      </section>
+
+      <section class="flex flex-col justify-center relative bg-white pt-16 pb-4 lg:pt-20 lg:pb-6" id="video-grid" style="zoom: 0.9;">
+        <div class="w-full max-w-[1600px] mx-auto px-4 md:px-16 mt-0">
+          <div class="mb-4 lg:mb-8 flex flex-col md:flex-row justify-between items-end gap-6">
+            <div>
+              <h2
+                class="text-2xl lg:text-4xl font-medium tracking-tight text-[#1d1d1f] max-w-5xl leading-[1.1]"
+              >
+                Prevent incidents with <span class="text-[#007AFF]">AI video alerts</span>
+              </h2>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+            <div
+              class="lg:col-span-3 flex flex-row lg:flex-col py-1 overflow-x-auto lg:overflow-visible no-scrollbar pb-6 lg:pb-0 relative z-10"
+              id="event-buttons"
+            >
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn active text-black"
+                data-event="lane"
+              >
+                Lane departure warning
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="drowsiness"
+              >
+                Drowsiness detection
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="collision"
+              >
+                Forward collision warning
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="distraction"
+              >
+                Inattentive driving
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="seatbelt"
+              >
+                No seat belt
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="mobile"
+              >
+                Mobile usage
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="tailgating"
+              >
+                Tailgating
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="rolling"
+              >
+                Rolling stops
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="harsh"
+              >
+                Harsh driving
+              </button>
+              <button
+                class="shrink-0 text-left px-4 py-1.5 transition-all text-sm md:text-base event-btn text-black"
+                data-event="pedestrian"
+              >
+                Pedestrian collision warning
+              </button>
+            </div>
+            <div class="lg:col-span-9 flex flex-col space-y-6">
+              <div
+                class="w-full aspect-[16/9] bg-[#050505] rounded-2xl overflow-hidden relative group shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/5"
+              >
+                <!-- Tactical Corner Accents -->
+                <div
+                  class="absolute top-0 left-0 w-8 h-8 border-t border-l border-[#007AFF]/30 z-20"
+                ></div>
+                <div
+                  class="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-[#007AFF]/30 z-20"
+                ></div>
+                <!-- Video Player -->
+                <video
+                  id="event-video"
+                  class="w-full h-full object-cover"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  poster="media/events/lane_departure_poster.jpg"
+                >
+                  <source
+                    id="video-source"
+                    src="media/Lan_Departure_Warning.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <img
+                  id="event-image"
+                  class="w-full h-full object-cover hidden"
+                  src=""
+                  alt="Event Detail"
+                />
+              </div>
+
+              <div class="flex flex-col md:flex-row justify-between items-start gap-4 mt-2">
+                <div class="flex-grow">
+                  <h3
+                    class="font-bold text-[#1d1d1f] text-xl md:text-2xl mb-1 tracking-tight"
+                    id="event-title"
+                  >
+                    Lane departure warning
+                  </h3>
+                  <p
+                    class="text-[#86868b] text-xs md:text-sm max-w-2xl leading-relaxed"
+                    id="event-desc"
+                  >
+                    Detects when the vehicle drifts from its lane without signaling, delivering an
+                    immediate predictive alert to correct the trajectory before leaving the road.
+                  </p>
+                </div>
+                <!-- Audio Logic -->
+                <button
+                  id="audio-trigger"
+                  class="shrink-0 flex items-center gap-2 bg-[#007AFF] hover:bg-[#007AFF]/80 text-white font-bold py-2.5 px-6 rounded-full transition-all text-xs shadow-lg active:scale-95"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  Hear in-cab alert
+                </button>
+                <audio id="event-audio" src="media/Return_to_Lane.wav"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative bg-white py-10 lg:py-16" id="visuals-grid">
+        <div class="w-full max-w-[1300px] mx-auto px-6 md:px-16">
+          <!-- Header: Left Aligned, Clean Sans -->
+          <div class="mb-4">
+            <h2
+              class="text-xl lg:text-3xl font-medium tracking-tight text-[#1d1d1f] max-w-5xl leading-[1.1]"
+            >
+              Real-time AI video for critical situations
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <!-- TILE 01: EVIDENCE -->
+            <div class="flex flex-col group cursor-pointer">
+              <div
+                class="aspect-[3/4] w-full bg-[#f5f5f7] rounded-2xl overflow-hidden mb-2 transition-transform duration-500 group-hover:scale-[1.02] shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative"
+              >
+                <img
+                  src="/media/lagos_evidence_pro.png"
+                  alt="Indisputable trip evidence"
+                  class="w-full h-full object-cover"
+                />
+
+                <!-- Tactical CSS Overlay (Sharp & Professional) -->
+                <div
+                  class="absolute inset-0 pointer-events-none p-6 flex items-center justify-center"
+                >
+                  <!-- Proximity Ring -->
+                  <div
+                    class="w-48 h-48 border border-[#007AFF]/40 rounded-full relative animate-pulse shadow-[0_0_20px_rgba(0,122,255,0.1)]"
+                  >
+                    <div
+                      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[#007AFF] rounded-full shadow-[0_0_10px_#007AFF]"
+                    ></div>
+                  </div>
+
+                  <!-- Real Camera Metadata (OSD Style) -->
+                  <div
+                    class="absolute top-0 left-0 w-full p-4 bg-gradient-to-b from-black/60 to-transparent"
+                  >
+                    <div class="flex justify-between items-start">
+                      <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-white tracking-wider uppercase"
+                          >OBEX_FLEET_CAM_01</span
+                        >
+                        <span class="text-[8px] text-white/70 font-medium"
+                          >3RD MAINLAND BRIDGE // LAGOS, NG</span
+                        >
+                      </div>
+                      <div class="text-[9px] font-bold text-white text-right">
+                        REC
+                        <span
+                          class="w-2 h-2 inline-block bg-red-600 rounded-full animate-pulse ml-1"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent flex justify-between items-end"
+                  >
+                    <div class="text-[8px] text-white/80 font-medium tracking-widest">
+                      05.13.2026 // 16:25:11
+                    </div>
+                    <div class="text-[8px] text-white/80 font-medium tracking-widest">
+                      9.0812° N, 7.4851° E
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-3 px-1">
+                <h3 class="text-xl lg:text-2xl font-semibold text-[#1d1d1f] leading-tight">
+                  Indisputable trip evidence
+                </h3>
+                <p class="text-[#86868b] text-sm lg:text-base leading-relaxed">
+                  Protect your assets with indisputable sovereign data. High-definition trip replays
+                  combine multi-angle video, telemetry, and GPS location into a unified legal-grade
+                  evidence package.
+                </p>
+              </div>
+            </div>
+
+            <!-- TILE 02: INTERVENTION -->
+            <div class="flex flex-col group cursor-pointer">
+              <div
+                class="aspect-[3/4] w-full bg-[#1a1a1a] rounded-2xl overflow-hidden mb-4 transition-transform duration-500 group-hover:scale-[1.02] shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+              >
+                <img
+                  src="/media/intervention_driver_pro.png"
+                  alt="Pre-Incident Intervention"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="space-y-3 px-1">
+                <h3 class="text-xl lg:text-2xl font-semibold text-[#1d1d1f] leading-tight">
+                  Pre-Incident Intervention
+                </h3>
+                <p class="text-[#86868b] text-sm lg:text-base leading-relaxed">
+                  Centralized visibility into fleet risk with autonomous cloud uploads for
+                  collisions, harsh maneuvers, and AI-detected safety incidents.
+                </p>
+              </div>
+            </div>
+
+            <!-- TILE 03: COMMAND LAYER -->
+            <div class="flex flex-col group cursor-pointer">
+              <div
+                class="aspect-[3/4] w-full bg-[#1a1a1a] rounded-2xl overflow-hidden mb-4 transition-transform duration-500 group-hover:scale-[1.02] shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+              >
+                <img
+                  src="/media/command_layer_realistic.png"
+                  alt="Unified command integration"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="space-y-3 px-1">
+                <h3 class="text-xl lg:text-2xl font-semibold text-[#1d1d1f] leading-tight">
+                  Unified command integration
+                </h3>
+                <p class="text-[#86868b] text-sm lg:text-base leading-relaxed">
+                  Complete integration into the NEST oversight protocol. Stream live situational
+                  awareness and manage fleet-wide risk profiles through the TELETRAAN sovereign
+                  command interface.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COACHING & TRAINING SECTION -->
+      <section class="relative bg-white py-24 lg:py-36 overflow-hidden" id="coaching-training">
+        <div
+          class="w-full max-w-[1450px] mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center"
+        >
+          <!-- Left: Text Content -->
+          <div class="lg:col-span-5 space-y-8">
+            <h2
+              class="text-4xl md:text-5xl lg:text-6xl font-black text-[#1d1d1f] tracking-tight leading-[1.05]"
+            >
+              Absolute visibility <br class="hidden sm:inline" />
+              <span class="text-[#007AFF]">across your mobile assets</span>
+            </h2>
+
+            <p class="text-lg md:text-xl text-[#86868b] leading-relaxed font-light">
+              Monitor driver behavior and safety protocols in real time through the <strong class="text-black font-semibold">TELETRAAN</strong> command interface. Gain the situational awareness needed to enforce operational standards and protect your fleet.
+            </p>
+          </div>
+
+          <!-- Right: Visual -->
+          <div class="lg:col-span-7 relative group w-full">
+            <!-- Decorative premium glowing backdrop -->
+            <div class="absolute -inset-4 bg-gradient-to-tr from-[#007AFF]/10 via-purple-500/5 to-transparent rounded-[2.5rem] blur-3xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+            <div
+              class="relative aspect-[16/10] w-full bg-[#080808] rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.18)] border border-black/10 transition-all duration-700 group-hover:scale-[1.01] group-hover:shadow-[0_40px_100px_rgba(0,0,0,0.22)]"
+            >
+              <!-- Tactical HUD corner markers for high-fidelity command aesthetic -->
+              <div class="absolute top-5 left-5 w-4 h-4 border-t border-l border-white/20 z-20"></div>
+              <div class="absolute top-5 right-5 w-4 h-4 border-t border-r border-white/20 z-20"></div>
+              <div class="absolute bottom-5 left-5 w-4 h-4 border-b border-l border-white/20 z-20"></div>
+              <div class="absolute bottom-5 right-5 w-4 h-4 border-b border-r border-white/20 z-20"></div>
+
+              <img
+                src="/media/Coaching___Training.webp"
+                alt="Driver coaching interface"
+                class="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-all duration-700 ease-out"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Premium FAQ Section -->
+      <section class="relative bg-[#f5f5f7] py-24 lg:py-32 border-t border-black/5" id="faq-section">
+        <div class="w-full max-w-[1000px] mx-auto px-6 md:px-16">
+          
+          <!-- Main Heading -->
+          <h2 class="text-center text-3xl md:text-5xl lg:text-6xl font-black text-[#1d1d1f] tracking-tight leading-tight mb-16">
+            Learn more about dash cams
+          </h2>
+
+          <!-- Accordion Container -->
+          <div class="space-y-4">
+            
+            <!-- Item 1 -->
+            <div class="border-b border-black/10 pb-4 faq-item">
+              <button class="w-full flex justify-between items-center py-4 text-left group transition-all" onclick="toggleFaq(this)">
+                <span class="text-lg md:text-xl font-bold text-[#1d1d1f] group-hover:text-[#007AFF] transition-colors duration-300">
+                  What are the different types of dash cams?
+                </span>
+                <span class="shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 bg-black shadow-sm flex items-center justify-center transition-transform duration-300 chevron">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white group-hover:text-[#007AFF] transition-colors duration-300">
+                    <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                <p class="text-sm md:text-base text-[#86868b] leading-relaxed pt-2 pb-6 max-w-4xl font-light">
+                  Modern fleet cameras generally fall into two categories: front facing cameras that monitor the road ahead, and dual facing cameras like the <strong class="text-black font-semibold">OBEX Fleet Dual View</strong> that monitor both the driver cabin and the forward road. Selecting the right configuration depends on your fleet risk profile, with dual view units providing the most complete liability protection and predictive driver safety capabilities.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="border-b border-black/10 pb-4 faq-item">
+              <button class="w-full flex justify-between items-center py-4 text-left group transition-all" onclick="toggleFaq(this)">
+                <span class="text-lg md:text-xl font-bold text-[#1d1d1f] group-hover:text-[#007AFF] transition-colors duration-300">
+                  Why do fleets need predictive dash cams?
+                </span>
+                <span class="shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 bg-black shadow-sm flex items-center justify-center transition-transform duration-300 chevron">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white group-hover:text-[#007AFF] transition-colors duration-300">
+                    <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                <p class="text-sm md:text-base text-[#86868b] leading-relaxed pt-2 pb-6 max-w-4xl font-light">
+                  Traditional dash cams only record events after they happen, serving as passive digital witnesses. Predictive mobility intelligence systems like <strong class="text-black font-semibold">OBEX Fleet</strong> actively analyze driver behavior such as fatigue, distraction, and trailing distance in real time. By delivering instantaneous in cab audio alerts, they allow drivers to correct behavior before an incident occurs, reducing collision rates by up to 50% and protecting fleets from catastrophic liability.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="border-b border-black/10 pb-4 faq-item">
+              <button class="w-full flex justify-between items-center py-4 text-left group transition-all" onclick="toggleFaq(this)">
+                <span class="text-lg md:text-xl font-bold text-[#1d1d1f] group-hover:text-[#007AFF] transition-colors duration-300">
+                  How does an AI Dash Cam differ from a traditional dash cam?
+                </span>
+                <span class="shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 bg-black shadow-sm flex items-center justify-center transition-transform duration-300 chevron">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white group-hover:text-[#007AFF] transition-colors duration-300">
+                    <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                <p class="text-sm md:text-base text-[#86868b] leading-relaxed pt-2 pb-6 max-w-4xl font-light">
+                  A traditional dash cam functions as a simple loop recording camera. An AI enabled system utilizes an integrated neural processing unit to run computer vision models on the edge. This enables the device to detect complex events such as drowsiness, mobile phone distraction, lane departures, and rolling stops and automatically upload high priority event footage to the cloud while keeping standard footage private.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="border-b border-black/10 pb-4 faq-item">
+              <button class="w-full flex justify-between items-center py-4 text-left group transition-all" onclick="toggleFaq(this)">
+                <span class="text-lg md:text-xl font-bold text-[#1d1d1f] group-hover:text-[#007AFF] transition-colors duration-300">
+                  Does OBEX Fleet adhere to international fleet safety standards?
+                </span>
+                <span class="shrink-0 ml-4 w-8 h-8 rounded-full border border-white/10 bg-black shadow-sm flex items-center justify-center transition-transform duration-300 chevron">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white group-hover:text-[#007AFF] transition-colors duration-300">
+                    <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                <p class="text-sm md:text-base text-[#86868b] leading-relaxed pt-2 pb-6 max-w-4xl font-light">
+                  Yes. <strong class="text-black font-semibold">OBEX Fleet</strong> is designed to meet strict regulatory and compliance requirements globally, including the UK Direct Vision Standard and European Union General Safety Regulations. It integrates seamlessly into existing enterprise fleet management architectures, providing sovereign data control, encrypted cloud storage, and comprehensive safety auditing tools required by modern international enterprises.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const chevron = item.querySelector('.chevron');
+        
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+        
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.querySelector('.faq-content').style.maxHeight = '0px';
+            otherItem.querySelector('.chevron').style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        if (isOpen) {
+          content.style.maxHeight = '0px';
+          chevron.style.transform = 'rotate(0deg)';
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          chevron.style.transform = 'rotate(180deg)';
+        }
+      }
+    </script>
+
+    <section class="capabilities-horizontal-section" id="capabilities-grid">
+      <div class="capabilities-bg-grid"></div>
+
+      <div class="capabilities-container">
+        <div class="capabilities-header">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="media/avzdax-logo.png"
+            alt="AVZDAX"
+            class="capabilities-logo hidden md:block"
+          />
+          <h2 class="capabilities-title synco">
+            MOBILITY<br />
+            <span>INTELLIGENCE</span>
+          </h2>
+        </div>
+
+        <div class="capabilities-scroll-wrapper">
+          <div class="capabilities-cards-track">
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">PREDICTIVE<br />MOBILITY</h3>
+                <p class="cap-card-description">
+                  Understand driver behavior and predict risk before it becomes an incident. OBEX
+                  Fleet continuously analyzes movement patterns to identify fatigue, distraction,
+                  and safety violations in real-time.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">LIVE FLEET<br />COMMAND</h3>
+                <p class="cap-card-description">
+                  Complete visibility across your mobile assets. Monitor your entire fleet through
+                  the TELETRAAN sovereign command interface with zero-latency live streaming and
+                  real-time telemetry.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">TRIP<br />EVIDENCE PRO</h3>
+                <p class="cap-card-description">
+                  Indisputable sovereign data for legal-grade protection. High-definition trip
+                  replays combine multi-angle video, telemetry, and GPS location into a unified
+                  evidence package.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">DRIVER<br />SENTINEL</h3>
+                <p class="cap-card-description">
+                  Intelligent in-cab alerts that act as a silent co-pilot. OBEX Fleet delivers
+                  predictive intervention for lane departures, forward collisions, and mobile usage,
+                  ensuring every driver comes home safely.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">CLOUD<br />FUSION</h3>
+                <p class="cap-card-description">
+                  Seamless synchronization with the NEST infrastructure. Automated cloud uploads for
+                  collisions and harsh maneuvers ensure that critical data is preserved and
+                  accessible from anywhere in the world.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+
+            <div class="cap-card">
+              <div>
+                <h3 class="cap-card-title synco">HARDWARE<br />AGNOSTIC</h3>
+                <p class="cap-card-description">
+                  Native support for global fleet hardware standards. OBEX Fleet integrates with
+                  existing infrastructure and supports universal protocols, eliminating vendor
+                  lock-in and protecting your investments.
+                </p>
+              </div>
+              <div class="cap-card-footer">
+                <span class="cap-card-line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cap-progress-container">
+          <div class="cap-progress-bar"></div>
+        </div>
+
+        <div class="capabilities-cta">
+          <a href="/contact" class="cap-cta-btn">
+            Request Information
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div id="spec-trigger">
+      <section class="pinned-stage lab-phase" id="specs">
+        <div class="blueprint-grid"></div>
+
+        <div
+          class="max-w-[1400px] w-full px-6 md:px-12 flex flex-col-reverse lg:grid lg:grid-cols-12 gap-4 lg:gap-20 items-center justify-end relative z-10 h-auto lg:h-auto pt-4 lg:pt-20 pb-8 lg:pb-0 -translate-y-[15vh] lg:translate-y-0"
+          id="spec-ui"
+          style="color: #ffffff !important; transform: scale(0.9); transform-origin: center;"
+        >
+          <div class="lg:col-span-4 space-y-2 lg:space-y-16 mt-2 lg:mt-0" id="spec-text">
+            <div>
+              <h2 class="synco text-3xl lg:text-6xl font-black" style="color: #ffffff !important">
+                <span class="whitespace-nowrap">HARDWARE</span><br />INTELLIGENCE.
+              </h2>
+            </div>
+            <div class="space-y-3 lg:space-y-8">
+              <div class="border-b border-black/10 pb-2 lg:pb-6">
+                <div class="synco text-sm lg:text-3xl">DUAL-LENS VISION SYSTEM</div>
+              </div>
+              <div class="border-b border-black/10 pb-2 lg:pb-6">
+                <div class="synco text-sm lg:text-3xl">BUILT-IN ALERT SPEAKER</div>
+              </div>
+              <div class="border-b border-black/10 pb-2 lg:pb-6">
+                <div class="synco text-sm lg:text-3xl">MOTION & GPS SENSORS</div>
+              </div>
+              <div class="border-b border-black/10 pb-2 lg:pb-6">
+                <div class="synco text-sm lg:text-3xl">VEHICLE DIAGNOSTICS</div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="lg:col-span-8 flex flex-col items-center justify-end w-full lg:w-auto h-full lg:h-auto pb-0 relative"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              src="media/obex_fleet_back_nobg.png"
+              class="w-auto h-[35vh] lg:w-[110%] lg:h-auto lg:scale-110 relative z-10 object-contain mb-0"
+              id="anatomy-img"
+              alt="OBEX Fleet Hardware"
+            />
+
+            <div class="absolute top-[47%] right-[3%] z-20 callout hidden lg:block" id="c1">
+              <div class="synco text-[10px] font-bold" style="color: #ffffff !important">
+                DUAL LENS
+              </div>
+            </div>
+            <div class="absolute top-[88%] right-[4%] z-20 callout hidden lg:block" id="c2">
+              <div class="synco text-[10px] font-bold" style="color: #ffffff !important">
+                ALERT SPEAKER
+              </div>
+            </div>
+            <div class="absolute top-[48%] left-[9%] z-20 callout hidden lg:block" id="c3">
+              <div class="synco text-[10px] font-bold" style="color: #ffffff !important">
+                GPS + SENSORS
+              </div>
+            </div>
+            <div class="absolute top-[87%] left-[33%] z-20 callout hidden lg:block" id="c4">
+              <div class="synco text-[10px] font-bold" style="color: #ffffff !important">
+                CHARGING PORT
+              </div>
+            </div>
+            <div class="absolute top-[25%] right-[9%] z-20 callout hidden lg:block" id="c5">
+              <div class="synco text-[10px] font-bold" style="color: #ffffff !important">
+                ADJUSTABLE DASH LOCK
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      window.addEventListener('scroll', function () {
+        const nav = document.getElementById('main-nav')
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled')
+        } else {
+          nav.classList.remove('nav-scrolled')
+        }
+      })
+
+      function showPreview(product) {
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+        })
+
+        document.getElementById('preview-default').style.opacity = '1'
+
+        const preview = document.getElementById('p-' + product)
+        if (preview) {
+          preview.classList.add('active')
+          document.getElementById('preview-default').style.opacity = '0'
+        }
+      }
+
+      function initMobileMenu() {
+        const btns = document.querySelectorAll('.mobile-menu-toggle-modern')
+        const overlay = document.getElementById('mobile-menu-overlay')
+
+        if (!btns.length || !overlay) return
+
+        btns.forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            e.stopImmediatePropagation()
+            const opened = this.classList.toggle('open')
+            this.setAttribute('aria-expanded', opened ? 'true' : 'false')
+
+            btns.forEach(b => {
+              if (b !== this) {
+                if (opened) b.classList.add('open')
+                else b.classList.remove('open')
+                b.setAttribute('aria-expanded', opened ? 'true' : 'false')
+              }
+            })
+
+            if (opened) {
+              overlay.style.display = 'flex'
+              document.body.style.overflow = 'hidden'
+            } else {
+              overlay.style.display = 'none'
+              document.body.style.overflow = ''
+            }
+          })
+        })
+
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) {
+            btns.forEach(btn => {
+              btn.classList.remove('open')
+              btn.setAttribute('aria-expanded', 'false')
+            })
+            overlay.style.display = 'none'
+            document.body.style.overflow = ''
+          }
+        })
+      }
+
+      initMobileMenu()
+
+      document.querySelectorAll('.nav-toggle').forEach(button => {
+        button.addEventListener('click', function () {
+          const dropdown = this.nextElementSibling
+          dropdown.classList.toggle('open')
+          this.classList.toggle('active')
+        })
+      })
+
+      document
+        .querySelectorAll(
+          '.product-link-item, .intelligence-link-item, .mission-link-item, .nav-direct-link'
+        )
+        .forEach(link => {
+          link.addEventListener('click', function () {
+            document.getElementById('mobile-menu-overlay').style.display = 'none'
+          })
+        })
+
+      gsap.registerPlugin(ScrollTrigger, TextPlugin)
+
+      const isMobile = window.innerWidth <= 1024
+      const lenis = new Lenis({
+        lerp: isMobile ? 0.12 : 0.05,
+        smoothWheel: true,
+        touchMultiplier: isMobile ? 2.5 : 1,
+      })
+
+      window.lenis = lenis
+      lenis.on('scroll', ScrollTrigger.update)
+      gsap.ticker.add(time => {
+        lenis.raf(time * 1000)
+      })
+      gsap.ticker.lagSmoothing(0)
+
+      gsap.to('#main-core', {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        delay: 0.5,
+      })
+
+      function initSpecFreeze() {
+        const specTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#spec-trigger',
+            start: 'top top',
+            end: '+=150%',
+            pin: true,
+            scrub: true,
+            onToggle: self => {
+              document
+                .getElementById('main-nav')
+                ?.classList.toggle('nav-dark-minimal', self.isActive)
+              const mobileNav = document.querySelector('.mobile-nav-bar')
+              if (mobileNav) mobileNav.classList.toggle('nav-dark-minimal', self.isActive)
+            },
+          },
+        })
+
+        specTl
+          .from('#anatomy-img', {
+            scale: 1.5,
+            opacity: 0,
+            rotateX: -20,
+            filter: 'blur(20px)',
+            duration: 1.5,
+          })
+          .from('#spec-text', { x: -100, opacity: 0, duration: 1 }, '-=1')
+          .from('.callout', { y: 50, opacity: 0, stagger: 0.2, duration: 1 }, '-=0.5')
+          // Reveal finishes in the first ~30% of the scrub; the inert hold keeps
+          // the fully-revealed hardware frozen on screen for the rest of the pin.
+          .to({}, { duration: 5 })
+      }
+
+      if (!isMobile) {
+        window.addEventListener('mousemove', e => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 60
+          const y = (e.clientY / window.innerHeight - 0.5) * 60
+          gsap.to('#tower', {
+            rotationY: x,
+            rotationX: -y,
+            x: x * 2,
+            y: y * 2,
+            duration: 3,
+            ease: 'power2.out',
+          })
+        })
+      }
+
+      ;(function () {
+        function initCapabilitiesHorizontalScroll() {
+          const section = document.querySelector('#capabilities-grid')
+          const track = document.querySelector('.capabilities-cards-track')
+          const progressBar = document.querySelector('.cap-progress-bar')
+
+          if (
+            !section ||
+            !track ||
+            typeof gsap === 'undefined' ||
+            typeof ScrollTrigger === 'undefined'
+          )
+            return
+
+          const cards = track.querySelectorAll('.cap-card')
+          const isMobile = window.innerWidth <= 768
+          const gap = isMobile ? 16 : 32
+          const padding = isMobile ? 32 : 120
+
+          // Card-sum gives the true content width in pre-zoom CSS px. The
+          // .capabilities-container applies `zoom`, so convert that overflow into
+          // rendered px (pin length) and local px (track transform = overflow/zoom).
+          // Using offsetWidth without the zoom factor over-scrolled past the last
+          // card and left a large empty gap.
+          const cardWidth = cards[0].offsetWidth
+          const contentWidth = cardWidth * cards.length + gap * (cards.length - 1) + padding
+          const container = section.querySelector('.capabilities-container')
+          const zoom = parseFloat(getComputedStyle(container).zoom) || 1
+          const visualOverflow = contentWidth * zoom - window.innerWidth
+          const scrollDistance = visualOverflow / zoom
+
+          ScrollTrigger.getAll().forEach(st => {
+            if (st.trigger === section) st.kill()
+          })
+
+          if (visualOverflow <= 0) return
+
+          gsap.to(track, {
+            x: -scrollDistance,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: '+=' + visualOverflow * 1.2,
+              pin: true,
+              scrub: 0.8,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              onUpdate: self => {
+                if (progressBar) {
+                  progressBar.style.width = self.progress * 100 + '%'
+                }
+              },
+              onEnter: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeave: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+              onEnterBack: () => {
+                document.getElementById('main-nav')?.classList.add('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.add('nav-dark-minimal')
+              },
+              onLeaveBack: () => {
+                document.getElementById('main-nav')?.classList.remove('nav-dark-minimal')
+                document.querySelector('.mobile-nav-bar')?.classList.remove('nav-dark-minimal')
+              },
+            },
+          })
+        }
+
+        function initScrollScenes() {
+          // Build the capabilities pin first so its pin-spacer exists, then build
+          // the spec freeze against the now-correct document layout, then re-measure
+          // every trigger. Order matters: creating the spec pin before the
+          // capabilities spacer leaves it anchored to a stale offset (premature
+          // un-pin -> empty void + the section scrolling through twice).
+          initCapabilitiesHorizontalScroll()
+          initSpecFreeze()
+          ScrollTrigger.refresh()
+        }
+
+        if (document.readyState === 'complete') {
+          setTimeout(initScrollScenes, 200)
+        } else {
+          window.addEventListener('load', () => setTimeout(initScrollScenes, 200))
+        }
+
+        let resizeTimeout
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout)
+          resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh()
+            initCapabilitiesHorizontalScroll()
+          }, 250)
+        })
+
+        // Event Grid Interactivity
+        const eventData = {
+          drowsiness: {
+            title: 'Drowsiness detection',
+            desc: 'Tracks eye movement, blink rate, and head position using IR sensors to detect fatigue before the driver even realizes they are tired.',
+            video: 'media/US_Drowsiness_Detection.mov',
+            audio: 'media/events/drowsiness_alert.mp3',
+          },
+          lane: {
+            title: 'Lane departure warning',
+            desc: 'Detects when the vehicle drifts from its lane without signaling, delivering an immediate predictive alert to correct the trajectory before leaving the road.',
+            video: 'media/Lan_Departure_Warning.mp4',
+            audio: 'media/Return_to_Lane.wav',
+          },
+          collision: {
+            title: 'Forward collision warning',
+            desc: 'Calculates the closing speed between the vehicle and obstacles ahead, issuing a harsh warning if a collision is imminent.',
+            video: 'media/Forward_Collision_Warning.mp4',
+            audio: 'media/FCW_sound.wav',
+          },
+          distraction: {
+            title: 'Inattentive driving',
+            desc: 'Identifies if the driver is looking away from the road for an extended period, ensuring their eyes remain on the path ahead.',
+            video: 'media/Inattentive_Driving.mp4',
+            audio: 'media/Alert__Distracted_Driving.wav',
+          },
+          seatbelt: {
+            title: 'No seat belt',
+            desc: 'Detects when the driver or passenger is operating the vehicle without a secured seat belt.',
+            video: 'media/No_Seatbelt.mp4',
+            audio: 'media/seatbelt_us.wav',
+          },
+          mobile: {
+            title: 'Mobile usage',
+            desc: 'Identifies dangerous handheld device usage while the vehicle is in motion, triggering immediate warnings.',
+            video: 'media/Mobile_Usage.webp',
+            audio: 'media/phone_policy_US.wav',
+          },
+          tailgating: {
+            title: 'Tailgating',
+            desc: 'Measures following distance dynamically and alerts drivers when they are trailing dangerously close to the vehicle ahead.',
+            video: 'media/Tailgating.mp4',
+            audio: 'media/Alert__Following_Distance.wav',
+          },
+          rolling: {
+            title: 'Rolling stops',
+            desc: 'Monitors behavior at stop signs and intersections to ensure complete halts rather than dangerous rolling stops.',
+            video: 'media/Rolling_Stop.mp4',
+            audio: 'media/events/rolling_alert.mp3',
+          },
+          harsh: {
+            title: 'Harsh driving',
+            desc: 'Detects erratic steering, hard braking, or aggressive acceleration using internal G-force and motion sensors.',
+            video: 'media/Harsh_Driving.mp4',
+            audio: 'media/Harsh_event_detected_English_US.wav',
+          },
+          pedestrian: {
+            title: 'Pedestrian collision warning',
+            desc: "Identifies pedestrians and cyclists in the vehicle's path, issuing critical alerts before a potential impact.",
+            video: 'media/PCW_Right_Side_View.mp4',
+            audio: 'media/PCW_In-cab_Audio_Alert__August_2025_.mp3',
+          },
+        }
+
+        const eventBtns = document.querySelectorAll('.event-btn')
+        const eventTitle = document.getElementById('event-title')
+        const eventDesc = document.getElementById('event-desc')
+        const eventVideo = document.getElementById('event-video')
+        const eventImage = document.getElementById('event-image')
+        const videoSource = document.getElementById('video-source')
+        const eventAudio = document.getElementById('event-audio')
+        const audioTrigger = document.getElementById('audio-trigger')
+
+        eventBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            // Remove active state
+            eventBtns.forEach(b => b.classList.remove('active'))
+            btn.classList.add('active')
+
+            // Update content
+            const type = btn.getAttribute('data-event')
+            const data = eventData[type]
+            if (data) {
+              eventTitle.textContent = data.title
+              eventDesc.textContent = data.desc
+
+              // Update video/image
+              if (data.video) {
+                const isImage = data.video.match(/\.(webp|jpg|jpeg|png)$/i)
+                if (isImage) {
+                  eventVideo.classList.add('hidden')
+                  eventImage.classList.remove('hidden')
+                  eventImage.src = data.video
+                } else {
+                  eventImage.classList.add('hidden')
+                  eventVideo.classList.remove('hidden')
+                  if (videoSource) {
+                    videoSource.src = data.video
+                    eventVideo.load()
+                    eventVideo.play()
+                  }
+                }
+              }
+
+              // Update audio
+              if (data.audio && eventAudio) {
+                eventAudio.src = data.audio
+                // Show/hide audio button based on user request (drowsiness and rolling do not have sound)
+                if (type === 'drowsiness' || type === 'rolling') {
+                  audioTrigger.style.display = 'none'
+                } else {
+                  audioTrigger.style.display = 'flex'
+                }
+              }
+            }
+          })
+        })
+
+        if (audioTrigger && eventAudio) {
+          audioTrigger.addEventListener('click', () => {
+            eventAudio.play()
+          })
+        }
+
+        // Initialize state for the default active button
+        const initialActiveBtn = document.querySelector('.event-btn.active')
+        if (initialActiveBtn) {
+          initialActiveBtn.click()
+        }
+      })()
+
+      const capObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active-node')
+            } else {
+              entry.target.classList.remove('active-node')
+            }
+          })
+        },
+        { threshold: 0.6, root: document.querySelector('.capabilities-carousel') }
+      )
+      document.querySelectorAll('.cap-card').forEach(card => capObserver.observe(card))
+    </script>
+
+    <section
+      class="min-h-[70vh] flex items-center relative bg-[#fafafa] py-24 border-t border-black/5"
+      id="chapter-benefits"
+    >
+      <div
+        class="w-full max-w-[1400px] mx-auto px-8 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20"
+      >
+        <div
+          class="space-y-8 bg-white p-10 md:p-14 rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 transition-transform duration-500 hover:-translate-y-2"
+        >
+          <h2
+            class="synco text-2xl lg:text-3xl font-black text-black border-b border-black/10 pb-6"
+          >
+            FOR DRIVERS
+          </h2>
+          <ul class="space-y-6 text-base lg:text-lg text-black/70 font-light">
+            <li class="flex items-start">
+              <span class="text-black mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>A Silent Co-Pilot:</strong> Sits quietly on the windshield and only
+                intervenes when risk escalates.</span
+              >
+            </li>
+            <li class="flex items-start">
+              <span class="text-black mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>Reduces Mistakes:</strong> Catches fatigue and distraction before they turn
+                into fatal errors.</span
+              >
+            </li>
+            <li class="flex items-start">
+              <span class="text-black mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>Ensures Safe Returns:</strong> The ultimate goal is simple: ensuring every
+                driver comes home safely.</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          class="space-y-8 bg-[#0a0a0a] p-10 md:p-14 rounded-[2rem] shadow-2xl shadow-black/20 border border-white/5 transition-transform duration-500 hover:-translate-y-2"
+        >
+          <h2
+            class="synco text-2xl lg:text-3xl font-black text-white border-b border-white/10 pb-6"
+          >
+            FOR FLEET OWNERS
+          </h2>
+          <ul class="space-y-6 text-base lg:text-lg text-white/70 font-light">
+            <li class="flex items-start">
+              <span class="text-white mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>Full Visibility:</strong> See all vehicles, routes, and risk levels in real
+                time via TELETRAAN.</span
+              >
+            </li>
+            <li class="flex items-start">
+              <span class="text-white mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>Improves Discipline:</strong> Builds better driving habits systematically
+                without constant micromanagement.</span
+              >
+            </li>
+            <li class="flex items-start">
+              <span class="text-white mr-4 text-2xl leading-none">■</span>
+              <span
+                ><strong>Reduces Liability:</strong> Predictive prevention drastically lowers
+                accident rates, repair costs, and insurance premiums.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="bg-[#fafafa]">
+      <div id="footer-container"></div>
+      <script src="/components/footer-loader.js"></script>
+    </div>
+
+    <script>
+      const revealElements = document.querySelectorAll('.reveal-on-scroll, .scroll-reveal')
+      const revealObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed')
+            }
+          })
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -80px 0px' }
+      )
+      revealElements.forEach(el => revealObserver.observe(el))
+    </script>
+
+    <script>
+      function toggleSearch() {
+        const overlay = document.getElementById('search-overlay')
+        if (overlay) {
+          overlay.classList.toggle('is-open')
+          if (overlay.classList.contains('is-open')) {
+            document.body.style.overflow = 'hidden'
+            const input = overlay.querySelector('input')
+            if (input) setTimeout(() => input.focus(), 100)
+          } else {
+            document.body.style.overflow = ''
+          }
+        }
+      }
+
+      function showPreview(id) {
+        const defaultPreview = document.getElementById('preview-default')
+        if (defaultPreview) defaultPreview.style.opacity = '0'
+
+        document.querySelectorAll('.menu-preview-img').forEach(img => {
+          img.classList.remove('active')
+          img.style.opacity = '0'
+          img.style.transform = 'scale(0.8) translateY(20px)'
+        })
+
+        const target = document.getElementById('p-' + id)
+        if (target) {
+          target.classList.add('active')
+
+          void target.offsetWidth
+          target.style.opacity = '1'
+          target.style.transform = 'scale(1.25) translateY(0)'
+        }
+      }
+
+      document.querySelector('.mega-menu-content')?.addEventListener('mouseleave', () => {})
+
+      const mobileToggle = document.querySelector('.mobile-menu-toggle-modern')
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+          const menu = document.getElementById('mobile-menu-overlay')
+          if (menu) {
+            menu.style.display = 'block'
+            document.body.style.overflow = 'hidden'
+          }
+        })
+      }
+
+      function closeMobileMenu() {
+        const menu = document.getElementById('mobile-menu-overlay')
+        if (menu) {
+          menu.style.display = 'none'
+          document.body.style.overflow = ''
+        }
+      }
+    </script>
+    <script src="/media/site-utils.js"></script>
+  </body>
+</html>
