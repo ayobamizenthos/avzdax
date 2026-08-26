@@ -1819,7 +1819,7 @@
               <form
                 id="contact-form"
                 method="POST"
-                action="contact-handler.php"
+                action="/api/contact"
                 class="space-y-8 md:space-y-12 relative z-10 pt-6"
               >
                 <input
@@ -2317,9 +2317,10 @@
                         '<span class="animate-pulse tracking-widest">SENDING...</span>'
 
                       try {
-                        const response = await fetch('contact-handler.php', {
+                        const response = await fetch('/api/contact', {
                           method: 'POST',
-                          body: formData,
+                          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                          body: new URLSearchParams(formData),
                         })
 
                         const result = await response.json()
@@ -2334,23 +2335,6 @@
                           throw new Error(result.message || 'Submission failed.')
                         }
                       } catch (error) {
-                        if (
-                          window.location.hostname.match(/localhost|ngrok|127\.0\.0\.1/) &&
-                          (error.message.includes('Unexpected token') ||
-                            error.message.includes('JSON'))
-                        ) {
-                          setTimeout(() => {
-                            const successOverlay = document.getElementById('form-success')
-                            if (successOverlay) successOverlay.classList.add('visible')
-                            form.reset()
-                            resetSelects()
-
-                            submitBtn.disabled = false
-                            submitBtn.innerHTML = submitBtnText
-                          }, 500)
-                          return
-                        }
-
                         const errorOverlay = document.getElementById('form-error')
                         if (errorOverlay) {
                           errorOverlay.querySelector('p').textContent = error.message

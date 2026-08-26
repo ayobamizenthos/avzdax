@@ -1,0 +1,9 @@
+{
+  "name": "avzdax",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AVZDAX corporate site",
+  "dependencies": {
+    "nodemailer": "^9.0.5"
+  }
+}

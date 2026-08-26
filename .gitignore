@@ -10,3 +10,5 @@ google-credentials.json
 vendor/
 submissions/
 composer.phar
+
+node_modules/
