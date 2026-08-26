@@ -9,7 +9,6 @@ const ALLOWED_INQUIRY_TYPES = [
   'Sales',
   'Partnership',
   'Media / Press',
-  'Career',
   'Support'
 ]
 
