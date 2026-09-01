@@ -12,7 +12,6 @@ submissions/
 findings.txt
 optimize-videos.bat
 optimize_media.ps1
-video-optimizer.js
 
 # Credentials - never leave this machine
 google-credentials.json
