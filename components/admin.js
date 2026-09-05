@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id)
 
 const state = {
   posts: [],
+  tab: 'all',
   editing: null,
   coverUrl: null
 }
@@ -98,6 +99,18 @@ document.querySelectorAll('.rail nav button').forEach((button) => {
   })
 })
 
+document.querySelectorAll('#post-filters .filter').forEach((button) => {
+  button.addEventListener('click', () => {
+    state.tab = button.dataset.tab
+    document.querySelectorAll('#post-filters .filter').forEach((filter) => {
+      const active = filter === button
+      filter.classList.toggle('on', active)
+      filter.setAttribute('aria-selected', String(active))
+    })
+    renderRows()
+  })
+})
+
 const KIND_LABEL = { article: 'Article', video: 'Video', external: 'Link' }
 
 function rowMarkup(post) {
@@ -119,10 +132,36 @@ function rowMarkup(post) {
         </div>
       </div>
       <div class="row-actions">
+        <button class="icon-btn" data-move="up" data-slug="${escapeHtml(post.slug)}" aria-label="Move up">&uarr;</button>
+        <button class="icon-btn" data-move="down" data-slug="${escapeHtml(post.slug)}" aria-label="Move down">&darr;</button>
         <button class="icon-btn" data-edit="${escapeHtml(post.slug)}">Edit</button>
         <button class="icon-btn warn" data-remove="${escapeHtml(post.slug)}">Delete</button>
       </div>
     </div>`
+}
+
+function updateCounts(posts) {
+  $('count-all').textContent = posts.length
+  $('count-published').textContent = posts.filter((post) => post.status === 'published').length
+  $('count-draft').textContent = posts.filter((post) => post.status === 'draft').length
+}
+
+function visiblePosts() {
+  return state.tab === 'all' ? state.posts : state.posts.filter((post) => post.status === state.tab)
+}
+
+function renderRows() {
+  const rows = $('post-rows')
+  const posts = visiblePosts()
+
+  rows.innerHTML = posts.length
+    ? posts.map(rowMarkup).join('')
+    : state.posts.length
+      ? `<div class="empty">No ${state.tab === 'draft' ? 'drafts' : 'published posts'} yet.</div>`
+      : '<div class="empty">Nothing here yet.<br><br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
+
+  if (!state.posts.length) wireImport()
+  wireRows()
 }
 
 async function loadPosts() {
@@ -132,15 +171,45 @@ async function loadPosts() {
   try {
     const { posts } = await api('/api/admin/posts')
     state.posts = posts
-
-    rows.innerHTML = posts.length
-      ? posts.map(rowMarkup).join('')
-      : '<div class="empty">Nothing here yet.<br><br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
-
-    if (!posts.length) wireImport()
-    wireRows()
+    updateCounts(posts)
+    renderRows()
   } catch (problem) {
     rows.innerHTML = `<div class="empty">${escapeHtml(problem.message)}</div>`
+  }
+}
+
+function partitionOrder() {
+  const positions = state.posts.reduce((indexes, post, index) => {
+    if (state.tab === 'all' || post.status === state.tab) indexes.push(index)
+    return indexes
+  }, [])
+  const selected = positions.map((index) => state.posts[index].slug)
+  return { positions, selected }
+}
+
+function fullOrder(selected, positions) {
+  const order = state.posts.map((post) => post.slug)
+  positions.forEach((position, index) => { order[position] = selected[index] })
+  return order
+}
+
+function movePost(slug, offset) {
+  const { positions, selected } = partitionOrder()
+  const from = selected.indexOf(slug)
+  const to = from + offset
+  if (from < 0 || to < 0 || to >= selected.length) return
+
+  selected.splice(to, 0, selected.splice(from, 1)[0])
+  saveOrder(fullOrder(selected, positions))
+}
+
+async function saveOrder(slugs) {
+  try {
+    await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs }) })
+    await loadPosts()
+    flash('Order saved.', true)
+  } catch (problem) {
+    flash(problem.message)
   }
 }
 
@@ -172,18 +241,12 @@ function wireRows() {
       row.classList.remove('over')
       if (!draggedSlug || row.dataset.slug === draggedSlug) return
 
-      const order = Array.from($('post-rows').querySelectorAll('.row')).map((r) => r.dataset.slug)
-      const from = order.indexOf(draggedSlug)
-      order.splice(from, 1)
-      order.splice(order.indexOf(row.dataset.slug), 0, draggedSlug)
-
-      try {
-        await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs: order }) })
-        flash('Order saved.', true)
-        loadPosts()
-      } catch (problem) {
-        flash(problem.message)
-      }
+      const { positions, selected } = partitionOrder()
+      const from = selected.indexOf(draggedSlug)
+      const target = selected.indexOf(row.dataset.slug)
+      selected.splice(from, 1)
+      selected.splice(target > from ? target - 1 : target, 0, draggedSlug)
+      saveOrder(fullOrder(selected, positions))
     })
   })
 
@@ -193,6 +256,10 @@ function wireRows() {
 
   $('post-rows').querySelectorAll('[data-remove]').forEach((button) => {
     button.addEventListener('click', () => removePost(button.dataset.remove))
+  })
+
+  $('post-rows').querySelectorAll('[data-move]').forEach((button) => {
+    button.addEventListener('click', () => movePost(button.dataset.slug, button.dataset.move === 'up' ? -1 : 1))
   })
 }
 
