@@ -18,8 +18,17 @@
     <meta name="twitter:title" content="Newsroom — Latest Updates | AVZDAX" />
     <meta name="twitter:description" content="Latest updates, press releases, and announcements from AVZDAX. Stay informed on developments in sovereign defense technology." />
 
+    <link rel="preload" href="/api/posts" as="fetch" crossorigin>
+    <script>
+        window.newsroomFeed = fetch('/api/posts', { headers: { Accept: 'application/json' } })
+            .then(response => (response.ok ? response.json() : null))
+            .catch(() => null);
+    </script>
     <script src="video-optimizer.js" defer></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;900&family=JetBrains+Mono:wght@300;500&family=Syncopate:wght@700;800&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -38,7 +47,6 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;900&family=JetBrains+Mono:wght@300;500&family=Syncopate:wght@700;800&display=swap');
 
         :root {
             --void: #030303; --white: #ffffff; --silver: #E5E5E7; --alloy: #86868B;
@@ -783,6 +791,14 @@
         .r-body p { margin-bottom: 40px; opacity: 0.9; }
         .r-body h3 { font-family: 'Syncopate'; font-size: 36px; font-weight: 900; margin: 80px 0 30px; text-transform: uppercase; color: #000; letter-spacing: -0.02em; line-height: 1; }
         .r-body strong { font-weight: 900; }
+        .r-body em { font-style: italic; }
+        .r-body h2 { font-family: 'Syncopate'; font-size: 36px; font-weight: 900; margin: 80px 0 30px; text-transform: uppercase; color: #000; letter-spacing: -0.02em; line-height: 1; }
+        .r-body h4 { font-size: 22px; font-weight: 900; margin: 56px 0 20px; color: #000; }
+        .r-body blockquote { margin: 56px 0; padding-left: 32px; border-left: 2px solid #000; font-size: 24px; font-weight: 600; line-height: 1.5; opacity: 1; }
+        .r-body ul, .r-body ol { margin: 0 0 40px 24px; opacity: 0.9; }
+        .r-body li { margin-bottom: 14px; }
+        .r-body img { width: 100%; height: auto; border-radius: 4px; margin: 48px 0; display: block; }
+        .r-body a { color: #000; text-decoration: underline; text-underline-offset: 4px; }
 
         
         
@@ -874,6 +890,10 @@
             .r-main-text, .r-side-meta { grid-column: span 12; }
             .r-body { font-size: 18px; }
             .r-body h3 { font-size: 28px; margin: 50px 0 24px; }
+            .r-body h2 { font-size: 28px; margin: 50px 0 24px; }
+            .r-body h4 { font-size: 19px; margin: 40px 0 16px; }
+            .r-body blockquote { font-size: 21px; margin: 40px 0; padding-left: 24px; }
+            .r-body img { margin: 36px 0; }
             .r-quote-full { font-size: 32px; padding: 40px 0; margin: 40px 0; }
             
             .r-hero-image { max-height: 380px; margin-bottom: 40px; }
@@ -925,6 +945,11 @@
             .r-body { font-size: 16px; line-height: 1.7; }
             .r-body p { margin-bottom: 24px; }
             .r-body h3 { font-size: 22px; margin: 40px 0 16px; }
+            .r-body h2 { font-size: 22px; margin: 40px 0 16px; }
+            .r-body h4 { font-size: 17px; margin: 30px 0 12px; }
+            .r-body blockquote { font-size: 18px; margin: 30px 0; padding-left: 18px; }
+            .r-body ul, .r-body ol { margin-bottom: 24px; }
+            .r-body img { margin: 28px 0; }
             .r-quote-full { font-size: 24px; padding: 30px 0; margin: 30px 0; }
             .r-hero-image { max-height: 260px; margin-bottom: 30px; border-radius: 4px; }
             .r-image-grid { margin: 40px 0; gap: 10px; grid-template-columns: 1fr; }
@@ -952,6 +977,9 @@
             .r-body { font-size: 15px; }
             .r-body p { margin-bottom: 20px; }
             .r-body h3 { font-size: 20px; margin: 32px 0 14px; }
+            .r-body h2 { font-size: 20px; margin: 32px 0 14px; }
+            .r-body h4 { font-size: 16px; margin: 26px 0 10px; }
+            .r-body blockquote { font-size: 17px; margin: 26px 0; }
             .r-quote-full { font-size: 20px; padding: 24px 0; margin: 24px 0; }
             .r-header { margin-bottom: 30px; padding-bottom: 24px; }
             .reader-container { padding: 80px 14px 50px; }
@@ -1097,167 +1125,6 @@
     <div class="news-container pt-20">
 
         <div class="news-grid">
-            
-            
-            <div class="card-wrap featured-card reveal-up" data-category="insight" data-article-id="the-end-of-reactive-security">
-                <div class="card-body">
-                    
-                    <h2 class="c-title">The End of Reactive Security</h2>
-                    <p class="c-excerpt">Intelligence is no longer an optional overlay; it is the fundamental infrastructure upon which physical stability is built. The era of observation is over.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Thesis</a>
-                </div>
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/primusbox.webp" class="card-img object-contain opacity-100 p-8 md:p-20" alt="Institutional Intelligence" title="The End of Reactive Security">
-                </div>
-            </div>
-
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="surveillance-is-not-enough">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/trion-display.webp" class="card-img" alt="Trion Sensing Hardware" title="Why Surveillance Is Not Enough">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Why Surveillance Alone Was Never Enough</h2>
-                    <p class="c-excerpt">The presence of a camera does not constitute the presence of safety. We must bridge the gap between sight and understanding.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="neural-network-accuracy">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/news-neural-mesh.webp" class="card-img" alt="Neural Mesh Mapping" title="Limits of Threat Prediction">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Neural Networks and the Limits of Threat Prediction</h2>
-                    <p class="c-excerpt">Predictive accuracy is often mistaken for foresight. We must define the threshold where mathematical modeling meets physical reality.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="energy-security-logic">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/industry-energy.webp" class="card-img" alt="Energy Infrastructure Defense" title="Securing Critical Assets">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Why Energy Infrastructure Cannot Be Secured Reactively</h2>
-                    <p class="c-excerpt">When failure is catastrophic, reaction is irrelevant. We must architect systems where stability is a mathematical constant.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="broadcast" data-video-url="https://www.youtube.com/watch?v=MMXsmbpqR4g">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="https://img.youtube.com/vi/MMXsmbpqR4g/maxresdefault.jpg" class="card-img" alt="TVC News Broadcast" title="CEO on TVC News">
-                    <div class="play-trigger">
-                        <button class="play-btn" aria-label="Play TVC News Interview">
-                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Plateau State Security</h2>
-                    <p class="c-excerpt">Operational analysis of Sovereign Shield deployment and the impact of predictive autonomous sensing on regional stabilization efforts.</p>
-                    <a href="https://youtu.be/MMXsmbpqR4g" target="_blank" rel="noopener" class="c-link">Watch Interview</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap wide-card reveal-up" data-category="broadcast" data-video-url="https://www.youtube.com/watch?v=tAotVFKt5cs">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="https://img.youtube.com/vi/tAotVFKt5cs/maxresdefault.jpg" class="card-img" alt="Channels TV Sunrise Daily" title="Proactive Tech Discussion">
-                    <div class="play-trigger">
-                        <button class="play-btn" aria-label="Play Channels TV Discussion">
-                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Proactive Technology Over Reactive Response</h2>
-                    <p class="c-excerpt">Engineering inquiry into the architectural requirements for indigenous defense frameworks and the transition to predictive temporal systems.</p>
-                    <a href="https://youtu.be/tAotVFKt5cs" target="_blank" rel="noopener" class="c-link">Watch Discussion</a>
-                </div>
-            </div>
-
-
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="broadcast" data-article-id="state-policing-analysis">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="https://img.youtube.com/vi/MMXsmbpqR4g/0.jpg" class="card-img" alt="State Police Framework" title="Localized Security Infrastructure">
-                    <div class="play-trigger">
-                        <button class="play-btn" aria-label="Play State Police Discussion">
-                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">State Police & Technology</h2>
-                    <p class="c-excerpt">Thematic breakdown of decentralized data mesh networks and edge-compute requirements for effective localized policing infrastructure.</p>
-                    <a href="https://youtu.be/MMXsmbpqR4g" target="_blank" rel="noopener" class="c-link">Watch Analysis</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="blog" data-external-url="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/copy-paste-medium.webp" class="card-img" alt="Industry Analysis" title="Security Industry Evolution">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">The Copy-Paste Problem</h2>
-                    <p class="c-excerpt">Strategic critique of legacy security models and the imperative for African indigenous data sovereignty in autonomous infrastructure.</p>
-                    <a href="https://medium.com/@AVZDAXtechnologies/the-security-industry-has-a-copy-paste-problem-a1f89e341f8a" target="_blank" rel="noopener" class="c-link">Read Article</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="blog" data-external-url="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/ai-renaissance-medium.webp" class="card-img" alt="The AI Renaissance" title="Building the Future Through Africa's Lens">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">The AI Renaissance</h2>
-                    <p class="c-excerpt">A deep-dive into the intersection of indigenous intelligence and global innovation. Architecting the next era of autonomous defense through a regional lens.</p>
-                    <a href="https://medium.com/@AVZDAXtechnologies/the-ai-renaissance-building-the-future-through-africas-lens-0c9e74d4ce27" target="_blank" rel="noopener" class="c-link">Read Article</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="making-crime-obsolete">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/news-data-analytics.webp" class="card-img" alt="Data Analytics" title="Making Crime Obsolete">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Making Crime Obsolete</h2>
-                    <p class="c-excerpt">Technical analysis of closing the temporal window of opportunity for kinetic threats through mathematical certainty and predictive analytics.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Analysis</a>
-                </div>
-            </div>
-
-            
-            <div class="card-wrap standard-card reveal-up" data-category="insight" data-article-id="ethical-autonomy">
-                <div class="card-media">
-                    <img loading="lazy" decoding="async" src="/media/human-watch.webp" class="card-img" alt="AI Ethics" title="Responsible Autonomy">
-                </div>
-                <div class="card-body">
-                    
-                    <h2 class="c-title">Ethical Autonomy</h2>
-                    <p class="c-excerpt">Neural Alignment Standard (NAS): Why Human-in-the-Loop protocols are engineering requirements, not philosophical constraints, in autonomous defense systems.</p>
-                    <a href="javascript:void(0)" class="c-link">Read Advisory</a>
-                </div>
-            </div>
         </div> 
     </div> 
     <div style="background-color: #030303;" class="relative">
@@ -1299,491 +1166,38 @@
     </div>
 
     <script>
-        const intelDB = {
-            "the-end-of-reactive-security": {
-                meta: "THESIS // INSTITUTIONAL BRIEFING // 01",
-                title: "The End of Reactive Security",
-                img: "/media/primusbox.webp",
-                content: `
+        const intelDB = {};
+
+        function buildReaderHtml(post) {
+            const headline = post.headline || escapeText(post.title) + '.';
+            return `
                     <div class="r-header">
-                        
-                        <h1 class="r-title">The End of <span class="text-black">Reactive</span> Security.</h1>
+                        <h1 class="r-title">${headline}</h1>
                     </div>
 
                     <div class="r-content-grid">
                         <div class="r-main-text">
-                            <div class="r-body">
-                                <p>For most of modern history, security has been built around reaction. An incident occurs, footage is reviewed, reports are written, and lessons are discussed after the fact. The assumption has always been that response, if fast enough, is sufficient.</p>
-                                
-                                <p><strong>That assumption no longer holds.</strong></p>
-
-                                <p>The environments we are trying to protect today are denser, faster, and more interconnected than ever before. Threats do not announce themselves clearly or arrive all at once. They form gradually, through small behavioral signals, subtle deviations, and patterns that only become obvious when viewed over time. By the time a traditional system raises an alarm, the outcome has often already been decided.</p>
-
-                                <p>This is the central failure of reactive security. It is built to explain the past, not to prevent the future.</p>
-
-                                <h3>The Documentation Trap</h3>
-                                <p>Traditional surveillance systems are excellent at answering one question: what happened? Cameras record, logs accumulate, and evidence is preserved. But security is not ultimately about documentation. It is about prevention. And prevention requires a different kind of systemâ€”one designed to understand what is unfolding before it reaches a point of no return.</p>
-
-                                <p>Understanding behavior is fundamentally different from detecting motion. It requires context. It requires comparison against norms. It requires the ability to recognize when something is not just moving, but behaving unusually, persistently, or with intent. This is not something that can be achieved by adding more cameras or more screens.</p>
-
-                                <div class="r-quote-full">
-                                    "The most important question is no longer how fast we can respond. It is why we allowed it to happen at all."
-                                </div>
-
-                                <h3>Intelligence as Infrastructure</h3>
-                                <p>At scale, reaction fails because it assumes time is available. In reality, time is the most limited resource in any security scenario. The gap between detection and consequence is often measured in seconds, not minutes. Systems that wait for certainty before acting inevitably act too late.</p>
-
-                                <p>Predictive systems are designed to operate continuously, not episodically. They look for anomalies instead of alarms, patterns instead of isolated events, and early signals instead of obvious outcomes. Their role is not to replace human judgment, but to extend itâ€”to reduce noise, surface meaning, and allow human operators to intervene earlier, with better information and less urgency.</p>
-
-                                <p>As these systems mature, intelligence itself becomes infrastructure. Just as electricity and connectivity reshaped cities, embedded intelligence is reshaping how physical spaces are secured. It no longer lives only in centralized control rooms or cloud dashboards. It exists at the edge, in cameras, sensors, towers, and autonomous systems that can interpret their surroundings in real time.</p>
-
-                                <p>At AVZDAX, we are building systems designed not to document failure after the fact, but to reduce the likelihood of failure in the first place. The goal is not more footage. <strong>The goal is foresight.</strong></p>
-                            </div>
+                            <div class="r-body">${post.content}</div>
                         </div>
 
-                        <div class="r-side-meta">
-                            
-                        </div>
-                    </div>
-                `
-            },
-            "surveillance-is-not-enough": {
-                meta: "ANALYSIS // SYSTEMIC CRITIQUE // 02",
-                title: "Why Surveillance Alone Was Never Enough",
-                img: "/media/trion-display.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Why Surveillance <span class="text-black">Alone</span> Was Never Enough.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Surveillance has been treated for decades as a proxy for security. Add cameras, increase coverage, store more footage, and safety will follow. The logic feels intuitive, but it has always been incomplete.</p>
-                                
-                                <p><strong>Observation does not equal understanding.</strong></p>
-
-                                <p>Cameras are exceptional at capturing visual data. They are far less effective at interpreting meaning. A camera can record movement endlessly without knowing whether that movement is routine, suspicious, accidental, or intentional. As a result, traditional surveillance systems accumulate vast amounts of information while offering very little insight.</p>
-
-                                <p>This is why many environments today are heavily monitored yet still vulnerable. Surveillance systems were designed for review, not comprehension. They assume that a human will eventually watch, interpret, and decide. At scale, this breaks down. Human attention does not scale linearly with data.</p>
-
-                                <h3>The Inversion of Meaning</h3>
-                                <p>The industryâ€™s response has historically been to add more layers: more monitors, more guards, more alerts. But this approach treats symptoms rather than causes. Security fails not because data is unavailable, but because meaning arrives too late.</p>
-
-                                <p>The difference between safety and incident often lies in subtle shifts: a pattern that deviates slightly from the norm, a behavior that persists longer than expected, a movement that does not align with context. These signals rarely trigger alarms on their own. They only become obvious in hindsight, once an event has already occurred.</p>
-
-                                <div class="r-quote-full">
-                                    "Visibility without understanding is not safety. It is hindsight."
-                                </div>
-
-                                <h3>The Function of Interpretation</h3>
-                                <p>An intelligent security system does not ask whether something moved. It asks whether something changed. It compares behavior against baselines, correlates activity across time and space, and evaluates whether a situation is evolving toward risk. This is not a function of better optics or higher resolution. <strong>It is a function of interpretation.</strong></p>
-
-                                <p>When intelligence is embedded into surveillance, the role of the system changes. It moves from passive observation to active assessment. It begins to reduce noise instead of creating it. It highlights what matters instead of demanding constant attention.</p>
-
-                                <p>This shift also redefines the role of human operators. Instead of watching endlessly and reacting under pressure, humans are positioned as decision-makers. They engage earlier, with context, and with a clearer understanding of why an intervention may be necessary.</p>
-
-                                <p>At AVZDAX, we design security around comprehension, not just coverage. Systems that cannot interpret behavior will always lag behind events. Systems that can will begin to prevent them.</p>
-                            </div>
-                        </div>
-
-                        <div class="r-side-meta">
-                            
-                        </div>
-                    </div>
-                `
-            },
-            "trion-urban-deployment": {
-                meta: "DEPLOYMENT // NOVEMBER 2025 // URBAN THEATER",
-                title: "Trion Optical Sensors: A New Era of Peacetech.",
-                img: "/media/trion-display.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Trion <span class="accent-green">Optical</span> Mesh.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>AVZDAX is proud to announce the successful deployment of the TRION Multi-Spectrum Sensing mesh across major urban centers. This implementation represents the largest single deployment of edge-compute sensing hardware in the region, bridging the gap between passive observation and active predictive defense. This is <span class="text-white font-bold">Peacetech</span> in its most tangible form.</p>
-                                
-
-
-                                <p>The TRION units are not just cameras; they are autonomous intelligence nodes. By processing multi-spectrum data at the source, these sensors identify tactical anomaliesâ€”from unauthorized thermal signatures to behavioral pattern shiftsâ€”allowing for pre-emptive response protocols. The network effectively creates a digital twin of the urban environment, where security is maintained through mathematical oversight.</p>
-
-                                <div class="r-quote-full">"We are turning the city into a conscious environment that can sense and neutralize threats before they reach their objective."</div>
-                                
-                                <p>By moving the analytical heavy lifting to the edge, AVZDAX ensures that critical decisions are made in milliseconds, independent of centralized cloud latency. This decentralized approach is the core of the Sovereign Shield architecture, ensuring that the network remains operational even under extreme conditions.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "energy-infrastructure-protection": {
-                meta: "DEPLOYMENT // CRITICAL ASSETS // ENERGY SECURITY",
-                title: "Energy Infrastructure Protected by Peacetech.",
-                img: "/media/obex-display.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Sovereign <span class="accent-green">Energy</span> Shield.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Protecting the energy backbone of a nation requires a security architecture that is as resilient as the infrastructure it guards. AVZDAX has officially transitioned several key national energy assets to the Sovereign Shield protocol, utilizing our <span class="text-white font-bold">Peacetech</span> hardware-logic layer to provide 24/7 autonomous oversight.</p>
-                                
-
-
-                                <p>For energy infrastructure, even a few minutes of compromise can result in millions in losses and national instability. Our deployment utilizes a combination of Trion sensing nodes and Obex architectural imaging to create a 'dead-zone' around critical assets. Any unauthorized approach or systemic anomaly is detected and analyzed by the PRIMUS core instantly, triggering pre-defined non-kinetic response protocols.</p>
-
-                                <div class="r-quote-full">"Energy security is national security. By shielding our power-grids with autonomous intelligence, we are securing the very lifeblood of the nation's economy."</div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "energy-security-logic": {
-                meta: "STRATEGY // INSTITUTIONAL BRIEFING // 04",
-                title: "Why Energy Infrastructure Cannot Be Secured Reactively",
-                img: "/media/industry-energy.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Why Energy Infrastructure <span class="text-black">Cannot</span> Be Secured Reactively.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Energy infrastructure is unforgiving by nature. Power plants, refineries, pipelines, and transmission facilities operate as continuous systems where disruption carries immediate and compounding consequences. Downtime is not an inconvenience. It is a systemic failure that ripples across economies, public safety, and national stability.</p>
-                                
-                                <p><strong>Yet much of the world still secures these assets using reactive models designed for a slower, less interconnected era.</strong></p>
-
-                                <p>Traditional security frameworks assume that threats will be visible, localized, and isolated. An intrusion is detected. An alert is raised. A response is dispatched. This logic works tolerably well for discrete environments. It breaks down completely when applied to energy systems, where small anomalies can escalate into large-scale failures long before a human response is possible.</p>
-
-                                <h3>The Drift of Risk</h3>
-                                <p>Energy infrastructure does not fail suddenly. It degrades. It drifts. It accumulates risk quietly. Security incidents in this sector rarely begin as obvious attacks. They emerge through subtle signals: unusual movement patterns, repeated low-level access attempts, abnormal activity near sensitive zones, or deviations from operational rhythms.</p>
-
-                                <p>Reactive systems are blind to trajectories. They are designed to respond to outcomes. Predictive security changes the frame entirely. Instead of waiting for a breach, predictive systems model how breaches form.</p>
-
-                                <div class="r-quote-full">
-                                    "In systems that power societies, prevention is not an optimization. It is a requirement."
-                                </div>
-
-                                <h3>The Value of Time</h3>
-                                <p>In energy environments, timing is everything. A delayed response can trigger cascading shutdowns, equipment damage, environmental harm, or prolonged outages. Once escalation begins, options narrow rapidly. Predictive systems create time where none previously existed.</p>
-
-                                <p>When intelligence is embedded directly into the security layer, infrastructure becomes more resilient by design. Systems do not merely watch assets; they understand how those assets are used, how people interact with them, and how risk accumulates around them. This understanding enables preventative action that is architectural rather than reactive.</p>
-
-                                <p>At AVZDAX, we approach energy security as a predictive problem. Because sitting at the intersection of economic continuity and national security requires more than coverage. <strong>It requires foresight.</strong></p>
-                            </div>
-                        </div>
-
-                        <div class="r-side-meta">
-                            
-                        </div>
-                    </div>
-                `
-            },
-            "plateau-state-security": {
-                meta: "BROADCAST // TVC NEWS INTERVIEW // REGIONAL DEFENSE",
-                title: "Addressing Plateau State Security with Peacetech.",
-                img: "https://img.youtube.com/vi/MMXsmbpqR4g/maxresdefault.jpg",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Plateau State <span class="accent-green">Stabilization</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>In an exclusive interview with TVC News, AVZDAX leadership discusses the deployment of the Sovereign Shield in Plateau State. The discussion centers on how <span class="text-white font-bold">Peacetech</span> is providing a proactive solution to long-standing security challenges.</p>
-                                
-                                <p>We are moving from response to prevention by mapping behavioral anomalies before they turn into kinetic incidents. The Plateau deployment is a testament to how indigenous technology can solve deep-seated regional conflicts through architectural peace rather than traditional force.</p>
-
-                                <div class="r-quote-full">"We are not just monitoring conflict; we are architecting the conditions for its impossibility."</div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "the-neural-mesh-expansion": {
-                meta: "GLOBAL INTELLIGENCE // NETWORK REPORT // PHASE IV",
-                title: "Global Peacetech: The Neural Mesh Expansion.",
-                img: "/media/nest_display.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">The Neural <span class="accent-green">Expansion</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>The AVZDAX Neural Mesh is entering its most ambitious phase of growth. As we scale our <span class="text-white font-bold">Peacetech</span> infrastructure across Silicon Valley, London, and West Africa, we are creating a planetary cognitive redundancyâ€”a global temporal shield that learns from every node in the network.</p>
-                                
-                                <p>This expansion is not just about coverage; it's about intelligence density. Every new node adds exponentially to the network's ability to predict and neutralize threat vectors. We are building a future where peace is a global utility, accessible via the AVZDAX backbone.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "maritime-sovereignty": {
-                meta: "MARITIME // DEEP_SENSING // LITTORAL DEFENSE",
-                title: "Maritime Peacetech: Securing Sovereign Waters.",
-                img: "/media/sentinel-hero.png",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Maritime <span class="accent-green">Sovereignty</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>The vast expanses of sovereign waters have traditionally been the most difficult theaters to secure. AVZDAX is changing that with its <span class="text-white font-bold">Peacetech</span> maritime layer, utilizing deep-sensing hydro-acoustic arrays and autonomous littoral monitoring to create a persistent presence where none existed before.</p>
-                                
-
-
-                                <p>How multi-spectrum acoustic sensors are transforming coastal defense and securing sovereign waters through autonomous monitoring. The ocean is no longer a blind spot; it is a monitored theater of architectural peace. By integrating our maritime sensors with the global Neural Mesh, we provide nations with an unblinking eye over their most valuable natural resources.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "neural-network-accuracy": {
-                meta: "ANALYSIS // SYSTEMIC RESEARCH // 03",
-                title: "Neural Networks and the Limits of Threat Prediction",
-                img: "/media/news-neural-mesh.webp",
-                content: `
-                    <div class="r-header">
-
-                        <h1 class="r-title">Neural Networks and the Limits of <span class="text-black">Threat Prediction</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>There is a temptation, when confronted with the capabilities of modern neural architectures, to assume that prediction is simply a function of scale. More data, more layers, more compute. The logic is seductive because it is partially true. Deep learning systems can detect patterns in behavioral data that no human analyst would ever isolate. They can correlate signals across time, space, and context with extraordinary precision.</p>
-
-                                <p><strong>But precision is not the same as foresight.</strong></p>
-
-                                <p>A neural network trained on historical threat data can identify anomalies with remarkable consistency. It can flag deviations from baseline behavior, assign risk probabilities, and surface early indicators that something is shifting. These are genuine capabilities that fundamentally improve the quality of security intelligence. The danger lies in treating these outputs as certainty.</p>
-
-                                <h3>The Confidence Problem</h3>
-                                <p>Every prediction a neural network produces comes with an implicit confidence score. In controlled environments with stable baselines, that confidence can be extraordinarily high. But physical security does not operate in controlled environments. It operates in cities, transit corridors, public gatherings, and border zones where the variables are not just numerous but fundamentally unpredictable.</p>
-
-                                <p>A system trained on six months of normal pedestrian flow through a transit hub will flag unusual clustering with high confidence. But it cannot distinguish between a planned attack and a delayed train with equal certainty. Context collapses at the edges of statistical modeling. The network knows something is different. It does not know what that difference means.</p>
-
-                                <p>This is not a failure of the technology. It is a boundary condition that must be engineered around, not ignored.</p>
-
-                                <div class="r-quote-full">
-                                    "The most dangerous system is one that is accurate enough to be trusted completely, but not intelligent enough to know when it should not be."
-                                </div>
-
-                                <h3>Where Prediction Ends and Judgment Begins</h3>
-                                <p>The value of neural threat prediction is not in replacing human decision-making. It is in compressing the time between signal and understanding. An operator who receives a structured alert with contextual analysis can act faster and with greater clarity than one watching a wall of screens. The system does not decide. It prepares.</p>
-
-                                <p>At AVZDAX, our approach to neural threat modeling is built on this principle. The PRIMUS behavioral engine processes continuous streams of environmental data, identifies deviations from learned baselines, and surfaces structured intelligence to operators. What it does not do is pretend that a probability score is the same as ground truth.</p>
-
-                                <p>Prediction models are most useful when they are honest about their own limits. A system that reports high confidence when conditions are stable and reduces confidence when variables exceed training parameters is far more valuable than one that maintains false certainty in every scenario.</p>
-
-                                <h3>The Architecture of Honest Intelligence</h3>
-                                <p>Building systems that acknowledge uncertainty is harder than building systems that suppress it. It requires a fundamentally different relationship between the algorithm and the operator. Instead of binary alerts, the system must communicate degrees of concern. Instead of definitive classifications, it must present structured possibilities.</p>
-
-                                <p>This is the direction we believe intelligent security must move. Not toward omniscient prediction, but toward systems that make human operators meaningfully faster, better informed, and more capable of exercising judgment at the moments when judgment matters most.</p>
-
-                                <p>Neural networks are not the end of the security equation. <strong>They are the beginning of a new kind of partnership between machine intelligence and human understanding.</strong></p>
-                            </div>
-                        </div>
-
-                        <div class="r-side-meta">
-
-                        </div>
-                    </div>
-                `
-            },
-            "proactive-technology-discussion": {
-                meta: "BROADCAST // CHANNELS TV EXCLUSIVE // DIALOGUE",
-                title: "Proactive Tech vs Reactive Response.",
-                img: "https://img.youtube.com/vi/tAotVFKt5cs/maxresdefault.jpg",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">The Proactive <span class="accent-green">Pivot</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Channels TVâ€™s Sunrise Daily hosts a deep-dive into why Africaâ€™s security framework must pivot toward autonomous, indigenous technology. AVZDAX explains the engineering required to build a temporal shield that anticipates threats, rather than simple equipment that responds to casualties. This is the essence of <span class="text-white font-bold">Peacetech</span>.</p>
-                                
-                                <p>For too long, the approach to security has been to buy more hardware after a crisis. We are proposing a different model: invest in the intelligence that prevents the crisis. This requires a transition from reactive policing to architectural peace, where the data itself becomes the primary deterrent.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "state-policing-analysis": {
-                meta: "RESOURCE // INTEL ANALYSIS // GOVERNANCE",
-                title: "State Police & Technology.",
-                img: "https://img.youtube.com/vi/MMXsmbpqR4g/0.jpg",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Sovereign <span class="accent-green">Policing</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>This technical analysis explores the infrastructure required for effective state-level policing in the 21st century. By utilizing decentralized data mesh networks and autonomous edge computing, AVZDAX provides states with the ability to maintain sovereign oversight without the latency of centralized federal responses. This is <span class="text-white font-bold">Peacetech</span> at the scale of governance.</p>
-                                
-                                <p>The model moves away from large, centralized surveillance centers toward a distributed, autonomous sensing network. This ensures that response times are localized and intelligence is indigenous to the communities being protected, preserving both liberty and security.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "africa-s-tech-transition": {
-                meta: "INSIGHT // INDUSTRIAL REPORT // PIVOT 2026",
-                title: "Africaâ€™s Tech Transition.",
-                img: "/media/avzdax-ceo.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">The <span class="accent-green">Tech</span> Transition.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>The continent is moving from security consumer to autonomous infrastructure exporter. AVZDAX is leading this transformation through indigenous sensing technology and algorithmic sovereignty. This is the global rise of <span class="text-white font-bold">Peacetech</span>.</p>
-                                
-                                <p>African cities are uniquely positioned to leapfrog traditional reactive security models by adopting decentralized, AI-driven infrastructure from the start. We are architecting a future where the cradle of civilization is also its most advanced theater of architectural peace.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "industry-analysis-copy-paste": {
-                meta: "RESEARCH // GLOBAL CRITIQUE // EVALUATION",
-                title: "The Copy-Paste Problem.",
-                img: "/media/teletraan-display.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">The <span class="accent-green">Copy-Paste</span> Problem.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>A critical examination of the stagnation in traditional security models. AVZDAX argues why Africa must develop indigenous data sovereignty rather than importing foreign frameworks that aren't optimized for the region's specific situational vectors. We need <span class="text-white font-bold">Peacetech</span>, not imported War-tech.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            "making-crime-obsolete": {
-                meta: "STRATEGY // INSTITUTIONAL BRIEFING // 09",
-                title: "Making Crime Obsolete",
-                img: "/media/news-data-analytics.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Making Crime <span class="text-black">Obsolete</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Most security systems are built around a single assumption: crime is inevitable. The goal, therefore, is not to prevent crime, but to respond to it faster, document it better, or punish it more efficiently. Cameras record. Guards intervene. Reports are filed.</p>
-                                
-                                <p><strong>But what if crime is not an inevitability? What if it is a byproduct of delayed awareness?</strong></p>
-
-                                <p>Crime rarely begins with action. It begins with opportunity. Unauthorized presence, pattern probing, repeated low-risk attempts, environmental blind spots, and behavioral anomalies often precede an incident by hours, days, or even weeks. These early signals are typically invisible to reactive systems because they do not violate rules strongly enough to trigger alarms.</p>
-
-                                <div class="r-quote-full">
-                                    "When environments become aware of themselves, crime loses its advantage."
-                                </div>
-
-                                <h3>The Erosion of Opportunity</h3>
-                                <p>The idea of making crime obsolete does not rely on harsher enforcement or constant human monitoring. It relies on removing opportunity before intent can materialize into action. This requires systems that understand environments, behaviors, and trajectories, not just events.</p>
-
-                                <p>In spaces where movement patterns are understood, access behaviors are contextualized, and anomalies are detected early, malicious intent becomes increasingly difficult to execute noticed. The window for exploitation narrows. Uncertainty increases for the attacker. <strong>Opportunity collapses.</strong></p>
-
-                                <h3>The Result is Calm</h3>
-                                <p>This does not require total surveillance or invasive oversight. In fact, predictive systems often reduce unnecessary monitoring by focusing only on meaningful deviations. Normal activity fades into the background. Risk stands out clearly. The result is not a more oppressive environment, but a calmer one.</p>
-
-                                <p>When systems consistently detect intent before action, the cost of attempting crime outweighs the benefit. Over time, behavior adapts. Risk-seeking declines. Environments self-stabilize. This is how crime becomes obsoleteâ€”not eliminated by force, but eroded by foresight.</p>
-
-                                <p>At AVZDAX, we believe the future of security is not defined by faster responses, but by fewer incidents. <strong>Intelligence does not chase crime. It removes the conditions that allow it to exist.</strong></p>
-                            </div>
-                        </div>
-
-                        <div class="r-side-meta">
-                            
-                        </div>
-                    </div>
-                `
-            },
-            "ethical-autonomy": {
-                meta: "GOVERNANCE // POLICY // 10",
-                title: "Ethical Autonomy in Peacetech",
-                img: "/media/human-watch.webp",
-                content: `
-                    <div class="r-header">
-                        
-                        <h1 class="r-title">Ethical <span class="text-black">Autonomy</span>.</h1>
-                    </div>
-
-                    <div class="r-content-grid">
-                        <div class="r-main-text">
-                            <div class="r-body">
-                                <p>Autonomous systems do not fail because they lack intelligence. They fail because decisions are made too early, too absolutely, or without sufficient context. That is why human-in-the-loop design is foundational to NEST.</p>
-                                
-                                <p><strong>In real security environments, autonomy cannot exist as a binary state where machines act freely until a human intervenes.</strong></p>
-
-                                <p>Effective systems are built around decision boundaries, not overrides. The question is not whether a human can stop the system. The question is when authority should transition. NEST is designed around that transition.</p>
-
-                                <div class="r-quote-full">
-                                    "The result is a system that moves faster than humans when speed is safe, and slower than humans when consequences demand restraint."
-                                </div>
-
-                                <h3>The Escalation of Context</h3>
-                                <p>The system operates independently where confidence is high and consequences are contained. Behavioral baselining and anomaly detection occur continuously without human involvement. These processes are fast, repeatable, and mathematically grounded. Human attention is not wasted where machines are objectively better.</p>
-
-                                <p>When uncertainty increases, the system does not escalate alerts. It escalates context. Operators are presented with structured intelligence, not raw data. The goal is early understanding, not late reaction. Human judgment enters the loop before decisions become irreversible.</p>
-
-                                <h3>Engineering Ethics</h3>
-                                <p>Ethics in autonomous systems is not enforced by slowing machines down. It is enforced by designing systems that recognize the limits of their own certainty and defer authority accordingly.</p>
-
-                                <p>NEST treats human judgment as a scarce and valuable resource. It is applied only where its strengths matter most. That balance is not philosophical. <strong>It is engineered.</strong></p>
-                            </div>
-                        </div>
-
-                        <div class="r-side-meta">
-                            
-                        </div>
-                    </div>
-                `
-            }
-        };
+                        <div class="r-side-meta"></div>
+                    </div>`;
+        }
 
         const reader = document.getElementById('intel-reader');
         const readerContent = document.getElementById('reader-content-root');
         const closeReader = document.getElementById('close-reader');
         let savedScrollY = 0;
 
-        function openArticle(id) {
+        async function openArticle(id) {
             const data = intelDB[id];
             if (!data) return;
+
+            if (!data.content) {
+                const response = await fetch('/api/posts?slug=' + encodeURIComponent(id));
+                if (!response.ok) return;
+                data.content = buildReaderHtml(await response.json());
+            }
 
             savedScrollY = window.scrollY;
 
@@ -1874,6 +1288,7 @@
         });
 
 
+        function bindCardBehaviour() {
         document.querySelectorAll('.card-wrap').forEach(card => {
 
             const playBtn = card.querySelector('.play-trigger');
@@ -1909,6 +1324,7 @@
                 }
             });
         });
+        }
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -1918,6 +1334,7 @@
         requestAnimationFrame(raf);
 
 
+        function bindFilters() {
         const buttons = document.querySelectorAll('.f-item');
         const cards = document.querySelectorAll('.card-wrap');
 
@@ -1959,6 +1376,7 @@
                 });
             });
         });
+        }
 
 
         document.querySelectorAll(".reveal-up").forEach(el => {
@@ -1971,6 +1389,97 @@
         });
         gsap.from(".reveal-right", { x: 100, opacity: 0, duration: 1.5, scrollTrigger: { trigger: ".reveal-right", start: "top 95%" } });
         gsap.from(".reveal-left", { x: -100, opacity: 0, duration: 1.5, scrollTrigger: { trigger: ".reveal-left", start: "top 95%" } });
+
+        const playButton = (label) => `
+                    <div class="play-trigger">
+                        <button class="play-btn" aria-label="Play ${label}">
+                            <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,0.13,34,0,34,0S12.21,0.13,6.9,1.55 c-2.93,0.78-4.64,3.26-5.42,6.19C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path><path d="M45,24L27,14v20L45,24z" fill="#fff"></path></svg>
+                        </button>
+                    </div>`;
+
+        const escapeAttr = (value) => String(value == null ? '' : value)
+            .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        const escapeText = (value) => String(value == null ? '' : value)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        function cardMarkup(post) {
+            const videoId = post.videoUrl ? getYoutubeId(post.videoUrl) : null;
+            const destination = post.linkUrl || post.externalUrl || (videoId ? 'https://youtu.be/' + videoId : post.videoUrl);
+
+            const anchor = destination
+                ? `<a href="${escapeAttr(destination)}" target="_blank" rel="noopener" class="c-link">${escapeText(post.linkLabel)}</a>`
+                : `<a href="javascript:void(0)" class="c-link">${escapeText(post.linkLabel)}</a>`;
+
+            const hook = post.kind === 'video'
+                ? ` data-video-url="${escapeAttr(post.videoUrl)}"`
+                : post.kind === 'external'
+                    ? ` data-external-url="${escapeAttr(post.externalUrl)}"`
+                    : ` data-article-id="${escapeAttr(post.slug)}"`;
+
+            const imageClass = post.imageClass ? `card-img ${escapeAttr(post.imageClass)}` : 'card-img';
+
+            const media = `
+                <div class="card-media">
+                    <img loading="lazy" decoding="async" src="${escapeAttr(post.image)}" class="${imageClass}" alt="${escapeAttr(post.imageAlt)}" title="${escapeAttr(post.imageTitle)}">${post.hasPlayButton ? playButton(escapeAttr(post.title)) : ''}
+                </div>`;
+
+            const body = `
+                <div class="card-body">
+                    <h2 class="c-title">${escapeText(post.title)}</h2>
+                    <p class="c-excerpt">${escapeText(post.excerpt)}</p>
+                    ${anchor}
+                </div>`;
+
+            const inner = post.layout === 'featured' ? body + media : media + body;
+
+            return `
+            <div class="card-wrap ${post.layout}-card reveal-up" data-category="${escapeAttr(post.category)}"${hook}>${inner}
+            </div>`;
+        }
+
+        function revealCards(elements) {
+            elements.forEach(el => {
+                gsap.from(el, {
+                    y: 100, opacity: 0, duration: 1.5, ease: "power4.out",
+                    scrollTrigger: { trigger: el, start: "top 95%" }
+                });
+            });
+            ScrollTrigger.refresh();
+        }
+
+        async function loadNewsroom() {
+            const grid = document.querySelector('.news-grid');
+            if (!grid) return;
+
+            let posts = [];
+            try {
+                const feed = await (window.newsroomFeed || fetch('/api/posts', { headers: { Accept: 'application/json' } }).then(r => (r.ok ? r.json() : null)));
+                posts = (feed && feed.posts) || [];
+            } catch (error) {
+                console.error('Newsroom could not be loaded');
+            }
+
+            if (!posts.length) {
+                grid.innerHTML = '<p class="newsroom-empty">No entries published yet.</p>';
+                return;
+            }
+
+            grid.innerHTML = posts.map(cardMarkup).join('\n');
+
+            posts.filter(post => post.kind === 'article').forEach(post => {
+                intelDB[post.slug] = { title: post.title, img: post.image, meta: post.meta };
+            });
+
+            bindCardBehaviour();
+            bindFilters();
+            revealCards(Array.from(grid.querySelectorAll('.card-wrap')));
+
+            const opening = decodeURIComponent(window.location.hash.replace('#', ''));
+            if (opening && intelDB[opening]) openArticle(opening);
+        }
+
+        loadNewsroom();
 
 
         window.addEventListener("mousemove", (e) => {

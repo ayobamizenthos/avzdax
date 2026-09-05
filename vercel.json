@@ -43,5 +43,9 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/news/:slug", "destination": "/api/article?slug=:slug" },
+    { "source": "/news-sitemap.xml", "destination": "/api/news-sitemap" }
   ]
 }

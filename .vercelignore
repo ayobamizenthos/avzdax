@@ -15,3 +15,4 @@ optimize_media.ps1
 
 # Credentials - never leave this machine
 google-credentials.json
+scripts/

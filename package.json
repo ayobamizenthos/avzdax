@@ -4,6 +4,11 @@
   "private": true,
   "description": "AVZDAX corporate site",
   "dependencies": {
-    "nodemailer": "^9.0.5"
+    "@vercel/blob": "^2.8.0",
+    "nodemailer": "^9.0.5",
+    "sanitize-html": "^2.17.7"
+  },
+  "scripts": {
+    "seed:newsroom": "node scripts/seed-newsroom.js"
   }
 }

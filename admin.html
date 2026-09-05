@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Newsroom | AVZDAX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&family=Syncopate:wght@700&display=swap">
+    <link href="/components/admin-styles.css" rel="stylesheet">
+</head>
+<body>
+
+<section id="gate" class="gate hidden">
+    <form class="gate-card" id="gate-form">
+        <div class="wordmark">AVZDAX</div>
+        <h1>Newsroom</h1>
+        <p>Sign in to write and publish.</p>
+        <div id="gate-error" class="notice hidden"></div>
+        <label class="field">
+            <span class="mono">Password</span>
+            <input type="password" id="gate-password" autocomplete="current-password" required>
+        </label>
+        <button class="btn wide" type="submit">Sign in</button>
+    </form>
+</section>
+
+<section id="app" class="shell hidden">
+    <aside class="rail">
+        <div class="wordmark">AVZDAX</div>
+        <nav>
+            <button data-view="posts" class="on">Posts</button>
+            <button data-view="media">Images</button>
+        </nav>
+        <div class="spacer"></div>
+        <button class="icon-btn" id="sign-out">Sign out</button>
+    </aside>
+
+    <main>
+        <div id="flash" class="notice hidden"></div>
+
+        <section id="view-posts">
+            <div class="topbar">
+                <div>
+                    <div class="mono muted">Newsroom</div>
+                    <h1>Posts</h1>
+                    <p>Drag a row to change where it sits on the news page.</p>
+                </div>
+                <button class="btn" id="new-post">Write a post</button>
+            </div>
+            <div class="rows" id="post-rows"></div>
+        </section>
+
+        <section id="view-editor" class="hidden">
+            <div class="topbar">
+                <div>
+                    <div class="mono muted" id="editor-mode">New entry</div>
+                    <h1 id="editor-heading">Write a post</h1>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn ghost" id="editor-back">Back</button>
+                    <button class="btn" id="editor-save">Save</button>
+                </div>
+            </div>
+
+            <div class="editor">
+                <div>
+                    <div class="card">
+                        <input type="text" class="title-input" id="f-title" placeholder="Headline" autocomplete="off">
+                        <label class="field tight">
+                            <span class="mono">Summary shown on the card</span>
+                            <textarea id="f-excerpt" rows="2"></textarea>
+                        </label>
+                    </div>
+
+                    <div class="card" id="body-card">
+                        <h2>Article</h2>
+                        <div class="toolbar">
+                            <button type="button" data-cmd="bold"><strong>B</strong></button>
+                            <button type="button" data-cmd="italic"><em>I</em></button>
+                            <div class="sep"></div>
+                            <button type="button" data-block="h3">Heading</button>
+                            <button type="button" data-block="h4">Subheading</button>
+                            <button type="button" data-block="p">Body</button>
+                            <div class="sep"></div>
+                            <button type="button" data-cmd="insertUnorderedList">List</button>
+                            <button type="button" data-block="blockquote">Quote</button>
+                            <div class="sep"></div>
+                            <button type="button" id="tb-link">Link</button>
+                            <button type="button" id="tb-image">Image</button>
+                        </div>
+                        <div class="writing" id="f-content" contenteditable="true" data-placeholder="Start writing."></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <h2>Publishing</h2>
+                        <label class="field">
+                            <span class="mono">Status</span>
+                            <select id="f-status">
+                                <option value="published">Live on the site</option>
+                                <option value="draft">Draft, hidden</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span class="mono">Section</span>
+                            <select id="f-category">
+                                <option value="insight">Insight</option>
+                                <option value="broadcast">Broadcast</option>
+                                <option value="blog">Blog</option>
+                            </select>
+                        </label>
+                        <label class="field last">
+                            <span class="mono">Card size</span>
+                            <select id="f-layout">
+                                <option value="standard">Standard</option>
+                                <option value="featured">Featured, large</option>
+                                <option value="wide">Wide</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="card">
+                        <h2>Type</h2>
+                        <label class="field">
+                            <span class="mono">This entry is</span>
+                            <select id="f-kind">
+                                <option value="article">An article written here</option>
+                                <option value="video">A YouTube video</option>
+                                <option value="external">A link to another site</option>
+                            </select>
+                        </label>
+                        <label class="field hidden" id="wrap-video">
+                            <span class="mono">YouTube link</span>
+                            <input type="url" id="f-video" placeholder="https://youtu.be/">
+                        </label>
+                        <label class="field hidden" id="wrap-external">
+                            <span class="mono">Link address</span>
+                            <input type="url" id="f-external" placeholder="https://">
+                        </label>
+                        <label class="field last">
+                            <span class="mono">Button wording</span>
+                            <input type="text" id="f-linklabel" placeholder="Read Analysis">
+                        </label>
+                    </div>
+
+                    <div class="card">
+                        <h2>Cover image</h2>
+                        <div class="cover" id="cover-drop">
+                            <img id="cover-preview" class="hidden" alt="">
+                            <p class="hint" id="cover-hint">Drag an image here, or choose one.</p>
+                            <div class="side-actions">
+                                <button class="btn ghost" type="button" id="cover-pick">Choose image</button>
+                                <button class="btn danger hidden" type="button" id="cover-clear">Remove image</button>
+                            </div>
+                        </div>
+                        <label class="field spaced">
+                            <span class="mono">Label above the headline</span>
+                            <input type="text" id="f-meta" placeholder="THESIS // BRIEFING // 01">
+                        </label>
+                    </div>
+
+                    <div class="card">
+                        <h2>Remove</h2>
+                        <p class="hint">Deleting takes it off the site straight away.</p>
+                        <button class="btn danger" type="button" id="editor-delete">Delete this post</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-media" class="hidden">
+            <div class="topbar">
+                <div>
+                    <div class="mono muted">Newsroom</div>
+                    <h1>Images</h1>
+                    <p>Everything uploaded, ready to reuse.</p>
+                </div>
+                <button class="btn" id="media-add">Upload an image</button>
+            </div>
+            <div class="media-grid" id="media-grid"></div>
+        </section>
+    </main>
+</section>
+
+<input type="file" id="file-input" accept="image/*" class="hidden">
+<script src="/components/admin.js"></script>
+
+</body>
+</html>
