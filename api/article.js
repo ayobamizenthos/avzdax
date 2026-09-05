@@ -89,7 +89,6 @@ function articlePage(post) {
   const body = `<main data-nav-theme="light" class="article-page">
     <div class="article-shell">
         <a href="/news" class="article-back">&larr; Newsroom</a>
-${post.meta ? `        <p class="article-meta">${escapeHtml(post.meta)}</p>` : ''}
         <h1 class="article-title">${post.headline || title}</h1>
 ${hero}
         <div class="article-body">${post.content}</div>

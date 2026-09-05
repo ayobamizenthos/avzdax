@@ -1,11 +1,6 @@
 const $ = (id) => document.getElementById(id)
 
-const state = {
-  posts: [],
-  tab: 'all',
-  editing: null,
-  coverUrl: null
-}
+const state = { posts: [], tab: 'all', editing: null, coverUrl: null }
 
 const escapeHtml = (value) =>
   String(value == null ? '' : value)
@@ -38,13 +33,12 @@ async function api(path, options = {}) {
 }
 
 let flashTimer
-function flash(message, good = false) {
+function flash(message) {
   const box = $('flash')
   box.textContent = message
-  box.classList.toggle('good', good)
   box.classList.remove('hidden')
   clearTimeout(flashTimer)
-  flashTimer = setTimeout(() => box.classList.add('hidden'), 4000)
+  flashTimer = setTimeout(() => box.classList.add('hidden'), 4200)
 }
 
 function showGate() {
@@ -58,13 +52,65 @@ function showApp() {
 }
 
 function showView(name) {
-  ;['posts', 'editor', 'media'].forEach((view) => {
-    $('view-' + view).classList.toggle('hidden', view !== name)
-  })
-  document.querySelectorAll('.rail nav button').forEach((button) => {
-    button.classList.toggle('on', button.dataset.view === name)
-  })
+  $('view-posts').classList.toggle('hidden', name !== 'posts')
+  $('view-editor').classList.toggle('hidden', name !== 'editor')
+  document.body.classList.toggle('editing', name === 'editor')
+  hideToolbar()
+  if (name !== 'editor') { closeSettings(); hideToolbar() }
+  window.scrollTo(0, 0)
 }
+
+const ask = (() => {
+  const dialog = $('ask')
+  let settle = null
+
+  const close = (value) => {
+    const done = settle
+    settle = null
+    if (dialog.open) dialog.close()
+    if (done) done(value)
+  }
+
+  $('ask-cancel').addEventListener('click', () => close(null))
+  $('ask-confirm').addEventListener('click', () => {
+    const field = $('ask-field')
+    close(field.classList.contains('hidden') ? true : $('ask-input').value.trim() || null)
+  })
+  dialog.addEventListener('cancel', (event) => { event.preventDefault(); close(null) })
+  dialog.addEventListener('close', () => close(null))
+  $('ask-input').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') { event.preventDefault(); $('ask-confirm').click() }
+  })
+
+  return ({ title, body = '', confirmLabel = 'Confirm', input = null }) =>
+    new Promise((resolve) => {
+      settle = resolve
+      $('ask-title').textContent = title
+      $('ask-body').textContent = body
+      $('ask-body').classList.toggle('hidden', !body)
+
+      const field = $('ask-field')
+      field.classList.toggle('hidden', !input)
+      if (input) {
+        $('ask-label').textContent = input.label
+        $('ask-input').value = ''
+        $('ask-input').placeholder = input.placeholder || ''
+      }
+
+      $('ask-confirm').textContent = confirmLabel
+      dialog.showModal()
+      ;(input ? $('ask-input') : $('ask-cancel')).focus()
+    })
+})()
+
+$('toggle-password').addEventListener('click', () => {
+  const input = $('gate-password')
+  const revealed = input.type === 'text'
+  input.type = revealed ? 'password' : 'text'
+  $('toggle-password').setAttribute('aria-pressed', String(!revealed))
+  $('toggle-password').setAttribute('aria-label', revealed ? 'Show password' : 'Hide password')
+  input.focus()
+})
 
 $('gate-form').addEventListener('submit', async (event) => {
   event.preventDefault()
@@ -72,10 +118,7 @@ $('gate-form').addEventListener('submit', async (event) => {
   error.classList.add('hidden')
 
   try {
-    await api('/api/admin/login', {
-      method: 'POST',
-      body: JSON.stringify({ password: $('gate-password').value })
-    })
+    await api('/api/admin/login', { method: 'POST', body: JSON.stringify({ password: $('gate-password').value }) })
     $('gate-password').value = ''
     showApp()
     await loadPosts()
@@ -86,58 +129,33 @@ $('gate-form').addEventListener('submit', async (event) => {
 })
 
 $('sign-out').addEventListener('click', async () => {
+  const sure = await ask({ title: 'Sign out', body: 'Are you sure you want to sign out?', confirmLabel: 'Sign out' })
+  if (!sure) return
   await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' })
   showGate()
 })
 
-document.querySelectorAll('.rail nav button').forEach((button) => {
-  button.addEventListener('click', () => {
-    const view = button.dataset.view
-    showView(view)
-    if (view === 'posts') loadPosts()
-    if (view === 'media') loadMedia()
-  })
-})
-
-document.querySelectorAll('#post-filters .filter').forEach((button) => {
-  button.addEventListener('click', () => {
-    state.tab = button.dataset.tab
-    document.querySelectorAll('#post-filters .filter').forEach((filter) => {
-      const active = filter === button
-      filter.classList.toggle('on', active)
-      filter.setAttribute('aria-selected', String(active))
-    })
-    renderRows()
-  })
-})
-
 const KIND_LABEL = { article: 'Article', video: 'Video', external: 'Link' }
 
-function rowMarkup(post) {
-  const cover = post.image
-    ? `<img class="thumb" src="${escapeHtml(post.image)}" alt="">`
-    : '<div class="thumb"></div>'
+document.querySelectorAll('#post-filters .filter').forEach((button) => {
+  button.addEventListener('click', () => selectTab(button.dataset.tab))
+})
 
-  return `
-    <div class="row" draggable="true" data-slug="${escapeHtml(post.slug)}">
-      <div class="grip" title="Drag to reorder">::</div>
-      ${cover}
-      <div>
-        <p class="row-title">${escapeHtml(post.title)}</p>
-        <div class="row-sub">
-          <span class="chip ${post.status === 'published' ? 'live' : ''}">${post.status === 'published' ? 'Live' : 'Draft'}</span>
-          <span class="chip">${escapeHtml(post.category)}</span>
-          <span class="chip">${KIND_LABEL[post.kind] || 'Article'}</span>
-          <span class="chip">${escapeHtml(post.layout)}</span>
-        </div>
-      </div>
-      <div class="row-actions">
-        <button class="icon-btn" data-move="up" data-slug="${escapeHtml(post.slug)}" aria-label="Move up">&uarr;</button>
-        <button class="icon-btn" data-move="down" data-slug="${escapeHtml(post.slug)}" aria-label="Move down">&darr;</button>
-        <button class="icon-btn" data-edit="${escapeHtml(post.slug)}">Edit</button>
-        <button class="icon-btn warn" data-remove="${escapeHtml(post.slug)}">Delete</button>
-      </div>
-    </div>`
+function selectTab(name) {
+  state.tab = name
+
+  document.querySelectorAll('#post-filters .filter').forEach((filter) => {
+    const active = filter.dataset.tab === name
+    filter.classList.toggle('on', active)
+    filter.setAttribute('aria-selected', String(active))
+  })
+
+  const images = name === 'images'
+  $('media-panel').classList.toggle('hidden', !images)
+  $('post-rows').classList.toggle('hidden', images)
+
+  if (images) loadMedia()
+  else renderRows()
 }
 
 function updateCounts(posts) {
@@ -147,26 +165,61 @@ function updateCounts(posts) {
 }
 
 function visiblePosts() {
-  return state.tab === 'all' ? state.posts : state.posts.filter((post) => post.status === state.tab)
+  return state.tab === 'all' || state.tab === 'images'
+    ? state.posts
+    : state.posts.filter((post) => post.status === state.tab)
+}
+
+function postMarkup(post, index, total) {
+  const cover = post.image
+    ? `<img class="post-cover" src="${escapeHtml(post.image)}" alt="" loading="lazy">`
+    : '<span class="post-cover"></span>'
+
+  const status = post.status === 'published'
+    ? '<span class="live">Published</span>'
+    : '<span>Draft</span>'
+
+  return `
+    <article class="post-row" draggable="true" data-slug="${escapeHtml(post.slug)}">
+      <div>
+        <h2 class="post-title">${escapeHtml(post.title)}</h2>
+        ${post.excerpt ? `<p class="post-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
+        <p class="post-meta">
+          ${status}<span class="sep">&middot;</span>${escapeHtml(post.category)}<span class="sep">&middot;</span>${KIND_LABEL[post.kind] || 'Article'}<span class="sep">&middot;</span>${escapeHtml(post.layout)}
+        </p>
+      </div>
+      ${cover}
+      <div class="post-actions">
+        <button data-edit="${escapeHtml(post.slug)}">Edit</button>
+        <button class="danger" data-remove="${escapeHtml(post.slug)}">Delete</button>
+        <span class="arrows">
+          <button data-move="up" data-slug="${escapeHtml(post.slug)}" aria-label="Move up"${index === 0 ? ' disabled' : ''}>&uarr;</button>
+          <button data-move="down" data-slug="${escapeHtml(post.slug)}" aria-label="Move down"${index === total - 1 ? ' disabled' : ''}>&darr;</button>
+        </span>
+      </div>
+    </article>`
 }
 
 function renderRows() {
   const rows = $('post-rows')
-  const posts = visiblePosts()
+  const visible = visiblePosts()
 
-  rows.innerHTML = posts.length
-    ? posts.map(rowMarkup).join('')
-    : state.posts.length
-      ? `<div class="empty">No ${state.tab === 'draft' ? 'drafts' : 'published posts'} yet.</div>`
-      : '<div class="empty">Nothing here yet.<br><br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
+  if (!state.posts.length) {
+    rows.innerHTML = '<div class="empty">Nothing here yet.<br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
+    return wireImport()
+  }
 
-  if (!state.posts.length) wireImport()
+  if (!visible.length) {
+    rows.innerHTML = `<p class="empty">${state.tab === 'draft' ? 'No drafts.' : 'Nothing published.'}</p>`
+    return
+  }
+
+  rows.innerHTML = visible.map((post, i) => postMarkup(post, i, visible.length)).join('')
   wireRows()
 }
 
 async function loadPosts() {
-  const rows = $('post-rows')
-  rows.innerHTML = '<div class="empty">Loading.</div>'
+  $('post-rows').innerHTML = '<p class="empty">Loading.</p>'
 
   try {
     const { posts } = await api('/api/admin/posts')
@@ -174,51 +227,46 @@ async function loadPosts() {
     updateCounts(posts)
     renderRows()
   } catch (problem) {
-    rows.innerHTML = `<div class="empty">${escapeHtml(problem.message)}</div>`
+    $('post-rows').innerHTML = `<p class="empty">${escapeHtml(problem.message)}</p>`
   }
-}
-
-function partitionOrder() {
-  const positions = state.posts.reduce((indexes, post, index) => {
-    if (state.tab === 'all' || post.status === state.tab) indexes.push(index)
-    return indexes
-  }, [])
-  const selected = positions.map((index) => state.posts[index].slug)
-  return { positions, selected }
-}
-
-function fullOrder(selected, positions) {
-  const order = state.posts.map((post) => post.slug)
-  positions.forEach((position, index) => { order[position] = selected[index] })
-  return order
-}
-
-function movePost(slug, offset) {
-  const { positions, selected } = partitionOrder()
-  const from = selected.indexOf(slug)
-  const to = from + offset
-  if (from < 0 || to < 0 || to >= selected.length) return
-
-  selected.splice(to, 0, selected.splice(from, 1)[0])
-  saveOrder(fullOrder(selected, positions))
 }
 
 async function saveOrder(slugs) {
   try {
     await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs }) })
     await loadPosts()
-    flash('Order saved.', true)
+    flash('Order saved.')
   } catch (problem) {
     flash(problem.message)
   }
 }
 
+// Reordering happens inside whichever filter is open. Anything outside it keeps its own
+// order, so publishing a draft later drops it exactly where it was placed.
+function partition() {
+  const inTab = visiblePosts().map((post) => post.slug)
+  const others = state.posts.filter((post) => !inTab.includes(post.slug)).map((post) => post.slug)
+  return { inTab, others }
+}
+
+function moveBy(slug, offset) {
+  const { inTab, others } = partition()
+  const from = inTab.indexOf(slug)
+  const to = from + offset
+
+  if (from === -1 || to < 0 || to >= inTab.length) return
+
+  inTab.splice(to, 0, inTab.splice(from, 1)[0])
+  saveOrder([...inTab, ...others])
+}
+
 let draggedSlug = null
 
 function wireRows() {
-  const rows = Array.from($('post-rows').querySelectorAll('.row'))
+  const rows = $('post-rows')
+  const rowNodes = Array.from(rows.querySelectorAll('.post-row'))
 
-  rows.forEach((row) => {
+  rowNodes.forEach((row) => {
     row.addEventListener('dragstart', () => {
       draggedSlug = row.dataset.slug
       row.classList.add('dragging')
@@ -226,7 +274,7 @@ function wireRows() {
 
     row.addEventListener('dragend', () => {
       row.classList.remove('dragging')
-      rows.forEach((other) => other.classList.remove('over'))
+      rowNodes.forEach((other) => other.classList.remove('over'))
     })
 
     row.addEventListener('dragover', (event) => {
@@ -236,41 +284,59 @@ function wireRows() {
 
     row.addEventListener('dragleave', () => row.classList.remove('over'))
 
-    row.addEventListener('drop', async (event) => {
+    row.addEventListener('drop', (event) => {
       event.preventDefault()
       row.classList.remove('over')
       if (!draggedSlug || row.dataset.slug === draggedSlug) return
 
-      const { positions, selected } = partitionOrder()
-      const from = selected.indexOf(draggedSlug)
-      const target = selected.indexOf(row.dataset.slug)
-      selected.splice(from, 1)
-      selected.splice(target > from ? target - 1 : target, 0, draggedSlug)
-      saveOrder(fullOrder(selected, positions))
+      const { inTab, others } = partition()
+      inTab.splice(inTab.indexOf(draggedSlug), 1)
+      inTab.splice(inTab.indexOf(row.dataset.slug), 0, draggedSlug)
+      saveOrder([...inTab, ...others])
     })
   })
 
-  $('post-rows').querySelectorAll('[data-edit]').forEach((button) => {
+  rows.querySelectorAll('[data-move]').forEach((button) => {
+    button.addEventListener('click', () => moveBy(button.dataset.slug, button.dataset.move === 'up' ? -1 : 1))
+  })
+  rows.querySelectorAll('[data-edit]').forEach((button) => {
     button.addEventListener('click', () => openEditor(button.dataset.edit))
   })
-
-  $('post-rows').querySelectorAll('[data-remove]').forEach((button) => {
+  rows.querySelectorAll('[data-remove]').forEach((button) => {
     button.addEventListener('click', () => removePost(button.dataset.remove))
   })
+}
 
-  $('post-rows').querySelectorAll('[data-move]').forEach((button) => {
-    button.addEventListener('click', () => movePost(button.dataset.slug, button.dataset.move === 'up' ? -1 : 1))
+function wireImport() {
+  const button = $('import-old')
+  if (!button) return
+
+  button.addEventListener('click', async () => {
+    button.disabled = true
+    button.textContent = 'Bringing them in...'
+
+    try {
+      const { imported } = await api('/api/admin/import', { method: 'POST' })
+      flash(`${imported} entries imported.`)
+      await loadPosts()
+    } catch (problem) {
+      flash(problem.message)
+      button.disabled = false
+      button.textContent = 'Bring in the 18 existing entries'
+    }
   })
 }
 
 async function removePost(slug) {
   const post = state.posts.find((item) => item.slug === slug)
-  if (!window.confirm(`Delete "${post ? post.title : slug}"? This cannot be undone.`)) return
+
+  const sure = await ask({ title: 'Delete entry', body: post ? post.title : slug, confirmLabel: 'Delete' })
+  if (!sure) return
 
   try {
     await api('/api/admin/posts?slug=' + encodeURIComponent(slug), { method: 'DELETE' })
-    flash('Deleted.', true)
-    loadPosts()
+    flash('Deleted.')
+    await loadPosts()
   } catch (problem) {
     flash(problem.message)
   }
@@ -284,21 +350,55 @@ const blank = {
   layout: 'standard',
   kind: 'article',
   image: null,
-  imageAlt: '',
   linkLabel: '',
   videoUrl: '',
   externalUrl: '',
-  headline: null,
-  meta: '',
   content: '',
   status: 'published'
 }
+
+// Wide screens keep the panel docked beside the writing area. Small screens move that
+// same panel into a real dialog, so opening it cannot be defeated by layout.
+const compact = window.matchMedia('(max-width: 900px), (hover: none)')
+const settingsDock = $('settings')
+const settingsSheet = $('settings-sheet')
+const settingsPanel = document.querySelector('.side-panel')
+
+function openSettings() {
+  if (!compact.matches || settingsSheet.open) return
+  settingsSheet.appendChild(settingsPanel)
+  settingsSheet.showModal()
+}
+
+function closeSettings() {
+  if (settingsSheet.open) settingsSheet.close()
+}
+
+settingsSheet.addEventListener('close', () => settingsDock.appendChild(settingsPanel))
+settingsSheet.addEventListener('click', (event) => {
+  if (event.target === settingsSheet) closeSettings()
+})
+
+compact.addEventListener('change', () => {
+  if (!compact.matches) closeSettings()
+})
+
+$('open-settings').addEventListener('click', openSettings)
+$('close-settings').addEventListener('click', closeSettings)
 
 function applyKind() {
   const kind = $('f-kind').value
   $('wrap-video').classList.toggle('hidden', kind !== 'video')
   $('wrap-external').classList.toggle('hidden', kind !== 'external')
   $('body-card').classList.toggle('hidden', kind !== 'article')
+  hideToolbar()
+}
+
+function setCover(url) {
+  $('cover-preview').src = url || ''
+  $('cover-preview').classList.toggle('hidden', !url)
+  $('cover-hint').classList.toggle('hidden', Boolean(url))
+  $('cover-clear').classList.toggle('hidden', !url)
 }
 
 function fillEditor(post) {
@@ -314,14 +414,12 @@ function fillEditor(post) {
   $('f-video').value = post.videoUrl || ''
   $('f-external').value = post.externalUrl || ''
   $('f-linklabel').value = post.linkLabel || ''
-  $('f-meta').value = post.meta || ''
   $('f-content').innerHTML = post.content || ''
 
   setCover(post.image || null)
   applyKind()
 
-  $('editor-mode').textContent = post.slug ? 'Editing' : 'New entry'
-  $('editor-heading').textContent = post.slug ? post.title : 'Write a post'
+  $('save-state').textContent = post.slug ? 'Saved' : ''
   $('editor-delete').classList.toggle('hidden', !post.slug)
 }
 
@@ -329,14 +427,13 @@ async function openEditor(slug) {
   showView('editor')
 
   if (!slug) {
-    fillEditor({ ...blank })
+    fillEditor({ ...blank, status: state.tab === 'draft' ? 'draft' : 'published' })
     $('f-title').focus()
     return
   }
 
   try {
-    const post = await api('/api/admin/posts?slug=' + encodeURIComponent(slug))
-    fillEditor(post)
+    fillEditor(await api('/api/admin/posts?slug=' + encodeURIComponent(slug)))
   } catch (problem) {
     flash(problem.message)
     showView('posts')
@@ -345,43 +442,49 @@ async function openEditor(slug) {
 
 function collect() {
   const kind = $('f-kind').value
+  const title = $('f-title').value.trim()
+
   return {
     slug: state.editing || undefined,
-    title: $('f-title').value.trim(),
+    title,
     excerpt: $('f-excerpt').value.trim(),
     category: $('f-category').value,
     layout: $('f-layout').value,
     kind,
     status: $('f-status').value,
     image: state.coverUrl,
-    imageAlt: $('f-title').value.trim(),
-    imageTitle: $('f-title').value.trim(),
+    imageAlt: title,
+    imageTitle: title,
     linkLabel: $('f-linklabel').value.trim(),
     videoUrl: $('f-video').value.trim(),
     externalUrl: $('f-external').value.trim(),
-    meta: $('f-meta').value.trim(),
     headline: null,
     content: kind === 'article' ? $('f-content').innerHTML : ''
   }
 }
 
 $('new-post').addEventListener('click', () => openEditor(null))
-$('editor-back').addEventListener('click', () => { showView('posts'); loadPosts() })
 $('f-kind').addEventListener('change', applyKind)
+
+$('editor-back').addEventListener('click', async () => {
+  showView('posts')
+  await loadPosts()
+})
 
 $('editor-save').addEventListener('click', async () => {
   const button = $('editor-save')
   button.disabled = true
+  $('save-state').textContent = 'Saving'
 
   try {
     const { post } = await api('/api/admin/posts', { method: 'POST', body: JSON.stringify(collect()) })
     state.editing = post.slug
     state.coverUrl = post.image || null
-    $('editor-mode').textContent = 'Editing'
-    $('editor-heading').textContent = post.title
+    $('save-state').textContent = 'Saved'
     $('editor-delete').classList.remove('hidden')
-    flash(post.status === 'published' ? 'Saved. It appears on the news page within a minute.' : 'Saved as a draft, hidden from the site.', true)
+    flash(post.status === 'published' ? 'Saved. It appears on the news page within a minute.' : 'Saved as a draft.')
   } catch (problem) {
+    $('save-state').textContent = 'Not saved'
     flash(problem.message)
   } finally {
     button.disabled = false
@@ -390,8 +493,77 @@ $('editor-save').addEventListener('click', async () => {
 
 $('editor-delete').addEventListener('click', async () => {
   if (!state.editing) return
-  await removePost(state.editing)
-  showView('posts')
+  const slug = state.editing
+  await removePost(slug)
+  if (!state.posts.some((post) => post.slug === slug)) showView('posts')
+})
+
+const editable = $('f-content')
+const selBar = $('toolbar')
+
+function hideToolbar() {
+  selBar.classList.add('hidden')
+}
+
+// Sits above the selection, the way a writing app does, and only while text is selected.
+function placeToolbar() {
+  const selection = window.getSelection()
+
+  if (
+    $('f-kind').value !== 'article' ||
+    !selection ||
+    selection.isCollapsed ||
+    !selection.rangeCount ||
+    !editable.contains(selection.anchorNode)
+  ) {
+    return hideToolbar()
+  }
+
+  const rect = selection.getRangeAt(0).getBoundingClientRect()
+  if (!rect.width && !rect.height) return hideToolbar()
+
+  selBar.classList.remove('hidden')
+
+  const half = selBar.offsetWidth / 2
+  const centre = rect.left + window.scrollX + rect.width / 2
+  const edge = 10
+
+  selBar.style.left = Math.min(Math.max(centre, half + edge), window.innerWidth - half - edge) + 'px'
+  selBar.style.top = rect.top + window.scrollY + 'px'
+}
+
+document.addEventListener('selectionchange', placeToolbar)
+
+// A touch selection is not settled until the gesture ends, so re-check afterwards.
+;['touchend', 'pointerup'].forEach((type) =>
+  editable.addEventListener(type, () => setTimeout(placeToolbar, 60))
+)
+window.addEventListener('resize', placeToolbar)
+window.addEventListener('scroll', () => { if (!selBar.classList.contains('hidden')) placeToolbar() }, { passive: true })
+
+// Buttons must not steal the caret, or formatting would apply to nothing.
+selBar.addEventListener('mousedown', (event) => {
+  if (event.target.closest('button')) event.preventDefault()
+})
+
+document.querySelectorAll('#toolbar [data-cmd]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.execCommand(button.dataset.cmd, false, null)
+    placeToolbar()
+  })
+})
+
+document.querySelectorAll('#toolbar [data-block]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.execCommand('formatBlock', false, button.dataset.block)
+    placeToolbar()
+  })
+})
+
+editable.addEventListener('paste', (event) => {
+  event.preventDefault()
+  const text = (event.clipboardData || window.clipboardData).getData('text/plain')
+  document.execCommand('insertText', false, text)
 })
 
 const MAX_EDGE = 1920
@@ -418,10 +590,9 @@ function resizeToWebp(file) {
 }
 
 async function uploadImage(file) {
-  const dataUrl = await resizeToWebp(file)
   const { url } = await api('/api/admin/media', {
     method: 'POST',
-    body: JSON.stringify({ name: file.name, dataUrl })
+    body: JSON.stringify({ name: file.name, dataUrl: await resizeToWebp(file) })
   })
   return url
 }
@@ -435,25 +606,60 @@ function pickFile() {
   })
 }
 
-function setCover(url) {
-  const preview = $('cover-preview')
-  preview.src = url || ''
-  preview.classList.toggle('hidden', !url)
-  $('cover-hint').classList.toggle('hidden', Boolean(url))
-  $('cover-clear').classList.toggle('hidden', !url)
-}
+// One place to get an image: reuse anything already uploaded, or add a new one.
+const chooseImage = (() => {
+  const dialog = $('picker')
+  let settle = null
+
+  const close = (value) => {
+    const done = settle
+    settle = null
+    if (dialog.open) dialog.close()
+    if (done) done(value)
+  }
+
+  $('picker-close').addEventListener('click', () => close(null))
+  dialog.addEventListener('cancel', (event) => { event.preventDefault(); close(null) })
+  dialog.addEventListener('close', () => close(null))
+
+  $('picker-upload').addEventListener('click', async () => {
+    const file = await pickFile()
+    if (!file) return
+    try {
+      close(await uploadImage(file))
+    } catch (problem) {
+      flash(problem.message)
+    }
+  })
+
+  return () =>
+    new Promise((resolve) => {
+      settle = resolve
+      const grid = $('picker-grid')
+      grid.innerHTML = '<p class="picker-empty">Loading.</p>'
+      dialog.showModal()
+
+      api('/api/admin/media')
+        .then(({ media }) => {
+          grid.innerHTML = media.length
+            ? media.map((item) => `<button type="button" data-pick="${escapeHtml(item.url)}" title="${escapeHtml(item.name)}"><img src="${escapeHtml(item.url)}" alt="" loading="lazy"></button>`).join('')
+            : '<p class="picker-empty">No images yet. Use Upload new.</p>'
+
+          grid.querySelectorAll('[data-pick]').forEach((button) => {
+            button.addEventListener('click', () => close(button.dataset.pick))
+          })
+        })
+        .catch((problem) => {
+          grid.innerHTML = `<p class="picker-empty">${escapeHtml(problem.message)}</p>`
+        })
+    })
+})()
 
 $('cover-pick').addEventListener('click', async () => {
-  const file = await pickFile()
-  if (!file) return
-  try {
-    const url = await uploadImage(file)
-    state.coverUrl = url
-    setCover(url)
-    flash('Image added.', true)
-  } catch (problem) {
-    flash(problem.message)
-  }
+  const url = await chooseImage()
+  if (!url) return
+  state.coverUrl = url
+  setCover(url)
 })
 
 $('cover-clear').addEventListener('click', () => {
@@ -463,14 +669,9 @@ $('cover-clear').addEventListener('click', () => {
 
 const dropZone = $('cover-drop')
 ;['dragenter', 'dragover'].forEach((type) =>
-  dropZone.addEventListener(type, (event) => {
-    event.preventDefault()
-    dropZone.classList.add('drop')
-  })
+  dropZone.addEventListener(type, (event) => { event.preventDefault(); dropZone.classList.add('drop') })
 )
-;['dragleave', 'drop'].forEach((type) =>
-  dropZone.addEventListener(type, () => dropZone.classList.remove('drop'))
-)
+;['dragleave', 'drop'].forEach((type) => dropZone.addEventListener(type, () => dropZone.classList.remove('drop')))
 
 dropZone.addEventListener('drop', async (event) => {
   event.preventDefault()
@@ -480,79 +681,68 @@ dropZone.addEventListener('drop', async (event) => {
     const url = await uploadImage(file)
     state.coverUrl = url
     setCover(url)
-    flash('Image added.', true)
+    flash('Cover image added.')
   } catch (problem) {
     flash(problem.message)
   }
 })
 
-document.querySelectorAll('.toolbar [data-cmd]').forEach((button) => {
-  button.addEventListener('click', () => {
-    document.execCommand(button.dataset.cmd, false, null)
-    $('f-content').focus()
-  })
-})
+$('tb-link').addEventListener('click', async () => {
+  const selection = window.getSelection()
+  const range = selection.rangeCount ? selection.getRangeAt(0) : null
 
-document.querySelectorAll('.toolbar [data-block]').forEach((button) => {
-  button.addEventListener('click', () => {
-    document.execCommand('formatBlock', false, button.dataset.block)
-    $('f-content').focus()
-  })
-})
-
-$('tb-link').addEventListener('click', () => {
-  const href = window.prompt('Link address')
+  const href = await ask({ title: 'Add a link', confirmLabel: 'Add link', input: { label: 'Address', placeholder: 'https://' } })
   if (!href) return
+
+  editable.focus()
+  if (range) {
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
   document.execCommand('createLink', false, href)
-  $('f-content').focus()
 })
 
 $('tb-image').addEventListener('click', async () => {
-  const file = await pickFile()
-  if (!file) return
-  try {
-    const url = await uploadImage(file)
-    $('f-content').focus()
-    document.execCommand('insertHTML', false, `<img src="${escapeHtml(url)}" alt="">`)
-  } catch (problem) {
-    flash(problem.message)
-  }
-})
+  const selection = window.getSelection()
+  const range = selection.rangeCount && editable.contains(selection.anchorNode) ? selection.getRangeAt(0) : null
 
-$('f-content').addEventListener('paste', (event) => {
-  event.preventDefault()
-  const text = (event.clipboardData || window.clipboardData).getData('text/plain')
-  document.execCommand('insertText', false, text)
+  const url = await chooseImage()
+  if (!url) return
+
+  editable.focus()
+  if (range) {
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
+  document.execCommand('insertHTML', false, `<img src="${escapeHtml(url)}" alt="">`)
 })
 
 async function loadMedia() {
   const grid = $('media-grid')
-  grid.innerHTML = '<div class="empty">Loading.</div>'
+  grid.innerHTML = '<p class="empty">Loading.</p>'
 
   try {
     const { media } = await api('/api/admin/media')
 
     grid.innerHTML = media.length
-      ? media
-          .map(
-            (item) => `
-      <div class="media-item">
-        <img src="${escapeHtml(item.url)}" alt="">
-        <footer>
-          <span class="name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
-          <button class="icon-btn warn" data-drop="${escapeHtml(item.url)}">Delete</button>
-        </footer>
-      </div>`
-          )
-          .join('')
-      : '<div class="empty">No images uploaded yet.</div>'
+      ? media.map((item) => `
+      <figure class="media-item">
+        <img src="${escapeHtml(item.url)}" alt="" loading="lazy">
+        <figcaption class="media-foot">
+          <span class="media-name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
+          <button data-drop="${escapeHtml(item.url)}">Delete</button>
+        </figcaption>
+      </figure>`).join('')
+      : '<p class="empty">No images uploaded yet.</p>'
 
     grid.querySelectorAll('[data-drop]').forEach((button) => {
       button.addEventListener('click', async () => {
-        if (!window.confirm('Delete this image? Any post using it will lose it.')) return
+        const sure = await ask({ title: 'Delete image', body: 'Any entry still using it will lose it.', confirmLabel: 'Delete' })
+        if (!sure) return
+
         try {
           await api('/api/admin/media?url=' + encodeURIComponent(button.dataset.drop), { method: 'DELETE' })
-          flash('Image deleted.', true)
+          flash('Image deleted.')
           loadMedia()
         } catch (problem) {
           flash(problem.message)
@@ -560,7 +750,7 @@ async function loadMedia() {
       })
     })
   } catch (problem) {
-    grid.innerHTML = `<div class="empty">${escapeHtml(problem.message)}</div>`
+    grid.innerHTML = `<p class="empty">${escapeHtml(problem.message)}</p>`
   }
 }
 
@@ -569,7 +759,7 @@ $('media-add').addEventListener('click', async () => {
   if (!file) return
   try {
     await uploadImage(file)
-    flash('Image uploaded.', true)
+    flash('Image uploaded.')
     loadMedia()
   } catch (problem) {
     flash(problem.message)
@@ -581,46 +771,22 @@ async function boot() {
     const session = await (await fetch('/api/admin/session', { credentials: 'same-origin' })).json()
 
     if (!session.configured) {
-      $('gate').classList.remove('hidden')
+      showGate()
       const error = $('gate-error')
       error.textContent = 'Sign-in is not set up yet. Add ADMIN_PASSWORD in Vercel, then redeploy.'
       error.classList.remove('hidden')
       return
     }
 
-    if (session.signedIn) {
-      showApp()
-      showView('posts')
-      if (!session.storageReady) {
-        flash('Storage is not connected yet. Create a Blob store in Vercel and redeploy, then reload this page.')
-      }
-      await loadPosts()
-    } else {
-      showGate()
-    }
+    if (!session.signedIn) return showGate()
+
+    showApp()
+    showView('posts')
+    if (!session.storageReady) flash('Storage is not connected yet. Create a Blob store in Vercel and redeploy.')
+    await loadPosts()
   } catch {
     showGate()
   }
 }
 
 boot()
-
-function wireImport() {
-  const button = $('import-old')
-  if (!button) return
-
-  button.addEventListener('click', async () => {
-    button.disabled = true
-    button.textContent = 'Bringing them in...'
-
-    try {
-      const { imported } = await api('/api/admin/import', { method: 'POST' })
-      flash(`${imported} entries imported.`, true)
-      loadPosts()
-    } catch (problem) {
-      flash(problem.message)
-      button.disabled = false
-      button.textContent = 'Bring in the 18 existing entries'
-    }
-  })
-}
