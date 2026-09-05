@@ -120,7 +120,6 @@ function normalise(input, existing) {
       externalUrl: kind === 'external' ? input.externalUrl : null,
       linkUrl: existing ? existing.linkUrl || null : null,
       headline,
-      meta: cleanText(input.meta) || null,
       content: kind === 'article' ? cleanBody(input.content) : '',
       status: input.status === 'draft' ? 'draft' : 'published',
       position: existing ? existing.position : 0,

@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id)
 
 const state = {
   posts: [],
+  tab: 'published',
   editing: null,
   coverUrl: null
 }
@@ -43,7 +44,7 @@ function flash(message, good = false) {
   box.classList.toggle('good', good)
   box.classList.remove('hidden')
   clearTimeout(flashTimer)
-  flashTimer = setTimeout(() => box.classList.add('hidden'), 4000)
+  flashTimer = setTimeout(() => box.classList.add('hidden'), 4500)
 }
 
 function showGate() {
@@ -57,13 +58,20 @@ function showApp() {
 }
 
 function showView(name) {
-  ;['posts', 'editor', 'media'].forEach((view) => {
-    $('view-' + view).classList.toggle('hidden', view !== name)
-  })
-  document.querySelectorAll('.rail nav button').forEach((button) => {
-    button.classList.toggle('on', button.dataset.view === name)
-  })
+  $('view-posts').classList.toggle('hidden', name !== 'posts')
+  $('view-editor').classList.toggle('hidden', name !== 'editor')
+  window.scrollTo({ top: 0, behavior: 'instant' })
 }
+
+$('toggle-password').addEventListener('click', () => {
+  const input = $('gate-password')
+  const revealed = input.type === 'text'
+
+  input.type = revealed ? 'password' : 'text'
+  $('toggle-password').setAttribute('aria-pressed', String(!revealed))
+  $('toggle-password').setAttribute('aria-label', revealed ? 'Show password' : 'Hide password')
+  input.focus()
+})
 
 $('gate-form').addEventListener('submit', async (event) => {
   event.preventDefault()
@@ -89,59 +97,175 @@ $('sign-out').addEventListener('click', async () => {
   showGate()
 })
 
-document.querySelectorAll('.rail nav button').forEach((button) => {
-  button.addEventListener('click', () => {
-    const view = button.dataset.view
-    showView(view)
-    if (view === 'posts') loadPosts()
-    if (view === 'media') loadMedia()
+const ask = (() => {
+  const dialog = $('ask')
+  let settle = null
+
+  const close = (value) => {
+    // settle is cleared first: dialog.close() fires its own close event synchronously,
+    // which would otherwise re-enter here and resolve with null.
+    const done = settle
+    settle = null
+    if (dialog.open) dialog.close()
+    if (done) done(value)
+  }
+
+  $('ask-cancel').addEventListener('click', () => close(null))
+  $('ask-confirm').addEventListener('click', () => {
+    const field = $('ask-field')
+    close(field.classList.contains('hidden') ? true : $('ask-input').value.trim() || null)
   })
-})
+  dialog.addEventListener('cancel', (event) => { event.preventDefault(); close(null) })
+  dialog.addEventListener('close', () => close(null))
+  $('ask-input').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') { event.preventDefault(); $('ask-confirm').click() }
+  })
+
+  return ({ title, body = '', confirmLabel = 'Confirm', danger = false, input = null }) =>
+    new Promise((resolve) => {
+      settle = resolve
+
+      $('ask-title').textContent = title
+      $('ask-body').textContent = body
+      $('ask-body').classList.toggle('hidden', !body)
+
+      const field = $('ask-field')
+      field.classList.toggle('hidden', !input)
+      if (input) {
+        $('ask-label').textContent = input.label
+        $('ask-input').value = input.value || ''
+        $('ask-input').placeholder = input.placeholder || ''
+      }
+
+      const confirm = $('ask-confirm')
+      confirm.textContent = confirmLabel
+      confirm.classList.toggle('danger', danger)
+
+      dialog.showModal()
+      ;(input ? $('ask-input') : $('ask-cancel')).focus()
+    })
+})()
 
 const KIND_LABEL = { article: 'Article', video: 'Video', external: 'Link' }
 
-function rowMarkup(post) {
+document.querySelectorAll('.tab').forEach((tab) => {
+  tab.addEventListener('click', () => selectTab(tab.dataset.tab))
+})
+
+function selectTab(name) {
+  state.tab = name
+
+  document.querySelectorAll('.tab').forEach((tab) => {
+    const on = tab.dataset.tab === name
+    tab.classList.toggle('on', on)
+    tab.setAttribute('aria-selected', String(on))
+  })
+
+  const showingMedia = name === 'images'
+  $('media-panel').classList.toggle('hidden', !showingMedia)
+  $('post-rows').classList.toggle('hidden', showingMedia)
+  $('new-post').classList.toggle('hidden', showingMedia)
+
+  $('tab-hint').textContent = showingMedia
+    ? 'Images you have uploaded, ready to reuse in any post.'
+    : name === 'draft'
+      ? 'Drafts stay off the news page. Order them here and they publish into that position.'
+      : 'Drag a row, or use the arrows, to change where it sits on the news page.'
+
+  if (showingMedia) loadMedia()
+  else renderRows()
+}
+
+function countsFrom(posts) {
+  $('count-published').textContent = posts.filter((p) => p.status === 'published').length
+  $('count-draft').textContent = posts.filter((p) => p.status === 'draft').length
+}
+
+function rowMarkup(post, index, total) {
   const cover = post.image
-    ? `<img class="thumb" src="${escapeHtml(post.image)}" alt="">`
-    : '<div class="thumb"></div>'
+    ? `<img class="thumb" src="${escapeHtml(post.image)}" alt="" loading="lazy">`
+    : '<span class="thumb"></span>'
+
+  const live = post.status === 'published'
+    ? '<span class="mark" aria-hidden="true"></span>Live'
+    : 'Draft'
+
+  const arrows = `<button class="act" data-move="up" data-slug="${escapeHtml(post.slug)}" aria-label="Move up"${index === 0 ? ' disabled' : ''}>&uarr;</button>
+          <button class="act" data-move="down" data-slug="${escapeHtml(post.slug)}" aria-label="Move down"${index === total - 1 ? ' disabled' : ''}>&darr;</button>`
 
   return `
-    <div class="row" draggable="true" data-slug="${escapeHtml(post.slug)}">
-      <div class="grip" title="Drag to reorder">::</div>
-      ${cover}
-      <div>
-        <p class="row-title">${escapeHtml(post.title)}</p>
-        <div class="row-sub">
-          <span class="chip ${post.status === 'published' ? 'live' : ''}">${post.status === 'published' ? 'Live' : 'Draft'}</span>
-          <span class="chip">${escapeHtml(post.category)}</span>
-          <span class="chip">${KIND_LABEL[post.kind] || 'Article'}</span>
-          <span class="chip">${escapeHtml(post.layout)}</span>
+      <article class="row" draggable="true" data-slug="${escapeHtml(post.slug)}">
+        <span class="grip" aria-hidden="true">|||</span>
+        ${cover}
+        <div>
+          <h3 class="row-title">${escapeHtml(post.title)}</h3>
+          <p class="row-meta">${live}<span class="sep">/</span>${escapeHtml(post.category)}<span class="sep">/</span>${KIND_LABEL[post.kind] || 'Article'}<span class="sep">/</span>${escapeHtml(post.layout)}</p>
         </div>
-      </div>
-      <div class="row-actions">
-        <button class="icon-btn" data-edit="${escapeHtml(post.slug)}">Edit</button>
-        <button class="icon-btn warn" data-remove="${escapeHtml(post.slug)}">Delete</button>
-      </div>
-    </div>`
+        <div class="row-actions">
+          ${arrows}
+          <button class="act" data-edit="${escapeHtml(post.slug)}">Edit</button>
+          <button class="act warn" data-remove="${escapeHtml(post.slug)}">Delete</button>
+        </div>
+      </article>`
+}
+
+function renderRows() {
+  const rows = $('post-rows')
+  const visible = state.posts.filter((post) => post.status === state.tab)
+
+  if (!visible.length) {
+    rows.innerHTML = state.posts.length
+      ? `<p class="empty">${state.tab === 'draft' ? 'No drafts. Anything you save as a draft appears here.' : 'Nothing published yet.'}</p>`
+      : '<div class="empty">This newsroom is empty.<br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
+
+    if (!state.posts.length) wireImport()
+    return
+  }
+
+  rows.innerHTML = visible.map((post, i) => rowMarkup(post, i, visible.length)).join('')
+  wireRows()
 }
 
 async function loadPosts() {
-  const rows = $('post-rows')
-  rows.innerHTML = '<div class="empty">Loading.</div>'
+  $('post-rows').innerHTML = '<p class="empty">Loading.</p>'
 
   try {
     const { posts } = await api('/api/admin/posts')
     state.posts = posts
-
-    rows.innerHTML = posts.length
-      ? posts.map(rowMarkup).join('')
-      : '<div class="empty">Nothing here yet.<br><br><button class="btn" id="import-old">Bring in the 18 existing entries</button></div>'
-
-    if (!posts.length) wireImport()
-    wireRows()
+    countsFrom(posts)
+    renderRows()
   } catch (problem) {
-    rows.innerHTML = `<div class="empty">${escapeHtml(problem.message)}</div>`
+    $('post-rows').innerHTML = `<p class="empty">${escapeHtml(problem.message)}</p>`
   }
+}
+
+async function saveOrder(slugs) {
+  try {
+    await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs }) })
+    await loadPosts()
+    flash('Order saved.', true)
+  } catch (problem) {
+    flash(problem.message)
+  }
+}
+
+// Rows are reordered inside the open tab. The other tab keeps its own order untouched,
+// so publishing a draft later drops it exactly where it was placed.
+function partition() {
+  const inTab = state.posts.filter((p) => p.status === state.tab).map((p) => p.slug)
+  const others = state.posts.filter((p) => p.status !== state.tab).map((p) => p.slug)
+  return { inTab, others }
+}
+
+function moveBy(slug, offset) {
+  const { inTab, others } = partition()
+  const from = inTab.indexOf(slug)
+  const to = from + offset
+
+  if (from === -1 || to < 0 || to >= inTab.length) return
+
+  inTab.splice(to, 0, inTab.splice(from, 1)[0])
+  saveOrder([...inTab, ...others])
 }
 
 let draggedSlug = null
@@ -167,43 +291,66 @@ function wireRows() {
 
     row.addEventListener('dragleave', () => row.classList.remove('over'))
 
-    row.addEventListener('drop', async (event) => {
+    row.addEventListener('drop', (event) => {
       event.preventDefault()
       row.classList.remove('over')
       if (!draggedSlug || row.dataset.slug === draggedSlug) return
 
-      const order = Array.from($('post-rows').querySelectorAll('.row')).map((r) => r.dataset.slug)
-      const from = order.indexOf(draggedSlug)
-      order.splice(from, 1)
-      order.splice(order.indexOf(row.dataset.slug), 0, draggedSlug)
-
-      try {
-        await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs: order }) })
-        flash('Order saved.', true)
-        loadPosts()
-      } catch (problem) {
-        flash(problem.message)
-      }
+      const { inTab, others } = partition()
+      inTab.splice(inTab.indexOf(draggedSlug), 1)
+      inTab.splice(inTab.indexOf(row.dataset.slug), 0, draggedSlug)
+      saveOrder([...inTab, ...others])
     })
   })
 
-  $('post-rows').querySelectorAll('[data-edit]').forEach((button) => {
+  const rowsRoot = $('post-rows')
+  rowsRoot.querySelectorAll('[data-move]').forEach((button) => {
+    button.addEventListener('click', () => moveBy(button.dataset.slug, button.dataset.move === 'up' ? -1 : 1))
+  })
+  rowsRoot.querySelectorAll('[data-edit]').forEach((button) => {
     button.addEventListener('click', () => openEditor(button.dataset.edit))
   })
-
-  $('post-rows').querySelectorAll('[data-remove]').forEach((button) => {
+  rowsRoot.querySelectorAll('[data-remove]').forEach((button) => {
     button.addEventListener('click', () => removePost(button.dataset.remove))
+  })
+}
+
+function wireImport() {
+  const button = $('import-old')
+  if (!button) return
+
+  button.addEventListener('click', async () => {
+    button.disabled = true
+    button.textContent = 'Bringing them in...'
+
+    try {
+      const { imported } = await api('/api/admin/import', { method: 'POST' })
+      flash(`${imported} entries imported.`, true)
+      await loadPosts()
+    } catch (problem) {
+      flash(problem.message)
+      button.disabled = false
+      button.textContent = 'Bring in the 18 existing entries'
+    }
   })
 }
 
 async function removePost(slug) {
   const post = state.posts.find((item) => item.slug === slug)
-  if (!window.confirm(`Delete "${post ? post.title : slug}"? This cannot be undone.`)) return
+
+  const sure = await ask({
+    title: 'Delete this post?',
+    body: post ? post.title : slug,
+    confirmLabel: 'Delete',
+    danger: true
+  })
+
+  if (!sure) return
 
   try {
     await api('/api/admin/posts?slug=' + encodeURIComponent(slug), { method: 'DELETE' })
     flash('Deleted.', true)
-    loadPosts()
+    await loadPosts()
   } catch (problem) {
     flash(problem.message)
   }
@@ -217,12 +364,9 @@ const blank = {
   layout: 'standard',
   kind: 'article',
   image: null,
-  imageAlt: '',
   linkLabel: '',
   videoUrl: '',
   externalUrl: '',
-  headline: null,
-  meta: '',
   content: '',
   status: 'published'
 }
@@ -232,6 +376,14 @@ function applyKind() {
   $('wrap-video').classList.toggle('hidden', kind !== 'video')
   $('wrap-external').classList.toggle('hidden', kind !== 'external')
   $('body-card').classList.toggle('hidden', kind !== 'article')
+}
+
+function setCover(url) {
+  const preview = $('cover-preview')
+  preview.src = url || ''
+  preview.classList.toggle('hidden', !url)
+  $('cover-hint').classList.toggle('hidden', Boolean(url))
+  $('cover-clear').classList.toggle('hidden', !url)
 }
 
 function fillEditor(post) {
@@ -247,14 +399,12 @@ function fillEditor(post) {
   $('f-video').value = post.videoUrl || ''
   $('f-external').value = post.externalUrl || ''
   $('f-linklabel').value = post.linkLabel || ''
-  $('f-meta').value = post.meta || ''
   $('f-content').innerHTML = post.content || ''
 
   setCover(post.image || null)
   applyKind()
 
-  $('editor-mode').textContent = post.slug ? 'Editing' : 'New entry'
-  $('editor-heading').textContent = post.slug ? post.title : 'Write a post'
+  $('save-state').textContent = post.slug ? 'Editing' : 'New entry'
   $('editor-delete').classList.toggle('hidden', !post.slug)
 }
 
@@ -262,14 +412,13 @@ async function openEditor(slug) {
   showView('editor')
 
   if (!slug) {
-    fillEditor({ ...blank })
+    fillEditor({ ...blank, status: state.tab === 'draft' ? 'draft' : 'published' })
     $('f-title').focus()
     return
   }
 
   try {
-    const post = await api('/api/admin/posts?slug=' + encodeURIComponent(slug))
-    fillEditor(post)
+    fillEditor(await api('/api/admin/posts?slug=' + encodeURIComponent(slug)))
   } catch (problem) {
     flash(problem.message)
     showView('posts')
@@ -278,43 +427,49 @@ async function openEditor(slug) {
 
 function collect() {
   const kind = $('f-kind').value
+  const title = $('f-title').value.trim()
+
   return {
     slug: state.editing || undefined,
-    title: $('f-title').value.trim(),
+    title,
     excerpt: $('f-excerpt').value.trim(),
     category: $('f-category').value,
     layout: $('f-layout').value,
     kind,
     status: $('f-status').value,
     image: state.coverUrl,
-    imageAlt: $('f-title').value.trim(),
-    imageTitle: $('f-title').value.trim(),
+    imageAlt: title,
+    imageTitle: title,
     linkLabel: $('f-linklabel').value.trim(),
     videoUrl: $('f-video').value.trim(),
     externalUrl: $('f-external').value.trim(),
-    meta: $('f-meta').value.trim(),
     headline: null,
     content: kind === 'article' ? $('f-content').innerHTML : ''
   }
 }
 
 $('new-post').addEventListener('click', () => openEditor(null))
-$('editor-back').addEventListener('click', () => { showView('posts'); loadPosts() })
 $('f-kind').addEventListener('change', applyKind)
+
+$('editor-back').addEventListener('click', async () => {
+  showView('posts')
+  await loadPosts()
+})
 
 $('editor-save').addEventListener('click', async () => {
   const button = $('editor-save')
   button.disabled = true
+  $('save-state').textContent = 'Saving'
 
   try {
     const { post } = await api('/api/admin/posts', { method: 'POST', body: JSON.stringify(collect()) })
     state.editing = post.slug
     state.coverUrl = post.image || null
-    $('editor-mode').textContent = 'Editing'
-    $('editor-heading').textContent = post.title
+    $('save-state').textContent = 'Saved'
     $('editor-delete').classList.remove('hidden')
     flash(post.status === 'published' ? 'Saved. It appears on the news page within a minute.' : 'Saved as a draft, hidden from the site.', true)
   } catch (problem) {
+    $('save-state').textContent = 'Not saved'
     flash(problem.message)
   } finally {
     button.disabled = false
@@ -323,8 +478,9 @@ $('editor-save').addEventListener('click', async () => {
 
 $('editor-delete').addEventListener('click', async () => {
   if (!state.editing) return
-  await removePost(state.editing)
-  showView('posts')
+  const slug = state.editing
+  await removePost(slug)
+  if (!state.posts.some((p) => p.slug === slug)) showView('posts')
 })
 
 const MAX_EDGE = 1920
@@ -351,10 +507,9 @@ function resizeToWebp(file) {
 }
 
 async function uploadImage(file) {
-  const dataUrl = await resizeToWebp(file)
   const { url } = await api('/api/admin/media', {
     method: 'POST',
-    body: JSON.stringify({ name: file.name, dataUrl })
+    body: JSON.stringify({ name: file.name, dataUrl: await resizeToWebp(file) })
   })
   return url
 }
@@ -368,17 +523,7 @@ function pickFile() {
   })
 }
 
-function setCover(url) {
-  const preview = $('cover-preview')
-  preview.src = url || ''
-  preview.classList.toggle('hidden', !url)
-  $('cover-hint').classList.toggle('hidden', Boolean(url))
-  $('cover-clear').classList.toggle('hidden', !url)
-}
-
-$('cover-pick').addEventListener('click', async () => {
-  const file = await pickFile()
-  if (!file) return
+async function useAsCover(file) {
   try {
     const url = await uploadImage(file)
     state.coverUrl = url
@@ -387,6 +532,11 @@ $('cover-pick').addEventListener('click', async () => {
   } catch (problem) {
     flash(problem.message)
   }
+}
+
+$('cover-pick').addEventListener('click', async () => {
+  const file = await pickFile()
+  if (file) useAsCover(file)
 })
 
 $('cover-clear').addEventListener('click', () => {
@@ -401,22 +551,12 @@ const dropZone = $('cover-drop')
     dropZone.classList.add('drop')
   })
 )
-;['dragleave', 'drop'].forEach((type) =>
-  dropZone.addEventListener(type, () => dropZone.classList.remove('drop'))
-)
+;['dragleave', 'drop'].forEach((type) => dropZone.addEventListener(type, () => dropZone.classList.remove('drop')))
 
-dropZone.addEventListener('drop', async (event) => {
+dropZone.addEventListener('drop', (event) => {
   event.preventDefault()
   const file = event.dataTransfer.files[0]
-  if (!file) return
-  try {
-    const url = await uploadImage(file)
-    state.coverUrl = url
-    setCover(url)
-    flash('Image added.', true)
-  } catch (problem) {
-    flash(problem.message)
-  }
+  if (file) useAsCover(file)
 })
 
 document.querySelectorAll('.toolbar [data-cmd]').forEach((button) => {
@@ -433,11 +573,24 @@ document.querySelectorAll('.toolbar [data-block]').forEach((button) => {
   })
 })
 
-$('tb-link').addEventListener('click', () => {
-  const href = window.prompt('Link address')
+$('tb-link').addEventListener('click', async () => {
+  const selection = window.getSelection()
+  const range = selection.rangeCount ? selection.getRangeAt(0) : null
+
+  const href = await ask({
+    title: 'Add a link',
+    confirmLabel: 'Add link',
+    input: { label: 'Address', placeholder: 'https://' }
+  })
+
   if (!href) return
-  document.execCommand('createLink', false, href)
+
   $('f-content').focus()
+  if (range) {
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
+  document.execCommand('createLink', false, href)
 })
 
 $('tb-image').addEventListener('click', async () => {
@@ -460,29 +613,31 @@ $('f-content').addEventListener('paste', (event) => {
 
 async function loadMedia() {
   const grid = $('media-grid')
-  grid.innerHTML = '<div class="empty">Loading.</div>'
+  grid.innerHTML = '<p class="empty">Loading.</p>'
 
   try {
     const { media } = await api('/api/admin/media')
 
     grid.innerHTML = media.length
-      ? media
-          .map(
-            (item) => `
-      <div class="media-item">
-        <img src="${escapeHtml(item.url)}" alt="">
-        <footer>
-          <span class="name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
-          <button class="icon-btn warn" data-drop="${escapeHtml(item.url)}">Delete</button>
-        </footer>
-      </div>`
-          )
-          .join('')
-      : '<div class="empty">No images uploaded yet.</div>'
+      ? media.map((item) => `
+      <figure class="media-item">
+        <img src="${escapeHtml(item.url)}" alt="" loading="lazy">
+        <figcaption class="media-foot">
+          <span class="media-name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
+          <button class="act warn" data-drop="${escapeHtml(item.url)}">Delete</button>
+        </figcaption>
+      </figure>`).join('')
+      : '<p class="empty">No images uploaded yet.</p>'
 
     grid.querySelectorAll('[data-drop]').forEach((button) => {
       button.addEventListener('click', async () => {
-        if (!window.confirm('Delete this image? Any post using it will lose it.')) return
+        const sure = await ask({
+          title: 'Delete this image?',
+          body: 'Any post still using it will lose it.',
+          confirmLabel: 'Delete',
+          danger: true
+        })
+        if (!sure) return
         try {
           await api('/api/admin/media?url=' + encodeURIComponent(button.dataset.drop), { method: 'DELETE' })
           flash('Image deleted.', true)
@@ -493,7 +648,7 @@ async function loadMedia() {
       })
     })
   } catch (problem) {
-    grid.innerHTML = `<div class="empty">${escapeHtml(problem.message)}</div>`
+    grid.innerHTML = `<p class="empty">${escapeHtml(problem.message)}</p>`
   }
 }
 
@@ -514,46 +669,22 @@ async function boot() {
     const session = await (await fetch('/api/admin/session', { credentials: 'same-origin' })).json()
 
     if (!session.configured) {
-      $('gate').classList.remove('hidden')
+      showGate()
       const error = $('gate-error')
       error.textContent = 'Sign-in is not set up yet. Add ADMIN_PASSWORD in Vercel, then redeploy.'
       error.classList.remove('hidden')
       return
     }
 
-    if (session.signedIn) {
-      showApp()
-      showView('posts')
-      if (!session.storageReady) {
-        flash('Storage is not connected yet. Create a Blob store in Vercel and redeploy, then reload this page.')
-      }
-      await loadPosts()
-    } else {
-      showGate()
-    }
+    if (!session.signedIn) return showGate()
+
+    showApp()
+    showView('posts')
+    if (!session.storageReady) flash('Storage is not connected yet. Create a Blob store in Vercel and redeploy.')
+    await loadPosts()
   } catch {
     showGate()
   }
 }
 
 boot()
-
-function wireImport() {
-  const button = $('import-old')
-  if (!button) return
-
-  button.addEventListener('click', async () => {
-    button.disabled = true
-    button.textContent = 'Bringing them in...'
-
-    try {
-      const { imported } = await api('/api/admin/import', { method: 'POST' })
-      flash(`${imported} entries imported.`, true)
-      loadPosts()
-    } catch (problem) {
-      flash(problem.message)
-      button.disabled = false
-      button.textContent = 'Bring in the 18 existing entries'
-    }
-  })
-}
