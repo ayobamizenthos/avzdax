@@ -25,6 +25,16 @@
   color: #000;
 }
 
+.article-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 64px 0 24px;
+}
+
 .article-title {
   font-family: 'Syncopate', sans-serif;
   font-weight: 800;
@@ -39,6 +49,7 @@
 
 .article-hero {
   width: 100%;
+  max-height: 520px;
   overflow: hidden;
   border-radius: 6px;
   margin-bottom: 72px;
@@ -46,9 +57,8 @@
 
 .article-hero img {
   width: 100%;
-  height: auto;
-  max-height: 640px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -128,8 +138,7 @@
   .article-shell { padding: 0 32px; }
   .article-body { font-size: 18px; }
   .article-body h2, .article-body h3 { font-size: 27px; margin: 56px 0 22px; }
-  .article-hero { margin-bottom: 48px; }
-  .article-hero img { max-height: 420px; }
+  .article-hero { max-height: 380px; margin-bottom: 48px; }
 }
 
 @media (max-width: 640px) {
@@ -140,6 +149,6 @@
   .article-body p { margin-bottom: 24px; }
   .article-body h2, .article-body h3 { font-size: 21px; margin: 40px 0 16px; }
   .article-body blockquote { font-size: 19px; margin: 36px 0; padding-left: 20px; }
-  .article-hero { margin-bottom: 32px; }
-  .article-hero img { max-height: 300px; }
+  .article-hero { max-height: 240px; margin-bottom: 32px; }
+  .article-meta { margin: 40px 0 18px; }
 }
