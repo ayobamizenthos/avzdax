@@ -83,8 +83,8 @@ async function writeIndex(cards) {
   await writeJson(INDEX_PATH, cards.map((card, position) => ({ ...card, position })))
 }
 
-async function readPost(slug) {
-  return readJson(postPath(slug))
+async function readPost(slug, options) {
+  return readJson(postPath(slug), options)
 }
 
 const settled = (card, post) =>
@@ -141,7 +141,7 @@ async function deletePost(slug) {
 }
 
 async function reorder(slugs) {
-  const index = await readIndex()
+  const index = await readIndex({ fresh: true })
   const bySlug = new Map(index.map((card) => [card.slug, card]))
   const ordered = slugs.map((slug) => bySlug.get(slug)).filter(Boolean)
   const untouched = index.filter((card) => !slugs.includes(card.slug))

@@ -17,7 +17,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const existing = await readIndex()
+    const existing = await readIndex({ fresh: true })
     if (existing.length) {
       return res.status(409).json({ error: 'There are already posts here. Import is only for an empty newsroom.' })
     }

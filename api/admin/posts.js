@@ -16,21 +16,21 @@ module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
       if (slug) {
         if (!isSafeSlug(slug)) return res.status(400).json({ error: 'Unknown post' })
-        const post = await readPost(slug)
+        const post = await readPost(slug, { fresh: true })
         return post ? res.status(200).json(post) : res.status(404).json({ error: 'Not found' })
       }
-      return res.status(200).json({ posts: await readIndex() })
+      return res.status(200).json({ posts: await readIndex({ fresh: true }) })
     }
 
     if (req.method === 'POST') {
       const input = req.body || {}
-      const existing = isSafeSlug(input.slug) ? await readPost(input.slug) : null
+      const existing = isSafeSlug(input.slug) ? await readPost(input.slug, { fresh: true }) : null
       const { errors, post } = normalise(input, existing)
 
       if (errors) return res.status(400).json({ error: errors.join(' ') })
 
       if (!existing) {
-        const index = await readIndex()
+        const index = await readIndex({ fresh: true })
         if (index.some((card) => card.slug === post.slug)) {
           return res.status(409).json({ error: 'A post with that title already exists. Change the title slightly.' })
         }
