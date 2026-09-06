@@ -1039,6 +1039,39 @@
             pointer-events: none;
         }
         .menu-preview-img.active { opacity: 1; transform: scale(1.25) translateY(0); }
+
+        /* ---------- newsroom reads on white, so the list flows into the article ---------- */
+
+        body { background: #ffffff; color: #0b0b0c; }
+
+        .news-container { background: #ffffff; }
+
+        .card-wrap {
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid rgba(11, 11, 12, 0.12);
+        }
+
+        .card-wrap:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(11, 11, 12, 0.3);
+        }
+
+        .card-media { background: #f5f5f3; }
+        .featured-card .card-media { background: #f5f5f3; }
+        .featured-card .card-media::after { display: none; }
+        .featured-card .card-media .card-img { filter: none; }
+
+        .c-title { color: #0b0b0c; }
+        .c-excerpt { color: rgba(11, 11, 12, 0.62); }
+
+        .c-link { color: #0b0b0c; border-color: rgba(11, 11, 12, 0.28); }
+        .card-wrap:hover .c-link { border-color: #0b0b0c; }
+
+        .newsroom-empty { color: rgba(11, 11, 12, 0.6); }
+        .c-meta { color: rgba(11, 11, 12, 0.5); }
+
     </style>
 </head>
 <body>
@@ -1130,8 +1163,7 @@
         <div class="news-grid">
         </div> 
     </div> 
-    <div style="background-color: #030303;" class="relative">
-        <div class="h-[150px]"></div>
+    <div class="relative">
 
         
 

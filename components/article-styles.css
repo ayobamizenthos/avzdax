@@ -1,7 +1,7 @@
 .article-page {
   background: #fff;
   color: #000;
-  padding: 180px 0 160px;
+  padding: 148px 0 150px;
 }
 
 .article-shell {
@@ -11,18 +11,33 @@
 }
 
 .article-back {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 999px;
+  color: #000;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.article-back svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .article-back:hover {
-  color: #000;
+  background: #000;
+  border-color: #000;
+  color: #fff;
 }
 
 .article-title {
@@ -32,24 +47,23 @@
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  margin: 0 0 56px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0 0 26px;
 }
 
 .article-hero {
   width: 100%;
-  max-height: 520px;
-  overflow: hidden;
   border-radius: 6px;
-  margin-bottom: 72px;
+  margin-bottom: 52px;
 }
 
+/* Show the whole picture, and never taller than the screen it is being read on. */
 .article-hero img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: min(620px, 68vh);
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 .article-body {
@@ -124,20 +138,75 @@
 }
 
 @media (max-width: 1024px) {
-  .article-page { padding: 140px 0 120px; }
+  .article-page { padding: 120px 0 110px; }
   .article-shell { padding: 0 32px; }
   .article-body { font-size: 18px; }
   .article-body h2, .article-body h3 { font-size: 27px; margin: 56px 0 22px; }
-  .article-hero { max-height: 380px; margin-bottom: 48px; }
+  .article-hero { margin-bottom: 38px; }
+  .article-hero img { max-height: min(430px, 60vh); }
 }
 
 @media (max-width: 640px) {
-  .article-page { padding: 120px 0 90px; }
+  .article-page { padding: 104px 0 84px; }
   .article-shell { padding: 0 20px; }
   .article-title { padding-bottom: 32px; margin-bottom: 36px; }
   .article-body { font-size: 16px; line-height: 1.7; }
   .article-body p { margin-bottom: 24px; }
   .article-body h2, .article-body h3 { font-size: 21px; margin: 40px 0 16px; }
   .article-body blockquote { font-size: 19px; margin: 36px 0; padding-left: 20px; }
-  .article-hero { max-height: 240px; margin-bottom: 32px; }
+  .article-hero { margin-bottom: 28px; }
+  .article-hero img { max-height: min(320px, 52vh); }
+}
+
+.article-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 30px;
+}
+
+.share-btn,
+.share-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 999px;
+  background: transparent;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.share-copy { width: 42px; padding: 0; }
+
+.share-btn:hover,
+.share-copy:hover { background: #000; border-color: #000; color: #fff; }
+
+.share-btn svg,
+.share-copy svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-said {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 640px) {
+  .article-share { margin-bottom: 36px; }
+  .share-btn { flex: 1; }
 }

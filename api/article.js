@@ -39,7 +39,7 @@ ${head}
 <div id="header-container"></div>
 <script src="/components/header-loader.js"></script>
 ${body}
-<div style="background-color: #030303;" class="relative">
+<div class="relative">
     <div id="footer-container"></div>
     <script src="/components/footer-loader.js"></script>
 </div>
@@ -88,12 +88,51 @@ function articlePage(post) {
 
   const body = `<main data-nav-theme="light" class="article-page">
     <div class="article-shell">
-        <a href="/news" class="article-back">&larr; Newsroom</a>
+        <a href="/news" class="article-back" aria-label="Back to the newsroom" title="Back to the newsroom">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m11 6-6 6 6 6"></path></svg>
+        </a>
         <h1 class="article-title">${post.headline || title}</h1>
+        <div class="article-share">
+            <button type="button" class="share-btn" id="share-post">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.4 10.8 15.6 6.9M8.4 13.2l7.2 3.9"></path></svg>
+                Share
+            </button>
+            <button type="button" class="share-copy" id="copy-link" aria-label="Copy link" title="Copy link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V6a2 2 0 0 1 2-2h9"></path></svg>
+            </button>
+            <span class="share-said" id="share-said" hidden></span>
+        </div>
 ${hero}
         <div class="article-body">${post.content}</div>
     </div>
-</main>`
+</main>
+<script>
+(function () {
+    var link = window.location.href
+    var said = document.getElementById('share-said')
+    var timer
+
+    function say(message) {
+        said.textContent = message
+        said.hidden = false
+        clearTimeout(timer)
+        timer = setTimeout(function () { said.hidden = true }, 2600)
+    }
+
+    function copy() {
+        if (!navigator.clipboard) return say('Copy the address from the bar above')
+        navigator.clipboard.writeText(link).then(function () { say('Link copied') },
+            function () { say('Could not copy') })
+    }
+
+    document.getElementById('share-post').addEventListener('click', function () {
+        if (!navigator.share) return copy()
+        navigator.share({ title: document.title, url: link }).catch(function () {})
+    })
+
+    document.getElementById('copy-link').addEventListener('click', copy)
+})()
+</script>`
 
   return page({ head, body })
 }
@@ -104,7 +143,9 @@ const notFoundPage = () =>
     <meta name="robots" content="noindex" />`,
     body: `<main data-nav-theme="light" class="article-page">
     <div class="article-shell">
-        <a href="/news" class="article-back">&larr; Newsroom</a>
+        <a href="/news" class="article-back" aria-label="Back to the newsroom" title="Back to the newsroom">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m11 6-6 6 6 6"></path></svg>
+        </a>
         <h1 class="article-title">That entry is not here.</h1>
         <div class="article-body"><p>It may have been unpublished or the address mistyped.</p></div>
     </div>
