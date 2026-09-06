@@ -74,8 +74,8 @@ const toCard = (post) =>
 
 const byPosition = (a, b) => a.position - b.position
 
-async function readIndex() {
-  const index = await readJson(INDEX_PATH)
+async function readIndex(options) {
+  const index = await readJson(INDEX_PATH, options)
   return Array.isArray(index) ? index.sort(byPosition) : []
 }
 
@@ -87,27 +87,49 @@ async function readPost(slug) {
   return readJson(postPath(slug))
 }
 
+const settled = (card, post) =>
+  Boolean(card) && card.status === post.status && card.updatedAt === post.updatedAt
+
+// Blob overwrites are not always visible to the next read. Without confirming the index
+// afterwards a publish can leave the entry stale, so the post exists but never reaches
+// the news page. Each attempt re-reads, re-merges and re-checks.
+async function commitToIndex(post) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const index = await readIndex({ fresh: true })
+    const at = index.findIndex((card) => card.slug === post.slug)
+
+    if (at === -1) index.push(toCard(post))
+    else index[at] = { ...index[at], ...toCard(post) }
+
+    await writeIndex(index)
+
+    const written = (await readIndex({ fresh: true })).find((card) => card.slug === post.slug)
+    if (settled(written, post)) return
+
+    await new Promise((resolve) => setTimeout(resolve, 150 * (attempt + 1)))
+  }
+
+  throw new Error('The entry saved but the list did not update. Try saving again.')
+}
+
 async function savePost(post) {
   const stamped = { ...post, updatedAt: new Date().toISOString() }
   await writeJson(postPath(stamped.slug), stamped)
-
-  const index = await readIndex()
-  const existing = index.findIndex((card) => card.slug === stamped.slug)
-  if (existing === -1) {
-    index.push(toCard(stamped))
-  } else {
-    index[existing] = { ...index[existing], ...toCard(stamped) }
-  }
-  await writeIndex(index)
+  await commitToIndex(stamped)
   return stamped
 }
 
 async function deletePost(slug) {
-  const index = await readIndex()
+  const index = await readIndex({ fresh: true })
   const remaining = index.filter((card) => card.slug !== slug)
   if (remaining.length === index.length) return false
 
   await writeIndex(remaining)
+
+  if ((await readIndex({ fresh: true })).some((card) => card.slug === slug)) {
+    await writeIndex(remaining)
+  }
+
   try {
     const meta = await head(postPath(slug))
     forget(postPath(slug))
