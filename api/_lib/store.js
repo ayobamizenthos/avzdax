@@ -16,8 +16,11 @@ const urlCache = new Map()
 const bodyCache = new Map()
 const BODY_TTL_MS = 5000
 
-async function resolveUrl(pathname) {
-  if (urlCache.has(pathname)) return urlCache.get(pathname)
+// An overwrite gives the object a new URL. A cached one therefore goes stale the moment
+// anything is saved, and every warm instance holds its own copy - so a fresh read has to
+// resolve the address again rather than trust what it remembers.
+async function resolveUrl(pathname, fresh) {
+  if (!fresh && urlCache.has(pathname)) return urlCache.get(pathname)
   const meta = await head(pathname)
   urlCache.set(pathname, meta.url)
   return meta.url
@@ -29,7 +32,7 @@ async function readJson(pathname, { fresh = false } = {}) {
 
   let url
   try {
-    url = await resolveUrl(pathname)
+    url = await resolveUrl(pathname, fresh)
   } catch {
     return null
   }
