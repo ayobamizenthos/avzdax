@@ -218,6 +218,29 @@ function renderRows() {
   wireRows()
 }
 
+const CARD_FIELDS = [
+  'slug', 'title', 'excerpt', 'category', 'layout', 'kind', 'image',
+  'linkLabel', 'videoUrl', 'externalUrl', 'status', 'position', 'updatedAt'
+]
+
+function mergePost(post) {
+  const card = CARD_FIELDS.reduce((out, field) => {
+    if (post[field] !== undefined) out[field] = post[field]
+    return out
+  }, {})
+
+  const at = state.posts.findIndex((item) => item.slug === card.slug)
+  if (at === -1) state.posts.push(card)
+  else state.posts[at] = { ...state.posts[at], ...card }
+
+  updateCounts(state.posts)
+}
+
+function dropPost(slug) {
+  state.posts = state.posts.filter((item) => item.slug !== slug)
+  updateCounts(state.posts)
+}
+
 async function loadPosts() {
   $('post-rows').innerHTML = '<p class="empty">Loading.</p>'
 
@@ -234,7 +257,9 @@ async function loadPosts() {
 async function saveOrder(slugs) {
   try {
     await api('/api/admin/reorder', { method: 'POST', body: JSON.stringify({ slugs }) })
-    await loadPosts()
+    state.posts.sort((a, b) => slugs.indexOf(a.slug) - slugs.indexOf(b.slug))
+    state.posts.forEach((post, position) => { post.position = position })
+    renderRows()
     flash('Order saved.')
   } catch (problem) {
     flash(problem.message)
@@ -318,7 +343,7 @@ function wireImport() {
     try {
       const { imported } = await api('/api/admin/import', { method: 'POST' })
       flash(`${imported} entries imported.`)
-      await loadPosts()
+      setTimeout(loadPosts, 1200)
     } catch (problem) {
       flash(problem.message)
       button.disabled = false
@@ -335,8 +360,9 @@ async function removePost(slug) {
 
   try {
     await api('/api/admin/posts?slug=' + encodeURIComponent(slug), { method: 'DELETE' })
+    dropPost(slug)
+    renderRows()
     flash('Deleted.')
-    await loadPosts()
   } catch (problem) {
     flash(problem.message)
   }
@@ -466,9 +492,9 @@ function collect() {
 $('new-post').addEventListener('click', () => openEditor(null))
 $('f-kind').addEventListener('change', applyKind)
 
-$('editor-back').addEventListener('click', async () => {
+$('editor-back').addEventListener('click', () => {
   showView('posts')
-  await loadPosts()
+  renderRows()
 })
 
 $('editor-save').addEventListener('click', async () => {
@@ -480,6 +506,7 @@ $('editor-save').addEventListener('click', async () => {
     const { post } = await api('/api/admin/posts', { method: 'POST', body: JSON.stringify(collect()) })
     state.editing = post.slug
     state.coverUrl = post.image || null
+    mergePost(post)
     $('save-state').textContent = 'Saved'
     $('editor-delete').classList.remove('hidden')
     flash(post.status === 'published' ? 'Saved. It appears on the news page within a minute.' : 'Saved as a draft.')
