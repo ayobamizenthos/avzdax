@@ -695,18 +695,23 @@ function placeToolbar() {
 let settling = null
 const settle = () => {
   clearTimeout(settling)
-  settling = setTimeout(placeToolbar, 40)
+  settling = setTimeout(placeToolbar, 120)
 }
 
 // While the pointer is down the selection is still being made, so keep out of the way.
 editable.addEventListener('pointerdown', hideToolbar)
 document.addEventListener('mouseup', settle)
 document.addEventListener('touchend', settle)
+document.addEventListener('touchcancel', settle)
+document.addEventListener('pointerup', settle)
 editable.addEventListener('keyup', settle)
 
+// Dragging the selection handles is driven by the operating system and does not reliably
+// end with a touch event on the page, so a changed selection alone brings the bar back.
 document.addEventListener('selectionchange', () => {
   const selection = window.getSelection()
-  if (!selection || selection.isCollapsed) hideToolbar()
+  if (!selection || selection.isCollapsed) return hideToolbar()
+  settle()
 })
 
 window.addEventListener('resize', hideToolbar)
