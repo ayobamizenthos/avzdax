@@ -652,3 +652,9 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 3px; }
+
+/* Desktop sits a notch larger, matching the browser's 110% view. Phones and tablets are
+   left alone, where the layout is already sized for the screen. */
+@media (min-width: 1000px) and (hover: hover) {
+  body { zoom: 1.1; }
+}
