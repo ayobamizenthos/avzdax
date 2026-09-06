@@ -87,35 +87,17 @@ async function readPost(slug, options) {
   return readJson(postPath(slug), options)
 }
 
-const settled = (card, post) =>
-  Boolean(card) && card.status === post.status && card.updatedAt === post.updatedAt
-
-// Blob overwrites are not always visible to the next read. Without confirming the index
-// afterwards a publish can leave the entry stale, so the post exists but never reaches
-// the news page. Each attempt re-reads, re-merges and re-checks.
-async function commitToIndex(post) {
-  for (let attempt = 0; attempt < 4; attempt++) {
-    const index = await readIndex({ fresh: true })
-    const at = index.findIndex((card) => card.slug === post.slug)
-
-    if (at === -1) index.push(toCard(post))
-    else index[at] = { ...index[at], ...toCard(post) }
-
-    await writeIndex(index)
-
-    const written = (await readIndex({ fresh: true })).find((card) => card.slug === post.slug)
-    if (settled(written, post)) return
-
-    await new Promise((resolve) => setTimeout(resolve, 150 * (attempt + 1)))
-  }
-
-  throw new Error('The entry saved but the list did not update. Try saving again.')
-}
-
 async function savePost(post) {
   const stamped = { ...post, updatedAt: new Date().toISOString() }
   await writeJson(postPath(stamped.slug), stamped)
-  await commitToIndex(stamped)
+
+  const index = await readIndex({ fresh: true })
+  const at = index.findIndex((card) => card.slug === stamped.slug)
+
+  if (at === -1) index.push(toCard(stamped))
+  else index[at] = { ...index[at], ...toCard(stamped) }
+
+  await writeIndex(index)
   return stamped
 }
 
