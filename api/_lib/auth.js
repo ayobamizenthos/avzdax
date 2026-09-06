@@ -4,7 +4,7 @@ const COOKIE_NAME = 'avzdax_newsroom'
 const SESSION_HOURS = 12
 
 const signingKey = () => {
-  const secret = process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD
+  const secret = process.env.ADMIN_SESSION_SECRET || adminPassword()
   if (!secret) throw new Error('ADMIN_PASSWORD is not configured')
   return crypto.createHash('sha256').update('avzdax-newsroom:' + secret).digest()
 }
@@ -13,10 +13,14 @@ const sign = (value) => crypto.createHmac('sha256', signingKey()).update(value).
 
 const digest = (value) => crypto.createHash('sha256').update(String(value)).digest()
 
+// A secret pasted into a dashboard often arrives with a stray newline or space on the end.
+// The stored value is trimmed so that accident cannot lock the writer out for good.
+const adminPassword = () => (process.env.ADMIN_PASSWORD || '').trim()
+
 function passwordMatches(candidate) {
-  const expected = process.env.ADMIN_PASSWORD
+  const expected = adminPassword()
   if (!expected) return false
-  return crypto.timingSafeEqual(digest(candidate), digest(expected))
+  return crypto.timingSafeEqual(digest(String(candidate).trim()), digest(expected))
 }
 
 function issueSession() {
