@@ -150,6 +150,7 @@ select {
 /* ---------- sign in ---------- */
 
 .gate {
+  position: relative;
   min-height: 100dvh;
   display: grid;
   place-items: center;
@@ -157,7 +158,17 @@ select {
 }
 
 .gate-card { width: 100%; max-width: 360px; }
-.gate-mark { height: 26px; width: auto; display: block; margin-bottom: 44px; }
+.gate-brand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 26px 30px;
+  padding-top: calc(26px + env(safe-area-inset-top));
+  display: inline-flex;
+  align-items: center;
+}
+
+.gate-brand img { height: 36px; width: auto; display: block; filter: brightness(0); }
 
 .gate-title {
   font-family: var(--serif);
@@ -247,7 +258,7 @@ select {
 
 .post-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 132px;
+  grid-template-columns: 20px minmax(0, 1fr) 132px;
   gap: 30px;
   align-items: start;
   padding: 32px 0;
@@ -293,17 +304,13 @@ select {
 }
 
 .post-actions {
-  grid-column: 1;
+  grid-column: 2;
   display: flex;
   align-items: center;
   gap: 20px;
   margin-top: 16px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  flex-wrap: wrap;
 }
-
-.post-row:hover .post-actions,
-.post-row:focus-within .post-actions { opacity: 1; }
 
 .post-actions button { border: 0; background: transparent; padding: 4px 0; font-size: 13.5px; color: var(--ink-2); }
 .post-actions button:hover { color: var(--ink); }
@@ -393,25 +400,27 @@ body.editing .bar { display: none; }
 
 .compose { max-width: 720px; margin: 0 auto; padding: 30px 30px 140px; width: 100%; }
 
-.title-input {
+input.title-input {
   width: 100%;
   border: 0;
   border-radius: 0;
+  background: transparent;
   padding: 0;
   min-height: 0;
   font-family: var(--serif);
-  font-size: clamp(28px, 4.4vw, 40px);
+  font-size: clamp(27px, 3.4vw, 34px);
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.026em;
+  line-height: 1.22;
+  letter-spacing: -0.024em;
 }
 
-.title-input:focus, .excerpt-input:focus { border: 0; }
-.title-input::placeholder { color: var(--ink-3); }
+input.title-input:focus, textarea.excerpt-input:focus { border: 0; box-shadow: none; }
+input.title-input::placeholder { color: var(--ink-3); }
 
-.excerpt-input {
+textarea.excerpt-input {
   width: 100%;
   border: 0;
+  background: transparent;
   border-radius: 0;
   padding: 14px 0 0;
   min-height: 0;
@@ -448,7 +457,7 @@ body.editing .bar { display: none; }
 .side { position: sticky; top: var(--bar-h); align-self: start; }
 
 .side-panel {
-  background: var(--sand);
+  background: #eeeeec;
   border-radius: 8px;
   margin: 30px 30px 0 0;
   max-height: calc(100dvh - var(--bar-h) - 40px);
@@ -461,7 +470,7 @@ body.editing .bar { display: none; }
 .side-body { overflow-y: auto; padding: 6px 22px 24px; -webkit-overflow-scrolling: touch; }
 
 .side-body input, .side-body select { background: var(--paper); }
-.side-delete { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rule-2); width: 100%; text-align: left; }
+.side-delete { margin-top: 30px; width: 100%; text-align: left; }
 
 .cover { border: 1px dashed var(--rule-2); border-radius: 6px; padding: 14px; text-align: center; background: var(--paper); }
 .cover.drop { border-color: var(--ink); }
@@ -546,9 +555,6 @@ body.editing .bar { display: none; }
 /* nothing may push the page wider than the screen */
 html, body { max-width: 100%; overflow-x: hidden; }
 
-@media (hover: none) {
-  .post-actions { opacity: 1; }
-}
 
 @media (max-width: 1080px) {
   .editor-grid { grid-template-columns: minmax(0, 1fr) 290px; }
@@ -608,12 +614,14 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .filter { font-size: 14px; }
 
   .post-row { grid-template-columns: minmax(0, 1fr) 92px; gap: 16px; padding: 24px 0; }
+  .grip { display: none; }
+  .post-actions { grid-column: 1 / -1; }
   .post-title { font-size: 18.5px; }
   .post-excerpt { font-size: 15px; -webkit-line-clamp: 3; margin-bottom: 12px; }
   .post-meta { font-size: 12.5px; gap: 7px; }
   .post-cover { width: 92px; height: 74px; }
 
-  .post-actions { opacity: 1; gap: 18px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .post-actions { gap: 18px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
   .post-actions button { font-size: 13.5px; min-height: 34px; }
 
 
@@ -633,6 +641,8 @@ html, body { max-width: 100%; overflow-x: hidden; }
 
   .gate { padding: 26px 20px calc(26px + env(safe-area-inset-bottom)); }
   .gate-title { font-size: 27px; }
+  .gate-brand { padding: 20px 18px; padding-top: calc(20px + env(safe-area-inset-top)); }
+  .gate-brand img { height: 30px; }
 
   .status { left: 18px; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); transform: none; max-width: none; }
   @keyframes status-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -657,4 +667,75 @@ html, body { max-width: 100%; overflow-x: hidden; }
    left alone, where the layout is already sized for the screen. */
 @media (min-width: 1000px) and (hover: hover) {
   body { zoom: 1.1; }
+}
+
+/* The caret already shows where focus is inside the document itself, so these three do not
+   need a ring drawn round them. Every other control keeps its focus outline. */
+input.title-input:focus,
+input.title-input:focus-visible,
+textarea.excerpt-input:focus,
+textarea.excerpt-input:focus-visible,
+.writing:focus,
+.writing:focus-visible {
+  outline: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.sel-bar.below { transform: translate(-50%, 0); }
+
+/* A plain pill instead of the browser's chrome, on the panels that scroll. */
+.side-body, .picker-grid, .filters, .sel-bar {
+  scrollbar-width: thin;
+  scrollbar-color: #b8b8b4 transparent;
+}
+
+.side-body::-webkit-scrollbar,
+.picker-grid::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.side-body::-webkit-scrollbar-track,
+.picker-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.side-body::-webkit-scrollbar-thumb,
+.picker-grid::-webkit-scrollbar-thumb {
+  background: #b8b8b4;
+  border-radius: 999px;
+}
+
+.side-body::-webkit-scrollbar-button,
+.picker-grid::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Drag handle on each row */
+.grip {
+  align-self: start;
+  margin-top: 5px;
+  color: var(--ink-3);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.grip svg { width: 18px; height: 18px; fill: currentColor; stroke: none; pointer-events: none; }
+.grip, .grip * { cursor: grab; }
+.grip:active, .post-row.dragging .grip { cursor: grabbing; }
+.post-row:hover .grip { opacity: 1; }
+.grip:hover { color: var(--ink); }
+
+/* Dragging is a pointer gesture; on touch the arrows do the reordering instead. */
+@media (max-width: 600px), (hover: none) {
+  .grip { display: none; }
+  .post-row { grid-template-columns: minmax(0, 1fr) 92px; }
+  .post-actions { grid-column: 1 / -1; }
+}
+
+@media (max-width: 380px) {
+  .post-row { grid-template-columns: minmax(0, 1fr) 76px; }
 }

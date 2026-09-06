@@ -1,6 +1,59 @@
 const $ = (id) => document.getElementById(id)
 
-const state = { posts: [], tab: 'all', editing: null, coverUrl: null }
+const state = { posts: [], tab: 'all', editing: null, coverUrl: null, dirty: false }
+
+// The open entry is kept in the address, so a reload returns to what was being written
+// rather than throwing the writer back to the list.
+// A post being written has an address of its own, so a reload returns to it even before
+// it has been given a title.
+const rememberOpen = (target, replace) => {
+  const next = target === null
+    ? window.location.pathname
+    : target === 'new'
+      ? '#new'
+      : '#edit=' + encodeURIComponent(target)
+
+  const current = window.location.hash || window.location.pathname
+  if (current === next) return
+
+  if (replace) history.replaceState(null, '', next)
+  else history.pushState(null, '', next)
+}
+
+const openFromAddress = () => {
+  if (window.location.hash === '#new') return 'new'
+  const match = window.location.hash.match(/^#edit=(.+)$/)
+  return match ? decodeURIComponent(match[1]) : null
+}
+
+// Whatever is being written is kept in this browser as it is typed, so closing the tab or
+// reloading gives it straight back instead of asking the writer to be careful.
+const draftKey = () => 'newsroom:working:' + (state.editing || 'new')
+
+function keepWorking(entry) {
+  try {
+    window.localStorage.setItem(draftKey(), JSON.stringify({ ...entry, keptAt: Date.now() }))
+  } catch {
+    // a browser with storage switched off simply does not get the safety net
+  }
+}
+
+function takeWorking() {
+  try {
+    const raw = window.localStorage.getItem(draftKey())
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+
+function forgetWorking() {
+  try {
+    window.localStorage.removeItem(draftKey())
+  } catch {
+    // nothing to clear
+  }
+}
 
 const escapeHtml = (value) =>
   String(value == null ? '' : value)
@@ -181,6 +234,9 @@ function postMarkup(post, index, total) {
 
   return `
     <article class="post-row" draggable="true" data-slug="${escapeHtml(post.slug)}">
+      <span class="grip" aria-hidden="true" title="Drag to reorder">
+        <svg viewBox="0 0 24 24"><use href="#i-grip"></use></svg>
+      </span>
       <div>
         <h2 class="post-title">${escapeHtml(post.title)}</h2>
         ${post.excerpt ? `<p class="post-excerpt">${escapeHtml(post.excerpt)}</p>` : ''}
@@ -444,26 +500,55 @@ function fillEditor(post) {
 
   setCover(post.image || null)
   applyKind()
+  state.dirty = false
 
   $('save-state').textContent = post.slug ? 'Saved' : ''
   $('editor-delete').classList.toggle('hidden', !post.slug)
 }
 
-async function openEditor(slug) {
+async function openEditor(slug, fromHistory) {
   showView('editor')
+  rememberOpen(slug || 'new', fromHistory)
 
   if (!slug) {
     fillEditor({ ...blank, status: state.tab === 'draft' ? 'draft' : 'published' })
+    restoreWorking()
     $('f-title').focus()
     return
   }
 
   try {
     fillEditor(await api('/api/admin/posts?slug=' + encodeURIComponent(slug)))
+    restoreWorking()
   } catch (problem) {
     flash(problem.message)
     showView('posts')
   }
+}
+
+// Anything left over from a previous visit is put back exactly as it was.
+function restoreWorking() {
+  const kept = takeWorking()
+  if (!kept) return
+
+  $('f-title').value = kept.title || ''
+  $('f-excerpt').value = kept.excerpt || ''
+  $('f-category').value = kept.category || 'insight'
+  $('f-layout').value = kept.layout || 'standard'
+  $('f-kind').value = kept.kind || 'article'
+  $('f-status').value = kept.status || 'published'
+  $('f-video').value = kept.videoUrl || ''
+  $('f-external').value = kept.externalUrl || ''
+  $('f-linklabel').value = kept.linkLabel || ''
+  $('f-content').innerHTML = kept.content || ''
+
+  state.coverUrl = kept.image || null
+  setCover(state.coverUrl)
+  applyKind()
+
+  state.dirty = true
+  $('save-state').textContent = 'Unsaved'
+  flash('Picked up where you left off.')
 }
 
 function collect() {
@@ -492,10 +577,49 @@ function collect() {
 $('new-post').addEventListener('click', () => openEditor(null))
 $('f-kind').addEventListener('change', applyKind)
 
-$('editor-back').addEventListener('click', () => {
+$('editor-back').addEventListener('click', async () => {
+  if (state.dirty) {
+    const leave = await ask({
+      title: 'Unsaved changes',
+      body: 'Leave without saving? Your latest edits will be discarded.',
+      confirmLabel: 'Discard'
+    })
+    if (!leave) return
+    forgetWorking()
+  }
+
+  state.dirty = false
+  rememberOpen(null)
   showView('posts')
   renderRows()
 })
+
+// Following the browser's back and forward buttons rather than leaving the dashboard.
+window.addEventListener('popstate', () => {
+  const slug = openFromAddress()
+  if (slug) return openEditor(slug === 'new' ? null : slug, true)
+
+  state.dirty = false
+  showView('posts')
+  renderRows()
+})
+
+// Anything typed or chosen counts as an unsaved change.
+let keeping = null
+const noteChange = () => {
+  state.dirty = true
+  $('save-state').textContent = 'Unsaved'
+  clearTimeout(keeping)
+  keeping = setTimeout(() => keepWorking(collect()), 600)
+}
+
+;['f-title', 'f-excerpt', 'f-status', 'f-category', 'f-layout', 'f-kind', 'f-video', 'f-external', 'f-linklabel']
+  .forEach((id) => {
+    $(id).addEventListener('input', noteChange)
+    $(id).addEventListener('change', noteChange)
+  })
+
+$('f-content').addEventListener('input', noteChange)
 
 $('editor-save').addEventListener('click', async () => {
   const button = $('editor-save')
@@ -506,7 +630,10 @@ $('editor-save').addEventListener('click', async () => {
     const { post } = await api('/api/admin/posts', { method: 'POST', body: JSON.stringify(collect()) })
     state.editing = post.slug
     state.coverUrl = post.image || null
+    state.dirty = false
+    forgetWorking()
     mergePost(post)
+    rememberOpen(post.slug, true)
     $('save-state').textContent = 'Saved'
     $('editor-delete').classList.remove('hidden')
     flash(post.status === 'published' ? 'Saved. It appears on the news page within a minute.' : 'Saved as a draft.')
@@ -532,7 +659,11 @@ function hideToolbar() {
   selBar.classList.add('hidden')
 }
 
-// Sits above the selection, the way a writing app does, and only while text is selected.
+const coarse = window.matchMedia('(hover: none)')
+
+// Shown only once a selection has settled. Repositioning while the pointer is still down
+// made dragging jump, and on a phone the toolbar sits below the text so it does not fight
+// with the copy and paste bubble the operating system puts above it.
 function placeToolbar() {
   const selection = window.getSelection()
 
@@ -551,22 +682,35 @@ function placeToolbar() {
 
   selBar.classList.remove('hidden')
 
+  const gap = 16
   const half = selBar.offsetWidth / 2
   const centre = rect.left + window.scrollX + rect.width / 2
   const edge = 10
 
+  selBar.classList.toggle('below', coarse.matches)
   selBar.style.left = Math.min(Math.max(centre, half + edge), window.innerWidth - half - edge) + 'px'
-  selBar.style.top = rect.top + window.scrollY + 'px'
+  selBar.style.top = (coarse.matches ? rect.bottom + window.scrollY + gap : rect.top + window.scrollY - gap) + 'px'
 }
 
-document.addEventListener('selectionchange', placeToolbar)
+let settling = null
+const settle = () => {
+  clearTimeout(settling)
+  settling = setTimeout(placeToolbar, 40)
+}
 
-// A touch selection is not settled until the gesture ends, so re-check afterwards.
-;['touchend', 'pointerup'].forEach((type) =>
-  editable.addEventListener(type, () => setTimeout(placeToolbar, 60))
-)
-window.addEventListener('resize', placeToolbar)
-window.addEventListener('scroll', () => { if (!selBar.classList.contains('hidden')) placeToolbar() }, { passive: true })
+// While the pointer is down the selection is still being made, so keep out of the way.
+editable.addEventListener('pointerdown', hideToolbar)
+document.addEventListener('mouseup', settle)
+document.addEventListener('touchend', settle)
+editable.addEventListener('keyup', settle)
+
+document.addEventListener('selectionchange', () => {
+  const selection = window.getSelection()
+  if (!selection || selection.isCollapsed) hideToolbar()
+})
+
+window.addEventListener('resize', hideToolbar)
+window.addEventListener('scroll', hideToolbar, { passive: true })
 
 // Buttons must not steal the caret, or formatting would apply to nothing.
 selBar.addEventListener('mousedown', (event) => {
@@ -811,6 +955,9 @@ async function boot() {
     showView('posts')
     if (!session.storageReady) flash('Storage is not connected yet. Create a Blob store in Vercel and redeploy.')
     await loadPosts()
+
+    const reopen = openFromAddress()
+    if (reopen) await openEditor(reopen === 'new' ? null : reopen, true)
   } catch {
     showGate()
   }
