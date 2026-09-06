@@ -66,16 +66,18 @@
     </header>
 
     <main id="view-posts" class="wrap">
-        <div class="page-head">
-            <h1 class="page-title">Newsroom</h1>
-            <button class="btn btn-small" id="new-post">Write</button>
-        </div>
+        <div class="page-top">
+            <div class="page-head">
+                <h1 class="page-title">Newsroom</h1>
+                <button class="btn btn-small" id="new-post">Write</button>
+            </div>
 
-        <div class="filters" id="post-filters" role="tablist" aria-label="Filter entries">
-            <button class="filter on" data-tab="all" role="tab" aria-selected="true">All<span id="count-all">0</span></button>
-            <button class="filter" data-tab="published" role="tab" aria-selected="false">Published<span id="count-published">0</span></button>
-            <button class="filter" data-tab="draft" role="tab" aria-selected="false">Drafts<span id="count-draft">0</span></button>
-            <button class="filter" data-tab="images" role="tab" aria-selected="false">Images</button>
+            <div class="filters" id="post-filters" role="tablist" aria-label="Filter entries">
+                <button class="filter on" data-tab="all" role="tab" aria-selected="true">All<span id="count-all">0</span></button>
+                <button class="filter" data-tab="published" role="tab" aria-selected="false">Published<span id="count-published">0</span></button>
+                <button class="filter" data-tab="draft" role="tab" aria-selected="false">Drafts<span id="count-draft">0</span></button>
+                <button class="filter" data-tab="images" role="tab" aria-selected="false">Images</button>
+            </div>
         </div>
 
         <div id="post-rows"></div>
@@ -184,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="ghost danger side-delete" type="button" id="editor-delete">Delete this entry</button>
+                        <button class="ghost danger side-delete" type="button" id="editor-delete">Delete</button>
                     </div>
                 </div>
             </aside>
