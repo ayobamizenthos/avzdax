@@ -719,14 +719,12 @@ textarea.excerpt-input:focus-visible,
   color: var(--ink-3);
   display: grid;
   place-items: center;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 .grip svg { width: 18px; height: 18px; fill: currentColor; stroke: none; pointer-events: none; }
 .grip, .grip * { cursor: grab; }
 .grip:active, .post-row.dragging .grip { cursor: grabbing; }
-.post-row:hover .grip { opacity: 1; }
 .grip:hover { color: var(--ink); }
 
 /* Dragging is a pointer gesture; on touch the arrows do the reordering instead. */
