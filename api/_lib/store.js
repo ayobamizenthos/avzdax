@@ -90,6 +90,27 @@ async function readPost(slug, options) {
   return readJson(postPath(slug), options)
 }
 
+const POSTS_PREFIX = 'newsroom/posts/'
+
+// The index is rebuilt by read-modify-write, and storage can serve a copy a second or two
+// behind. Writing that back would quietly drop whatever it did not know about, so the post
+// files themselves are treated as the record and anything missing is put back.
+async function reconcile(index) {
+  const { blobs } = await list({ prefix: POSTS_PREFIX })
+  const known = new Set(index.map((card) => card.slug))
+
+  const missing = blobs
+    .map((blob) => blob.pathname.slice(POSTS_PREFIX.length).replace(/\.json$/, ''))
+    .filter((slug) => slug && !known.has(slug))
+
+  for (const slug of missing) {
+    const post = await readJson(postPath(slug), { fresh: true })
+    if (post) index.push(toCard(post))
+  }
+
+  return index
+}
+
 async function savePost(post) {
   const stamped = { ...post, updatedAt: new Date().toISOString() }
   await writeJson(postPath(stamped.slug), stamped)
@@ -100,7 +121,7 @@ async function savePost(post) {
   if (at === -1) index.push(toCard(stamped))
   else index[at] = { ...index[at], ...toCard(stamped) }
 
-  await writeIndex(index)
+  await writeIndex(await reconcile(index))
   return stamped
 }
 
@@ -109,12 +130,6 @@ async function deletePost(slug) {
   const remaining = index.filter((card) => card.slug !== slug)
   if (remaining.length === index.length) return false
 
-  await writeIndex(remaining)
-
-  if ((await readIndex({ fresh: true })).some((card) => card.slug === slug)) {
-    await writeIndex(remaining)
-  }
-
   try {
     const meta = await head(postPath(slug))
     forget(postPath(slug))
@@ -122,6 +137,8 @@ async function deletePost(slug) {
   } catch {
     // the index is the source of truth; a missing body file is not an error
   }
+
+  await writeIndex(await reconcile(remaining))
   return true
 }
 
